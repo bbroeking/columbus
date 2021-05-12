@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import * as parcel from "../../../build/contracts/Parcel.json";
 
 // import detectEthereumProvider from '@metamask/detect-provider'
@@ -7,16 +7,16 @@ import * as parcel from "../../../build/contracts/Parcel.json";
 @Injectable()
 export class EthersService {
 
-  private ethereum;
-  private provider;
-  private signer;
-  private contract;
+  private ethereum: any;
+  private provider: ethers.providers.Web3Provider;
+  private signer: ethers.providers.JsonRpcSigner;
+  private unsignedContract: ethers.Contract;
   
   constructor(private window: Window) { 
     this.ethereum = (window as any).ethereum;
     this.provider = new ethers.providers.Web3Provider(this.ethereum);
     this.signer = this.getSigner();
-    this.contract = this.getContract();
+    this.unsignedContract = this.getContract();
   }
 
   isMetamaskInstalled() {
@@ -25,9 +25,8 @@ export class EthersService {
     }  
   }
 
-  async requestAccounts() {
+  async requestAccount() {
     const accounts = await this.ethereum.request({ method: 'eth_requestAccounts' });
-    console.log(accounts[0]);
     return accounts[0];
   }
 
@@ -48,12 +47,50 @@ export class EthersService {
   }
 
   connectContract(){
-    const daiWithSigner = this.contract.connect(this.signer);
+    const daiWithSigner = this.unsignedContract.connect(this.signer);
     return daiWithSigner;
   }
 
   discover(){
     const diaWithSigner = this.connectContract();
-    diaWithSigner.discover('0xAee8ee2f7fc0B8d7d7E421d6BD9bDc31Fb99ceE4', 'uri');
+    const account = this.requestAccount();
+    diaWithSigner.discover(account, 'uri');
+  }
+
+  async getBalanceOf(){
+    const diaWithSigner = this.connectContract();
+    const balance = await diaWithSigner.balanceOf(this.requestAccount());
+    console.log(balance);
+    return balance.toNumber();
+  }
+
+  async getTokenOfOwnerByIndex() {
+    const account = this.requestAccount();
+    const diaWithSigner = this.connectContract();
+    const balance: BigNumber = await diaWithSigner.balanceOf(account);
+    let tokens = [];
+    for (let i= 0; i < balance.toNumber(); i++){
+      let token = await diaWithSigner.tokenOfOwnerByIndex(account, i);
+      tokens.push(token);
+    }
+    console.log(tokens);
+    return tokens;
+  }
+
+  async getTotalSupply() {
+    const signedContract = this.connectContract();
+    const totalSupply: BigNumber = await signedContract.totalSupply(); // do we need the signed contract?
+    let tokens = [];
+    for(let i=0; i < totalSupply.toNumber(); i++){
+      let token = await signedContract.tokenByIndex(i);
+      tokens.push(token);
+    }
+    return tokens;
+  }
+
+  async getMetadataURI(tokenId: number) {
+    const uri = await this.unsignedContract.tokenURI(tokenId);
+    console.log(uri);
+    return uri;
   }
 }
