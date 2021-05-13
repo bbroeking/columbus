@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EthersService } from '../services/ethers.service';
+import { MetadataService } from '../services/metadata.service';
+
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-explorer',
@@ -9,16 +12,31 @@ import { EthersService } from '../services/ethers.service';
 export class ExplorerComponent implements OnInit {
 
   public ethersService: EthersService;
-  constructor(private ethers: EthersService) { 
+  metadataSubscription: Subscription;
+  data: any;
+
+  constructor(private ethers: EthersService,
+              private metadataService: MetadataService) 
+  {
     this.ethersService = ethers;
+
   }
 
   ngOnInit(): void {
-    // this.ethersService.connectContract();
+    this.metadataService
+      .generateMetadata(4)
+      .subscribe(res => {
+        this.data = res;
+        console.log(res);
+      });
   }
 
-  checkConnection() {
-    this.ethersService.isMetamaskInstalled();
+  ngOnDestroy() {
+    this.metadataSubscription.unsubscribe();
+  }
+
+  logData() {
+    console.log(this.data);
   }
 
 }

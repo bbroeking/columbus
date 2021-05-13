@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ExplorerComponent } from './explorer/explorer.component';
 import { InitalizeService } from './services/initalize.service';
 import { EthersService } from './services/ethers.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -18,7 +20,8 @@ export function init_app(initalizeService: InitalizeService) {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [{ provide: Window,
                 useValue: window 

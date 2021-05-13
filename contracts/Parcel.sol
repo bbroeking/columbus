@@ -5,6 +5,8 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "./Concat.sol";
 
 contract Parcel is ERC721, ERC721Enumerable, ERC721URIStorage {
     using Counters for Counters.Counter;
@@ -13,12 +15,16 @@ contract Parcel is ERC721, ERC721Enumerable, ERC721URIStorage {
     constructor() ERC721("Parcel Token", "PARCEL") {
     }
 
-    function discover(address _to, string memory _tokenURI) public returns(uint256) {
+    function discover(address _to) public returns(uint256) {
         _tokenIds.increment();
         uint256 discoveredId = _tokenIds.current();
 
        _mint(_to, discoveredId);
-       _setTokenURI(discoveredId, _tokenURI);
+       string memory uri = Concat.strConcat(
+            Strings.toString(discoveredId),
+            '.json'
+        );
+       _setTokenURI(discoveredId, uri);
        return discoveredId;
     }
 
@@ -49,6 +55,6 @@ contract Parcel is ERC721, ERC721Enumerable, ERC721URIStorage {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://foo.com/token/";
+        return "https://storage.googleapis.com/parcel-metadata/parcel/";
     }
 }
