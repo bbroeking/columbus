@@ -1,6 +1,6 @@
 <button (click)="ethersService.isMetamaskInstalled()">isMetamaskInstalled</button>
-<button (click)="ethersService.requestAccount()">requestAccounts</button>
-<!-- <button (click)="ethersService.givenProvider()"></button> -->
+<button (click)="ethersService.requestAccount()">requestAccount</button>
+<button (click)="ethersService.getBalance()">getBalance</button>
 <button (click)="ethersService.connectContract()">connectContract</button>
 <button (click)="ethersService.getSigner()">getSigner</button>
 <button (click)="ethersService.discover()">Discover</button>
@@ -9,3 +9,12 @@
 <button (click)="ethersService.getTotalSupply()">getTotalSupply</button>
 <button (click)="ethersService.getMetadataURI(1)">getMetadataURI</button>
 <button (click)="logData()">Log Data</button>
+
+
+<div>Current Account Balance: {{balance}}</div>
+<div>Number of Tokens Held By Current Metamask Account: {{numTokens}}</div>
+
+<div *ngFor="let metadata of tokenMetadata">
+    Northern: {{metadata.data.northernTile}}
+    North Western: {{ metadata.data.northWesternTile }}
+</div>

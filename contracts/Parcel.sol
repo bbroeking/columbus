@@ -15,17 +15,12 @@ contract Parcel is ERC721, ERC721Enumerable, ERC721URIStorage {
     constructor() ERC721("Parcel Token", "PARCEL") {
     }
 
-    function discover(address _to) public returns(uint256) {
+    function discover(address _to, string memory uuid) public returns(uint256) {
         _tokenIds.increment();
         uint256 discoveredId = _tokenIds.current();
-
-       _mint(_to, discoveredId);
-       string memory uri = Concat.strConcat(
-            Strings.toString(discoveredId),
-            '.json'
-        );
-       _setTokenURI(discoveredId, uri);
-       return discoveredId;
+        _safeMint(_to, discoveredId);
+        _setTokenURI(discoveredId, uuid);
+        return discoveredId;
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal override(ERC721, ERC721Enumerable) {
@@ -55,6 +50,6 @@ contract Parcel is ERC721, ERC721Enumerable, ERC721URIStorage {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://storage.googleapis.com/parcel-metadata/parcel/";
+        return "https://storage.googleapis.com/parcel-metadata/";
     }
 }

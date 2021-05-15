@@ -7,6 +7,7 @@ import { ExplorerComponent } from './explorer/explorer.component';
 import { InitalizeService } from './services/initalize.service';
 import { EthersService } from './services/ethers.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MapComponent } from './map/map.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -16,7 +17,8 @@ export function init_app(initalizeService: InitalizeService) {
 @NgModule({
   declarations: [
     AppComponent,
-    ExplorerComponent
+    ExplorerComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

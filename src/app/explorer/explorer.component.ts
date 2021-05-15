@@ -15,25 +15,27 @@ export class ExplorerComponent implements OnInit {
   metadataSubscription: Subscription;
   data: any;
 
+  public balance: string;
+  public numTokens: number;
+  public tokenMetadata: any;
+
+
   constructor(private ethers: EthersService,
-              private metadataService: MetadataService) 
-  {
-    this.ethersService = ethers;
+              private metadataService: MetadataService){
+                this.ethersService = ethers;
+              }
 
-  }
+  async ngOnInit() {
+    // this.balance = await this.ethersService.getBalance();
+    this.numTokens = await this.ethersService.getBalanceOf();
+    this.tokenMetadata = await this.ethersService.getTokenOfOwnerByIndex();
 
-  ngOnInit(): void {
-    this.metadataService
-      .generateMetadata(4)
-      .subscribe(res => {
-        this.data = res;
-        console.log(res);
-      });
   }
 
   ngOnDestroy() {
-    this.metadataSubscription.unsubscribe();
+    // this.metadataSubscription.unsubscribe();
   }
+
 
   logData() {
     console.log(this.data);
