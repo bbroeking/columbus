@@ -1,4 +1,6 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EthersService } from '../services/ethers.service';
 
 import { MapComponent } from './map.component';
 
@@ -8,7 +10,12 @@ describe('MapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
+      declarations: [ MapComponent ],
+      providers:[EthersService, 
+                  { provide: Window, useValue: { ethereum: {} }},
+                  HttpClient,
+                  HttpHandler
+                ]
     })
     .compileComponents();
   });

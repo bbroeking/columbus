@@ -6,7 +6,6 @@ import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./Concat.sol";
 
 contract Parcel is ERC721, ERC721Enumerable, ERC721URIStorage {
     using Counters for Counters.Counter;

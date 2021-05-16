@@ -22,13 +22,13 @@ export class EthersService {
               private metadataService: MetadataService,
               private hexagonService: HexagonService)
   { 
-    this.ethereum = (window as any).ethereum;
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-    this.signer = this.getSigner();
-    this.unsignedContract = this.getContract();
+    this.ethereum = (this.window as any).ethereum;
   }
 
   public ngOnInit(){
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+    this.signer = this.getSigner();
+    this.unsignedContract = this.getContract();
     this.unsignedContract.on("Transfer", (from, to, amount, event) => {
       console.log(`${ from } sent ${ ethers.utils.formatEther(amount) } to ${ to}`);
       console.log(event);

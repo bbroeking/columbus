@@ -98,6 +98,7 @@ export class HexagonService {
   }
 
   totalHexagonsAtRadius(r: number){
+    if (r < 1) return 0;
     return 1 + (3*r) * (r+1);
   }
 

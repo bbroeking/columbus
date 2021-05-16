@@ -38,7 +38,11 @@ export class ExplorerComponent implements OnInit {
     let supply = await this.ethersService.getTotalSupply().then(res => res);
     let coordinates: Coordinate = await this.hexagonService.getCoordinatesFromId(supply);
     this.neighbors = this.hexagonService.getNeighbors(coordinates);
-    console.log(this.neighbors);
+
+    let testCoordinate: Coordinate = new Coordinate(0, 0, 0);
+    let id = this.hexagonService.getIdFromCoordinates(testCoordinate);
+    console.log('test coordinate id')
+    console.log(id);
   }
 
   ngOnDestroy() {

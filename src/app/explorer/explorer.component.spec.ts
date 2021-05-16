@@ -1,4 +1,6 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EthersService } from '../services/ethers.service';
 
 import { ExplorerComponent } from './explorer.component';
 
@@ -8,7 +10,12 @@ describe('ExplorerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExplorerComponent ]
+      declarations: [ ExplorerComponent ],
+      providers:[EthersService,                   
+                 { provide: Window, useValue: { ethereum: {} }},
+                 HttpClient,
+                 HttpHandler
+                ]
     })
     .compileComponents();
   });

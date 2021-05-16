@@ -11,7 +11,9 @@ export class MapComponent implements OnInit {
 
   public totalSupply: any[];
 
-  constructor(private ethersService: EthersService) { }
+  constructor(private ethersService: EthersService) { 
+    
+  }
 
   ngOnInit(){
   }
