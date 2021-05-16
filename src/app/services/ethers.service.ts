@@ -7,6 +7,8 @@ import * as parcel from "../../../build/contracts/Parcel.json";
 import {MetadataService} from '../services/metadata.service'
 import { MetadataResponse } from '../models/metadata-response.model';
 import { ParcelMetadata } from '../models/parcel-metadata.model';
+import { HexagonService } from './hexagon.service';
+import { Coordinate } from '../models/coordinate.model';
 
 @Injectable()
 export class EthersService {
@@ -17,7 +19,8 @@ export class EthersService {
   private unsignedContract: ethers.Contract;
   
   constructor(private window: Window,
-              private metadataService: MetadataService)
+              private metadataService: MetadataService,
+              private hexagonService: HexagonService)
   { 
     this.ethereum = (window as any).ethereum;
     this.provider = new ethers.providers.Web3Provider(this.ethereum);
@@ -74,10 +77,16 @@ export class EthersService {
   async discover(){
     const signedContract = this.connectContract();
     const account = this.requestAccount();
-    return this.metadataService.generateMetadata()
-                        .subscribe(resp => {
-                          return signedContract.discover(account, resp.uuid);
-                        });
+
+    const tokenId = await this.getTotalSupply();
+    const coords: Coordinate = this.hexagonService.getCoordinatesFromId(tokenId);
+    let neighbors: Map<string, Coordinate> = this.hexagonService.getNeighbors(coords);
+    neighbors.set('location', coords);
+
+    return this.metadataService.generateMetadata(neighbors)
+                               .subscribe(resp => {
+                                 return signedContract.discover(account, resp.uuid);
+                               });
   }
 
   async getBalanceOf(){
@@ -93,7 +102,6 @@ export class EthersService {
     let tokens: ParcelMetadata[] = [];
     for (let i= 0; i < balance.toNumber(); i++){
       let token = await signedContract.tokenOfOwnerByIndex(account, i);
-      // get uri
       const uri: string = await this.getMetadataURIWithBigNumber(token);
       let uriComponents = uri.split("/");
       const blob_id: string = uriComponents[uriComponents.length - 1];
@@ -103,16 +111,9 @@ export class EthersService {
     return tokens;
   }
 
-  async getTotalSupply() {
-    const signedContract = this.connectContract();
-    const totalSupply: BigNumber = await signedContract.totalSupply(); // do we need the signed contract?
-    let tokens = [];
-    for(let i=0; i < totalSupply.toNumber(); i++){
-      let token = await signedContract.tokenByIndex(i);
-      tokens.push(token);
-    }
-    console.log(tokens);
-    return tokens;
+  async getTotalSupply(): Promise<number> {
+    const totalSupply: BigNumber = await this.unsignedContract.totalSupply(); 
+    return totalSupply.toNumber();
   }
 
   getOwnedParcelData(){

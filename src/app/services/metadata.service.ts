@@ -13,9 +13,11 @@ export class MetadataService {
 
   constructor(private http: HttpClient) { }
 
-  generateMetadata(): Observable<MetadataResponse> {
+  generateMetadata(body: any): Observable<MetadataResponse> {
+    const headers = { 'content-type': 'application/json'}
+    let req = JSON.stringify([...body]);
     return this.http
-               .get<MetadataResponse>(`${API_URL}/api/generate-parcel`)
+               .post<MetadataResponse>(`${API_URL}/api/generate-parcel`, req, {'headers':headers})
   }
 
   getMetadata(tokenId: string): Observable<ParcelMetadata> {

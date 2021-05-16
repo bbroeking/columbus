@@ -13,9 +13,7 @@ export class MapComponent implements OnInit {
 
   constructor(private ethersService: EthersService) { }
 
-  async ngOnInit(): Promise<void> {
-    this.totalSupply = await this.ethersService.getTotalSupply();
-    console.log(this.totalSupply);
+  ngOnInit(){
   }
 
   

@@ -1,8 +1,13 @@
+import { Coordinate } from "./coordinate.model"
+
 export class ParcelMetadata {
-    'northernTile': string
-    'northWesternTile': string
-    'northEasternTile': string
-    'southernTile': string
-    'southWesternTile': string
-    'southEasternTile': string
+    'location': Coordinate
+    'neighbors': {
+        'eastTile': Coordinate
+        'northEastTile': Coordinate
+        'northWesternTile': Coordinate
+        'westTile': Coordinate
+        'southEastTile': Coordinate
+        'southWestTile': Coordinate
+    }
 }

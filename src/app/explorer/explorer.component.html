@@ -14,7 +14,17 @@
 <div>Current Account Balance: {{balance}}</div>
 <div>Number of Tokens Held By Current Metamask Account: {{numTokens}}</div>
 
-<div *ngFor="let metadata of tokenMetadata">
-    Northern: {{metadata.data.northernTile}}
-    North Western: {{ metadata.data.northWesternTile }}
+<div *ngFor="let neighbor of neighbors | keyvalue">
+    <div> Neighbor {{neighbor.key}}</div>
+    <div class="locations">
+        <div>
+            X: {{neighbor.value.x}}            
+        </div>
+        <div>
+            Y: {{neighbor.value.y}}
+        </div>
+        <div>
+            Z: {{neighbor.value.z}}
+        </div>
+    </div>
 </div>
