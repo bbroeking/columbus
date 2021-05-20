@@ -7,21 +7,29 @@
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> X Position </th>
       <td mat-cell *matCellDef="let element"> {{element.data.location.x}} </td>
-      <td mat-footerocell *matFooterCellDef> Total Lands</td>
+      <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
   
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef> Y Position </th>
       <td mat-cell *matCellDef="let element"> {{element.data.location.y}} </td>
-      <td mat-footer-cell *matFooterCellDef>{{numTokens}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
 
     <!-- Weight Column -->
   <ng-container matColumnDef="weight">
     <th mat-header-cell *matHeaderCellDef> Z Position </th>
     <td mat-cell *matCellDef="let element"> {{element.data.location.z}} </td>
-    <td mat-footerocell *matFooterCellDef> </td>
+    <td mat-footer-cell *matFooterCellDef> </td>
+  </ng-container>
+
+  <!-- Link Column -->
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-matbutton [routerLink]="hello(element.data.location)"> Go To </button> </td>
+    <td mat-footer-cell *matFooterCellDef> Total Lands: {{numTokens}}</td>
   </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

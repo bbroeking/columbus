@@ -1,9 +1,12 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { concat, Observable } from 'rxjs';
+import { concat, from, Observable } from 'rxjs';
 import { Coordinate } from '../models/coordinate.model';
 import { ParcelMetadata } from '../models/parcel-metadata.model';
 import { EthersService } from '../services/ethers.service';
 import {DataSource} from '@angular/cdk/collections';
+import { HexagonService } from '../services/hexagon.service';
+import {MatButtonModule} from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 export interface PeriodicElement {
   location: string;
@@ -28,48 +31,43 @@ export class BrowserComponent implements OnInit {
   public tokens2: ParcelMetadata[] = [];
   public numTokens: number;
   public temp: Observable<Array<any>>;
-  public cvs: string;
   public testt: any;
   
   
-  displayedColumns: string[] = ['position', 'location','weight',];
+  displayedColumns: string[] = ['position', 'location','weight','link',];
   dataSource = myDataArray;
   constructor(
     private ethers: EthersService,
+    private hexagonService: HexagonService
   ) {this.ethersService = ethers }
 
   async ngOnInit() {
     this.numTokens = await this.ethersService.getBalanceOf();
     this.temp = await this.ethersService.getTokenOfOwnerByIndex();
-    this.ethersService.getTokenOfOwnerByIndex()
+    this.ethersService.getTokenOfOwnerByIndex() 
     await this.ethersService.getTokenOfOwnerByIndex()
                             .then(res => res.subscribe(res => {
-      this.dataSource = res
-
-      // res.forEach((element: any) => {
-      //   let ele = element.data as ParcelMetadata;
-      //   let location = ele.location as Coordinate;
-        
-      //   console.log(location)
-      //   //json
-      //   this.cvs = JSON.stringify(location)
-      //   console.log(this.cvs)
-      //   //array valuesonly
-      //   // this.testt = Object.values(location)
-      //   //array keys
-      //   // this.testt = Object.keys(location)
-      //   //array of arrays
-      //   // this.testt = Object.entries(location)
-
-      //   console.log(this.testt)
-      //   this.tokens2.push(ele);
-      // });
+      this.dataSource = res;
+      res.forEach((element: any) => {
+        let ele = element.data as ParcelMetadata;
+        let location = new Coordinate(ele.location.x, ele.location.y,ele.location.z);
+        this.testt = this.hexagonService.getIdFromCoordinates(location)
+        // console.log(this.hexagonService.getIdFromCoordinates(location))
+        console.log(this.testt)
+      });
       
       // console.log(res);
       // console.log(this.tokens2.length)
       
     }))
 
+  }
+
+  public hello(coords :Coordinate) {
+    let location = new Coordinate(coords.x, coords.y,coords.z);
+    const id = this.hexagonService.getIdFromCoordinates(location)
+    console.log(coords)
+    return `/map/${id}`;
   }
 
 }
