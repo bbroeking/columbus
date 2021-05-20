@@ -9,6 +9,8 @@ import { MetadataResponse } from '../models/metadata-response.model';
 import { ParcelMetadata } from '../models/parcel-metadata.model';
 import { HexagonService } from './hexagon.service';
 import { Coordinate } from '../models/coordinate.model';
+import {Observable, forkJoin } from 'rxjs';
+import { promise } from 'selenium-webdriver';
 
 @Injectable()
 export class EthersService {
@@ -23,12 +25,15 @@ export class EthersService {
               private hexagonService: HexagonService)
   { 
     this.ethereum = (this.window as any).ethereum;
+
+    this.provider = new ethers.providers.Web3Provider(this.ethereum);
+
+    this.signer = this.getSigner();
+    this.unsignedContract = this.getContract();
+
   }
 
   public ngOnInit(){
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-    this.signer = this.getSigner();
-    this.unsignedContract = this.getContract();
     this.unsignedContract.on("Transfer", (from, to, amount, event) => {
       console.log(`${ from } sent ${ ethers.utils.formatEther(amount) } to ${ to}`);
       console.log(event);
@@ -95,20 +100,19 @@ export class EthersService {
     return balance.toNumber();
   }
 
-  async getTokenOfOwnerByIndex() {
+  async getTokenOfOwnerByIndex(){
     const account = this.requestAccount();
     const signedContract = this.connectContract();
     const balance: BigNumber = await signedContract.balanceOf(account);
-    let tokens: ParcelMetadata[] = [];
+    let tokens = [];
     for (let i= 0; i < balance.toNumber(); i++){
       let token = await signedContract.tokenOfOwnerByIndex(account, i);
       const uri: string = await this.getMetadataURIWithBigNumber(token);
       let uriComponents = uri.split("/");
       const blob_id: string = uriComponents[uriComponents.length - 1];
-      this.metadataService.getMetadata(blob_id)
-                          .subscribe(res => tokens.push(res));
-    }
-    return tokens;
+      tokens.push(this.metadataService.getMetadata(blob_id));
+    }               
+    return forkJoin(...tokens)
   }
 
   async getTotalSupply(): Promise<number> {
