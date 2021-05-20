@@ -8,8 +8,10 @@ import { InitalizeService } from './services/initalize.service';
 import { EthersService } from './services/ethers.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
-import { RouterModule, Routes } from '@angular/router';
 
+import { BrowserComponent } from './browser/browser.component';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule, Routes } from '@angular/router';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -21,12 +23,15 @@ const routes: Routes = [];
   declarations: [
     AppComponent,
     ExplorerComponent,
-    MapComponent
+    MapComponent,
+    BrowserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatTableModule,
+
   ],
   providers: [{ provide: Window,
                 useValue: window 
