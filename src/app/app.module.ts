@@ -8,11 +8,14 @@ import { InitalizeService } from './services/initalize.service';
 import { EthersService } from './services/ethers.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
+import { RouterModule, Routes } from '@angular/router';
 
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
 }
+
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -23,7 +26,7 @@ export function init_app(initalizeService: InitalizeService) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [{ provide: Window,
                 useValue: window 
