@@ -43,6 +43,7 @@ export class ExplorerComponent implements OnInit {
     let id = this.hexagonService.getIdFromCoordinates(testCoordinate);
     console.log('test coordinate id')
     console.log(id);
+    await this.ethersService.getTokenOfOwnerByIndex().then(res => res.subscribe(res => console.log(res)))
   }
 
   ngOnDestroy() {
