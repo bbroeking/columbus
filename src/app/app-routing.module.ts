@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserComponent } from './browser/browser.component';
+import { ExplorerComponent } from './explorer/explorer.component';
+import { MapComponent } from './map/map.component';
+
 
 const routes: Routes = [
+  { path: '', component: ExplorerComponent },
+  { path: 'explorer', component: ExplorerComponent },
+  { path: 'map/:mapId', component: MapComponent },
 ];
 
 @NgModule({
