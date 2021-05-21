@@ -12,6 +12,14 @@ import { MapComponent } from './map/map.component';
 import { BrowserComponent } from './browser/browser.component';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
+import { ParcelDetailsComponent } from './parcel-details/parcel-details.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ParcelTileComponent } from './parcel-tile/parcel-tile.component';
+
+// Firebase
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -24,14 +32,18 @@ const routes: Routes = [];
     AppComponent,
     ExplorerComponent,
     MapComponent,
-    BrowserComponent
+    BrowserComponent,
+    ParcelDetailsComponent,
+    DashboardComponent,
+    ParcelTileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatTableModule,
-
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [{ provide: Window,
                 useValue: window 

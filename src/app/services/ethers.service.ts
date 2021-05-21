@@ -55,7 +55,6 @@ export class EthersService {
 
   async requestAccount() {
     const accounts = await this.ethereum.request({ method: 'eth_requestAccounts' });
-    console.log(accounts);
     return accounts[0];
   }
 
@@ -120,23 +119,17 @@ export class EthersService {
     return totalSupply.toNumber();
   }
 
-  getOwnedParcelData(){
-
-  }
-
   async getTotalSupplyParcelData(){
     const totalSupply = await this.getTotalSupply();
 
   }
 
-  async getMetadataURI(tokenId: number) {
-    const uri = await this.unsignedContract.tokenURI(tokenId);
-    console.log(uri);
-    return uri;
+  getMetadataURI(tokenId: number): Promise<string> {
+    return this.unsignedContract.tokenURI(tokenId)
   }
-  async getMetadataURIWithBigNumber(tokenId: BigNumber){
-    const uri = await this.unsignedContract.tokenURI(tokenId);
-    return uri;
+
+  getMetadataURIWithBigNumber(tokenId: BigNumber): Promise<string> {
+    return this.unsignedContract.tokenURI(tokenId);
   }
 
 

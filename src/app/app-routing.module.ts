@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ExplorerComponent } from './explorer/explorer.component';
 import { MapComponent } from './map/map.component';
 import {BrowserComponent} from './browser/browser.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
   { path: '', component: BrowserComponent },
   { path: 'explorer', component: ExplorerComponent },
-  { path: 'map/:mapId', component: MapComponent },
+  { path: 'dashboard/:mapId', component: DashboardComponent },
+  { path: 'explorer', component: ExplorerComponent },
 ];
 
 @NgModule({

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EthersService } from '../services/ethers.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HexagonService } from '../services/hexagon.service';
 import { Coordinate } from '../models/coordinate.model';
 
@@ -11,28 +10,48 @@ import { Coordinate } from '../models/coordinate.model';
 })
 export class MapComponent implements OnInit {
 
-  mapId: number;
+  @Input() mapId: number;
+
+  // neighbor Ids
+
+  northWesternTile: string = "northWesternTile";
+  northEasternTile: string = "northEasternTile";
+  eastTile: string = "eastTile";
+  westTile: string = "westTile";
+  southWesternTile: string = "southWesternTile";
+  southEasternTile: string = "southEasternTile";
+
+  public parcelNorthWesternTile: number;
+  public parcelNorthEasternTile: number;
+  public parcelEastTile: number;
+  public parcelWestTile: number;
+  public parcelSouthWesternTile: number;
+  public parcelSouthEasternTile: number;
+
   mapCoordinateBase: Coordinate;
   neighbors: Map<string, Coordinate>;
   neighborsId: Map<string, number>
 
   constructor(private ethersService: EthersService,
-              private hexagonService: HexagonService,
-              private route: ActivatedRoute) {}
+              private hexagonService: HexagonService) {}
 
-  ngOnInit(){
-    this.route.paramMap.subscribe(params => {
-      this.mapId = +(params.get('mapId') || 0);
-    });
+  async ngOnInit(){
     this.mapCoordinateBase = this.hexagonService.getCoordinatesFromId(this.mapId);
     this.neighbors = this.hexagonService.getNeighbors(this.mapCoordinateBase);
     this.neighborsId = new Map<string, number>();
     this.neighbors.forEach((value: Coordinate, key: string) => {
       this.neighborsId.set(key, this.hexagonService.getIdFromCoordinates(value));
     })
-    console.log(this.neighborsId);
-
+    this.getNeighborParcelIds();
   }
 
-  
+
+  getNeighborParcelIds() {
+    this.parcelNorthWesternTile = this.neighborsId.get(this.northWesternTile) || 0;
+    this.parcelNorthEasternTile = this.neighborsId.get(this.northEasternTile) || 0;
+    this.parcelEastTile = this.neighborsId.get(this.eastTile) || 0;
+    this.parcelWestTile = this.neighborsId.get(this.westTile) || 0;
+    this.parcelSouthEasternTile = this.neighborsId.get(this.southEasternTile) || 0;
+    this.parcelSouthWesternTile = this.neighborsId.get(this.southWesternTile) || 0;
+  }
 }

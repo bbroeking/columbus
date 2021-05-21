@@ -1,12 +1,9 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { concat, from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Coordinate } from '../models/coordinate.model';
 import { ParcelMetadata } from '../models/parcel-metadata.model';
 import { EthersService } from '../services/ethers.service';
-import {DataSource} from '@angular/cdk/collections';
 import { HexagonService } from '../services/hexagon.service';
-import {MatButtonModule} from '@angular/material/button';
-import { RouterModule } from '@angular/router';
 
 export interface PeriodicElement {
   location: string;
@@ -48,26 +45,25 @@ export class BrowserComponent implements OnInit {
     await this.ethersService.getTokenOfOwnerByIndex()
                             .then(res => res.subscribe(res => {
       this.dataSource = res;
-      res.forEach((element: any) => {
-        let ele = element.data as ParcelMetadata;
-        let location = new Coordinate(ele.location.x, ele.location.y,ele.location.z);
-        this.testt = this.hexagonService.getIdFromCoordinates(location)
-        // console.log(this.hexagonService.getIdFromCoordinates(location))
-        console.log(this.testt)
-      });
+      // res.forEach((element: any) => {
+      //   let ele = element.data as ParcelMetadata;
+      //   let location = new Coordinate(ele.location.x, ele.location.y,ele.location.z);
+      //   this.testt = this.hexagonService.getIdFromCoordinates(location)
+      //   // console.log(this.hexagonService.getIdFromCoordinates(location))
+      //   console.log(this.testt)
+      // });
       
       // console.log(res);
       // console.log(this.tokens2.length)
       
-    }))
+    }));
 
   }
 
-  public hello(coords :Coordinate) {
+  public generateLink(coords :Coordinate) {
     let location = new Coordinate(coords.x, coords.y,coords.z);
-    const id = this.hexagonService.getIdFromCoordinates(location)
-    console.log(coords)
-    return `/map/${id}`;
+    const id = this.hexagonService.getIdFromCoordinates(location);
+    return `/dashboard/${id}`;
   }
 
 }

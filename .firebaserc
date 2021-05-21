@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "columbus-313520": {
+      "hosting": {
+        "columbus": [
+          "columbus-313520"
+        ]
+      }
+    }
+  }
+}
