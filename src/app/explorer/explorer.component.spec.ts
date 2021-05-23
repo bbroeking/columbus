@@ -15,7 +15,8 @@ describe('ExplorerComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ExplorerComponent ],
       providers:[
-        { provide: EthersService, useValue: { getBalanceOf: jasmine.createSpy('getBalanceOf')}},
+        { provide: EthersService, useValue: { getBalanceOf: jasmine.createSpy('getBalanceOf'),
+                                              getTokenOfOwnerByIdex: jasmine.createSpy('getTokenOfOwnerByIndex') }},
         { provide: MetadataService, useValue: {}},
         { provide: HexagonService, useValue: { getCoordinatesFromId: () => new Coordinate(0,0,0) }}                   
       ]

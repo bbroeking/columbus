@@ -40,22 +40,9 @@ export class BrowserComponent implements OnInit {
 
   async ngOnInit() {
     this.numTokens = await this.ethersService.getBalanceOf();
-    this.temp = await this.ethersService.getTokenOfOwnerByIndex();
-    this.ethersService.getTokenOfOwnerByIndex() 
     await this.ethersService.getTokenOfOwnerByIndex()
                             .then(res => res.subscribe(res => {
-      this.dataSource = res;
-      // res.forEach((element: any) => {
-      //   let ele = element.data as ParcelMetadata;
-      //   let location = new Coordinate(ele.location.x, ele.location.y,ele.location.z);
-      //   this.testt = this.hexagonService.getIdFromCoordinates(location)
-      //   // console.log(this.hexagonService.getIdFromCoordinates(location))
-      //   console.log(this.testt)
-      // });
-      
-      // console.log(res);
-      // console.log(this.tokens2.length)
-      
+      this.dataSource = res;      
     }));
 
   }

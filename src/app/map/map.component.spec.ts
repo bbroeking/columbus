@@ -13,9 +13,7 @@ describe('MapComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MapComponent ],
-      providers:[
-        { provide: HexagonService, useValue:{ getCoordinatesFromId: jasmine.createSpy('getCoordinatesFromId')}},
-      ]
+      providers:[]
     })
     .compileComponents();
   });
