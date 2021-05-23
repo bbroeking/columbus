@@ -1,44 +1,29 @@
-<ul id="grid" class="clear">
-    <li class="hex-item">
-        <div class="hex-content">
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
-            <app-parcel-tile [mapId]="parcelNorthWesternTile"></app-parcel-tile>
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
-            <app-parcel-tile [mapId]="parcelNorthEasternTile"></app-parcel-tile>
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
-            <app-parcel-tile [mapId]="parcelWestTile"></app-parcel-tile>
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content"></div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
-            <app-parcel-tile [mapId]="parcelEastTile"></app-parcel-tile>
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
+<div class="hex-row">
+    <div class="hex">
+        <app-parcel-tile [mapId]="parcelNorthWesternTile"></app-parcel-tile>
+    </div>
+    <div class="hex">
+        <app-parcel-tile [mapId]="parcelNorthEasternTile"></app-parcel-tile>
+    </div>
+</div>
 
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
-            <app-parcel-tile [mapId]="parcelSouthWesternTile"></app-parcel-tile>
-        </div>
-    </li>
-    <li class="hex-item">
-        <div class="hex-content">
-            <app-parcel-tile [mapId]="parcelSouthEasternTile"></app-parcel-tile>
-        </div>
-    </li>
-</ul>
+<div class="hex-row even">
+    <div class="hex">
+        <app-parcel-tile [mapId]="parcelWestTile"></app-parcel-tile>
+    </div>
+    <div class="hex">
+        <app-parcel-tile [mapId]="mapId"></app-parcel-tile>
+    </div>
+    <div class="hex">
+        <app-parcel-tile [mapId]="parcelEastTile"></app-parcel-tile>
+    </div>
+</div>
+
+<div class="hex-row">
+    <div class="hex">
+        <app-parcel-tile [mapId]="parcelSouthWesternTile"></app-parcel-tile>
+    </div>
+    <div class="hex">
+        <app-parcel-tile [mapId]="parcelSouthEasternTile"></app-parcel-tile>
+    </div>
+</div>

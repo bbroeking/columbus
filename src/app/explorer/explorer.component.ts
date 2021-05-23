@@ -39,10 +39,6 @@ export class ExplorerComponent implements OnInit {
     let coordinates: Coordinate = await this.hexagonService.getCoordinatesFromId(supply);
     this.neighbors = this.hexagonService.getNeighbors(coordinates);
 
-    let testCoordinate: Coordinate = new Coordinate(0, 0, 0);
-    let id = this.hexagonService.getIdFromCoordinates(testCoordinate);
-    console.log('test coordinate id')
-    console.log(id);
     await this.ethersService.getTokenOfOwnerByIndex().then(res => res.subscribe(res => console.log(res)))
   }
 

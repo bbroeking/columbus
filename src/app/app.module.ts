@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Provider } from './services/ethers-utils/web3-provider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,9 +21,16 @@ import { ParcelTileComponent } from './parcel-tile/parcel-tile.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { providers } from 'ethers';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
+}
+
+export function enableWeb3Provider(provider: providers.Web3Provider) {
+  return () => {
+    provider.getSigner();  // Ask the user to enable MetaMask at load time.
+  };
 }
 
 const routes: Routes = [];
@@ -47,6 +55,12 @@ const routes: Routes = [];
   ],
   providers: [{ provide: Window,
                 useValue: window 
+              },
+              {
+                provide: APP_INITIALIZER, // move this to a better spot
+                useFactory: enableWeb3Provider,
+                deps: [Provider],
+                multi: true
               },
               // { provide: APP_INITIALIZER,
               //   useFactory: init_app,

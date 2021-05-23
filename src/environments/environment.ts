@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  network: "HTTP://127.0.0.1:7545",
+  contract: '0x0DDDa1d8A79779c006dA105CD5b0858122A4aa0c',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebase: {
     apiKey: "AIzaSyBCu8y8ME96NAcULBgSK15EK_xE6ozfV1k",
@@ -14,7 +16,9 @@ export const environment = {
     appId: "1:799616935280:web:7ac8b53a387ce0c9a95bb5",
     measurementId: "G-MW4KS5LFQH"
   }
+
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

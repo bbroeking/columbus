@@ -1,56 +1,40 @@
-import { Injectable } from '@angular/core';
-import { BigNumber, ethers } from "ethers";
+import { Inject, Injectable } from '@angular/core';
+import { BigNumber, Contract, ethers } from "ethers";
 
 import {LOCAL_PARCEL_CONTRACT} from '../env';
 import * as parcel from "../../../build/contracts/Parcel.json";
 
 import {MetadataService} from '../services/metadata.service'
-import { MetadataResponse } from '../models/metadata-response.model';
-import { ParcelMetadata } from '../models/parcel-metadata.model';
 import { HexagonService } from './hexagon.service';
 import { Coordinate } from '../models/coordinate.model';
-import {Observable, forkJoin } from 'rxjs';
-import { promise } from 'selenium-webdriver';
+import { forkJoin } from 'rxjs';
+import { Provider } from './ethers-utils/web3-provider';
+import { ParcelContract } from './ethers-utils/contract';
 
 @Injectable()
 export class EthersService {
 
-  private ethereum: any;
+  private ethereum;
   private provider: ethers.providers.Web3Provider;
-  private signer: ethers.providers.JsonRpcSigner;
   private unsignedContract: ethers.Contract;
+  private signedContract: ethers.Contract;
   
-  constructor(private window: Window,
+  constructor(@Inject(Provider) provider: Provider,
+              @Inject(ParcelContract) parcelContract: Contract,
               private metadataService: MetadataService,
-              private hexagonService: HexagonService)
+              private hexagonService: HexagonService,
+              private window: Window)
   { 
-    this.ethereum = (this.window as any).ethereum;
-
-    this.provider = new ethers.providers.Web3Provider(this.ethereum);
-
-    this.signer = this.getSigner();
-    this.unsignedContract = this.getContract();
-
+    this.ethereum = (window as any).ethereum;
+    this.provider = provider;
+    this.unsignedContract = parcelContract;
+    this.signedContract = parcelContract;
   }
 
-  public ngOnInit(){
-    this.unsignedContract.on("Transfer", (from, to, amount, event) => {
-      console.log(`${ from } sent ${ ethers.utils.formatEther(amount) } to ${ to}`);
-      console.log(event);
-      // The event object contains the verbatim log data, the
-      // EventFragment and functions to fetch the block,
-      // transaction and receipt and event functions
-    });
-  }
+  public ngOnInit() {}
 
   public ngOnDestory(){
     this.unsignedContract.removeAllListeners();
-  }
-
-  isMetamaskInstalled() {
-    if (typeof this.ethereum !== 'undefined') {
-      console.log('MetaMask is installed!');
-    }  
   }
 
   async requestAccount() {
@@ -73,13 +57,12 @@ export class EthersService {
     return new ethers.Contract(daiAddress, daiAbi, this.provider);
   }
 
-  connectContract(){
-    const signedContract = this.unsignedContract.connect(this.signer);
-    return signedContract;
-  }
+  // connectContract(){
+  //   const signedContract = this.unsignedContract.connect(this.signer);
+  //   return signedContract;
+  // }
 
   async discover(){
-    const signedContract = this.connectContract();
     const account = this.requestAccount();
 
     const tokenId = await this.getTotalSupply();
@@ -89,23 +72,21 @@ export class EthersService {
 
     return this.metadataService.generateMetadata(neighbors)
                                .subscribe(resp => {
-                                 return signedContract.discover(account, resp.uuid);
+                                 return this.signedContract.discover(account, resp.uuid);
                                });
   }
 
   async getBalanceOf(){
-    const signedContract = this.connectContract();
-    const balance = await signedContract.balanceOf(this.requestAccount());
+    const balance = await this.signedContract.balanceOf(this.requestAccount());
     return balance.toNumber();
   }
 
   async getTokenOfOwnerByIndex(){
     const account = this.requestAccount();
-    const signedContract = this.connectContract();
-    const balance: BigNumber = await signedContract.balanceOf(account);
+    const balance: BigNumber = await this.signedContract.balanceOf(account);
     let tokens = [];
     for (let i= 0; i < balance.toNumber(); i++){
-      let token = await signedContract.tokenOfOwnerByIndex(account, i);
+      let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
       const uri: string = await this.getMetadataURIWithBigNumber(token);
       let uriComponents = uri.split("/");
       const blob_id: string = uriComponents[uriComponents.length - 1];

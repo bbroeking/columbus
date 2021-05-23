@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EthersService } from '../services/ethers.service';
 
 import { BrowserComponent } from './browser.component';
 
@@ -8,7 +9,10 @@ describe('BrowserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BrowserComponent ]
+      declarations: [ BrowserComponent ],
+      providers: [
+        { provide: EthersService, useValue: {}}
+      ]
     })
     .compileComponents();
   });

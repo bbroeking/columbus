@@ -1,18 +1,26 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { ethers } from 'ethers';
+import { ParcelContract } from './ethers-utils/contract';
+import { Provider } from './ethers-utils/web3-provider';
 
 import { EthersService } from './ethers.service';
+import { HexagonService } from './hexagon.service';
+import { MetadataService } from './metadata.service';
 
 describe('EthersService', () => {
   let service: EthersService;
 
   beforeEach(() => {
+    const spy = jasmine.createSpyObj('ethers', ['provider']);
     TestBed.configureTestingModule({
       providers:[
                   EthersService,
-                  { provide: Window, useValue: { ethereum: {} }},
-                  HttpClient,
-                  HttpHandler
+                  { provide: Window, useValue: { ethereum: {}}},
+                  { provide: ParcelContract, useValue: {}},
+                  { provide: Provider, useValue: {}},
+                  { provide: MetadataService, useValue: {}},
+                  { provide: HexagonService, useValue: {}},
                 ]
     });
     service = TestBed.inject(EthersService);

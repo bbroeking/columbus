@@ -1,6 +1,9 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Coordinate } from '../models/coordinate.model';
 import { EthersService } from '../services/ethers.service';
+import { HexagonService } from '../services/hexagon.service';
+import { MetadataService } from '../services/metadata.service';
 
 import { ExplorerComponent } from './explorer.component';
 
@@ -11,11 +14,11 @@ describe('ExplorerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ExplorerComponent ],
-      providers:[EthersService,                   
-                 { provide: Window, useValue: { ethereum: {} }},
-                 HttpClient,
-                 HttpHandler
-                ]
+      providers:[
+        { provide: EthersService, useValue: { getBalanceOf: jasmine.createSpy('getBalanceOf')}},
+        { provide: MetadataService, useValue: {}},
+        { provide: HexagonService, useValue: { getCoordinatesFromId: () => new Coordinate(0,0,0) }}                   
+      ]
     })
     .compileComponents();
   });

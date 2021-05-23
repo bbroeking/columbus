@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'explorer', component: ExplorerComponent },
   { path: 'dashboard/:mapId', component: DashboardComponent },
   { path: 'explorer', component: ExplorerComponent },
+  { path: 'map', component: MapComponent }
 ];
 
 @NgModule({

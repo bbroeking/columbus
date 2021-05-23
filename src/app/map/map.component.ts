@@ -13,7 +13,6 @@ export class MapComponent implements OnInit {
   @Input() mapId: number;
 
   // neighbor Ids
-
   northWesternTile: string = "northWesternTile";
   northEasternTile: string = "northEasternTile";
   eastTile: string = "eastTile";
@@ -32,8 +31,7 @@ export class MapComponent implements OnInit {
   neighbors: Map<string, Coordinate>;
   neighborsId: Map<string, number>
 
-  constructor(private ethersService: EthersService,
-              private hexagonService: HexagonService) {}
+  constructor(private hexagonService: HexagonService) {}
 
   async ngOnInit(){
     this.mapCoordinateBase = this.hexagonService.getCoordinatesFromId(this.mapId);
@@ -47,11 +45,11 @@ export class MapComponent implements OnInit {
 
 
   getNeighborParcelIds() {
-    this.parcelNorthWesternTile = this.neighborsId.get(this.northWesternTile) || 0;
-    this.parcelNorthEasternTile = this.neighborsId.get(this.northEasternTile) || 0;
-    this.parcelEastTile = this.neighborsId.get(this.eastTile) || 0;
-    this.parcelWestTile = this.neighborsId.get(this.westTile) || 0;
-    this.parcelSouthEasternTile = this.neighborsId.get(this.southEasternTile) || 0;
-    this.parcelSouthWesternTile = this.neighborsId.get(this.southWesternTile) || 0;
+    this.parcelNorthWesternTile = this.neighborsId.get(this.northWesternTile) || -1;
+    this.parcelNorthEasternTile = this.neighborsId.get(this.northEasternTile) || -1;
+    this.parcelEastTile = this.neighborsId.get(this.eastTile) || -1;
+    this.parcelWestTile = this.neighborsId.get(this.westTile) || -1;
+    this.parcelSouthEasternTile = this.neighborsId.get(this.southEasternTile) || -1;
+    this.parcelSouthWesternTile = this.neighborsId.get(this.southWesternTile) || -1;
   }
 }
