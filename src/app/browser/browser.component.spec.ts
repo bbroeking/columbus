@@ -11,8 +11,11 @@ describe('BrowserComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ BrowserComponent ],
       providers: [
-        { provide: EthersService, useValue: { getBalanceOf: jasmine.createSpy('getBalanceOf'),
-                                              getTokenOfOwnerByIdex: jasmine.createSpy('getTokenOfOwnerByIndex').and.returnValue(Promise.resolve({}))}}
+        { provide: EthersService, useValue: { 
+          getBalanceOf: jasmine.createSpy('getBalanceOf'),
+          getTokenOfOwnerByIndex: jasmine.createSpy('getTokenOfOwnerByIndex').and.returnValue({
+            then: jasmine.createSpy() }
+          )}}
       ]
     })
     .compileComponents();

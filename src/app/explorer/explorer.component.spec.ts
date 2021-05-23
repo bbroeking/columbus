@@ -16,9 +16,10 @@ describe('ExplorerComponent', () => {
       declarations: [ ExplorerComponent ],
       providers:[
         { provide: EthersService, useValue: { getBalanceOf: jasmine.createSpy('getBalanceOf'),
-                                              getTokenOfOwnerByIdex: jasmine.createSpy('getTokenOfOwnerByIndex') }},
+                                              getTokenOfOwnerByIndex: jasmine.createSpy('getTokenOfOwnerByIndex'),
+                                              getTotalSupply: jasmine.createSpy('getTotalSupply').and.returnValue(Promise.resolve({}))
+                                            }},
         { provide: MetadataService, useValue: {}},
-        { provide: HexagonService, useValue: { getCoordinatesFromId: () => new Coordinate(0,0,0) }}                   
       ]
     })
     .compileComponents();

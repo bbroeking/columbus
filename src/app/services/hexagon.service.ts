@@ -12,7 +12,7 @@ export class HexagonService {
     let neighbors = new Map<string, Coordinate>([
       ['eastTile', coords.getEast()],
       ['northEastTile', coords.getNorthEast()],
-      ['northWesternTile', coords.getNorthWest()],
+      ['northWestTile', coords.getNorthWest()],
       ['westTile', coords.getWest()],
       ['southEastTile', coords.getSouthEast()],
       ['southWestTile', coords.getSouthWest()]
@@ -21,6 +21,7 @@ export class HexagonService {
   }
 
   getIdFromCoordinates(coords: Coordinate): number {
+    if (coords.isEqualComponents(0, 0, 0)) return 0;
     const r = (Math.abs(coords.x) + Math.abs(coords.y) + Math.abs(coords.z)) / 2;
     const id = this.totalHexagonsAtRadius(r-1) + this.matchCoordinate(r, coords);
     return id;
@@ -92,17 +93,19 @@ export class HexagonService {
 
   getCoordinatesFromId(id: number): Coordinate {
     let r = 0;
-    while (6*r < id){ r++; }
+    while (this.totalHexagonsAtRadius(r) <= id){ r++; }
     let positionOnRing = id - this.totalHexagonsAtRadius(r-1);
     return this.getCoordinates(r, positionOnRing);
   }
 
   totalHexagonsAtRadius(r: number){
-    if (r < 1) return 0;
+    if (r < 1) return 1;
     return 1 + (3*r) * (r+1);
   }
 
   getCoordinates(r: number, supply: number): Coordinate {
+    if (r == 0) return new Coordinate(0,0,0);
+
     let count = 0
     let x = -r;
     let y = 0;
