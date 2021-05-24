@@ -4,6 +4,7 @@ import { Coordinate } from '../models/coordinate.model';
 import { ParcelMetadata } from '../models/parcel-metadata.model';
 import { EthersService } from '../services/ethers.service';
 import { HexagonService } from '../services/hexagon.service';
+import { TileDataService } from '../tile-data.service';
 
 export interface PeriodicElement {
   location: string;
@@ -29,14 +30,16 @@ export class BrowserComponent implements OnInit {
   public numTokens: number;
   public temp: Observable<Array<any>>;
   public testt: any;
-  
+  public tileDataService: TileDataService
   
   displayedColumns: string[] = ['position', 'location','weight','link',];
   dataSource = myDataArray;
   constructor(
     private ethers: EthersService,
-    private hexagonService: HexagonService
-  ) {this.ethersService = ethers }
+    private hexagonService: HexagonService,
+    private tiledataService: TileDataService
+  ) {this.ethersService = ethers 
+     this.tileDataService = tiledataService}
 
   async ngOnInit() {
     this.numTokens = await this.ethersService.getBalanceOf();

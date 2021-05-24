@@ -10,12 +10,10 @@ export interface Resources {
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TileDataService {
 
-  @Input() mapId: number;
+  mapId: number = 1;
   private tileDoc: AngularFirestoreDocument<Resources>
   tile: Observable<Resources | undefined>;
 
@@ -26,13 +24,58 @@ export class TileDataService {
     private ethers: EthersService,
     ) {this.ethersService = ethers }
 
-async ngOnInit(){
-  let firestoreId = await this.getFirestoreFromTileId(this.mapId);
-  if (typeof firestoreId != undefined){
-    this.tileDoc = this.firestore.doc<Resources>(`tiles/${firestoreId}`);
-    this.tile = this.tileDoc.valueChanges();
-    this.create({ore: 3, wood:3, stone:3});
-  }
+ ngOnInit(){
+}
+
+async createTile(mapId: number) {
+  await this.getTileDocRef(mapId)
+            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              if (tileDoc === undefined) throw Error();
+              tileDoc.set({ore: 3, wood:3, stone:3});
+            })
+}
+
+
+async updateTileOre(mapId: number) {
+  await this.getTileDocRef(mapId)
+            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              if (tileDoc === undefined) throw Error();
+              tileDoc.update({ore:1})
+            })
+}
+
+async updateTileWood(mapId: number) {
+  await this.getTileDocRef(mapId)
+            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              if (tileDoc === undefined) throw Error();
+              tileDoc.update({wood:1})
+            })
+}
+
+async updateTileStone(mapId: number) {
+  await this.getTileDocRef(mapId)
+            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              if (tileDoc === undefined) throw Error();
+              tileDoc.update({stone:1})
+            })
+}
+
+
+async deleteTile(mapId: number) {
+  await this.getTileDocRef(mapId)
+            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              if (tileDoc === undefined) throw Error();
+              tileDoc.delete()
+            })
+}
+
+
+async getTileDocRef(mapId: number): Promise<AngularFirestoreDocument<Resources> | undefined> {
+  return this.getFirestoreFromTileId(this.mapId).then((firestoreId) => {
+    return this.firestore.doc<Resources>(`tiles/${firestoreId}`);
+  }).catch(() => {
+    return undefined;
+  });
 }
 
 async getFirestoreFromTileId(id: number): Promise<string | undefined> {
@@ -41,21 +84,14 @@ async getFirestoreFromTileId(id: number): Promise<string | undefined> {
                               let uriComponents = uri.split("/");
                               return uriComponents[uriComponents.length - 1];
                             })
-                            .catch(function(error: any) {
-                              console.log(error);
-                              return undefined;
-                            });
+                            // .catch(function(error: any) {
+                            //   console.log(error);
+                            //   return undefined;
+                            // });
 
 }
 
 
-
-create(tile: Resources){
-  this.tileDoc.set(tile);
-}
-update(tile: Resources){
-  this.tileDoc.set(tile);
-}
 
 
 // getTileId(id) {
