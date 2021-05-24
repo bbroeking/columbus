@@ -35,6 +35,21 @@ async ngOnInit(){
   }
 }
 
+async getFirestoreFromTileId(id: number): Promise<string | undefined> {
+  return this.ethersService.getMetadataURI(id)
+                            .then(function(uri: any) {
+                              let uriComponents = uri.split("/");
+                              return uriComponents[uriComponents.length - 1];
+                            })
+                            .catch(function(error: any) {
+                              console.log(error);
+                              return undefined;
+                            });
+
+}
+
+
+
 create(tile: Resources){
   this.tileDoc.set(tile);
 }
