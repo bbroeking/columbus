@@ -41,15 +41,8 @@
   set
   </button>
 
-  <button (click)= 'tileDataService.updateTileOre(1)'>
-    update ore
-    </button>
-
-  <button (click)= 'tileDataService.updateTileWood(1)'>
-    update wood
-    </button>
-  <button (click)= 'tileDataService.updateTileStone(1)'>
-    update stone
+  <button (click)= 'tileDataService.updateTileResource(1,{ore:2})'>
+    update resource
     </button>
   <button (click)= 'tileDataService.deleteTile(1)'>
     delete tile

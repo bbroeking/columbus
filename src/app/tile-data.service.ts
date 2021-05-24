@@ -9,7 +9,6 @@ export interface Resources {
   stone: number;
 }
 
-
 @Injectable()
 export class TileDataService {
 
@@ -36,27 +35,11 @@ async createTile(mapId: number) {
 }
 
 
-async updateTileOre(mapId: number) {
+async updateTileResource(mapId: number, resources: Partial<Resources>) {
   await this.getTileDocRef(mapId)
             .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
               if (tileDoc === undefined) throw Error();
-              tileDoc.update({ore:1})
-            })
-}
-
-async updateTileWood(mapId: number) {
-  await this.getTileDocRef(mapId)
-            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
-              if (tileDoc === undefined) throw Error();
-              tileDoc.update({wood:1})
-            })
-}
-
-async updateTileStone(mapId: number) {
-  await this.getTileDocRef(mapId)
-            .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
-              if (tileDoc === undefined) throw Error();
-              tileDoc.update({stone:1})
+              tileDoc.update(resources);
             })
 }
 
