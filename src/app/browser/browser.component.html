@@ -36,3 +36,14 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
+
+  <button (click)= 'tileDataService.createTile(1)'>
+  set
+  </button>
+
+  <button (click)= 'tileDataService.updateTileResource(1,{ore:2})'>
+    update resource
+    </button>
+  <button (click)= 'tileDataService.deleteTile(1)'>
+    delete tile
+    </button>
