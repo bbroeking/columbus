@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BigNumber, Contract, ethers } from "ethers";
 
-import {LOCAL_PARCEL_CONTRACT} from '../env';
+import { environment } from '../../environments/environment';
 import * as parcel from "../../../build/contracts/Parcel.json";
 
 import {MetadataService} from '../services/metadata.service'
@@ -52,7 +52,7 @@ export class EthersService {
   }
 
   getContract() {
-    const daiAddress = LOCAL_PARCEL_CONTRACT;
+    const daiAddress = environment.contract;
     const daiAbi = JSON.parse(JSON.stringify(parcel)).default.abi;
     return new ethers.Contract(daiAddress, daiAbi, this.provider);
   }
