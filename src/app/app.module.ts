@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { providers } from 'ethers';
-import { TileDataService } from './tile-data.service';
+import { TileDataService } from './services/tile-data.service';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();

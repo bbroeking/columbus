@@ -1,7 +1,7 @@
 import { Injectable, Input } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { EthersService } from './services/ethers.service';
+import { EthersService } from './ethers.service';
 
 export interface Resources {
   ore: number;
@@ -73,32 +73,4 @@ async getFirestoreFromTileId(id: number): Promise<string | undefined> {
                             // });
 
 }
-
-
-
-
-// getTileId(id) {
-//   return this.firestore
-//   .collection('Tile Ids')
-//   .doc(id)
-//   .valueChanges()
-// }
-
-
-// createTileData(id){
-//   return this.
-// }
-
-
-
-
-// createTileData(data){
-//   return new Promise<any>((resolve, reject) => {
-//     this.firestore
-//         .collection("Tiles")
-//         .add(data)
-//         .then(res => {}, err => reject(err));
-//   })
-// }
-
 }

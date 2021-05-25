@@ -4,7 +4,7 @@ import { Coordinate } from '../models/coordinate.model';
 import { ParcelMetadata } from '../models/parcel-metadata.model';
 import { EthersService } from '../services/ethers.service';
 import { HexagonService } from '../services/hexagon.service';
-import { TileDataService } from '../tile-data.service';
+import { TileDataService } from '../services/tile-data.service';
 
 export interface PeriodicElement {
   location: string;
