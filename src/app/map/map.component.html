@@ -1,29 +1,33 @@
-<div class="hex-row">
-    <div class="hex">
+<div class="grid">
+    <div class="hexagon hidden"></div>
+
+    <div class="hexagon northwest">
         <app-parcel-tile [mapId]="parcelNorthWesternTile"></app-parcel-tile>
     </div>
-    <div class="hex">
+    <div class="hexagon northeast">
         <app-parcel-tile [mapId]="parcelNorthEasternTile"></app-parcel-tile>
-    </div>
-</div>
 
-<div class="hex-row even">
-    <div class="hex">
+    </div>
+
+    <div class="hexagon hidden"></div>
+
+    <div class="hexagon west">
         <app-parcel-tile [mapId]="parcelWestTile"></app-parcel-tile>
     </div>
-    <div class="hex">
-        <app-parcel-tile [mapId]="mapId"></app-parcel-tile>
+    <div class="hexagon center">
+        <!-- <app-parcel-tile [mapId]="parcelCurrent"></app-parcel-tile> -->
     </div>
-    <div class="hex">
+    <div class="hexagon east">
         <app-parcel-tile [mapId]="parcelEastTile"></app-parcel-tile>
     </div>
-</div>
 
-<div class="hex-row">
-    <div class="hex">
+    <div class="hexagon hidden"></div>
+    <div class="hexagon hidden"></div>
+
+    <div class="hexagon southwest">
         <app-parcel-tile [mapId]="parcelSouthWesternTile"></app-parcel-tile>
     </div>
-    <div class="hex">
+    <div class="hexagon southeast">
         <app-parcel-tile [mapId]="parcelSouthEasternTile"></app-parcel-tile>
     </div>
 </div>

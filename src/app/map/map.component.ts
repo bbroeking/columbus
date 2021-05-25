@@ -13,19 +13,19 @@ export class MapComponent implements OnInit {
   @Input() mapId: number;
 
   // neighbor Ids
-  northWesternTile: string = "northWesternTile";
-  northEasternTile: string = "northEasternTile";
+  northWestTile: string = "northWestTile";
+  northEastTile: string = "northEastTile";
   eastTile: string = "eastTile";
   westTile: string = "westTile";
-  southWesternTile: string = "southWesternTile";
-  southEasternTile: string = "southEasternTile";
+  southWestTile: string = "southWestTile";
+  southEastTile: string = "southEastTile";
 
-  public parcelNorthWesternTile: number;
-  public parcelNorthEasternTile: number;
-  public parcelEastTile: number;
-  public parcelWestTile: number;
-  public parcelSouthWesternTile: number;
-  public parcelSouthEasternTile: number;
+  public parcelNorthWesternTile: number | undefined;
+  public parcelNorthEasternTile: number | undefined;
+  public parcelEastTile: number | undefined;
+  public parcelWestTile: number | undefined;
+  public parcelSouthWesternTile: number | undefined;
+  public parcelSouthEasternTile: number | undefined;
 
   mapCoordinateBase: Coordinate;
   neighbors: Map<string, Coordinate>;
@@ -45,11 +45,11 @@ export class MapComponent implements OnInit {
 
 
   getNeighborParcelIds() {
-    this.parcelNorthWesternTile = this.neighborsId.get(this.northWesternTile) || -1;
-    this.parcelNorthEasternTile = this.neighborsId.get(this.northEasternTile) || -1;
-    this.parcelEastTile = this.neighborsId.get(this.eastTile) || -1;
-    this.parcelWestTile = this.neighborsId.get(this.westTile) || -1;
-    this.parcelSouthEasternTile = this.neighborsId.get(this.southEasternTile) || -1;
-    this.parcelSouthWesternTile = this.neighborsId.get(this.southWesternTile) || -1;
+    this.parcelNorthWesternTile = this.neighborsId.get(this.northWestTile);
+    this.parcelNorthEasternTile = this.neighborsId.get(this.northEastTile);
+    this.parcelEastTile = this.neighborsId.get(this.eastTile);
+    this.parcelWestTile = this.neighborsId.get(this.westTile);
+    this.parcelSouthEasternTile = this.neighborsId.get(this.southEastTile);
+    this.parcelSouthWesternTile = this.neighborsId.get(this.southWestTile);
   }
 }

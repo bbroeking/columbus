@@ -14,7 +14,7 @@ export interface Item {
 })
 export class ParcelTileComponent implements OnInit {
 
-  @Input() mapId: number;
+  @Input() mapId: number | undefined;
   firestoreId: string | undefined;
   private itemDoc: AngularFirestoreDocument<Item>;
   item: Observable<Item | undefined>;
@@ -24,7 +24,11 @@ export class ParcelTileComponent implements OnInit {
               private firestore: AngularFirestore) { }
 
   async ngOnInit() {
-    this.firestoreId = this.mapId > 0 ? await this.getFirestoreFromTileId(this.mapId) : undefined;
+    if (this.mapId == undefined) {
+      // doesn't exist handling
+    } else {
+      this.firestoreId = this.mapId > 0 ? await this.getFirestoreFromTileId(this.mapId) : undefined;
+    }
     
     if (typeof this.firestoreId != undefined){
       this.itemDoc = this.firestore.doc<Item>(`items/${this.firestoreId}`);
@@ -50,7 +54,6 @@ export class ParcelTileComponent implements OnInit {
                                 console.log(error);
                                 return undefined;
                               });
-
   }
 
 }
