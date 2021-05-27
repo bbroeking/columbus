@@ -54,7 +54,7 @@ async deleteTile(mapId: number) {
 
 async getTileStructures(mapId: number) {
   return this.getFirestoreFromTileId(mapId).then((firestoreId) => {
-    return this.firestore.doc<Structure>(`tiles/${firestoreId}/structures/GbegDEzL4IWcE3sStLjj`).valueChanges();
+    return this.firestore.doc<Structure>(`tiles/${firestoreId}/structures/GowwAKThlv0qQP0yYadA`).valueChanges();
   }).catch((error) => {
     console.log(error);
     return undefined;
