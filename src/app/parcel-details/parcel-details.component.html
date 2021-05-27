@@ -1,9 +1,15 @@
 <div class="details-panel" >
     <p>{{selectedTile}}</p>
     <p>parcel-details works!</p>
-    <span style="color: #6C6; font-size: 135px;">&#x2B22;</span>    
+    <span style="color: rgb(102, 204, 102); font-size: 135px;">&#x2B22;</span>    
 
     <!-- <div *ngIf="data$ | async as structure">{{structure}}</div> -->
 
-    <div>{{data$ | async | json}}</div>
+    <div> {{structures$ | async | json}}</div>
+
+    <div *ngFor="let structure of structures$ | async">
+        <app-structure [structure]="structure"></app-structure>
+    </div>
+
+
 </div>

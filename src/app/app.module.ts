@@ -25,6 +25,8 @@ import { providers } from 'ethers';
 import { TileDataService } from './services/tile-data.service';
 import { HoverTileMenuComponent } from './hover-tile-menu/hover-tile-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { StructureComponent } from './structure/structure.component';
+import { StructureDetailsComponent } from './structure-details/structure-details.component';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -48,7 +50,9 @@ const routes: Routes = [];
     DashboardComponent,
     ParcelTileComponent,
     HoverTileMenuComponent,
-    NavbarComponent
+    NavbarComponent,
+    StructureComponent,
+    StructureDetailsComponent
   ],
   imports: [
     BrowserModule,
