@@ -7,10 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ParcelDetailsComponent implements OnInit {
 
-  @Input() mapId: number;
+  @Input() selectedTile: number;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

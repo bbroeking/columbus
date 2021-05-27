@@ -4,14 +4,14 @@
     <div
     (mouseenter)="openTooltip($event)"
     (mouseleave)="closeTooltip($event)"
-    (click)="updateDetails(parcelNorthWesternTile)"
+    (click)="updateDetailsTile(parcelNorthWesternTile)"
     class="hexagon northwest">
         <app-parcel-tile [mapId]="parcelNorthWesternTile"></app-parcel-tile>
     </div>
     <div 
     (mouseenter)="openTooltip($event)"
     (mouseleave)="closeTooltip($event)"
-    (click)="updateDetails(parcelNorthEasternTile)"
+    (click)="updateDetailsTile(parcelNorthEasternTile)"
      class="hexagon northeast">
         <app-parcel-tile [mapId]="parcelNorthEasternTile"></app-parcel-tile>
 
@@ -22,21 +22,21 @@
     <div
     (mouseenter)="openTooltip($event)"
     (mouseleave)="closeTooltip($event)" 
-    (click)="updateDetails(parcelWestTile)"
+    (click)="updateDetailsTile(parcelWestTile)"
     class="hexagon west">
         <app-parcel-tile [mapId]="parcelWestTile"></app-parcel-tile>
     </div>
     <div 
     (mouseenter)="openTooltip($event)"
     (mouseleave)="closeTooltip($event)" 
-    (click)="updateDetails(mapId)"
+    (click)="updateDetailsTile(mapId)"
     class="hexagon center">
         <app-parcel-tile [mapId]="mapId"></app-parcel-tile>
     </div>
     <div
     (mouseenter)="openTooltip($event)"
     (mouseleave)="closeTooltip($event)" 
-    (click)="updateDetails(parcelEastTile)"
+    (click)="updateDetailsTile(parcelEastTile)"
     class="hexagon east">
         <app-parcel-tile [mapId]="parcelEastTile"></app-parcel-tile>
     </div>
@@ -47,14 +47,14 @@
     <div 
     (mouseenter)="openTooltip($event)"
     (mouseleave)="closeTooltip($event)"
-    (click)="updateDetails(parcelSouthWesternTile)"
+    (click)="updateDetailsTile(parcelSouthWesternTile)"
     class="hexagon southwest">
         <app-parcel-tile [mapId]="parcelSouthWesternTile"></app-parcel-tile>
     </div>
     <div 
     (mouseenter)="openTooltip($event)" 
     (mouseleave)="closeTooltip($event)"
-    (click)="updateDetails(parcelSouthEasternTile)"
+    (click)="updateDetailsTile(parcelSouthEasternTile)"
     class="hexagon southeast">
         <app-parcel-tile [mapId]="parcelSouthEasternTile"></app-parcel-tile>
     </div>

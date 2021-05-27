@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { EthersService } from '../services/ethers.service';
 import { HexagonService } from '../services/hexagon.service';
 import { Coordinate } from '../models/coordinate.model';
@@ -13,6 +13,9 @@ export class MapComponent implements OnInit {
 
   @Input() mapId: number;
   @ViewChild(HoverTileMenuComponent) menu: HoverTileMenuComponent;
+
+
+  @Output() updateCurrentTile: EventEmitter<any> = new EventEmitter();
 
   // neighbor Ids
   northWestTile: string = "northWestTile";
@@ -62,7 +65,8 @@ export class MapComponent implements OnInit {
     this.menu.close();
   }
 
-  updateDetails(ele:any){
-    console.log(ele);
+  updateDetailsTile(selectedTile:any){
+    console.log(selectedTile);
+    this.updateCurrentTile.emit(selectedTile);
   }
 }

@@ -3,9 +3,9 @@
         <app-browser></app-browser>
     </div>
     <div class="world-map">
-        <app-map [mapId]="mapId"></app-map>
+        <app-map (updateCurrentTile)="handleDetailChange($event)" [mapId]="mapId"></app-map>
     </div>
     <div class="world-details">
-        <app-parcel-details [mapId]="mapId"></app-parcel-details>
+        <app-parcel-details [selectedTile]="selectedTile"></app-parcel-details>
     </div>
 </div>

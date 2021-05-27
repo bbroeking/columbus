@@ -10,6 +10,7 @@ import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.compo
 export class DashboardComponent implements OnInit {
 
   mapId: number;
+  selectedTile: number;
   @Input() hoverTileComponent: HoverTileMenuComponent;
   
   constructor(private route: ActivatedRoute) { }
@@ -18,6 +19,11 @@ export class DashboardComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.mapId = +(params.get('mapId') || 0);
     });
+    this.selectedTile = this.mapId;
   }
 
+  handleDetailChange(selectedTile: number){
+    this.selectedTile = selectedTile
+    console.log(selectedTile);
+  }
 }
