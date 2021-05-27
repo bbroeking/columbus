@@ -2,6 +2,7 @@ import { Injectable, Input } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { EthersService } from './ethers.service';
+import { map } from 'rxjs/operators';
 
 export interface Resources {
   ore: number;
@@ -9,19 +10,18 @@ export interface Resources {
   stone: number;
 }
 
+export interface Structure {
+  id: string;
+  position: number;
+}
+
 @Injectable()
 export class TileDataService {
 
-  mapId: number = 1;
-  private tileDoc: AngularFirestoreDocument<Resources>
-  tile: Observable<Resources | undefined>;
-
-  public ethersService: EthersService
-  
   constructor(
     private firestore: AngularFirestore,
     private ethers: EthersService,
-    ) {this.ethersService = ethers }
+    ) {}
 
  ngOnInit(){
 }
@@ -52,25 +52,46 @@ async deleteTile(mapId: number) {
             })
 }
 
+async getTileStructures(mapId: number) {
+  return this.getFirestoreFromTileId(mapId).then((firestoreId) => {
+    return this.firestore.doc<Structure>(`tiles/${firestoreId}/structures/GbegDEzL4IWcE3sStLjj`).valueChanges();
+  }).catch((error) => {
+    console.log(error);
+    return undefined;
+  });
+
+  // this.firestore.collection()
+  // return this.getTileDocRef(mapId)
+  //           .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+  //             if (tileDoc === undefined) throw Error();
+  //             return tileDoc.collection('structures').valueChanges();
+  //             // return tileDoc.collection('structures').snapshotChanges().pipe(
+  //             //   map(actions => {
+  //             //     console.log(actions);
+  //             //     return actions.map(p => {
+  //             //       const place = p.payload.doc;
+  //             //       const id = place.id;
+  //             //       return { id, ...place.data() } as Structure;
+  //             //     });
+  //             //   })
+  //             // )
+  //           });
+}
 
 async getTileDocRef(mapId: number): Promise<AngularFirestoreDocument<Resources> | undefined> {
-  return this.getFirestoreFromTileId(this.mapId).then((firestoreId) => {
+  return this.getFirestoreFromTileId(mapId).then((firestoreId) => {
     return this.firestore.doc<Resources>(`tiles/${firestoreId}`);
-  }).catch(() => {
+  }).catch((error) => {
+    console.log(error);
     return undefined;
   });
 }
 
 async getFirestoreFromTileId(id: number): Promise<string | undefined> {
-  return this.ethersService.getMetadataURI(id)
+  return this.ethers.getMetadataURI(id)
                             .then(function(uri: any) {
                               let uriComponents = uri.split("/");
                               return uriComponents[uriComponents.length - 1];
                             })
-                            // .catch(function(error: any) {
-                            //   console.log(error);
-                            //   return undefined;
-                            // });
-
-}
+  }
 }

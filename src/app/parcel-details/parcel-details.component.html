@@ -2,4 +2,8 @@
     <p>{{selectedTile}}</p>
     <p>parcel-details works!</p>
     <span style="color: #6C6; font-size: 135px;">&#x2B22;</span>    
+
+    <!-- <div *ngIf="data$ | async as structure">{{structure}}</div> -->
+
+    <div>{{data$ | async | json}}</div>
 </div>

@@ -22,8 +22,7 @@ export class DashboardComponent implements OnInit {
     this.selectedTile = this.mapId;
   }
 
-  handleDetailChange(selectedTile: number){
+  changeSelectedTile(selectedTile: number){
     this.selectedTile = selectedTile
-    console.log(selectedTile);
   }
 }
