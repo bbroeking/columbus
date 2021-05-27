@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { EthersService } from '../services/ethers.service';
 import { HexagonService } from '../services/hexagon.service';
 import { Coordinate } from '../models/coordinate.model';
+import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.component';
 
 @Component({
   selector: 'app-map',
@@ -11,6 +12,9 @@ import { Coordinate } from '../models/coordinate.model';
 export class MapComponent implements OnInit {
 
   @Input() mapId: number;
+  @ViewChild(HoverTileMenuComponent) menu: HoverTileMenuComponent;
+  menuX: string ="0px";
+  menuY:string = "0px";
 
   // neighbor Ids
   northWestTile: string = "northWestTile";
@@ -43,7 +47,6 @@ export class MapComponent implements OnInit {
     this.getNeighborParcelIds();
   }
 
-
   getNeighborParcelIds() {
     this.parcelNorthWesternTile = this.neighborsId.get(this.northWestTile);
     this.parcelNorthEasternTile = this.neighborsId.get(this.northEastTile);
@@ -51,5 +54,13 @@ export class MapComponent implements OnInit {
     this.parcelWestTile = this.neighborsId.get(this.westTile);
     this.parcelSouthEasternTile = this.neighborsId.get(this.southEastTile);
     this.parcelSouthWesternTile = this.neighborsId.get(this.southWestTile);
+  }
+
+  openTooltip(e: MouseEvent) {
+    this.menu.open(e);
+  }
+
+  closeTooltip(e: MouseEvent){
+    this.menu.close();
   }
 }

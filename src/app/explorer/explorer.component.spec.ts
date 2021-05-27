@@ -15,10 +15,13 @@ describe('ExplorerComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ExplorerComponent ],
       providers:[
-        { provide: EthersService, useValue: { getBalanceOf: jasmine.createSpy('getBalanceOf'),
-                                              getTokenOfOwnerByIndex: jasmine.createSpy('getTokenOfOwnerByIndex'),
-                                              getTotalSupply: jasmine.createSpy('getTotalSupply').and.returnValue(Promise.resolve({}))
-                                            }},
+        { provide: EthersService, useValue: { 
+          getBalanceOf: jasmine.createSpy('getBalanceOf'),
+          getTokenOfOwnerByIndex: jasmine.createSpy('getTokenOfOwnerByIndex').and.returnValue({
+            then: jasmine.createSpy() 
+          }),                                             
+          getTotalSupply: jasmine.createSpy('getTotalSupply').and.returnValue(Promise.resolve({}))
+        }},
         { provide: MetadataService, useValue: {}},
       ]
     })

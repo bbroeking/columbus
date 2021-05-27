@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { HoverTileMenuComponent } from './hover-tile-menu/hover-tile-menu.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'columbus';
 }

@@ -1,33 +1,34 @@
 <div class="grid">
     <div class="hexagon hidden"></div>
 
-    <div class="hexagon northwest">
+    <div (mouseenter)="openTooltip($event)" (mouseleave)="closeTooltip($event)" class="hexagon northwest">
         <app-parcel-tile [mapId]="parcelNorthWesternTile"></app-parcel-tile>
     </div>
-    <div class="hexagon northeast">
+    <div (mouseenter)="openTooltip($event)" (mouseleave)="closeTooltip($event)" class="hexagon northeast">
         <app-parcel-tile [mapId]="parcelNorthEasternTile"></app-parcel-tile>
 
     </div>
 
     <div class="hexagon hidden"></div>
 
-    <div class="hexagon west">
+    <div (mouseenter)="openTooltip($event)" (mouseleave)="closeTooltip($event)" class="hexagon west">
         <app-parcel-tile [mapId]="parcelWestTile"></app-parcel-tile>
     </div>
     <div class="hexagon center">
         <!-- <app-parcel-tile [mapId]="parcelCurrent"></app-parcel-tile> -->
     </div>
-    <div class="hexagon east">
+    <div (mouseenter)="openTooltip($event)" (mouseleave)="closeTooltip($event)" class="hexagon east">
         <app-parcel-tile [mapId]="parcelEastTile"></app-parcel-tile>
     </div>
 
     <div class="hexagon hidden"></div>
     <div class="hexagon hidden"></div>
 
-    <div class="hexagon southwest">
+    <div (mouseenter)="openTooltip($event)" (mouseleave)="closeTooltip($event)" class="hexagon southwest">
         <app-parcel-tile [mapId]="parcelSouthWesternTile"></app-parcel-tile>
     </div>
-    <div class="hexagon southeast">
+    <div (mouseenter)="openTooltip($event)" (mouseleave)="closeTooltip($event)" class="hexagon southeast">
         <app-parcel-tile [mapId]="parcelSouthEasternTile"></app-parcel-tile>
     </div>
 </div>
+<app-hover-tile-menu></app-hover-tile-menu>

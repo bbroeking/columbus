@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   mapId: number;
+  @Input() hoverTileComponent: HoverTileMenuComponent;
   
   constructor(private route: ActivatedRoute) { }
 

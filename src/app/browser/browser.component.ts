@@ -12,11 +12,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
 
 ];
-
 const myDataArray: never[] = []
-
-
-
 
 @Component({
   selector: 'app-browser',

@@ -1,5 +1,6 @@
 <div class='dashboard'>
     <app-browser></app-browser>
     <app-map [mapId]="mapId"></app-map>
-    <app-parcel-details></app-parcel-details>
+    <app-parcel-details [mapId]="mapId"></app-parcel-details>
 </div>
+<app-hover-tile-menu></app-hover-tile-menu>
