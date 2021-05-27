@@ -35,7 +35,8 @@ export class BrowserComponent implements OnInit {
     private hexagonService: HexagonService,
     private tiledataService: TileDataService
   ) {this.ethersService = ethers 
-     this.tileDataService = tiledataService}
+     this.tileDataService = tiledataService
+    }
 
   async ngOnInit() {
     this.numTokens = await this.ethersService.getBalanceOf();

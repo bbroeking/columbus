@@ -24,6 +24,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { providers } from 'ethers';
 import { TileDataService } from './services/tile-data.service';
 import { HoverTileMenuComponent } from './hover-tile-menu/hover-tile-menu.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -46,7 +47,8 @@ const routes: Routes = [];
     ParcelDetailsComponent,
     DashboardComponent,
     ParcelTileComponent,
-    HoverTileMenuComponent
+    HoverTileMenuComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 browser">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -37,13 +37,6 @@
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
 
-  <button (click)= 'tileDataService.createTile(1)'>
-  set
-  </button>
-
-  <button (click)= 'tileDataService.updateTileResource(1,{ore:2})'>
-    update resource
-    </button>
-  <button (click)= 'tileDataService.deleteTile(1)'>
-    delete tile
-    </button>
+  <button (click)= 'tileDataService.createTile(1)'>set</button>
+  <button (click)= 'tileDataService.updateTileResource(1,{ore:2})'>update resource</button>
+  <button (click)= 'tileDataService.deleteTile(1)'>delete tile</button>
