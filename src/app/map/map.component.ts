@@ -13,8 +13,6 @@ export class MapComponent implements OnInit {
 
   @Input() mapId: number;
   @ViewChild(HoverTileMenuComponent) menu: HoverTileMenuComponent;
-  menuX: string ="0px";
-  menuY:string = "0px";
 
   // neighbor Ids
   northWestTile: string = "northWestTile";
@@ -62,5 +60,9 @@ export class MapComponent implements OnInit {
 
   closeTooltip(e: MouseEvent){
     this.menu.close();
+  }
+
+  updateDetails(ele:any){
+    console.log(ele);
   }
 }
