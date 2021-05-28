@@ -25,6 +25,8 @@ import { providers } from 'ethers';
 import { TileDataService } from './services/tile-data.service';
 import { HoverTileMenuComponent } from './hover-tile-menu/hover-tile-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginComponent } from './login/login.component';
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -48,7 +50,8 @@ const routes: Routes = [];
     DashboardComponent,
     ParcelTileComponent,
     HoverTileMenuComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ const routes: Routes = [];
     HttpClientModule,
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [{ provide: Window,
                 useValue: window 
