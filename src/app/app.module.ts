@@ -27,6 +27,8 @@ import { HoverTileMenuComponent } from './hover-tile-menu/hover-tile-menu.compon
 import { NavbarComponent } from './navbar/navbar.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
+
 
 export function init_app(initalizeService: InitalizeService) {
   return () => initalizeService.init();
@@ -60,7 +62,8 @@ const routes: Routes = [];
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireFunctionsModule
   ],
   providers: [{ provide: Window,
                 useValue: window 
