@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable } from 'rxjs';
+import * as CloudFunctionConstants from './cloud-function-constants';
+import firebase from '@firebase/app';
+import '@firebase/functions'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CloudFunctionsService {
-  data$: Observable<any>;
+  private buildStructureFunction: any;
 
   constructor(private fns: AngularFireFunctions) { 
     fns.useEmulator("localhost", 5001); // TODO: Setup dev/prod 
+    // callable functions
+    this.buildStructureFunction = fns.httpsCallable(CloudFunctionConstants.buildStructure);
+  }
 
-    const callable = fns.httpsCallable('helloWorld');
-    this.data$ = callable({ name: 'some-data' });
+  buildStructure(data: any) {
+    return this.buildStructureFunction(data);
   }
 }

@@ -25,14 +25,19 @@ export class ExplorerComponent implements OnInit {
 
   public neighbors: Map<string, Coordinate>
   data$: Observable<any>;
-
+  buildStructure$: Observable<any>;
+  app$: Observable<any>;
 
   constructor(private ethers: EthersService,
               private metadataService: MetadataService,
               private hexagonService: HexagonService,
               private cloudFunctions: CloudFunctionsService){
                 this.ethersService = ethers;
-                this.data$ = cloudFunctions.data$;
+                this.app$ = this.cloudFunctions.buildStructure({
+                  'account': 'RZLTPoHfBOZII7RLVBvEgG1FTsp2',
+                  'tile': '1923048b-b05e-4617-8498-553f9c931a96',
+                  'building': 'minerals-refinery',
+                });
               }
 
   async ngOnInit() {

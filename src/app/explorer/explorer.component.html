@@ -8,7 +8,7 @@
 <button (click)="ethersService.getMetadataURI(1)">getMetadataURI</button>
 <button (click)="logData()">Log Data</button>
 
-
+<!-- 
 <div>Current Account Balance: {{balance}}</div>
 <div>Number of Tokens Held By Current Metamask Account: {{numTokens}}</div>
 
@@ -25,8 +25,16 @@
             Z: {{neighbor.value.z}}
         </div>
     </div>
-</div>
+</div> -->
 
 <div>
     {{data$ | async}}
+</div>
+
+<div>
+    {{buildStructure$ | async}}
+</div>
+
+<div>
+    {{app$ | async }}
 </div>
