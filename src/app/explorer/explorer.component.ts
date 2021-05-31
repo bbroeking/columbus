@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { EthersService } from '../services/ethers.service';
 import { MetadataService } from '../services/metadata.service';
 
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { HexagonService } from '../services/hexagon.service';
 import { Coordinate } from '../models/coordinate.model';
+import { CloudFunctionsService } from '../services/cloud-functions.service';
 
 @Component({
   selector: 'app-explorer',
@@ -23,12 +24,15 @@ export class ExplorerComponent implements OnInit {
   public id: number
 
   public neighbors: Map<string, Coordinate>
+  data$: Observable<any>;
 
 
   constructor(private ethers: EthersService,
               private metadataService: MetadataService,
-              private hexagonService: HexagonService){
+              private hexagonService: HexagonService,
+              private cloudFunctions: CloudFunctionsService){
                 this.ethersService = ethers;
+                this.data$ = cloudFunctions.data$;
               }
 
   async ngOnInit() {
