@@ -10,6 +10,8 @@ import { Coordinate } from '../models/coordinate.model';
 import { forkJoin } from 'rxjs';
 import { Provider } from './ethers-utils/web3-provider';
 import { ParcelContract } from './ethers-utils/contract';
+import { AuthService } from './auth.service';
+import { TileDataService } from './tile-data.service';
 
 @Injectable()
 export class EthersService {
@@ -21,6 +23,7 @@ export class EthersService {
   
   constructor(@Inject(Provider) provider: Provider,
               @Inject(ParcelContract) parcelContract: Contract,
+              private authService: AuthService,
               private metadataService: MetadataService,
               private hexagonService: HexagonService,
               private window: Window)
@@ -57,23 +60,19 @@ export class EthersService {
     return new ethers.Contract(daiAddress, daiAbi, this.provider);
   }
 
-  // connectContract(){
-  //   const signedContract = this.unsignedContract.connect(this.signer);
-  //   return signedContract;
-  // }
-
-  async discover(){
+  async discover(): Promise<string> {
     const account = this.requestAccount();
-
     const tokenId = await this.getTotalSupply();
     const coords: Coordinate = this.hexagonService.getCoordinatesFromId(tokenId);
     let neighbors: Map<string, Coordinate> = this.hexagonService.getNeighbors(coords);
     neighbors.set('location', coords);
 
     return this.metadataService.generateMetadata(neighbors)
-                               .subscribe(resp => {
-                                 return this.signedContract.discover(account, resp.uuid);
-                               });
+                              .toPromise()
+                              .then(resp => {
+      this.signedContract.discover(account, resp.uuid);
+      return resp.uri;
+    });
   }
 
   async getBalanceOf(){

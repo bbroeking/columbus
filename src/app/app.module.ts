@@ -30,6 +30,7 @@ import { StructureDetailsComponent } from './structure-details/structure-details
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { DiscoverComponent } from './discover/discover.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -57,7 +58,8 @@ const routes: Routes = [];
     NavbarComponent,
     StructureComponent,
     StructureDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    DiscoverComponent
   ],
   imports: [
     BrowserModule,

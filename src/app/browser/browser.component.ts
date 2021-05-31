@@ -41,9 +41,7 @@ export class BrowserComponent implements OnInit {
   async ngOnInit() {
     this.numTokens = await this.ethersService.getBalanceOf();
     await this.ethersService.getTokenOfOwnerByIndex()
-                            .then(res => res.subscribe(res => {
-      this.dataSource = res;      
-    }));
+                            .then(res => res.subscribe(res => this.dataSource = res ));
 
   }
 

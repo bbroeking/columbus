@@ -1,4 +1,4 @@
 export class MetadataResponse {
-    'uuid': String
-    'uri': String
+    'uuid': string
+    'uri': string
 }

@@ -18,7 +18,7 @@ export class ParcelDetailsComponent implements OnInit {
 
   async ngOnInit() {
     // this.data$ = await this.tileDataService.getTileStructures(1);
-    this.structures$ = await this.tileDataService.getNestedDoc(1)
+    // this.structures$ = await this.tileDataService.getNestedDoc(1)
   }
 
 
