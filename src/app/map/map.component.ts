@@ -12,10 +12,8 @@ import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.compo
 export class MapComponent implements OnInit {
 
   @Input() mapId: number;
-  @ViewChild(HoverTileMenuComponent) menu: HoverTileMenuComponent;
-
-
   @Output() updateCurrentTile: EventEmitter<any> = new EventEmitter();
+  @ViewChild(HoverTileMenuComponent) menu: HoverTileMenuComponent;
 
   // neighbor Ids
   northWestTile: string = "northWestTile";
@@ -39,6 +37,14 @@ export class MapComponent implements OnInit {
   constructor(private hexagonService: HexagonService) {}
 
   async ngOnInit(){
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.mapCoordinateBase = this.hexagonService.getCoordinatesFromId(this.mapId);
     this.neighbors = this.hexagonService.getNeighbors(this.mapCoordinateBase);
     this.neighborsId = new Map<string, number>();
@@ -66,7 +72,6 @@ export class MapComponent implements OnInit {
   }
 
   updateDetailsTile(selectedTile:any){
-    console.log(selectedTile);
     this.updateCurrentTile.emit(selectedTile);
   }
 }

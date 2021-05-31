@@ -42,7 +42,7 @@ export class ExplorerComponent implements OnInit {
 
   async ngOnInit() {
     this.numTokens = await this.ethersService.getBalanceOf();
-    this.tokenMetadata = await this.ethersService.getTokenOfOwnerByIndex();
+    // this.tokenMetadata = await this.ethersService.getTokenOfOwnerByIndex();
     let supply = await this.ethersService.getTotalSupply().then(res => res);
     let coordinates: Coordinate = await this.hexagonService.getCoordinatesFromId(supply);
     this.neighbors = this.hexagonService.getNeighbors(coordinates);

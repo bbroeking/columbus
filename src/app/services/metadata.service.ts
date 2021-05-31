@@ -13,9 +13,9 @@ export class MetadataService {
 
   constructor(private http: HttpClient) { }
 
-  generateMetadata(body: any): Observable<MetadataResponse> {
+  generateMetadata(): Observable<MetadataResponse> {
     const headers = { 'content-type': 'application/json'}
-    let req = JSON.stringify([...body]);
+    let req = JSON.stringify([]);
     return this.http
                .post<MetadataResponse>(`${API_URL}/api/generate-parcel`, req, {'headers':headers})
   }

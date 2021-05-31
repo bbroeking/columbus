@@ -62,12 +62,8 @@ export class EthersService {
 
   async discover(): Promise<string> {
     const account = this.requestAccount();
-    const tokenId = await this.getTotalSupply();
-    const coords: Coordinate = this.hexagonService.getCoordinatesFromId(tokenId);
-    let neighbors: Map<string, Coordinate> = this.hexagonService.getNeighbors(coords);
-    neighbors.set('location', coords);
 
-    return this.metadataService.generateMetadata(neighbors)
+    return this.metadataService.generateMetadata()
                               .toPromise()
                               .then(resp => {
       this.signedContract.discover(account, resp.uuid);
@@ -80,7 +76,18 @@ export class EthersService {
     return balance.toNumber();
   }
 
-  async getTokenOfOwnerByIndex(){
+  async getTokenIdByOwner(): Promise<number[]> {
+    const account = this.requestAccount();
+    const balance: BigNumber = await this.signedContract.balanceOf(account);
+    let tokensIds = [];
+    for (let i= 0; i < balance.toNumber(); i++){
+      let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
+      tokensIds.push(token.toNumber()-1);
+    }               
+    return tokensIds;
+  }
+
+  async getTokenMetadataByOwner(){
     const account = this.requestAccount();
     const balance: BigNumber = await this.signedContract.balanceOf(account);
     let tokens = [];

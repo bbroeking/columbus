@@ -6,21 +6,21 @@
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> X Position </th>
-      <td mat-cell *matCellDef="let element"> {{element.data.location.x}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.x}} </td>
       <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
   
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef> Y Position </th>
-      <td mat-cell *matCellDef="let element"> {{element.data.location.y}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.y}} </td>
       <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
 
     <!-- Weight Column -->
   <ng-container matColumnDef="weight">
     <th mat-header-cell *matHeaderCellDef> Z Position </th>
-    <td mat-cell *matCellDef="let element"> {{element.data.location.z}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.z}} </td>
     <td mat-footer-cell *matFooterCellDef> </td>
   </ng-container>
 
@@ -28,35 +28,11 @@
   <ng-container matColumnDef="link">
     <th mat-header-cell *matHeaderCellDef> Link </th>
     <td mat-cell *matCellDef="let element"> 
-      <button mat-matbutton [routerLink]="generateLink(element.data.location)"> Go To </button> </td>
+      <button mat-matbutton [routerLink]="generateLink(element)"> Go To </button> </td>
     <td mat-footer-cell *matFooterCellDef> Total Lands: {{numTokens}}</td>
   </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-  </table>
-
-  <!-- <button (click)= 'tileDataService.createTile(1)'>set</button>
-  <button (click)= 'tileDataService.updateTileResource(1,{ore:2})'>update resource</button>
-  <button (click)= 'tileDataService.deleteTile(1)'>delete tile</button>
-  <button (click)= 'tileDataService.createTile(1)'>set</button>
-
-  <button (click)= 'tileDataService.updateTileResource(1,{ore:2})'>
-    update resource
-    </button>
-  <button (click)= 'tileDataService.deleteTile(1)'>
-    delete tile
-    </button>
-  <button (click)= 'tileDataService.createAccount()'>
-    create account
-  </button>
-  <button (click)= 'tileDataService.getTileValues(1)'>
-    reads
-  </button> -->
-  <!-- <button (click)= 'tileDataService.tile2Account()'>
-    T2A
-  </button> -->
-<!-- <button (click)= 'tileDataService.getNestedDoc(1)'>
-  nested docs
-</button> -->
+</table>
