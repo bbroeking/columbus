@@ -1,0 +1,10 @@
+<!-- <div>
+    <button>Position {{structure.position}}</button>
+</div> -->
+<div class="dls-menu-item">
+    <button (click)="onPress()">Position {{structure.position}}</button>
+</div>
+
+<div id="comp-render" *ngIf="display">
+    <app-structure-details></app-structure-details>
+</div>

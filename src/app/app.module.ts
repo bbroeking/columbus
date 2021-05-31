@@ -25,6 +25,8 @@ import { providers } from 'ethers';
 import { TileDataService } from './services/tile-data.service';
 import { HoverTileMenuComponent } from './hover-tile-menu/hover-tile-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { StructureComponent } from './structure/structure.component';
+import { StructureDetailsComponent } from './structure-details/structure-details.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
@@ -53,6 +55,8 @@ const routes: Routes = [];
     ParcelTileComponent,
     HoverTileMenuComponent,
     NavbarComponent,
+    StructureComponent,
+    StructureDetailsComponent,
     LoginComponent
   ],
   imports: [
