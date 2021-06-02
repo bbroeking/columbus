@@ -13,7 +13,7 @@ describe('BrowserComponent', () => {
       providers: [
         { provide: EthersService, useValue: { 
           getBalanceOf: jasmine.createSpy('getBalanceOf'),
-          getTokenOfOwnerByIndex: jasmine.createSpy('getTokenOfOwnerByIndex').and.returnValue({
+          getTokenIdByOwner: jasmine.createSpy('getTokenOfOwnerByIndex').and.returnValue({
             then: jasmine.createSpy() }
           )}}
       ]

@@ -16,6 +16,7 @@ describe('StructureComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StructureComponent);
     component = fixture.componentInstance;
+    component.structure = { position: 1 }
     fixture.detectChanges();
   });
 

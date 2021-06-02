@@ -1,7 +1,6 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { EthersService } from './ethers.service';
 
 export interface Resources {
   minerals: number,
@@ -27,7 +26,6 @@ export class TileDataService {
 
   constructor(
     private firestore: AngularFirestore,
-    private ethers: EthersService,
     ) {}
 
   async getTileDocRef(uri: string): Promise<AngularFirestoreDocument<Resources> | undefined> {

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { TileDataService } from '../services/tile-data.service';
 
 import { ParcelDetailsComponent } from './parcel-details.component';
 
@@ -8,6 +10,10 @@ describe('ParcelDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: TileDataService, useValue: {}},
+        { provide: AngularFirestore, useValue: {}}
+      ],
       declarations: [ ParcelDetailsComponent ]
     })
     .compileComponents();

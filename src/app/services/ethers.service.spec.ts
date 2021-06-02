@@ -1,6 +1,8 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ethers } from 'ethers';
+import { AuthService } from './auth.service';
 import { ParcelContract } from './ethers-utils/contract';
 import { Provider } from './ethers-utils/web3-provider';
 
@@ -21,6 +23,7 @@ describe('EthersService', () => {
                   { provide: Provider, useValue: {}},
                   { provide: MetadataService, useValue: {}},
                   { provide: HexagonService, useValue: {}},
+                  { provide: AuthService, useValue: {}},
                 ]
     });
     service = TestBed.inject(EthersService);

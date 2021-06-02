@@ -6,7 +6,6 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import firebase from "firebase/app";
-import '@firebase/auth';
 
 @Injectable({
   providedIn: 'root'

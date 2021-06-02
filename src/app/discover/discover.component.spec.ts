@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EthersService } from '../services/ethers.service';
+import { TileDataService } from '../services/tile-data.service';
 
 import { DiscoverComponent } from './discover.component';
 
@@ -8,6 +10,10 @@ describe('DiscoverComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: EthersService, useValue: {}},
+        { provide: TileDataService, useValue: {}}
+      ],
       declarations: [ DiscoverComponent ]
     })
     .compileComponents();

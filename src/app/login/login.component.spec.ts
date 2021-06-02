@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from '../services/auth.service';
 
 import { LoginComponent } from './login.component';
 
@@ -8,6 +10,10 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: {}},
+        { provide: AngularFireAuth, useValue: {}}
+      ],
       declarations: [ LoginComponent ]
     })
     .compileComponents();

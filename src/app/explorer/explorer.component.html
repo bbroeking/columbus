@@ -3,38 +3,6 @@
 <button (click)="ethersService.getSigner()">getSigner</button>
 <button (click)="ethersService.discover()">Discover</button>
 <button (click)="ethersService.getBalanceOf()">getBalanceOf</button>
-<!-- <button (click)="ethersService.getTokenOfOwnerByIndex()">getTokenOfOwnerByIndex</button> -->
 <button (click)="ethersService.getTotalSupply()">getTotalSupply</button>
 <button (click)="ethersService.getMetadataURI(1)">getMetadataURI</button>
 <button (click)="logData()">Log Data</button>
-
-<!-- 
-<div>Current Account Balance: {{balance}}</div>
-<div>Number of Tokens Held By Current Metamask Account: {{numTokens}}</div>
-
-<div *ngFor="let neighbor of neighbors | keyvalue">
-    <div> Neighbor {{neighbor.key}}</div>
-    <div class="locations">
-        <div>
-            X: {{neighbor.value.x}}            
-        </div>
-        <div>
-            Y: {{neighbor.value.y}}
-        </div>
-        <div>
-            Z: {{neighbor.value.z}}
-        </div>
-    </div>
-</div> -->
-
-<div>
-    {{data$ | async}}
-</div>
-
-<div>
-    {{buildStructure$ | async}}
-</div>
-
-<div>
-    {{app$ | async }}
-</div>
