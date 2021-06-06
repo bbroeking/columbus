@@ -1,10 +1,13 @@
 <div class='discover-flip'>
-    <div class='discover-content'>
+    <div class='discover-content' (click)="flip()" [ngStyle]="discoverState">
         <div class='discover-front'>
             <p>front</p>
+            <div>{{ attributes | json }}</div>
+            <div>{{ stale }}</div>
         </div>
         <div class='discover-back'>
-            <p>back</p>
+            <span style="color: #6C6; font-size: 135px;">&#x2B22;</span>
+            <button (click)="conquer()">CONQUER</button>
         </div>
     </div>
 </div>

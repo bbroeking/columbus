@@ -1,11 +1,8 @@
-<div class='discover'>
-    <div>interior</div>
-    <button (click)="discover()">discover</button>
-    <button (click)="getTileStructures()">structures</button>
-</div>
-
 <div class="discover-list">
-    <app-discover-parcel></app-discover-parcel>
-    <app-discover-parcel></app-discover-parcel>
-    <app-discover-parcel></app-discover-parcel>    
+    <button (click)="tileGeneratorService.refreshUnclaimedLands()">refresh</button>
+    <app-discover-parcel [attributes]="attribute_one" [stale]="stale_one"></app-discover-parcel>
+    <app-discover-parcel [attributes]="attribute_two" [stale]="stale_two"></app-discover-parcel>
+    <app-discover-parcel [attributes]="attribute_three" [stale]="stale_three"></app-discover-parcel>
+    <app-discover-parcel [attributes]="attribute_four" [stale]="stale_four"></app-discover-parcel>
+    <app-discover-parcel [attributes]="attribute_five" [stale]="stale_five"></app-discover-parcel>
 </div>

@@ -1,8 +1,8 @@
 
 .discover-flip {
+    background-color: transparent;
     width: 200px;
     height: 600px;
-    background-color: yellow;
     border: 1px solid #f1f1f1;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
@@ -24,10 +24,10 @@
     backface-visibility: hidden;
 }
 
+.discover-front {
+    background-color: violet;
+}
 .discover-back {
+    background-color: turquoise;
     transform: rotateY(180deg);
 }
-
-.discover-flip:hover .discover-content {
-    transform: rotateY(180deg);
-  }

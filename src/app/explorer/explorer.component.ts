@@ -16,7 +16,6 @@ export class ExplorerComponent implements OnInit {
 
   public ethersService: EthersService;
   metadataSubscription: Subscription;
-  data: any;
 
   public balance: string;
   public numTokens: number;
@@ -24,7 +23,7 @@ export class ExplorerComponent implements OnInit {
   public id: number
 
   public neighbors: Map<string, Coordinate>
-  data$: Observable<any>;
+  data: Promise<any>;
   buildStructure$: Observable<any>;
   app$: Observable<any>;
 
@@ -33,7 +32,7 @@ export class ExplorerComponent implements OnInit {
               private hexagonService: HexagonService,
               private cloudFunctions: CloudFunctionsService){
                 this.ethersService = ethers;
-                this.app$ = this.cloudFunctions.buildStructure({
+                this.data = this.cloudFunctions.buildStructure({
                   'account': 'RZLTPoHfBOZII7RLVBvEgG1FTsp2',
                   'tile': '1923048b-b05e-4617-8498-553f9c931a96',
                   'building': 'minerals-refinery',

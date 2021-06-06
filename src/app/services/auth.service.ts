@@ -11,6 +11,7 @@ import firebase from "firebase/app";
   providedIn: 'root'
 })
 export class AuthService {
+  public user: firebase.User | null;
   public user$: Observable<User | null | undefined>;
 
   constructor(
@@ -21,6 +22,7 @@ export class AuthService {
       this.user$ = this.afAuth.authState.pipe(
         switchMap(user => {
           if(user){
+            this.user = user;
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
           } else {
             return of(null);

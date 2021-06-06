@@ -29,7 +29,7 @@ import { StructureComponent } from './structure/structure.component';
 import { StructureDetailsComponent } from './structure-details/structure-details.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, USE_EMULATOR } from '@angular/fire/functions';
 import { DiscoverComponent } from './discover/discover.component';
 import { DiscoverParcelComponent } from './discover-parcel/discover-parcel.component';
 
@@ -87,10 +87,11 @@ const routes: Routes = [];
               //   deps: [InitalizeService], // might also need web3
               //   multi: true,
               // },
+              { provide: USE_EMULATOR, useValue: ['localhost', 5001] }, //proxy angular fire functions
               InitalizeService,
               EthersService,
               TileDataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 export class AppModule { }
