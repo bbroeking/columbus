@@ -3,8 +3,8 @@
     background-color: transparent;
     width: 200px;
     height: 600px;
-    border: 1px solid #f1f1f1;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    border-radius: 20px;
 }
 
 .discover-content {
@@ -14,6 +14,7 @@
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
+    border-radius: 20px;
 }
 
 .discover-front, .discover-back {
@@ -22,12 +23,26 @@
     height: 100%;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
+    border-radius: 20px;
 }
 
 .discover-front {
-    background-color: violet;
+    background-color: steelblue;
 }
 .discover-back {
-    background-color: turquoise;
+    background-color: rgb(255, 235, 205);
     transform: rotateY(180deg);
+}
+.stats {
+    padding: 10px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.stat-number {
+    align-self: flex-end;
 }

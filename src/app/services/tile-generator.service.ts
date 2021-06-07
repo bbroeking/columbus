@@ -40,7 +40,6 @@ export class TileGeneratorService {
   refreshUnclaimedLands() {
     // return this.cloudFunctionsService.refreshUnclaimedLands({'uid': this.authService.user?.uid})
     return this.cloudFunctionsService.refreshUnclaimedLands({'uid': 'RZLTPoHfBOZII7RLVBvEgG1FTsp2'})
-
   }
 
   getUnclaimedLand(): Observable<UnclaimedLand | undefined> {
