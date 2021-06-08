@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EthersService } from '../services/ethers.service';
+import { TileDataService } from '../services/tile-data.service';
 
 import { StructureDetailsComponent } from './structure-details.component';
 
@@ -8,7 +10,11 @@ describe('StructureDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StructureDetailsComponent ]
+      declarations: [ StructureDetailsComponent ],
+      providers:[
+        {provide: EthersService, useValue:{}},
+        {provide: TileDataService, useValue: {}},
+      ]
     })
     .compileComponents();
   });
@@ -16,10 +22,12 @@ describe('StructureDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StructureDetailsComponent);
     component = fixture.componentInstance;
+    component.structure = {'id' : 'build', 'sid' : 'blah', 'position': 2}
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

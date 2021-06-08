@@ -2,9 +2,9 @@
     <button>Position {{structure.position}}</button>
 </div> -->
 <div class="dls-menu-item">
-    <button (click)="onPress()">Position {{structure.position}}</button>
+    <button mat-stroked-button color="success" (click)="onPress()">Position {{structure.position}}</button>
 </div>
 
 <div id="comp-render" *ngIf="display">
-    <app-structure-details></app-structure-details>
+    <app-structure-details [structure]="structure" [selectedTile]="selectedTile"></app-structure-details>
 </div>

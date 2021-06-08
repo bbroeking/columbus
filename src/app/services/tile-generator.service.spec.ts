@@ -6,7 +6,11 @@ describe('TileGeneratorService', () => {
   let service: TileGeneratorService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers:[
+        {provide:TileGeneratorService, useValue:{}}
+      ]
+    });
     service = TestBed.inject(TileGeneratorService);
   });
 

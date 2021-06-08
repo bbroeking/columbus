@@ -17,6 +17,12 @@ import { ParcelDetailsComponent } from './parcel-details/parcel-details.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ParcelTileComponent } from './parcel-tile/parcel-tile.component';
 
+import {MatButtonModule} from '@angular/material/button'
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+
+
 // Firebase
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -71,7 +77,12 @@ const routes: Routes = [];
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    MatButtonToggleModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    EthersService,
   ],
   providers: [{ provide: Window,
                 useValue: window 

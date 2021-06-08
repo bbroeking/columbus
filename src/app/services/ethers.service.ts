@@ -112,7 +112,7 @@ export class EthersService {
   }
 
   getMetadataURI(tokenId: number): Promise<string> {
-    return this.unsignedContract.tokenURI(tokenId)
+    return this.unsignedContract.tokenURI(tokenId + 1)
   }
 
   getMetadataURIWithBigNumber(tokenId: BigNumber): Promise<string> {

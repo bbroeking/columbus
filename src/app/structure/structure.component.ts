@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Building } from '../services/tile-data.service';
+import { Structure } from '../services/tile-data.service';
 
 @Component({
   selector: 'app-structure',
@@ -7,7 +7,8 @@ import { Building } from '../services/tile-data.service';
   styleUrls: ['./structure.component.less']
 })
 export class StructureComponent implements OnInit {
-  @Input() structure: Building
+  @Input() structure: Structure;
+  @Input() selectedTile: number;
   constructor() { }
   
   

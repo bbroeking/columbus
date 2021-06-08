@@ -8,8 +8,7 @@
     <div> {{structures$ | async | json}}</div>
 
     <div *ngFor="let structure of structures$ | async">
-        <app-structure [structure]="structure"></app-structure>
+        <app-structure [structure]="structure" [selectedTile]="selectedTile"></app-structure>
     </div>
-
 
 </div>

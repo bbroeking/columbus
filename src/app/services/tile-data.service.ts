@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { StructureDetailsComponent } from '../structure-details/structure-details.component';
 
 export interface Resources {
   minerals: number,
@@ -15,10 +16,7 @@ export interface Tile { // data in the tile
 export interface Structure {
   id: string;
   position: number;
-}
-
-export interface Building {
-  position: number
+  sid: string;
 }
 
 @Injectable()
@@ -44,10 +42,22 @@ export class TileDataService {
                 if (tileDoc === undefined) throw Error();
                 tileDoc.set({minerals: 200, energy: 100});
                 const strucutresRef = tileDoc.collection('structures');
-                strucutresRef.add({position: 0});
-                strucutresRef.add({position: 1});
-                strucutresRef.add({position: 2});
-                strucutresRef.add({position: 3});
+                strucutresRef.add({position: 0})
+                .then(function(docRef) {
+                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
+                });
+                strucutresRef.add({position: 1})
+                .then(function(docRef) {
+                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
+                });
+                strucutresRef.add({position: 2})
+                .then(function(docRef) {
+                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
+                });
+                strucutresRef.add({position: 3})
+                .then(function(docRef) {
+                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
+                });
               })
   }
 
@@ -93,7 +103,18 @@ export class TileDataService {
     const cleanedURI = this.cleanURI(uri);
     return this.firestore.collection('tiles')
                           .doc(cleanedURI)
-                          .collection<Building>('structures', ref => ref.orderBy('position'))
+                          .collection<Structure>('structures', ref => ref.orderBy('position'))
                           .valueChanges()
   }
+
+
+  async updateTileBuild(uri: string, sid:string, id:string){
+    const cleanedURI = this.cleanURI(uri);
+    return this.firestore.collection('tiles')
+                         .doc(cleanedURI)
+                         .collection('structures')
+                         .doc(sid).update({"id":id})
+
+  }
+
 }
