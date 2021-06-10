@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Observable } from 'rxjs';
+import { interval } from 'rxjs';
 import { LandAttributes } from '../models/land-attributes.model';
-import { CloudFunctionsService } from '../services/cloud-functions.service';
 import { TileDataService } from '../services/tile-data.service';
 import { TileGeneratorService, UnclaimedLand } from '../services/tile-generator.service';
 
@@ -23,12 +22,25 @@ export class DiscoverComponent implements OnInit {
   attribute_four: LandAttributes | undefined;
   attribute_five: LandAttributes | undefined;
 
-  // stale
+  // stale (obtained)
   stale_one: boolean | undefined;
   stale_two: boolean | undefined;
   stale_three: boolean | undefined;
   stale_four: boolean | undefined;
   stale_five: boolean | undefined;
+
+  // flipped 
+  flipped_one: boolean | undefined;
+  flipped_two: boolean | undefined;
+  flipped_three: boolean | undefined;
+  flipped_four: boolean | undefined;
+  flipped_five: boolean | undefined;
+
+  one = 'one';
+  two = 'two';
+  three = 'three';
+  four = 'four';
+  five = 'five';
 
   timeinterval: any; 
   days: number;
@@ -65,6 +77,12 @@ export class DiscoverComponent implements OnInit {
       this.stale_three = res?.stale_three;
       this.stale_four = res?.stale_four;
       this.stale_five = res?.stale_five;
+
+      this.flipped_one = res?.flipped_one;
+      this.flipped_two = res?.flipped_two;
+      this.flipped_three = res?.flipped_three;
+      this.flipped_four = res?.flipped_four;
+      this.flipped_five = res?.flipped_five;
     });
 
   }

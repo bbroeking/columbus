@@ -5,15 +5,13 @@ import { environment } from '../../environments/environment';
 import * as parcel from "../../../build/contracts/Parcel.json";
 
 import {MetadataService} from '../services/metadata.service'
-import { HexagonService } from './hexagon.service';
-import { Coordinate } from '../models/coordinate.model';
 import { forkJoin } from 'rxjs';
 import { Provider } from './ethers-utils/web3-provider';
 import { ParcelContract } from './ethers-utils/contract';
-import { AuthService } from './auth.service';
-import { TileDataService } from './tile-data.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class EthersService {
 
   private ethereum;
@@ -23,9 +21,7 @@ export class EthersService {
   
   constructor(@Inject(Provider) provider: Provider,
               @Inject(ParcelContract) parcelContract: Contract,
-              private authService: AuthService,
               private metadataService: MetadataService,
-              private hexagonService: HexagonService,
               private window: Window)
   { 
     this.ethereum = (window as any).ethereum;
@@ -60,15 +56,10 @@ export class EthersService {
     return new ethers.Contract(daiAddress, daiAbi, this.provider);
   }
 
-  async discover(): Promise<string> {
+  async discover(): Promise<any> {
     const account = this.requestAccount();
-
-    return this.metadataService.generateMetadata()
-                              .toPromise()
-                              .then(resp => {
-      this.signedContract.discover(account, resp.uuid);
-      return resp.uri;
-    });
+    const metadata = await this.metadataService.generateMetadata().toPromise();
+    return this.signedContract.discover(account, metadata.uuid);
   }
 
   async getBalanceOf(){

@@ -11,25 +11,29 @@ import { TileGeneratorService, UnclaimedLand } from '../services/tile-generator.
   templateUrl: './discover-parcel.component.html',
   styleUrls: ['./discover-parcel.component.less']
 })
-export class DiscoverParcelComponent implements OnInit {
+export class DiscoverParcelComponent {
 
   @Input() attributes: LandAttributes | undefined;
   @Input() stale: boolean | undefined;
-  flipped: boolean;
+  @Input() flipped: boolean | undefined;
+  @Input() prefix: string | undefined;
+
   discoverState: any;
   constructor(private ethers: EthersService,
-              private tileDataService: TileDataService) {}
-
-  ngOnInit() {
-  }
+              private tileDataService: TileDataService,
+              private tileGeneratorService: TileGeneratorService) {}
 
   ngOnChanges() {
-    if (this.stale) this.flip();
+    if (this.flipped) this.discoverState = {'transform': 'rotateY(180deg)'};
   }
 
   flip() {
     if(!this.flipped) {
       this.flipped = true;
+      const ucl = {
+        [`flipped_${this.prefix}`]: true
+      };
+      this.tileGeneratorService.updateState(ucl as Partial<UnclaimedLand>);
       this.discoverState = {'transform': 'rotateY(180deg)'}
     }
   }
@@ -38,7 +42,10 @@ export class DiscoverParcelComponent implements OnInit {
     this.ethers.discover()
                 .then((uri) => {
                   this.tileDataService.createTile(uri);
-                });
+                  const ucl = {
+                    [`stale_${this.prefix}`]: true
+                  };
+                  this.tileGeneratorService.updateState(ucl as Partial<UnclaimedLand>)
+                })
   }
-
 }

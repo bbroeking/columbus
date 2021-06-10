@@ -82,7 +82,6 @@ const routes: Routes = [];
     MatSelectModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    EthersService,
   ],
   providers: [{ provide: Window,
                 useValue: window 

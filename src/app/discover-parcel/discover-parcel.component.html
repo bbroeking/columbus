@@ -21,7 +21,7 @@
                     </li>
                 </ul>
             </div>
-            <button (click)="conquer()">CONQUER</button>
+            <button [disabled]="stale" (click)="conquer()">CONQUER</button>
         </div>
     </div>
 </div>

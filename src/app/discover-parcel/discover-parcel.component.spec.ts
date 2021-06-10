@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EthersService } from '../services/ethers.service';
 import { TileDataService } from '../services/tile-data.service';
+import { TileGeneratorService } from '../services/tile-generator.service';
 
 import { DiscoverParcelComponent } from './discover-parcel.component';
 
@@ -13,7 +14,8 @@ describe('DiscoverParcelComponent', () => {
       declarations: [ DiscoverParcelComponent ],
       providers:[
         {provide: EthersService, useValue: {}},
-        {provide: TileDataService, useValue: {}}
+        {provide: TileDataService, useValue: {}},
+        {provide: TileGeneratorService, useValue: {}},
       ]
     })
     .compileComponents();

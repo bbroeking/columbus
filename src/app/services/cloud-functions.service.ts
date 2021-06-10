@@ -3,7 +3,6 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import * as CloudFunctionConstants from './cloud-function-constants';
 import firebase from '@firebase/app';
 import '@firebase/functions'
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,6 @@ export class CloudFunctionsService {
   }
 
   async refreshUnclaimedLands(data: any) {
-    // return this.refreshUnclaimedLandsFunction(data);
     const res = await this.refreshUnclaimedLandsFunction(data).toPromise();
     return res;
   }
