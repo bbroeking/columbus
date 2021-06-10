@@ -1,16 +1,25 @@
 <div class='full-page'>
-    <app-navbar [page]="page"></app-navbar>
-    <div class="discover-list">
-        <app-discover-parcel [attributes]="attribute_one" [stale]="stale_one"></app-discover-parcel>
-        <app-discover-parcel [attributes]="attribute_two" [stale]="stale_two"></app-discover-parcel>
-        <app-discover-parcel [attributes]="attribute_three" [stale]="stale_three"></app-discover-parcel>
-        <app-discover-parcel [attributes]="attribute_four" [stale]="stale_four"></app-discover-parcel>
-        <app-discover-parcel [attributes]="attribute_five" [stale]="stale_five"></app-discover-parcel>
+    <div class='navbar-container'> 
+        <div class='navbar'>
+            <app-navbar [page]="page"></app-navbar>
+        </div>    
     </div>
-    <div class='refresh-time'>
-        Days: <span class="days">{{days}}</span>
-        Hours: <span class="hours">{{hours}}</span><br>
-        Minutes: <span class="minutes">{{minutes}}</span><br>
-        Seconds: <span class="seconds">{{seconds}}</span>
+    <div class='refresh-time-container'>
+        <div class='refresh-time'>
+            <span class="timer reset">Time until reset: </span>
+            <span class="timer days">Days: {{days}}</span>
+            <span class="timer hours">Hours: {{hours}}</span>
+            <span class="timer minutes">Minutes: {{minutes}}</span>
+            <span class="timer seconds">Seconds: {{seconds}}</span>
+        </div>    
+    </div>
+    <div class='discover-list-container'>
+        <div class="discover-list">
+            <app-discover-parcel [attributes]="attribute_one" [stale]="stale_one"></app-discover-parcel>
+            <app-discover-parcel [attributes]="attribute_two" [stale]="stale_two"></app-discover-parcel>
+            <app-discover-parcel [attributes]="attribute_three" [stale]="stale_three"></app-discover-parcel>
+            <app-discover-parcel [attributes]="attribute_four" [stale]="stale_four"></app-discover-parcel>
+            <app-discover-parcel [attributes]="attribute_five" [stale]="stale_five"></app-discover-parcel>
+        </div>    
     </div>
 </div>
