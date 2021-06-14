@@ -20,7 +20,8 @@ import { ParcelTileComponent } from './parcel-tile/parcel-tile.component';
 import {MatButtonModule} from '@angular/material/button'
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 // Firebase
@@ -84,6 +85,7 @@ const routes: Routes = [];
     MatSelectModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatSidenavModule,
   ],
   providers: [{ provide: Window,
                 useValue: window 

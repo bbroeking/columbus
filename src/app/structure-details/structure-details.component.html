@@ -22,5 +22,26 @@
   </mat-form-field>
 
   <div>
-    <button class ="btn btn1" (click)="printB()"> Build Selected Building</button>
+    <button class ="btn btn1" (click)="buildBuilding()">Build Selected Building</button>
   </div>
+
+<!-- sidebar details  -->
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class = "example-sidenav" mode="over">
+    <p class= "bDetails"> {{structure.id}}</p>
+    <button class= "example-button" type="button" mat-button (click)="drawer.toggle()"> Close</button>
+    <button type="button" class="upgrade-refinery" *ngIf="structure.id === 'Refinery'">Upgrade Refinery</button>
+    <button type="button" class="upgrade-field" *ngIf="structure.id === 'Field'">Upgrade Field</button>
+    <!-- <button (click)="showFiller = !showFiller" mat-raised-button>
+      Building Options
+    </button> -->
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button class = "sidebar-button" type="button" mat-button (click)="drawer.toggle()">
+      {{structure.id}} Details
+    </button>
+  </div>
+
+</mat-drawer-container>
+

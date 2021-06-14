@@ -17,7 +17,8 @@ export class StructureDetailsComponent implements OnInit {
   ) { }
   disableSelect = new FormControl(false);
 
- selectedBuilding: string
+  selectedBuilding: string
+  showFiller = false;
 
   ngOnInit(): void {
   }
@@ -33,7 +34,7 @@ export class StructureDetailsComponent implements OnInit {
     console.log(event)
     this.selectedBuilding = event.value
   }
-  async printB() {
+  async buildBuilding() {
     console.log(this.selectedBuilding)
     let dirtyUri = await this.ethers.getMetadataURI(this.selectedTile)
     let uri = this.tileDataService.cleanURI(dirtyUri)
