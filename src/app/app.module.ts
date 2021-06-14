@@ -38,6 +38,7 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireFunctionsModule, USE_EMULATOR } from '@angular/fire/functions';
 import { DiscoverComponent } from './discover/discover.component';
 import { DiscoverParcelComponent } from './discover-parcel/discover-parcel.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -67,7 +68,8 @@ const routes: Routes = [];
     StructureDetailsComponent,
     LoginComponent,
     DiscoverComponent,
-    DiscoverParcelComponent
+    DiscoverParcelComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
