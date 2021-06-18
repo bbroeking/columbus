@@ -17,6 +17,7 @@ export interface Structure {
   id: string;
   position: number;
   sid: string;
+  level: number;
 }
 
 @Injectable()
@@ -108,13 +109,20 @@ export class TileDataService {
   }
 
 
-  async updateTileBuild(uri: string, sid:string, id:string){
+  async updateTileBuild(uri: string, sid:string, id:string, level:number){
     const cleanedURI = this.cleanURI(uri);
     return this.firestore.collection('tiles')
                          .doc(cleanedURI)
                          .collection('structures')
-                         .doc(sid).update({"id":id})
+                         .doc(sid).update({"id":id, "level":level})
 
   }
-
+  async upgradeTileBuild(uri:string, sid:string, level:number){
+    const cleanedURI = this.cleanURI(uri);
+    const newLevel = level + 1
+    return this.firestore.collection('tiles')
+                         .doc(cleanedURI)
+                         .collection('structures')
+                         .doc(sid).update({"level":newLevel})
+  }
 }

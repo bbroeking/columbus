@@ -17,11 +17,14 @@ import { ParcelDetailsComponent } from './parcel-details/parcel-details.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ParcelTileComponent } from './parcel-tile/parcel-tile.component';
 
+
 import {MatButtonModule} from '@angular/material/button'
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 // Firebase
@@ -40,6 +43,7 @@ import { AngularFireFunctionsModule, USE_EMULATOR } from '@angular/fire/function
 import { DiscoverComponent } from './discover/discover.component';
 import { DiscoverParcelComponent } from './discover-parcel/discover-parcel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { StructureUpgradeDialogComponent } from './structure-upgrade-dialog/structure-upgrade-dialog.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -70,7 +74,9 @@ const routes: Routes = [];
     LoginComponent,
     DiscoverComponent,
     DiscoverParcelComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    StructureUpgradeDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -86,6 +92,7 @@ const routes: Routes = [];
     BrowserAnimationsModule,
     MatButtonModule,
     MatSidenavModule,
+    MatDialogModule,
   ],
   providers: [{ provide: Window,
                 useValue: window 

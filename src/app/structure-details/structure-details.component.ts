@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { EthersService } from '../services/ethers.service';
 import { Resources, Structure, TileDataService } from '../services/tile-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { StructureUpgradeDialogComponent } from '../structure-upgrade-dialog/structure-upgrade-dialog.component';
 
 @Component({
   selector: 'app-structure-details',
@@ -14,6 +16,7 @@ export class StructureDetailsComponent implements OnInit {
   constructor(
     private ethers: EthersService,
     private tileDataService:TileDataService,
+    public dialog: MatDialog,
   ) { }
   disableSelect = new FormControl(false);
 
@@ -37,9 +40,25 @@ export class StructureDetailsComponent implements OnInit {
   async buildBuilding() {
     console.log(this.selectedBuilding)
     let dirtyUri = await this.ethers.getMetadataURI(this.selectedTile)
-    let uri = this.tileDataService.cleanURI(dirtyUri)
-    console.log(uri)
     console.log(this.structure.sid)
-    return this.tileDataService.updateTileBuild(dirtyUri,this.structure.sid,this.selectedBuilding)
+    return this.tileDataService.updateTileBuild(dirtyUri,this.structure.sid,this.selectedBuilding,1)
   }
+  async upgradeBuilding() {
+    let dirtyUri = await this.ethers.getMetadataURI(this.selectedTile)
+    if (this.structure.level <= 3)
+    {
+      return this.tileDataService.upgradeTileBuild(dirtyUri, this.structure.sid, this.structure.level)
+    }
+    else
+    {
+      console.log('Max Level')
+    }
+  }
+
+async openDialog(){
+  this.dialog.open(StructureUpgradeDialogComponent, {
+    data: {location:this.structure.id, sidd: this.structure.sid, level: this.structure.level, dUri: this.selectedTile}
+  });
+}
+
 }

@@ -22,7 +22,7 @@ describe('StructureDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StructureDetailsComponent);
     component = fixture.componentInstance;
-    component.structure = {'id' : 'build', 'sid' : 'blah', 'position': 2}
+    component.structure = {'id' : 'build', 'sid' : 'blah', 'position': 2, 'level': 1}
     fixture.detectChanges();
   });
 

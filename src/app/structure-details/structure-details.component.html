@@ -1,17 +1,5 @@
 <p> Current Building: {{structure.id}}</p>
 
-<!-- <h4>Building Selection</h4>
-<mat-form-field appearance="fill">
-  <mat-label>Choose an option</mat-label>
-  <mat-select (selectionChange)= "change($event)" [disabled]="disableSelect.value">
-    <mat-option value="option1" [disabled] = "structure.id === 'smith'">smith</mat-option>
-    <mat-option value="option2" [disabled] = "structure.id === 'field'">field</mat-option>
-    <mat-option value="option3" [disabled] = "structure.id === 'mine'">mine</mat-option>
-    <mat-option value="option4" [disabled] = "structure.id === 'refinary'">refinary</mat-option>
-  </mat-select>
-</mat-form-field> -->
-
-
 <h4>Building Selection</h4>
 <mat-form-field appearance = "outline">
     <mat-select  (selectionChange)="change($event)">
@@ -29,12 +17,11 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class = "example-sidenav" mode="over">
     <p class= "bDetails"> {{structure.id}}</p>
+    <b class="bLevel">Building Level = {{structure.level}}</b>
     <button class= "example-button" type="button" mat-button (click)="drawer.toggle()"> Close</button>
-    <button type="button" class="upgrade-refinery" *ngIf="structure.id === 'Refinery'">Upgrade Refinery</button>
-    <button type="button" class="upgrade-field" *ngIf="structure.id === 'Field'">Upgrade Field</button>
-    <!-- <button (click)="showFiller = !showFiller" mat-raised-button>
-      Building Options
-    </button> -->
+    <button type="button" class="upgrade-refinery" (click)="upgradeBuilding()" *ngIf="structure.id === 'Refinery'" [disabled] = "structure.level === 4">Upgrade Refinery</button>
+    <button type="button" (click)="upgradeBuilding()" class="upgrade-field" *ngIf="structure.id === 'Field'">Upgrade Field</button>
+    <button class='upgrade-mine' mat-button (click)="openDialog()" *ngIf="structure.id === 'Mine'" >Upgrade Mine</button>
   </mat-drawer>
 
   <div class="example-sidenav-content">
