@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Tile, TileDataService } from '../services/tile-data.service';
+import { Tile, TileDataService } from 'src/app/services/tile-data.service';
 
 @Component({
   selector: 'app-report-details',

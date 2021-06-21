@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import {Structure, TileDataService } from '../services/tile-data.service';
-import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
-import { EthersService } from '../services/ethers.service';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Structure, TileDataService } from 'src/app/services/tile-data.service';
+import { EthersService } from 'src/app/services/ethers.service';
 
 
 @Component({

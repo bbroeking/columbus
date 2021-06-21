@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { of } from 'rxjs';
-import { EthersService } from '../services/ethers.service';
+import { EthersService } from 'src/app/services/ethers.service';
 
 import { ParcelTileComponent } from './parcel-tile.component';
 

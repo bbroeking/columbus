@@ -1,9 +1,4 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Coordinate } from '../models/coordinate.model';
-import { EthersService } from '../services/ethers.service';
-import { HexagonService } from '../services/hexagon.service';
-
 import { MapComponent } from './map.component';
 
 describe('MapComponent', () => {

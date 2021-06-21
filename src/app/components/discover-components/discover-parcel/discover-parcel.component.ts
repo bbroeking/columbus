@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LandAttributes } from '../models/land-attributes.model';
-import { AuthService } from '../services/auth.service';
-import { EthersService } from '../services/ethers.service';
-import { TileDataService } from '../services/tile-data.service';
-import { TileGeneratorService, UnclaimedLand } from '../services/tile-generator.service';
+import { LandAttributes } from 'src/app/models/land-attributes.model';
+import { EthersService } from 'src/app/services/ethers.service';
+import { TileDataService } from 'src/app/services/tile-data.service';
+import { TileGeneratorService, UnclaimedLand } from 'src/app/services/tile-generator.service';
 
 @Component({
   selector: 'app-discover-parcel',

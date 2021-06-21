@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { EthersService } from '../services/ethers.service';
-import { Structure, TileDataService } from '../services/tile-data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { EthersService } from 'src/app/services/ethers.service';
+import { Structure, TileDataService } from 'src/app/services/tile-data.service';
 import { StructureUpgradeDialogComponent } from '../structure-upgrade-dialog/structure-upgrade-dialog.component';
 
 @Component({

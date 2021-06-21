@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Structure } from '../services/tile-data.service';
+import { Structure } from 'src/app/services/tile-data.service';
 
 @Component({
   selector: 'app-structure',

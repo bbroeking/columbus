@@ -1,11 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { EthersService } from '../services/ethers.service';
-import { Resources, Structure, TileDataService } from '../services/tile-data.service';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { StructureDetailsComponent } from '../structure-details/structure-details.component';
+import { EthersService } from 'src/app/services/ethers.service';
+import { TileDataService } from 'src/app/services/tile-data.service';
 
 @Component({
   selector: 'app-structure-upgrade-dialog',

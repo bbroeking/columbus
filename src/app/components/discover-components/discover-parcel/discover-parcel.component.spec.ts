@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EthersService } from '../services/ethers.service';
-import { TileDataService } from '../services/tile-data.service';
-import { TileGeneratorService } from '../services/tile-generator.service';
+import { EthersService } from 'src/app/services/ethers.service';
+import { TileDataService } from 'src/app/services/tile-data.service';
+import { TileGeneratorService } from 'src/app/services/tile-generator.service';
 
 import { DiscoverParcelComponent } from './discover-parcel.component';
 

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { EthersService } from '../services/ethers.service';
-import { HexagonService } from '../services/hexagon.service';
-import { Coordinate } from '../models/coordinate.model';
+import { Coordinate } from 'src/app/models/coordinate.model';
+import { HexagonService } from 'src/app/services/hexagon.service';
 import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.component';
 
 @Component({

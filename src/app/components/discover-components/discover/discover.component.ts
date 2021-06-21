@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
-import { LandAttributes } from '../models/land-attributes.model';
-import { TileDataService } from '../services/tile-data.service';
-import { TileGeneratorService, UnclaimedLand } from '../services/tile-generator.service';
+import { LandAttributes } from 'src/app/models/land-attributes.model';
+import { TileDataService } from 'src/app/services/tile-data.service';
+import { TileGeneratorService, UnclaimedLand } from 'src/app/services/tile-generator.service';
 
 @Component({
   selector: 'app-discover',

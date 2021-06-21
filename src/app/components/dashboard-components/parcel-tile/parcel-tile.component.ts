@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { EthersService } from '../services/ethers.service';
+import { EthersService } from 'src/app/services/ethers.service';
 
 export interface Item {
   name: string;

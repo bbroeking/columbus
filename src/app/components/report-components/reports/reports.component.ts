@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
-import { Coordinate } from '../models/coordinate.model';
-import { EthersService } from '../services/ethers.service';
-import { HexagonService } from '../services/hexagon.service';
+import { EthersService } from 'src/app/services/ethers.service';
 
 @Component({
   selector: 'app-reports',

@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
+import { EthersService } from 'src/app/services/ethers.service';
+import { TileDataService } from 'src/app/services/tile-data.service';
+import { TileGeneratorService } from 'src/app/services/tile-generator.service';
 import { DiscoverParcelComponent } from '../discover-parcel/discover-parcel.component';
-import { EthersService } from '../services/ethers.service';
-import { TileDataService } from '../services/tile-data.service';
-import { TileGeneratorService } from '../services/tile-generator.service';
-
 import { DiscoverComponent } from './discover.component';
 
 

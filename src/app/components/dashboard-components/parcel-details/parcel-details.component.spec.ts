@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { EthersService } from '../services/ethers.service';
-import { TileDataService } from '../services/tile-data.service';
+import { EthersService } from 'src/app/services/ethers.service';
+import { TileDataService } from 'src/app/services/tile-data.service';
 import { ParcelDetailsComponent } from './parcel-details.component';
 
 describe('ParcelDetailsComponent', () => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Coordinate } from '../models/coordinate.model';
-import { EthersService } from '../services/ethers.service';
-import { HexagonService } from '../services/hexagon.service';
+import { Coordinate } from 'src/app/models/coordinate.model';
+import { EthersService } from 'src/app/services/ethers.service';
+import { HexagonService } from 'src/app/services/hexagon.service';
 
 const myDataArray: Coordinate[] = []
 

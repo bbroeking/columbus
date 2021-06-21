@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { EthersService } from '../services/ethers.service';
-import { MetadataService } from '../services/metadata.service';
-
 import {Observable, Subscription} from 'rxjs';
-import { HexagonService } from '../services/hexagon.service';
-import { Coordinate } from '../models/coordinate.model';
-import { CloudFunctionsService } from '../services/cloud-functions.service';
+import { Coordinate } from 'src/app/models/coordinate.model';
+import { CloudFunctionsService } from 'src/app/services/cloud-functions.service';
+import { EthersService } from 'src/app/services/ethers.service';
+import { HexagonService } from 'src/app/services/hexagon.service';
+import { MetadataService } from 'src/app/services/metadata.service';
 
 @Component({
   selector: 'app-explorer',
