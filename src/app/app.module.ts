@@ -43,12 +43,11 @@ import { AngularFireFunctionsModule, USE_EMULATOR } from '@angular/fire/function
 import { DiscoverComponent } from './discover/discover.component';
 import { DiscoverParcelComponent } from './discover-parcel/discover-parcel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-<<<<<<< HEAD
 import { StructureUpgradeDialogComponent } from './structure-upgrade-dialog/structure-upgrade-dialog.component';
-=======
+import { WarRoomComponent } from './war-room/war-room.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ReportDetailsComponent } from './report-details/report-details.component';
->>>>>>> 209f557 (reports page added)
+import { CloudFunctionsService } from './services/cloud-functions.service';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -80,13 +79,10 @@ const routes: Routes = [];
     DiscoverComponent,
     DiscoverParcelComponent,
     LandingPageComponent,
-<<<<<<< HEAD
     StructureUpgradeDialogComponent,
-
-=======
+    WarRoomComponent,
     ReportsComponent,
     ReportDetailsComponent
->>>>>>> 209f557 (reports page added)
   ],
   imports: [
     BrowserModule,
@@ -121,7 +117,8 @@ const routes: Routes = [];
               { provide: USE_EMULATOR, useValue: ['localhost', 5001] }, //proxy angular fire functions
               InitalizeService,
               EthersService,
-              TileDataService],
+              TileDataService,
+              CloudFunctionsService],
   bootstrap: [AppComponent],
 })
 

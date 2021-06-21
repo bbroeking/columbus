@@ -11,7 +11,7 @@ import { StructureDetailsComponent } from '../structure-details/structure-detail
   selector: 'app-structure-upgrade-dialog',
   templateUrl: './structure-upgrade-dialog.component.html',
   styleUrls: ['./structure-upgrade-dialog.component.less'],
-  providers: [StructureDetailsComponent]
+  providers: []
 })
 export class StructureUpgradeDialogComponent implements OnInit {
 

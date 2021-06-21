@@ -1,5 +1,5 @@
 <div *ngIf="tile$ | async; let tile">
     <div class="minerals-rate">{{tile.minerals}}</div>
     <div class="energy-rate">{{tile.energy}}</div>
-    <button *ngIf="tile.inConflict">Set-up Conflict</button>
+    <button *ngIf="tile.inConflict" [routerLink]="generateLink(tile.conflictId)">Set-up Conflict</button>
 </div>

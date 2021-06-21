@@ -17,4 +17,8 @@ export class ReportDetailsComponent implements OnInit {
     this.tile$ = this.tileService.getTileValuesAsObservable(this.report);
   }
 
+  public generateLink(conflictId: string) {
+    return `/war-room/${conflictId}`;
+  }
+
 }
