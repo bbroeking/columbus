@@ -31,10 +31,6 @@ export class BrowserComponent implements OnInit {
       })
       this.dataSource = coordinates;
     })
-    // this.ethers.getTokenMetadataByOwner()
-    //           .then(res => res.subscribe(res => {
-    //             this.dataSource = res 
-    //           }));
   }
 
   public generateLink(coords: Coordinate) {

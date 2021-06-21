@@ -43,7 +43,12 @@ import { AngularFireFunctionsModule, USE_EMULATOR } from '@angular/fire/function
 import { DiscoverComponent } from './discover/discover.component';
 import { DiscoverParcelComponent } from './discover-parcel/discover-parcel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+<<<<<<< HEAD
 import { StructureUpgradeDialogComponent } from './structure-upgrade-dialog/structure-upgrade-dialog.component';
+=======
+import { ReportsComponent } from './reports/reports.component';
+import { ReportDetailsComponent } from './report-details/report-details.component';
+>>>>>>> 209f557 (reports page added)
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -75,8 +80,13 @@ const routes: Routes = [];
     DiscoverComponent,
     DiscoverParcelComponent,
     LandingPageComponent,
+<<<<<<< HEAD
     StructureUpgradeDialogComponent,
 
+=======
+    ReportsComponent,
+    ReportDetailsComponent
+>>>>>>> 209f557 (reports page added)
   ],
   imports: [
     BrowserModule,

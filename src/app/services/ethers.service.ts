@@ -59,16 +59,17 @@ export class EthersService {
   async discover(): Promise<any> {
     const account = this.requestAccount();
     const metadata = await this.metadataService.generateMetadata().toPromise();
-    return this.signedContract.discover(account, metadata.uuid);
+    await this.signedContract.discover(account, metadata.uuid);
+    return metadata.uuid;
   }
 
   async getBalanceOf(){
-    const balance = await this.signedContract.balanceOf(this.requestAccount());
+    const balance = await this.signedContract.balanceOf(await this.requestAccount());
     return balance.toNumber();
   }
 
   async getTokenIdByOwner(): Promise<number[]> {
-    const account = this.requestAccount();
+    const account = await this.requestAccount();
     const balance: BigNumber = await this.signedContract.balanceOf(account);
     let tokensIds = [];
     for (let i= 0; i < balance.toNumber(); i++){
@@ -78,8 +79,22 @@ export class EthersService {
     return tokensIds;
   }
 
+  async getTokenMetadataIdsByOwner() {
+    const account = await this.requestAccount();
+    const balance: BigNumber = await this.signedContract.balanceOf(account);
+    let tokens = [];
+    for (let i= 0; i < balance.toNumber(); i++){
+      let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
+      const uri: string = await this.getMetadataURIWithBigNumber(token);
+      let uriComponents = uri.split("/");
+      const blob_id: string = uriComponents[uriComponents.length - 1];
+      tokens.push(blob_id);
+    }               
+    return tokens;
+  }
+
   async getTokenMetadataByOwner(){
-    const account = this.requestAccount();
+    const account = await this.requestAccount();
     const balance: BigNumber = await this.signedContract.balanceOf(account);
     let tokens = [];
     for (let i= 0; i < balance.toNumber(); i++){

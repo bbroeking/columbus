@@ -1,3 +1,5 @@
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <div class="login">
     <div *ngIf="auth.user$ | async; then authenticated else guest">
         <!-- template will replace this div -->
@@ -5,23 +7,26 @@
 
     <!-- User NOT logged in -->
     <ng-template #guest>
-    <h3>Howdy, GUEST</h3>
-    <p>Login to get started...</p>
+        <div class='unauthenticated'>
+            <h3>Howdy, GUEST</h3>
+            <p>Login to get started...</p>
+    
+            <img (click)="auth.googleSignin()" src='assets/images/btn_google_signin_dark_pressed_web.png'>
 
-    <button (click)="auth.googleSignin()">
-        <i class="fa fa-google"></i> Connect Google
-    </button>
-
+        </div>
     </ng-template>
 
 
     <!-- User logged in -->
     <ng-template #authenticated>
-    <div *ngIf="auth.user$ | async as user">
-        <h3>Howdy, {{ user.displayName }}</h3>
-        <img  [src]="user.photoURL">
-        <p>UID: {{ user.uid }}</p>
-        <button (click)="auth.signOut()">Logout</button>
-    </div>
+        <div class="authenticated">
+            <div *ngIf="auth.user$ | async as user">
+                <h3>Howdy, {{ user.displayName }}</h3>
+                <img  [src]="user.photoURL">
+                <p>UID: {{ user.uid }}</p>
+                <button [routerLink]="['/reports']"> Continue... </button>
+                <button (click)="auth.signOut()">Logout</button>
+            </div>    
+        </div>
     </ng-template>
 </div>

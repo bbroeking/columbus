@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { StructureDetailsComponent } from '../structure-details/structure-details.component';
+import { EthersService } from './ethers.service';
 
 export interface Resources {
   minerals: number,
@@ -10,7 +10,8 @@ export interface Resources {
 
 export interface Tile { // data in the tile
   minerals: number,
-  energy: number
+  energy: number,
+  inConflict: boolean
 }
 
 export interface Structure {
@@ -23,9 +24,7 @@ export interface Structure {
 @Injectable()
 export class TileDataService {
 
-  constructor(
-    private firestore: AngularFirestore,
-    ) {}
+  constructor(private firestore: AngularFirestore) {}
 
   async getTileDocRef(uri: string): Promise<AngularFirestoreDocument<Resources> | undefined> {
     return this.firestore.doc<Resources>(`tiles/${uri}`);
@@ -36,9 +35,8 @@ export class TileDataService {
     return uriComponents[uriComponents.length - 1];  
   }
 
-  async createTile(uri: string): Promise<void> {
-    const cleanedURI = this.cleanURI(uri);
-    await this.getTileDocRef(cleanedURI)
+  async createTile(uuid: any): Promise<void> {
+    await this.getTileDocRef(uuid)
               .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
                 if (tileDoc === undefined) throw Error();
                 tileDoc.set({minerals: 200, energy: 100});

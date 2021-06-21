@@ -16,4 +16,7 @@ export class LoginComponent implements OnInit {
     this.user$.subscribe((res: any) => console.log(res));
   }
 
+  getNext() {
+    console.log("get next");
+  }
 }

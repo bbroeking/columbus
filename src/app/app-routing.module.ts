@@ -8,14 +8,17 @@ import { DiscoverComponent } from './discover/discover.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 import { AuthGuard } from './auth.guard';
+import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard/:mapId', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard] },
+  // throwaway routes
   { path: 'explorer', component: ExplorerComponent },
-  { path: 'dashboard/:mapId', component: DashboardComponent },
   { path: 'map', component: MapComponent, canActivate: [AuthGuard] },
-  { path: 'discover', component: DiscoverComponent }
 ];
 
 @NgModule({
