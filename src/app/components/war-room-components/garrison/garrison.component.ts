@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { TroopDataService } from 'src/app/services/troop-data.service';
+import { Troop, TroopDataService } from 'src/app/services/troop-data.service';
 
 @Component({
   selector: 'app-garrison',
@@ -10,6 +11,7 @@ import { TroopDataService } from 'src/app/services/troop-data.service';
 })
 export class GarrisonComponent implements OnInit {
   uid: string | undefined;
+  troops$: Observable<Troop[]>;
 
   constructor(private authService: AuthService,
     private troopDataService: TroopDataService) { }
@@ -17,9 +19,7 @@ export class GarrisonComponent implements OnInit {
   async ngOnInit() {
     this.uid = await this.authService.user?.uid
     if (this.uid)
-      this.troopDataService.getTroopsByUser(this.uid).subscribe((res) => {
-        console.log(res);
-      })
+      this.troops$ = this.troopDataService.getTroopsByUser(this.uid);
   }
 
 }

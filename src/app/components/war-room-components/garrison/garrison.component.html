@@ -1,3 +1,5 @@
 <div class="garrison">
-    
+    <mat-list role="list">
+        <mat-list-item *ngFor="let troop of troops$ | async; index as i" role="listitem">{{troop.name}}</mat-list-item>
+    </mat-list>
 </div>
