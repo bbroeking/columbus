@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-planning-table',
@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./planning-table.component.less']
 })
 export class PlanningTableComponent implements OnInit {
-
+  @Input() isAttacking: boolean;
+  @Input() isDefending: boolean;
+  
   constructor() { }
 
   ngOnInit(): void {

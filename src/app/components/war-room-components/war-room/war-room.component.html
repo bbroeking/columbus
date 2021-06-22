@@ -1,3 +1,17 @@
-<p>war-room works!</p>
-<p>{{conflictId}}</p>
-
+<div class="war-room">
+    <div *ngIf="conflictData$ | async as conflictData">
+        <div class="resolving" *ngIf="!conflictData.isResolved">
+            <app-planning-table 
+                [isAttacking]="conflictData.isAttacking"
+                [isDefending]="conflictData.isDefending">
+            </app-planning-table>
+            <app-garrison *ngIf="!conflictData.isAttacking || !conflictData.isDefending"></app-garrison>
+            <app-conflict-feed *ngIf="conflictData.isAttacking && conflictData.isDefending"></app-conflict-feed>  
+        </div>
+        <div class="resolved" *ngIf="conflictData.isResolved">
+            <app-conflict-feed
+                [isResolved]="conflictData.isResolved">
+            </app-conflict-feed>
+        </div>
+    </div>
+</div>

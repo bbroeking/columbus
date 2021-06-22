@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { TroopDataService } from 'src/app/services/troop-data.service';
 
 @Component({
   selector: 'app-garrison',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./garrison.component.less']
 })
 export class GarrisonComponent implements OnInit {
+  uid: string | undefined;
 
-  constructor() { }
+  constructor(private authService: AuthService,
+    private troopDataService: TroopDataService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.uid = await this.authService.user?.uid
+    if (this.uid)
+      this.troopDataService.getTroopsByUser(this.uid).subscribe((res) => {
+        console.log(res);
+      })
   }
 
 }

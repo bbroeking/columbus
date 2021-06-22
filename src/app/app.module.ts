@@ -49,6 +49,7 @@ import { WarRoomComponent } from './components/war-room-components/war-room/war-
 import { ReportsComponent } from './components/report-components/reports/reports.component';
 import { ReportDetailsComponent } from './components/report-components/report-details/report-details.component';
 import { PlanningTableComponent } from './components/war-room-components/planning-table/planning-table.component';
+import { ConflictFeedComponent } from './components/war-room-components/conflict-feed/conflict-feed.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -85,7 +86,8 @@ const routes: Routes = [];
     ReportsComponent,
     ReportDetailsComponent,
     GarrisonComponent,
-    PlanningTableComponent
+    PlanningTableComponent,
+    ConflictFeedComponent
   ],
   imports: [
     BrowserModule,
