@@ -1,5 +1,10 @@
 <div class="garrison">
     <mat-list role="list">
-        <mat-list-item *ngFor="let troop of troops$ | async; index as i" role="listitem">{{troop.name}}</mat-list-item>
+        <mat-list-item
+            *ngFor="let troop of troops$ | async; index as i" 
+            role="listitem" 
+            (click)="add(troop)"
+            [class.disabled]="isAvailable(troop)">{{troop.name}}
+        </mat-list-item>
     </mat-list>
 </div>

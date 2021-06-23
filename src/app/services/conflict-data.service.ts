@@ -40,4 +40,12 @@ export class ConflictDataService {
     return this.firestore.doc<ConflictUpdates>(`conflict-updates/${conflictUpdatesId}`)
                         .valueChanges();
   }
+
+  async updateConflict(conflictId: string, conflict: Partial<Conflict>): Promise<void> {
+    await this.getConflictDocRef(conflictId)
+              .then(function(conflictDoc: AngularFirestoreDocument<Conflict> | undefined) {
+                if (conflictDoc === undefined) throw Error();
+                conflictDoc.update(conflict);
+              })
+  }
 }

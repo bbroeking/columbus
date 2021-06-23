@@ -1,1 +1,9 @@
-<div class="planning-table"></div>
+<div class="planning-table">
+    <div *ngFor="let troop of attacking$ | async">
+        <div class="troop" (click)="remove(troop)">{{troop.docid}}</div>
+    </div>
+    <div *ngFor="let troop of defending$ | async">
+        <div class="troop" (click)="remove(troop)">{{troop.docid}}</div>
+    </div>
+    <button class="submit" (click)="submitTable()" [class.disabled]="validTable()">Submit</button>
+</div>

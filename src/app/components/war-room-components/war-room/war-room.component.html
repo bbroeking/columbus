@@ -1,13 +1,18 @@
 <div class="war-room">
     <div *ngIf="conflictData$ | async as conflictData">
+        <!-- Combat is in the planning stages or is in progress -->
         <div class="resolving" *ngIf="!conflictData.isResolved">
             <app-planning-table 
                 [isAttacking]="conflictData.isAttacking"
-                [isDefending]="conflictData.isDefending">
+                [conflictId]="conflictId">
             </app-planning-table>
-            <app-garrison *ngIf="!conflictData.isAttacking || !conflictData.isDefending"></app-garrison>
+            <app-garrison 
+                *ngIf="!conflictData.isAttacking || !conflictData.isDefending" 
+                [isAttacking]="conflictData.isAttacking">
+            </app-garrison>
             <app-conflict-feed *ngIf="conflictData.isAttacking && conflictData.isDefending"></app-conflict-feed>  
         </div>
+        <!-- Combat is over -->
         <div class="resolved" *ngIf="conflictData.isResolved">
             <app-conflict-feed
                 [isResolved]="conflictData.isResolved">

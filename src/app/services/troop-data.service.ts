@@ -3,7 +3,9 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 
 export interface Troop {
-  name: string
+  name: string,
+  uid: string,
+  docid: string,
 }
 
 @Injectable({
@@ -18,6 +20,6 @@ export class TroopDataService {
   }
 
   getTroopsByUser(uid: string): Observable<Troop[]> {
-    return this.firestore.collection<Troop>("troops", ref => ref.where('uid', '==', uid)).valueChanges();
+    return this.firestore.collection<Troop>("troops", ref => ref.where('uid', '==', uid)).valueChanges({idField: 'docid'});
   }
 }
