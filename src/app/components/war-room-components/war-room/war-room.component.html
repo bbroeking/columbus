@@ -4,13 +4,17 @@
         <div class="resolving" *ngIf="!conflictData.isResolved">
             <app-planning-table 
                 [isAttacking]="conflictData.isAttacking"
+                [isDefending]="conflictData.isDefending"
                 [conflictId]="conflictId">
             </app-planning-table>
             <app-garrison 
                 *ngIf="!conflictData.isAttacking || !conflictData.isDefending" 
                 [isAttacking]="conflictData.isAttacking">
             </app-garrison>
-            <app-conflict-feed *ngIf="conflictData.isAttacking && conflictData.isDefending"></app-conflict-feed>  
+            <app-conflict-feed
+                *ngIf="conflictData.isAttacking && conflictData.isDefending"
+                [conflictUpdatesId]="conflictData.conflictUpdatesId"
+            ></app-conflict-feed>  
         </div>
         <!-- Combat is over -->
         <div class="resolved" *ngIf="conflictData.isResolved">

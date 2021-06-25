@@ -1,3 +1,5 @@
 <div class="conflict-feed">
-    
+    <div class="conflict-exists" *ngIf="conflictUpdates">
+        <div class="conflict-updates" *ngFor="let update of conflictUpdates"> {{ update.message }}</div>
+    </div>
 </div>

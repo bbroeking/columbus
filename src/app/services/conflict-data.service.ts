@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Troop } from './troop-data.service';
 
 export interface Conflict {
   tile: string,
-  attacking: string[], // 5 unit ids
-  defending: string[], // 5 unit ids
-  conflict_updates: string, // collection with updates of conflict
+  attacking: Troop[], // 5 unit ids
+  defending: Troop[], // 5 unit ids
+  conflictUpdatesId: string, // collection with updates of conflict
   isAttacking: boolean,
   isDefending: boolean,
   isResolved: boolean,
 }
 
 export interface ConflictUpdates {
-  updates: string[]
+  updates: ConflictUpdate[]
+}
+
+export interface ConflictUpdate {
+  message: string,
+  timestamp: string,
 }
 
 @Injectable({

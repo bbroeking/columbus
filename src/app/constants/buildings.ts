@@ -1,3 +1,5 @@
+import { ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS } from "./resources";
+
 // Army
 export const INFANTRY_PRODUCTION = 'infantry-prod';
 export const GROUND_MECH_PRODUCTION = 'ground-mech-production';
@@ -8,13 +10,6 @@ export const MECH_RESEARCH = 'mech-research';
 // Refinery
 export const MINERALS_REFINERY = 'minerals-refinery';
 export const ENERGY_REFINERY = 'energy-refinery';
-
-
-// Resources
-export const MINERALS = 'minerals';
-export const RARE_MINERALS = 'rare-minerals';
-export const ENERGY = 'energy';
-export const RARE_ENERGY = 'rare-energy';
 
 export const buildings = [
     {

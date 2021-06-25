@@ -4,8 +4,13 @@ import { Observable } from 'rxjs';
 
 export interface Troop {
   name: string,
+  type: string,
   uid: string,
   docid: string,
+}
+
+export enum Troops {
+  
 }
 
 @Injectable({
