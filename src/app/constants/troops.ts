@@ -6,7 +6,7 @@ export const MARINE = 'marine';
 
 export const TROOPS = [
     {
-        'id': MARINE,
+        'type': MARINE,
         'buildResources': {
             [MINERALS]: 0,
             [RARE_MINERALS]: 0,

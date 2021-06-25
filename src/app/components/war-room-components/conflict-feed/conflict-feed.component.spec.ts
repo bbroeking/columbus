@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { ConflictDataService } from 'src/app/services/conflict-data.service';
 
 import { ConflictFeedComponent } from './conflict-feed.component';
 
@@ -8,7 +10,12 @@ describe('ConflictFeedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConflictFeedComponent ]
+      declarations: [ ConflictFeedComponent ],
+      providers: [
+        { 
+          provide: ConflictDataService, useValue: { getConflictUpdatesValuesAsObservable: () => of('this') }
+        }
+      ]
     })
     .compileComponents();
   });

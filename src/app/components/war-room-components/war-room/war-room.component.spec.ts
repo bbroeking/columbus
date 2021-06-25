@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { ConflictDataService } from 'src/app/services/conflict-data.service';
 
 import { WarRoomComponent } from './war-room.component';
 
@@ -8,7 +11,17 @@ describe('WarRoomComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WarRoomComponent ]
+      declarations: [ WarRoomComponent ],
+      providers: [
+        { provide: ActivatedRoute, useValue: {
+          paramMap: of('attacking'),
+          }
+        },
+        { provide: ConflictDataService, useValue: {
+            getConflictValuesAsObservable: () => {}
+          } 
+        }
+      ]
     })
     .compileComponents();
   });

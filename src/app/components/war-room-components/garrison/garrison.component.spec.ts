@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthService } from 'src/app/services/auth.service';
+import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
+import { TroopDataService } from 'src/app/services/troop-data.service';
 
 import { GarrisonComponent } from './garrison.component';
 
@@ -8,7 +11,12 @@ describe('GarrisonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GarrisonComponent ]
+      declarations: [ GarrisonComponent ],
+      providers: [
+        {provide: AuthService, useValue: {} },
+        {provide: TroopDataService, useValue: {} },
+        {provide: BattlefieldDataService, useValue: {}}
+      ]
     })
     .compileComponents();
   });

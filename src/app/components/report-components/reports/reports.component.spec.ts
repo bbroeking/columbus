@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EthersService } from 'src/app/services/ethers.service';
 
 import { ReportsComponent } from './reports.component';
 
@@ -8,7 +9,13 @@ describe('ReportsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportsComponent ]
+      declarations: [ ReportsComponent ],
+      providers: [
+        { provide: EthersService, 
+          useValue: {
+            getTokenMetadataIdsByOwner: () => {}
+          }}
+      ]
     })
     .compileComponents();
   });

@@ -21,9 +21,8 @@ export class PlanningTableComponent implements OnInit {
   attacking: Troop[];
   defending: Troop[];
 
-  constructor(
-    private battlefieldDataService: BattlefieldDataService,
-    private conflictDataService: ConflictDataService) { }
+  constructor(private battlefieldDataService: BattlefieldDataService,
+              private conflictDataService: ConflictDataService) { }
 
   ngOnInit(): void {
     this.attacking$ = this.battlefieldDataService.currentAttacking;

@@ -12,7 +12,7 @@ export class WarRoomComponent implements OnInit {
   conflictId: string;
   conflictData$: Observable<Conflict | undefined>;
   constructor(private route: ActivatedRoute,
-    private conflictDataSerice: ConflictDataService) { }
+              private conflictDataSerice: ConflictDataService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

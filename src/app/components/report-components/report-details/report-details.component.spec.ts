@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TileDataService } from 'src/app/services/tile-data.service';
 
 import { ReportDetailsComponent } from './report-details.component';
 
@@ -8,7 +9,14 @@ describe('ReportDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportDetailsComponent ]
+      declarations: [ ReportDetailsComponent ],
+      providers: [
+        {
+          provide: TileDataService, useValue: { 
+            getTileValuesAsObservable: () => {}
+          } 
+        }
+      ]
     })
     .compileComponents();
   });
