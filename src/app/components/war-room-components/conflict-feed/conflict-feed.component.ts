@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DocumentData, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { Observable, Subscription } from 'rxjs';
-import { ConflictDataService, ConflictUpdate, ConflictUpdates } from 'src/app/services/conflict-data.service';
+import { ConflictDataService, ConflictUpdate } from 'src/app/services/conflict-data.service';
 
 @Component({
   selector: 'app-conflict-feed',
@@ -9,19 +10,18 @@ import { ConflictDataService, ConflictUpdate, ConflictUpdates } from 'src/app/se
 })
 export class ConflictFeedComponent implements OnInit {
   @Input() isResolved: boolean;
-  @Input() conflictUpdatesId: string;
+  @Input() conflictId: string;
   conflictUpdatesSubscription: Subscription
   conflictUpdates: ConflictUpdate[] | undefined;
+  conflictDocs: QueryDocumentSnapshot<DocumentData>[] | undefined;
 
 
   constructor(private conflictDataService: ConflictDataService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.conflictUpdates = undefined;
-    this.conflictUpdatesSubscription = this.conflictDataService.getConflictUpdatesValuesAsObservable(this.conflictUpdatesId)
-                                                               .subscribe((updates) => {
-                                                                 this.conflictUpdates = updates?.updates
-                                                               })
+    const query = await this.conflictDataService.getConflictUpdatesValues(this.conflictId);
+    this.conflictDocs = query?.docs;
   }
 
   ngOnDestroy() {

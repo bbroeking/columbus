@@ -1,2 +1,3 @@
-export const buildStructure = 'functions/build';
-export const refreshUnclaimedLands = 'functions/refresh';
+export const BUILD = 'functions/build';
+export const REFRESH = 'functions/refresh';
+export const SIMULATE_COMBAT = 'functions/simulate-combat'

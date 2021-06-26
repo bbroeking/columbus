@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Troop } from './troop-data.service';
 
@@ -7,20 +7,42 @@ export interface Conflict {
   tile: string,
   attacking: Troop[], // 5 unit ids
   defending: Troop[], // 5 unit ids
-  conflictUpdatesId: string, // collection with updates of conflict
+  conflictId: string, // self-ref id
   isAttacking: boolean,
   isDefending: boolean,
   isResolved: boolean,
 }
 
-export interface ConflictUpdates {
-  updates: ConflictUpdate[]
+export interface ConflictUpdate {
+  endOfRoundAtk: any,
+  endOfRoundDef: any,
+  logs: any,
+  round: number,
+  timestamp: string
 }
 
-export interface ConflictUpdate {
-  message: string,
-  timestamp: string,
+export interface COMBAT_TROOP {
+  name: string,
+  type: string,
+  uid: string,
+  docid: string,
+  [Attributes.HP]: number,
+  [Attributes.ATTACK]: number,
+  [Attributes.DEFENSE]: number,
+  [Attributes.MINDAMAGE]: number,
+  [Attributes.MAXDAMAGE]: number,
+  [Attributes.SKEWDAMAGE]: number
 }
+
+export enum Attributes {
+  HP = 'HP',
+  ATTACK = "Attack",
+  DEFENSE = "Defense",
+  MINDAMAGE = "Min Hit",
+  MAXDAMAGE = "Max Hit",
+  SKEWDAMAGE = "Skew Hit"
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,16 +57,12 @@ export class ConflictDataService {
 
   getConflictValuesAsObservable(conflictId: string): Observable<Conflict | undefined>{
     return this.firestore.doc<Conflict>(`conflicts/${conflictId}`)
-                        .valueChanges();
+                        .valueChanges({idField: 'conflictId'});
   }
 
-  async getConflictUpdatesDocRef(conflictUpdatesId: string): Promise<AngularFirestoreDocument<ConflictUpdates> | undefined> {
-    return this.firestore.doc<ConflictUpdates>(`conflict-updates/${conflictUpdatesId}`);
-  }
-
-  getConflictUpdatesValuesAsObservable(conflictUpdatesId: string): Observable<ConflictUpdates | undefined>{
-    return this.firestore.doc<ConflictUpdates>(`conflict-updates/${conflictUpdatesId}`)
-                        .valueChanges();
+  async getConflictUpdatesValues(conflictId: string): Promise<QuerySnapshot<DocumentData>| undefined> {
+    let docRef = await this.getConflictDocRef(conflictId);
+    return docRef?.collection<ConflictUpdate>('conflict-updates').ref.orderBy('round').get()
   }
 
   async updateConflict(conflictId: string, conflict: Partial<Conflict>): Promise<void> {

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
+import { CloudFunctionsService } from 'src/app/services/cloud-functions.service';
 import { ConflictDataService } from 'src/app/services/conflict-data.service';
 import { Troop } from 'src/app/services/troop-data.service';
 
@@ -22,7 +23,8 @@ export class PlanningTableComponent implements OnInit {
   defending: Troop[];
 
   constructor(private battlefieldDataService: BattlefieldDataService,
-              private conflictDataService: ConflictDataService) { }
+              private conflictDataService: ConflictDataService,
+              private cloudFunctionsService: CloudFunctionsService) { }
 
   ngOnInit(): void {
     this.attacking$ = this.battlefieldDataService.currentAttacking;
@@ -45,11 +47,13 @@ export class PlanningTableComponent implements OnInit {
     }
     else 
       this.conflictSubscription = this.conflictDataService.getConflictValuesAsObservable(this.conflictId)
-                                                          .pipe(
-                                                            map(val => [val?.attacking || [], val?.defending || []])
-                                                          ).subscribe((troops) => {
-                                                            this.attacking = troops[0]
-                                                            this.defending = troops[1]
+                                                          // .pipe(
+                                                          //   map(val => [val?.attacking || [], val?.defending || []])
+                                                          // )
+                                                          .subscribe((conflict) => {
+                                                            this.attacking = conflict?.attacking || []
+                                                            this.defending = conflict?.defending || []
+                                                            const res = this.cloudFunctionsService.simulateCombat(conflict)
                                                           })
   }
 

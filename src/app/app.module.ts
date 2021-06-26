@@ -51,6 +51,7 @@ import { ReportDetailsComponent } from './components/report-components/report-de
 import { PlanningTableComponent } from './components/war-room-components/planning-table/planning-table.component';
 import { ConflictFeedComponent } from './components/war-room-components/conflict-feed/conflict-feed.component';
 import { TroopCardComponent } from './components/war-room-components/troop-card/troop-card.component';
+import { ConflictRoundComponent } from './components/war-room-components/conflict-round/conflict-round.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -87,7 +88,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     GarrisonComponent,
     PlanningTableComponent,
     ConflictFeedComponent,
-    TroopCardComponent
+    TroopCardComponent,
+    ConflictRoundComponent
   ],
   imports: [
     BrowserModule,
