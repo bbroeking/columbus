@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CloudFunctionsService } from './cloud-functions.service';
 import { ConflictDataService } from './conflict-data.service';
 import { Troop } from './troop-data.service';
 
@@ -17,7 +18,8 @@ export class BattlefieldDataService {
   currentAttacking: Observable<Troop[]>;
   currentDefending: Observable<Troop[]>;
 
-  constructor(private conflictDataService: ConflictDataService) { 
+  constructor(private conflictDataService: ConflictDataService,
+    private cloudFunctionsService: CloudFunctionsService) { 
     this.attacking = [];
     this.defending = [];
     this.attackingSubject = new BehaviorSubject<Troop[]>(this.attacking);
@@ -77,7 +79,7 @@ export class BattlefieldDataService {
       return this.BATTLEFIELD_MAX == this.defending.length;
   }
 
-  submitBattlefield(isAttacking: boolean, conflictId: string){
+  async submitBattlefield(isAttacking: boolean, conflictId: string){
     var conflict = {};
     if (!isAttacking)
       conflict = { 
@@ -89,7 +91,10 @@ export class BattlefieldDataService {
         defending: this.defending,
         isDefending: true
       }
-    this.conflictDataService.updateConflict(conflictId, conflict);
-
+    var res = await this.conflictDataService.updateConflict(conflictId, conflict);
+    if (isAttacking)
+      res = await this.cloudFunctionsService.simulateCombat({
+        id: conflictId
+      })
   }
 }

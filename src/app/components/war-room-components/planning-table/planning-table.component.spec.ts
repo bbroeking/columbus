@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
+import { CloudFunctionsService } from 'src/app/services/cloud-functions.service';
 import { ConflictDataService } from 'src/app/services/conflict-data.service';
 
 import { PlanningTableComponent } from './planning-table.component';
@@ -20,7 +21,8 @@ describe('PlanningTableComponent', () => {
             isValidBattlefield: jasmine.createSpy('isValidBattlefield').and.returnValue(true)
           } 
         },
-        { provide: ConflictDataService, useValue: {} }
+        { provide: ConflictDataService, useValue: {} },
+        { provide: CloudFunctionsService, useValue: {}}
       ]
     })
     .compileComponents();

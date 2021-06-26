@@ -13,7 +13,7 @@ describe('ConflictFeedComponent', () => {
       declarations: [ ConflictFeedComponent ],
       providers: [
         { 
-          provide: ConflictDataService, useValue: { getConflictUpdatesValuesAsObservable: () => of('this') }
+          provide: ConflictDataService, useValue: { getConflictUpdatesValues: () => of('this') }
         }
       ]
     })

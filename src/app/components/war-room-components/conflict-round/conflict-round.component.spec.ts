@@ -17,6 +17,7 @@ describe('ConflictRoundComponent', () => {
     fixture = TestBed.createComponent(ConflictRoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.roundData = null;
   });
 
   it('should create', () => {

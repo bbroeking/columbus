@@ -11,21 +11,14 @@ import { ConflictDataService, ConflictUpdate } from 'src/app/services/conflict-d
 export class ConflictFeedComponent implements OnInit {
   @Input() isResolved: boolean;
   @Input() conflictId: string;
-  conflictUpdatesSubscription: Subscription
-  conflictUpdates: ConflictUpdate[] | undefined;
   conflictDocs: QueryDocumentSnapshot<DocumentData>[] | undefined;
 
 
   constructor(private conflictDataService: ConflictDataService) { }
 
   async ngOnInit() {
-    this.conflictUpdates = undefined;
     const query = await this.conflictDataService.getConflictUpdatesValues(this.conflictId);
     this.conflictDocs = query?.docs;
-  }
-
-  ngOnDestroy() {
-    this.conflictUpdatesSubscription.unsubscribe();
   }
 
 }

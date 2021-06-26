@@ -47,13 +47,9 @@ export class PlanningTableComponent implements OnInit {
     }
     else 
       this.conflictSubscription = this.conflictDataService.getConflictValuesAsObservable(this.conflictId)
-                                                          // .pipe(
-                                                          //   map(val => [val?.attacking || [], val?.defending || []])
-                                                          // )
                                                           .subscribe((conflict) => {
                                                             this.attacking = conflict?.attacking || []
                                                             this.defending = conflict?.defending || []
-                                                            const res = this.cloudFunctionsService.simulateCombat(conflict)
                                                           })
   }
 
@@ -64,7 +60,7 @@ export class PlanningTableComponent implements OnInit {
       this.battlefieldDataService.removeDefending(troop);
   }
 
-  submitTable() {
+  async submitTable() {
     this.battlefieldDataService.submitBattlefield(this.isAttacking, this.conflictId);
   }
 
