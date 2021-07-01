@@ -1,10 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
-import { CloudFunctionsService } from 'src/app/services/cloud-functions.service';
 import { ConflictDataService } from 'src/app/services/conflict-data.service';
+import { EthersService } from 'src/app/services/ethers.service';
+import { MetamaskService } from 'src/app/services/metamask.service';
 import { Troop } from 'src/app/services/troop-data.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-planning-table',
@@ -14,6 +18,8 @@ import { Troop } from 'src/app/services/troop-data.service';
 export class PlanningTableComponent implements OnInit {
   @Input() isAttacking: boolean;
   @Input() isDefending: boolean;
+  @Input() attackerId: string;
+  @Input() tileId: string;
   @Input() conflictId: string;
 
   attacking$: Observable<Troop[]>;
@@ -24,15 +30,24 @@ export class PlanningTableComponent implements OnInit {
 
   constructor(private battlefieldDataService: BattlefieldDataService,
               private conflictDataService: ConflictDataService,
-              private cloudFunctionsService: CloudFunctionsService) { }
+              private authService: AuthService,
+              private router: Router,
+              private ethers: EthersService,
+              private metamaskService: MetamaskService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    // if incorrect, navigate away for now.
+    let valid: boolean = await this.isCorrectUser()
+    if (!valid) {
+      this.router.navigate(['/reports']);
+    }
     this.attacking$ = this.battlefieldDataService.currentAttacking;
     this.defending$ = this.battlefieldDataService.currentDefending;
   }
 
   ngOnDestroy(){
-    this.conflictSubscription.unsubscribe();
+    if (this.conflictSubscription)
+      this.conflictSubscription.unsubscribe();
   }
 
   ngOnChanges() {
@@ -68,4 +83,11 @@ export class PlanningTableComponent implements OnInit {
     this.battlefieldDataService.isValidBattlefield(this.isAttacking);
   }
 
+  async isCorrectUser(): Promise<boolean> {
+    const metadataUris = await this.ethers.getTokenMetadataIdsByOwner(this.metamaskService.getConnectedAccount());
+    const attackerOnOffense = this.authService.user?.uid == this.attackerId && !this.isAttacking;
+    const defenderOnDefense = _.contains(metadataUris, this.tileId) && this.isAttacking && !this.isDefending;
+    const attackAndDefenseSet = this.isAttacking && this.isDefending;
+    return attackerOnOffense || defenderOnDefense || attackAndDefenseSet;
+  }
 }

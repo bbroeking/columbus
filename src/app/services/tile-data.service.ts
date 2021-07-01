@@ -27,8 +27,8 @@ export class TileDataService {
 
   constructor(private firestore: AngularFirestore) {}
 
-  async getTileDocRef(uri: string): Promise<AngularFirestoreDocument<Resources> | undefined> {
-    return this.firestore.doc<Resources>(`tiles/${uri}`);
+  async getTileDocRef(uri: string): Promise<AngularFirestoreDocument<Tile> | undefined> {
+    return this.firestore.doc<Tile>(`tiles/${uri}`);
   }
 
   cleanURI(fullURI: string): string {
@@ -61,10 +61,10 @@ export class TileDataService {
               })
   }
 
-  async updateTileResource(uri: string, resources: Partial<Resources>): Promise<void> {
+  async updateTile(uri: string, resources: Partial<Tile>): Promise<void> {
     const cleanedURI = this.cleanURI(uri);
     await this.getTileDocRef(cleanedURI)
-              .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              .then(function(tileDoc: AngularFirestoreDocument<Tile> | undefined) {
                 if (tileDoc === undefined) throw Error();
                 tileDoc.update(resources);
               })

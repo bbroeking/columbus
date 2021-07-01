@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, DocumentData, QuerySnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentData, DocumentReference, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Troop } from './troop-data.service';
 
 export interface Conflict {
-  tile: string,
+  tileId: string,
+  attackerId: string,
   attacking: Troop[], // 5 unit ids
   defending: Troop[], // 5 unit ids
   conflictId: string, // self-ref id
@@ -63,6 +64,16 @@ export class ConflictDataService {
   async getConflictUpdatesValues(conflictId: string): Promise<QuerySnapshot<DocumentData>| undefined> {
     let docRef = await this.getConflictDocRef(conflictId);
     return docRef?.collection<ConflictUpdate>('conflict-updates').ref.orderBy('round').get()
+  }
+
+  async createConflict(tileId: string, uid: string): Promise<DocumentReference<Partial<Conflict>>> {
+    return this.firestore.collection<Partial<Conflict>>('conflicts').add({
+      isAttacking: false,
+      isDefending: false,
+      isResolved: false,
+      tileId: tileId,
+      attackerId: uid
+    })
   }
 
   async updateConflict(conflictId: string, conflict: Partial<Conflict>): Promise<void> {

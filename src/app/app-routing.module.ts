@@ -9,6 +9,7 @@ import { LandingPageComponent } from './components/landing-page-components/landi
 import { LoginComponent } from './components/login-components/login/login.component';
 import { ReportsComponent } from './components/report-components/reports/reports.component';
 import { WarRoomComponent } from './components/war-room-components/war-room/war-room.component';
+import { DeclareWarComponent } from './components/war-room-components/declare-war/declare-war.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'dashboard/:mapId', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard] },
   { path: 'war-room/:conflictId', component: WarRoomComponent, canActivate: [AuthGuard] },
+  { path: 'declare-war', component: DeclareWarComponent, canActivate: [AuthGuard]},
   // throwaway routes
   { path: 'explorer', component: ExplorerComponent },
   { path: 'map', component: MapComponent, canActivate: [AuthGuard] },

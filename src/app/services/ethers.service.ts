@@ -79,8 +79,7 @@ export class EthersService {
     return tokensIds;
   }
 
-  async getTokenMetadataIdsByOwner() {
-    const account = await this.requestAccount();
+  async getTokenMetadataIdsByOwner(account: string) {
     const balance: BigNumber = await this.signedContract.balanceOf(account);
     let tokens = [];
     for (let i= 0; i < balance.toNumber(); i++){

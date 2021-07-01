@@ -29,4 +29,18 @@
             </div>    
         </div>
     </ng-template>
+
+<div *ngIf="!isMetaMaskInstalled" class="metamaskInstall">
+    <button mat-matbutton (click)="onClickInstallMetaMask()">Install MetaMask</button>
+</div>
+
+<div *ngIf="!isConnected" class="metamaskConnect">
+    <button mat-matbutton class="connect">
+        Connect
+    </button>
+</div>
+
+<div class="accounts" *ngFor="let account of accounts">
+    {{account}}
+</div>
 </div>
