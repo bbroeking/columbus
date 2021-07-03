@@ -6,6 +6,7 @@
                 [isAttacking]="conflictData.isAttacking"
                 [isDefending]="conflictData.isDefending"
                 [attackerId]="conflictData.attackerId"
+                [defenderId]="conflictData.defenderId"
                 [tileId]="conflictData.tileId"
                 [conflictId]="conflictId">
             </app-planning-table>
@@ -20,10 +21,9 @@
         </div>
         <!-- Combat is over -->
         <div class="resolved" *ngIf="conflictData.isResolved">
-            <app-conflict-feed
-                [isResolved]="conflictData.isResolved"
+            <app-conflict-resolved
                 [conflictId]="conflictData.conflictId">
-            </app-conflict-feed>
+            </app-conflict-resolved>
         </div>
     </div>
 </div>

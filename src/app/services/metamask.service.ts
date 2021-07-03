@@ -5,21 +5,26 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class MetamaskService {
-  account:string;
+  
   constructor(private route: Router) {}
 
   setConnectedAccount(accounts: string[]) {
-    this.account = accounts[0];
+    localStorage.setItem('metamask', accounts[0]);
   }
   getConnectedAccount() {
     if (!this.isMetaMaskConnected()){
       console.error("no connected account, rerouting");
       this.route.navigate(['/login']);
+      return '';
+    } else if (localStorage.getItem('metamask')) {
+      return localStorage.getItem('metamask') || '';
+    } else {
+      this.route.navigate(['/login']);
+      return '';
     }
-    return this.account;
   }
 
   isMetaMaskConnected(): boolean {
-    return this.account ? true : false;
+    return localStorage.getItem('metamask') ? true : false;
   }
 }

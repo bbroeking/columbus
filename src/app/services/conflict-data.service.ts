@@ -6,6 +6,7 @@ import { Troop } from './troop-data.service';
 export interface Conflict {
   tileId: string,
   attackerId: string,
+  defenderId: string,
   attacking: Troop[], // 5 unit ids
   defending: Troop[], // 5 unit ids
   conflictId: string, // self-ref id
@@ -66,13 +67,14 @@ export class ConflictDataService {
     return docRef?.collection<ConflictUpdate>('conflict-updates').ref.orderBy('round').get()
   }
 
-  async createConflict(tileId: string, uid: string): Promise<DocumentReference<Partial<Conflict>>> {
+  async createConflict(tileId: string, uid: string, uidd: string): Promise<DocumentReference<Partial<Conflict>>> {
     return this.firestore.collection<Partial<Conflict>>('conflicts').add({
       isAttacking: false,
       isDefending: false,
       isResolved: false,
       tileId: tileId,
-      attackerId: uid
+      attackerId: uid,
+      defenderId: uidd
     })
   }
 

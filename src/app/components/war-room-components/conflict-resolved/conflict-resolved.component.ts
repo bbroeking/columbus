@@ -1,17 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DocumentData, QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { Observable, Subscription } from 'rxjs';
-import { ConflictDataService, ConflictUpdate } from 'src/app/services/conflict-data.service';
+import { ConflictDataService } from 'src/app/services/conflict-data.service';
 
 @Component({
-  selector: 'app-conflict-feed',
-  templateUrl: './conflict-feed.component.html',
-  styleUrls: ['./conflict-feed.component.less']
+  selector: 'app-conflict-resolved',
+  templateUrl: './conflict-resolved.component.html',
+  styleUrls: ['./conflict-resolved.component.less']
 })
-export class ConflictFeedComponent implements OnInit {
+export class ConflictResolvedComponent implements OnInit {
   @Input() conflictId: string;
   conflictDocs: QueryDocumentSnapshot<DocumentData>[] | undefined;
-
 
   constructor(private conflictDataService: ConflictDataService) { }
 

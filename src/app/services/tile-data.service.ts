@@ -12,7 +12,8 @@ export interface Tile { // data in the tile
   minerals: number,
   energy: number,
   inConflict: boolean,
-  conflictId: string
+  conflictId: string,
+  ownerId: string
 }
 
 export interface Structure {

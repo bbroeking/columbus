@@ -19,6 +19,7 @@ export class PlanningTableComponent implements OnInit {
   @Input() isAttacking: boolean;
   @Input() isDefending: boolean;
   @Input() attackerId: string;
+  @Input() defenderId: string;
   @Input() tileId: string;
   @Input() conflictId: string;
 
@@ -84,9 +85,9 @@ export class PlanningTableComponent implements OnInit {
   }
 
   async isCorrectUser(): Promise<boolean> {
-    const metadataUris = await this.ethers.getTokenMetadataIdsByOwner(this.metamaskService.getConnectedAccount());
-    const attackerOnOffense = this.authService.user?.uid == this.attackerId && !this.isAttacking;
-    const defenderOnDefense = _.contains(metadataUris, this.tileId) && this.isAttacking && !this.isDefending;
+    const account = this.metamaskService.getConnectedAccount();
+    const attackerOnOffense = account == this.attackerId && !this.isAttacking;
+    const defenderOnDefense = account == this.defenderId && this.isAttacking && !this.isDefending;
     const attackAndDefenseSet = this.isAttacking && this.isDefending;
     return attackerOnOffense || defenderOnDefense || attackAndDefenseSet;
   }

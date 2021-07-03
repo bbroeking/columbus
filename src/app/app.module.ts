@@ -57,6 +57,7 @@ import { ConflictFeedComponent } from './components/war-room-components/conflict
 import { TroopCardComponent } from './components/war-room-components/troop-card/troop-card.component';
 import { ConflictRoundComponent } from './components/war-room-components/conflict-round/conflict-round.component';
 import { DeclareWarComponent } from './components/war-room-components/declare-war/declare-war.component';
+import { ConflictResolvedComponent } from './components/war-room-components/conflict-resolved/conflict-resolved.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -95,7 +96,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     ConflictFeedComponent,
     TroopCardComponent,
     ConflictRoundComponent,
-    DeclareWarComponent
+    DeclareWarComponent,
+    ConflictResolvedComponent
   ],
   imports: [
     BrowserModule,
