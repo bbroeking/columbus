@@ -23,6 +23,9 @@ export class MetamaskService {
       return '';
     }
   }
+  disconnectMetaMaskAccount() {
+    localStorage.removeItem('metamask');
+  }
 
   isMetaMaskConnected(): boolean {
     return localStorage.getItem('metamask') ? true : false;
