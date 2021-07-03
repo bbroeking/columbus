@@ -1,8 +1,10 @@
-<div class="account-details">
-    {{account}}
-</div>
-<div class="reports">
-    <div class="row" *ngFor="let uri of metadataUris">
-        <app-report-details [report]="uri"></app-report-details>
+<div class="reports-page">
+    <div class="reports">
+        <div class="account-details">
+            {{account}}
+        </div>
+        <div class="row" *ngFor="let uri of metadataUris">
+            <app-report-details [report]="uri"></app-report-details>
+        </div>
     </div>
 </div>

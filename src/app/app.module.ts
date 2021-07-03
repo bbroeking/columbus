@@ -41,7 +41,6 @@ import { ParcelDetailsComponent } from './components/dashboard-components/parcel
 import { DashboardComponent } from './components/dashboard-components/dashboard/dashboard.component';
 import { ParcelTileComponent } from './components/dashboard-components/parcel-tile/parcel-tile.component';
 import { HoverTileMenuComponent } from './components/dashboard-components/hover-tile-menu/hover-tile-menu.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { StructureComponent } from './components/dashboard-components/structure/structure.component';
 import { StructureDetailsComponent } from './components/dashboard-components/structure-details/structure-details.component';
 import { LoginComponent } from './components/login-components/login/login.component';
@@ -80,7 +79,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     DashboardComponent,
     ParcelTileComponent,
     HoverTileMenuComponent,
-    NavbarComponent,
     StructureComponent,
     StructureDetailsComponent,
     LoginComponent,
@@ -88,9 +86,11 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     DiscoverParcelComponent,
     LandingPageComponent,
     StructureUpgradeDialogComponent,
-    WarRoomComponent,
+    // Reports
     ReportsComponent,
     ReportDetailsComponent,
+    // Conflicts 
+    WarRoomComponent,
     GarrisonComponent,
     PlanningTableComponent,
     ConflictFeedComponent,
