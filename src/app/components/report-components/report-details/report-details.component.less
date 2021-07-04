@@ -2,9 +2,91 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 10px;
+    height: 100%;
 
+    // Tile 
     .tile {
         display: flex;
         align-items: center;
+        justify-content: space-around;
+
+        .tile-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 200px;
+
+            .location {
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+
+        .store {
+            display: flex;
+
+            .icon-mineral {
+                background-image: url(../../../../assets/mineral32.png);
+                height: 32px;
+                width: 32px;
+            }
+
+            .icon-energy {
+                background-image: url(../../../../assets/energy32.png);
+                height: 32px;
+                width: 32px;
+            }
+    
+        }
+    }
+
+    // Structures
+    .structures {
+        .structure {
+            width: 100%;
+            height: 25%;
+        }
+    }
+
+    // Conflict
+    .conflict {
+        .planning {
+            height: 100%;
+            .attackers {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                height: 50%;
+                .troop {
+                    display: flex;
+                    flex-direction: column;
+                    border-style: solid;
+                    border: 2px solid chartreuse;
+                    border-radius: 5px;
+                    padding: 12px;
+                }
+            }
+
+            .defenders {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                height: 50%;
+                .troop {
+                    display: flex;
+                    flex-direction: column;
+                    border-style: solid;
+                    border: 2px solid chartreuse;
+                    border-radius: 5px;
+                    padding: 12px;
+                }
+            }
+        }
+        .execution {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }

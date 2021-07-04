@@ -86,8 +86,9 @@ export class PlanningTableComponent implements OnInit {
 
   async isCorrectUser(): Promise<boolean> {
     const account = await this.metamaskService.getConnectedAccount();
+    const metadataIds: string[] = await this.ethers.getTokenMetadataIdsByOwner(account);
     const attackerOnOffense = account == this.attackerId && !this.isAttacking;
-    const defenderOnDefense = account == this.defenderId && this.isAttacking && !this.isDefending;
+    const defenderOnDefense = _.contains(metadataIds, this.tileId) && this.isAttacking && !this.isDefending;
     const attackAndDefenseSet = this.isAttacking && this.isDefending;
     return attackerOnOffense || defenderOnDefense || attackAndDefenseSet;
   }

@@ -19,7 +19,6 @@ export class DeclareWarComponent implements OnInit {
     private tileDataService: TileDataService,
     private conflictDataService: ConflictDataService,
     private router: Router,
-    private authService: AuthService,
     private metamaskService: MetamaskService) { }
 
   ngOnInit(): void {
@@ -35,7 +34,7 @@ export class DeclareWarComponent implements OnInit {
                                       if (res && !res?.inConflict){
                                         const account = await this.metamaskService.getConnectedAccount();
                                         // TODO make check for not attacking your own
-                                        const conflict = await this.conflictDataService.createConflict(this.tileId, account, res.ownerId);
+                                        const conflict = await this.conflictDataService.createConflict(this.tileId, account);
                                         this.tileDataService.updateTile(this.tileId, { conflictId: conflict.id, inConflict: true})
                                         this.router.navigate([`/war-room/${conflict.id}`])
                                       }

@@ -26,7 +26,7 @@ export class ParcelDetailsComponent implements OnInit {
 
 async ngOnChanges() {
   let uri = await this.ethers.getMetadataURI(this.selectedTile)
-  this.structures$ = await this.tileDataService.getOrderedStructures(uri);
+  this.structures$ = await this.tileDataService.getTileStructuresAsObservable(uri);
 }
 
 }

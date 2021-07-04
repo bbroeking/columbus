@@ -89,18 +89,9 @@ export class TileDataService {
 
   getTileStructuresAsObservable(uri: string): Observable<Structure[]> {
     const cleanedURI = this.cleanURI(uri);
-    return this.firestore.collection<Structure>(`tiles/${cleanedURI}/structures`)
+    return this.firestore.collection<Structure>(`tiles/${cleanedURI}/structures`, ref => ref.orderBy('position'))
                         .valueChanges();
   }
-
-  async getOrderedStructures(uri: string){
-    const cleanedURI = this.cleanURI(uri);
-    return this.firestore.collection('tiles')
-                          .doc(cleanedURI)
-                          .collection<Structure>('structures', ref => ref.orderBy('position'))
-                          .valueChanges()
-  }
-
 
   async updateTileBuild(uri: string, sid:string, id:string, level:number){
     const cleanedURI = this.cleanURI(uri);

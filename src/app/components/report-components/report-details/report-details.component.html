@@ -1,18 +1,55 @@
 <div class="tile-report">
+
+    <!-- Tile -->
     <div class='tile' *ngIf="tile$ | async; let tile">
-        <div>{{tile.id}}</div>
-        <div class="minerals-rate">{{tile.minerals}}</div>
-        <div class="energy-rate">{{tile.energy}}</div>
-    </div>
-    
-    <div class="structures" *ngIf="structures$ | async; let structures">
-        <div class="structure" *ngFor="let structure of structures">
-            <div class="sid">{{structure.position}}</div>
+        <div class="tile-details">
+            <span>{{tile.id}}</span>
+            <span style="color: #6C6; font-size: 75px;">&#x2B22;</span>
+            <div class="location">
+                <span class="loc x">X: 0</span>
+                <span class="loc y">Y: 0</span>
+                <span class="loc z">Z: 0</span>
+            </div>
+            <button mat-button class="go-to">Go to</button>
+        </div>
+        <div class="store">
+            <div class="icon-mineral"></div>
+            <span class="mineral-value">{{tile.minerals}}</span>
+        </div>
+        <div class="store">
+            <div class="icon-energy"></div>
+            <span class="energy-value">{{tile.energy}}</span>
         </div>
     </div>
+    
+    <!-- Structures -->
+    <div class="structures" *ngIf="structures$ | async; let structures">
+        <button mat-flat-button class="structure" *ngFor="let structure of structures">{{structure.position}}</button>
+    </div>
 
+    <!-- Conflict -->
     <div class="conflict" *ngIf="conflict$ | async; let conflict">
-        <div>{{conflict | json }} </div>
-        <button [routerLink]="generateLink(conflict.id)">Set-up Conflict</button>
+        <div class="planning" *ngIf="!conflict.isAttacking || conflict.isDefending">
+            <div class="attackers" *ngFor="let attacker of conflict.attacking">
+                <div class="troop">
+                    <span class="name">{{attacker.name}}</span>
+                    <span class="type">{{attacker.type}}</span>
+                </div>
+            </div>
+            <div class="defenders">
+                <div class="defenders-set" *ngIf="conflict.isDefending" >
+                    <div class="troop" *ngFor="let defender of conflict.defending">
+                        <span class="name">{{defender.name}}</span>
+                        <span class="type">{{defender.type}}</span>
+                    </div>
+                </div>
+                <div class="defenders-not-set" *ngIf="!conflict.isDefending">
+                    <button mat-button class="set-defenders">Set Defense</button>
+                </div>    
+            </div>
+        </div>
+        <div class="execution">
+            <button mat-button [routerLink]="generateLink(conflict.id)" *ngIf="conflict.isAttacking && !conflict.isDefending">View Conflict</button>
+        </div>
     </div>
 </div>

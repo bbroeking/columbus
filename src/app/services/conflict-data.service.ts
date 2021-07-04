@@ -67,14 +67,13 @@ export class ConflictDataService {
     return docRef?.collection<ConflictUpdate>('conflict-updates').ref.orderBy('round').get()
   }
 
-  async createConflict(tileId: string, uid: string, uidd: string): Promise<DocumentReference<Partial<Conflict>>> {
+  async createConflict(tileId: string, uid: string): Promise<DocumentReference<Partial<Conflict>>> {
     return this.firestore.collection<Partial<Conflict>>('conflicts').add({
       isAttacking: false,
       isDefending: false,
       isResolved: false,
       tileId: tileId,
       attackerId: uid,
-      defenderId: uidd
     })
   }
 
