@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LandAttributes } from 'src/app/models/land-attributes.model';
-import { EthersService } from 'src/app/services/ethers.service';
+import { EthersService, LandDiscovery } from 'src/app/services/ethers.service';
 import { TileDataService } from 'src/app/services/tile-data.service';
 import { TileGeneratorService, UnclaimedLand } from 'src/app/services/tile-generator.service';
 
@@ -38,8 +38,8 @@ export class DiscoverParcelComponent {
 
   conquer() {
     this.ethers.discover()
-                .then((uri) => {
-                  this.tileDataService.createTile(uri);
+                .then((landDiscovery: LandDiscovery) => {
+                  this.tileDataService.createTile(landDiscovery);
                   const ucl = {
                     [`stale_${this.prefix}`]: true
                   };

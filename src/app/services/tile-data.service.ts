@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { EthersService } from './ethers.service';
-
-export interface Resources {
-  minerals: number,
-  energy: number
-}
+import { LandDiscovery } from './ethers.service';
 
 export interface Tile { // data in the tile
   minerals: number,
   energy: number,
   inConflict: boolean,
   conflictId: string,
-  ownerId: string
+  ownerId: string,
+  id: string,
+  tokenId: number
 }
 
 export interface Structure {
@@ -37,29 +34,19 @@ export class TileDataService {
     return uriComponents[uriComponents.length - 1];  
   }
 
-  async createTile(uuid: any): Promise<void> {
-    await this.getTileDocRef(uuid)
-              .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
-                if (tileDoc === undefined) throw Error();
-                tileDoc.set({minerals: 200, energy: 100});
-                const strucutresRef = tileDoc.collection('structures');
-                strucutresRef.add({position: 0})
-                .then(function(docRef) {
-                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
-                });
-                strucutresRef.add({position: 1})
-                .then(function(docRef) {
-                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
-                });
-                strucutresRef.add({position: 2})
-                .then(function(docRef) {
-                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
-                });
-                strucutresRef.add({position: 3})
-                .then(function(docRef) {
-                  strucutresRef.doc(docRef.id).update({sid: docRef.id})
-                });
-              })
+  async createTile(landDiscovery: LandDiscovery): Promise<void> {
+    const tileRef = this.firestore.doc<Partial<Tile>>(`tiles/${landDiscovery.uuid}`)
+    tileRef
+      .set({
+        tokenId: landDiscovery.tokenId,
+        minerals: 200,
+        energy: 100,
+      });
+      const strucutresRef = tileRef.collection('structures');
+      strucutresRef.add({position: 0})
+      strucutresRef.add({position: 1})
+      strucutresRef.add({position: 2})
+      strucutresRef.add({position: 3})
   }
 
   async updateTile(uri: string, resources: Partial<Tile>): Promise<void> {
@@ -74,13 +61,13 @@ export class TileDataService {
   getTileValuesAsObservable(uri: string): Observable<Tile | undefined>{
     const cleanedURI = this.cleanURI(uri);
     return this.firestore.doc<Tile>(`tiles/${cleanedURI}`)
-                        .valueChanges();
+                        .valueChanges({idField: 'id'});
   }
 
   async deleteTile(uri: string) {
     const cleanedURI = this.cleanURI(uri);
     await this.getTileDocRef(cleanedURI)
-              .then(function(tileDoc: AngularFirestoreDocument<Resources> | undefined) {
+              .then(function(tileDoc: AngularFirestoreDocument<Tile> | undefined) {
                 if (tileDoc === undefined) throw Error();
                 tileDoc.delete()
               })
@@ -98,6 +85,12 @@ export class TileDataService {
                           })
                           return structures;
     });
+  }
+
+  getTileStructuresAsObservable(uri: string): Observable<Structure[]> {
+    const cleanedURI = this.cleanURI(uri);
+    return this.firestore.collection<Structure>(`tiles/${cleanedURI}/structures`)
+                        .valueChanges();
   }
 
   async getOrderedStructures(uri: string){

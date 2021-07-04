@@ -16,13 +16,13 @@
             </app-garrison>
             <app-conflict-feed
                 *ngIf="conflictData.isAttacking && conflictData.isDefending"
-                [conflictId]="conflictData.conflictId"
+                [conflictId]="conflictData.id"
             ></app-conflict-feed>  
         </div>
         <!-- Combat is over -->
         <div class="resolved" *ngIf="conflictData.isResolved">
             <app-conflict-resolved
-                [conflictId]="conflictData.conflictId">
+                [conflictId]="conflictData.id">
             </app-conflict-resolved>
         </div>
     </div>

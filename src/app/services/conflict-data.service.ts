@@ -9,10 +9,10 @@ export interface Conflict {
   defenderId: string,
   attacking: Troop[], // 5 unit ids
   defending: Troop[], // 5 unit ids
-  conflictId: string, // self-ref id
   isAttacking: boolean,
   isDefending: boolean,
   isResolved: boolean,
+  id: string, // self-ref
 }
 
 export interface ConflictUpdate {
@@ -59,7 +59,7 @@ export class ConflictDataService {
 
   getConflictValuesAsObservable(conflictId: string): Observable<Conflict | undefined>{
     return this.firestore.doc<Conflict>(`conflicts/${conflictId}`)
-                        .valueChanges({idField: 'conflictId'});
+                        .valueChanges({idField: 'id'});
   }
 
   async getConflictUpdatesValues(conflictId: string): Promise<QuerySnapshot<DocumentData>| undefined> {

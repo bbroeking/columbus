@@ -1,5 +1,18 @@
-<div *ngIf="tile$ | async; let tile">
-    <div class="minerals-rate">{{tile.minerals}}</div>
-    <div class="energy-rate">{{tile.energy}}</div>
-    <button *ngIf="tile.inConflict" [routerLink]="generateLink(tile.conflictId)">Set-up Conflict</button>
+<div class="tile-report">
+    <div class='tile' *ngIf="tile$ | async; let tile">
+        <div>{{tile.id}}</div>
+        <div class="minerals-rate">{{tile.minerals}}</div>
+        <div class="energy-rate">{{tile.energy}}</div>
+    </div>
+    
+    <div class="structures" *ngIf="structures$ | async; let structures">
+        <div class="structure" *ngFor="let structure of structures">
+            <div class="sid">{{structure.position}}</div>
+        </div>
+    </div>
+
+    <div class="conflict" *ngIf="conflict$ | async; let conflict">
+        <div>{{conflict | json }} </div>
+        <button [routerLink]="generateLink(conflict.id)">Set-up Conflict</button>
+    </div>
 </div>

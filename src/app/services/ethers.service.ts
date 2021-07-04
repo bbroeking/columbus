@@ -9,6 +9,11 @@ import { forkJoin } from 'rxjs';
 import { Provider } from './ethers-utils/web3-provider';
 import { ParcelContract } from './ethers-utils/contract';
 
+export interface LandDiscovery {
+  tokenId: number,
+  uuid: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,14 +35,12 @@ export class EthersService {
     this.signedContract = parcelContract;
   }
 
-  public ngOnInit() {}
-
   public ngOnDestory(){
     this.unsignedContract.removeAllListeners();
   }
 
   async requestAccount() {
-    const accounts = await this.ethereum.request({ method: 'eth_requestAccounts' });
+    const accounts = await this.ethereum.request({ method: 'eth_accounts' });
     return accounts[0];
   }
 
@@ -56,11 +59,13 @@ export class EthersService {
     return new ethers.Contract(daiAddress, daiAbi, this.provider);
   }
 
-  async discover(): Promise<any> {
+  async discover(): Promise<LandDiscovery> {
     const account = this.requestAccount();
     const metadata = await this.metadataService.generateMetadata().toPromise();
-    await this.signedContract.discover(account, metadata.uuid);
-    return metadata.uuid;
+    const rawTransaction = await this.signedContract.discover(account, metadata.uuid);
+    const confirmations = await rawTransaction.wait();
+    const tokenId = confirmations.events[0].args.tokenId.toNumber() // TODO: on-chain, this could take awhile and should be handled by and outside server resource
+    return {tokenId: tokenId, uuid: metadata.uuid} ;
   }
 
   async getBalanceOf(){
@@ -109,11 +114,6 @@ export class EthersService {
   async getTotalSupply(): Promise<number> {
     const totalSupply: BigNumber = await this.unsignedContract.totalSupply(); 
     return totalSupply.toNumber();
-  }
-
-  async getTotalSupplyParcelData(){
-    const totalSupply = await this.getTotalSupply();
-
   }
 
   getMetadataURI(tokenId: number): Promise<string> {
