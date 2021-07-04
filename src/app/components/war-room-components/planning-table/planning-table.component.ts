@@ -85,7 +85,7 @@ export class PlanningTableComponent implements OnInit {
   }
 
   async isCorrectUser(): Promise<boolean> {
-    const account = this.metamaskService.getConnectedAccount();
+    const account = await this.metamaskService.getConnectedAccount();
     const attackerOnOffense = account == this.attackerId && !this.isAttacking;
     const defenderOnDefense = account == this.defenderId && this.isAttacking && !this.isDefending;
     const attackAndDefenseSet = this.isAttacking && this.isDefending;

@@ -1,46 +1,12 @@
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<div class="login">
-    <div *ngIf="auth.user$ | async; then authenticated else guest">
-        <!-- template will replace this div -->
+<div class="connect">
+    <div *ngIf="!account" class="metamaskConnect">
+        <button mat-button (click)="onClickConnectToMetaMask()">
+            <div class="metamask-svg"></div>
+            Connect to your MetaMask Wallet
+        </button>
     </div>
-
-    <!-- User NOT logged in -->
-    <ng-template #guest>
-        <div class='unauthenticated'>
-            <h3>Howdy, GUEST</h3>
-            <p>Login to get started...</p>
     
-            <img (click)="auth.googleSignin()" src='assets/images/btn_google_signin_dark_pressed_web.png'>
-
-        </div>
-    </ng-template>
-
-
-    <!-- User logged in -->
-    <ng-template #authenticated>
-        <div class="authenticated">
-            <div *ngIf="auth.user$ | async as user">
-                <h3>Howdy, {{ user.displayName }}</h3>
-                <img  [src]="user.photoURL">
-                <p>UID: {{ user.uid }}</p>
-                <button [routerLink]="['/reports']"> Continue... </button>
-                <button (click)="auth.signOut()">Logout</button>
-            </div>    
-        </div>
-    </ng-template>
-
-<div *ngIf="!isMetaMaskInstalled" class="metamaskInstall">
-    <button mat-matbutton (click)="onClickInstallMetaMask()">Install MetaMask</button>
-</div>
-
-<div *ngIf="!isConnected" class="metamaskConnect">
-    <button mat-matbutton class="connect">
-        Connect
-    </button>
-</div>
-
-<div class="accounts" *ngFor="let account of accounts">
-    {{account}}
-</div>
+    <div *ngIf="account" class="connected">
+        <div class="accountConnected">You are connected to {{account}}</div>
+    </div>    
 </div>

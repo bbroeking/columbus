@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { MetamaskService } from 'src/app/services/metamask.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,32 +9,27 @@ import { MetamaskService } from 'src/app/services/metamask.service';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-
-  user$: any;
   onboarding: any;
-  accounts: string[];
 
-  isMetaMaskInstalled: boolean;
-  isConnected: boolean;
+  account:string;
+  accountSubscription: Subscription;
 
-  constructor(public auth: AuthService,
-              private metamaskService: MetamaskService) {
-                this.isConnected = true;
-                this.isMetaMaskInstalled = true;
-              }
+  constructor(private metamaskService: MetamaskService) {
+  }
   
   async ngOnInit() {
-    this.user$ = this.auth.user$;
+    this.accountSubscription = this.metamaskService.account
+                                    .subscribe((res) => {
+                                      this.account = res
+                                    });
 
     if(!MetaMaskOnboarding.isMetaMaskInstalled()) {
-      this.isMetaMaskInstalled = false;
-    } else if (this.metamaskService.isMetaMaskConnected()) {
-      if(this.onboarding)
-        this.onboarding.stopOnboarding();
-    } else {
-      this.isConnected = false;
-      this.connectToMetaMask();
+      // TODO: test adding the extension workflow
     }
+  }
+
+  ngOnDestroy() {
+    this.accountSubscription.unsubscribe();
   }
 
   async onClickInstallMetaMask() {
@@ -46,15 +41,9 @@ export class LoginComponent implements OnInit {
       console.error(error)
     }
   }
-  async connectToMetaMask() {
-    const { ethereum } = window as any;
-    try {
-      this.accounts = await ethereum.request({ method: 'eth_accounts' });
-      this.metamaskService.setConnectedAccount(this.accounts);
-      this.isConnected = true;
-    } catch (err) {
-      console.error('Error on init when getting accounts', err)
-    }
+
+  async onClickConnectToMetaMask() {
+    this.metamaskService.connectAccount();
   }
 
 }

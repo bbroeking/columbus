@@ -3,7 +3,13 @@
         <li class="nav-item" [routerLink]="['/']" >Home</li>
         <li class="nav-item" [routerLink]="['/reports']" >Reports</li>
         <li class="nav-item" [routerLink]="['/discover']" >Discover</li>
-        <li class="nav-item" (click)="metamaskService.disconnectMetaMaskAccount()">Disconnect</li>
+    </ul>
+    <ul class="nav navbar-account">
+        <li class="nav-item" *ngIf="account">
+            Connected to
+            <span class="address">{{account}}</span></li>
+        <!-- <li class="nav-item" *ngIf="account" (click)="metamaskService.disconnectMetaMaskAccount()">Disconnect</li> --> 
+        <li class="nav-item" *ngIf="!account" [routerLink]="['/login']">Connect</li>
     </ul>
 </div>
 <router-outlet></router-outlet>

@@ -1,5 +1,6 @@
 .navbar {
     position: relative;
+    display: flex;
     width: 100%;
     top: 0px;
     z-index: 3;
@@ -7,21 +8,35 @@
     border-top: 3px solid #98fc03;
 }
 
-.navbar-nav {
+.nav {
     display: flex;
     flex-wrap: nowrap;
-    padding-left: 125px;
     .nav-item {
         padding: 20px;
         display: block;
         text-align: center;
         text-decoration: none;
         color: #f2f2f2;
-    }
-
+    }    
     .nav-item:hover {
         background-color: #ddd;
         color: black;
+    }
+}
+
+.navbar-nav {
+    padding-left: 125px;
+}
+
+.navbar-account {
+    padding-right: 20px;
+    margin-left: auto;
+    .nav-item .address {
+        width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        direction: rtl;
+        text-align: left;
     }
 }
 

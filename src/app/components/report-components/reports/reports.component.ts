@@ -14,7 +14,7 @@ export class ReportsComponent implements OnInit {
     private metamaskService: MetamaskService) { }
 
   async ngOnInit() {
-    this.account = this.metamaskService.getConnectedAccount();
+    this.account = await this.metamaskService.getConnectedAccount();
     this.metadataUris = await this.ethers.getTokenMetadataIdsByOwner(this.account);
   }
 

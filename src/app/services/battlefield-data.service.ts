@@ -18,7 +18,8 @@ export class BattlefieldDataService {
   currentAttacking: Observable<Troop[]>;
   currentDefending: Observable<Troop[]>;
 
-  constructor(private conflictDataService: ConflictDataService,
+  constructor(
+    private conflictDataService: ConflictDataService,
     private cloudFunctionsService: CloudFunctionsService) { 
     this.attacking = [];
     this.defending = [];

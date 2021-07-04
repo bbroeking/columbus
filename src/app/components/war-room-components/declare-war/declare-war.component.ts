@@ -33,7 +33,7 @@ export class DeclareWarComponent implements OnInit {
     this.sub = this.tileDataService.getTileValuesAsObservable(this.tileId)
                                     .subscribe( async (res) => {
                                       if (res && !res?.inConflict){
-                                        const account = this.metamaskService.getConnectedAccount();
+                                        const account = await this.metamaskService.getConnectedAccount();
                                         // TODO make check for not attacking your own
                                         const conflict = await this.conflictDataService.createConflict(this.tileId, account, res.ownerId);
                                         this.tileDataService.updateTile(this.tileId, { conflictId: conflict.id, inConflict: true})
