@@ -9,9 +9,8 @@ import { TileDataService } from 'src/app/services/tile-data.service';
   selector: 'app-structure-upgrade-dialog',
   templateUrl: './structure-upgrade-dialog.component.html',
   styleUrls: ['./structure-upgrade-dialog.component.less'],
-  providers: []
 })
-export class StructureUpgradeDialogComponent implements OnInit {
+export class StructureUpgradeDialogComponent {
 
   constructor(
     private ethers: EthersService,
@@ -19,11 +18,6 @@ export class StructureUpgradeDialogComponent implements OnInit {
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data:any
   ) { }
-
-  ngOnInit() {
-    console.log(this.data)
-  }
-
 
   async upgradeBuilding() {
     let dirtyUri = await this.ethers.getMetadataURI(this.data.dUri)

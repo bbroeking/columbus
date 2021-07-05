@@ -3,7 +3,10 @@
 <h4>Building Selection</h4>
 <mat-form-field appearance = "outline">
     <mat-select  (selectionChange)="change($event)">
-      <mat-option *ngFor="let building of buildings" [value]="building.value" [disabled] = "structure.id === building.viewValue">
+      <mat-option
+        *ngFor="let building of buildings" 
+        [value]="building.value" 
+        [disabled]="structure.id === building.viewValue">
         {{ building.viewValue }}
       </mat-option>
     </mat-select>
@@ -29,6 +32,5 @@
       {{structure.id}} Details
     </button>
   </div>
-
 </mat-drawer-container>
 

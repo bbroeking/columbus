@@ -19,6 +19,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+// import {FormControl} from '@angular/forms';
 
 // Firebase
 import { environment } from 'src/environments/environment';
@@ -57,6 +58,9 @@ import { TroopCardComponent } from './components/war-room-components/troop-card/
 import { ConflictRoundComponent } from './components/war-room-components/conflict-round/conflict-round.component';
 import { DeclareWarComponent } from './components/war-room-components/declare-war/declare-war.component';
 import { ConflictResolvedComponent } from './components/war-room-components/conflict-resolved/conflict-resolved.component';
+import { StructureDialogComponent } from './components/dashboard-components/structure-dialog/structure-dialog.component';
+import { QueueHandlerPipe } from './components/dashboard-components/queue-handler.pipe';
+import { StructureDropdownComponent } from './components/dashboard-components/structure-dropdown/structure-dropdown.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -86,6 +90,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     DiscoverParcelComponent,
     LandingPageComponent,
     StructureUpgradeDialogComponent,
+    StructureDialogComponent,
     // Reports
     ReportsComponent,
     ReportDetailsComponent,
@@ -97,7 +102,9 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     TroopCardComponent,
     ConflictRoundComponent,
     DeclareWarComponent,
-    ConflictResolvedComponent
+    ConflictResolvedComponent,
+    QueueHandlerPipe,
+    StructureDropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,7 +125,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    // FormControl
   ],
   providers: [{ provide: Window,
                 useValue: window 

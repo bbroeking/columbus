@@ -1,7 +1,4 @@
 import { ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS } from "./resources";
-
-// troops
-
 export interface Troop {
     name: string,
     type: string,
@@ -46,9 +43,10 @@ export enum Attributes {
 }
 
 export const MARINE = 'marine';
+export const MARAUDER = 'marauder';
 
-export const TROOPS = [
-    {
+export const TROOPS = {
+    [MARINE]: {
         'type': MARINE,
         'buildResources': {
             [MINERALS]: 0,
@@ -65,4 +63,22 @@ export const TROOPS = [
             [Attributes.SKEWDAMAGE]: 1
         }
     },
-]
+
+    [MARAUDER]: {
+        'type': MARAUDER,
+        'buildResources': {
+            [MINERALS]: 0,
+            [RARE_MINERALS]: 0,
+            [ENERGY]: 0,
+            [RARE_ENERGY]: 0
+        },
+        'baseStats': {
+            [Attributes.HP]: 30,
+            [Attributes.ATTACK]: 3,
+            [Attributes.DEFENSE]: 7,
+            [Attributes.MINDAMAGE]: 0,
+            [Attributes.MAXDAMAGE]: 5,
+            [Attributes.SKEWDAMAGE]: 1
+        }
+    },
+}

@@ -1,0 +1,30 @@
+.structure-dialog {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .queue {
+        display: flex;
+        justify-content: space-evenly;
+        .slot {
+            background-color: brown;
+            margin: 30px;
+            height: 100px;
+            width: 100px;
+            
+            .queued {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+
+            .empty {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

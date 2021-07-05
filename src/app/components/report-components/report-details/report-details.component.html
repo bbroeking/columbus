@@ -24,12 +24,12 @@
     
     <!-- Structures -->
     <div class="structures" *ngIf="structures$ | async; let structures">
-        <button mat-flat-button class="structure" *ngFor="let structure of structures">{{structure.position}}</button>
+        <button mat-flat-button (click)="openDialog(structure)" class="structure" *ngFor="let structure of structures">{{structure.position}}</button>
     </div>
 
     <!-- Conflict -->
     <div class="conflict" *ngIf="conflict$ | async; let conflict">
-        <div class="planning" *ngIf="!conflict.isAttacking || conflict.isDefending">
+        <div class="planning" *ngIf="!conflict.isAttacking || !conflict.isDefending">
             <div class="attackers" *ngFor="let attacker of conflict.attacking">
                 <div class="troop">
                     <span class="name">{{attacker.name}}</span>
@@ -48,8 +48,11 @@
                 </div>    
             </div>
         </div>
-        <div class="execution">
-            <button mat-button [routerLink]="generateLink(conflict.id)" *ngIf="conflict.isAttacking && !conflict.isDefending">View Conflict</button>
+        <div class="execution" *ngIf="conflict.isAttacking && conflict.isDefending && !conflict.isResolved">
+            <button mat-button [routerLink]="generateLink(conflict.id)">View Conflict</button>
+        </div>
+        <div class="after-report" *ngIf="conflict.isAttacking && conflict.isDefending && conflict.isResolved">
+            <button mat-button [routerLink]="generateLink(conflict.id)">View Completed Conflict</button>
         </div>
     </div>
 </div>

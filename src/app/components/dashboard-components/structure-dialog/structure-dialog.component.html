@@ -1,0 +1,44 @@
+<div class="structure-dialog">
+    <div class="type">{{data.structure.type}}</div>
+    <div class="queue">
+        <div class="slot">
+            <div class="queued" *ngIf="data.structure.queue[0]">
+                <span class="type">{{data.structure.queue[0].type}}</span>
+                <span class="timestamp">{{data.structure.queue[0] | queueHandler}}%</span>
+            </div>
+            <div class="empty" *ngIf="!data.structure.queue[0]">EMPTY</div>
+        </div>
+        <div class="slot">
+            <div class="queued" *ngIf="data.structure.queue[1]">
+                <span class="type">{{data.structure.queue[1].type}}</span>
+                <span class="timestamp">{{data.structure.queue[1] | queueHandler}}%</span>
+            </div>
+            <div class="empty" *ngIf="!data.structure.queue[1]">EMPTY</div>
+        </div>
+        <div class="slot">
+            <div class="queued" *ngIf="data.structure.queue[2]">
+                <span class="type">{{data.structure.queue[2].type}}</span>
+                <span class="timestamp">{{data.structure.queue[2] | queueHandler}}%</span>
+            </div>
+            <div class="empty" *ngIf="!data.structure.queue[2]">EMPTY</div>
+        </div>
+        <div class="slot">
+            <div class="queued" *ngIf="data.structure.queue[3]">
+                <span class="type">{{data.structure.queue[3].type}}</span>
+                <span class="timestamp">{{data.structure.queue[3] | queueHandler}}%</span>
+            </div>
+            <div class="empty" *ngIf="!data.structure.queue[3]">EMPTY</div>
+        </div>
+        <div class="slot">
+            <div class="queued" *ngIf="data.structure.queue[4]">
+                <span class="type">{{data.structure.queue[4].type}}</span>
+                <span class="timestamp">{{data.structure.queue[4] | queueHandler}}%</span>
+            </div>
+            <div class="empty" *ngIf="!data.structure.queue[4]">EMPTY</div>
+        </div>
+    </div>
+    <div class="options">
+        <app-structure-dropdown [type]="data.structure.type"></app-structure-dropdown>
+        <button mat-button class="addToQueue">Add to queue</button>
+    </div>
+</div>
