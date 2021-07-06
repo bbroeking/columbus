@@ -21,7 +21,8 @@ export interface COMBAT_TROOP {
 export interface TROOP_MODEL {
     type: string,
     buildResources: Object,
-    baseStats: Stats
+    baseStats: Stats,
+    buildTime: number
 }
 
 export interface Stats {
@@ -45,7 +46,7 @@ export enum Attributes {
 export const MARINE = 'marine';
 export const MARAUDER = 'marauder';
 
-export const TROOPS = {
+export const TROOPS: {[key: string]: TROOP_MODEL} = {
     [MARINE]: {
         'type': MARINE,
         'buildResources': {
@@ -61,7 +62,8 @@ export const TROOPS = {
             [Attributes.MINDAMAGE]: 0,
             [Attributes.MAXDAMAGE]: 5,
             [Attributes.SKEWDAMAGE]: 1
-        }
+        },
+        'buildTime': 100
     },
 
     [MARAUDER]: {
@@ -79,6 +81,7 @@ export const TROOPS = {
             [Attributes.MINDAMAGE]: 0,
             [Attributes.MAXDAMAGE]: 5,
             [Attributes.SKEWDAMAGE]: 1
-        }
+        },
+        'buildTime': 100
     },
 }

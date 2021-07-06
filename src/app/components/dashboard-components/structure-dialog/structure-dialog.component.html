@@ -5,6 +5,7 @@
             <div class="queued" *ngIf="data.structure.queue[0]">
                 <span class="type">{{data.structure.queue[0].type}}</span>
                 <span class="timestamp">{{data.structure.queue[0] | queueHandler}}%</span>
+                <button mat-button (click)="claimTroop(0)" class="claim" *ngIf="(data.structure.queue[0] | queueHandler) == 100">Claim Troop</button>
             </div>
             <div class="empty" *ngIf="!data.structure.queue[0]">EMPTY</div>
         </div>
@@ -12,6 +13,7 @@
             <div class="queued" *ngIf="data.structure.queue[1]">
                 <span class="type">{{data.structure.queue[1].type}}</span>
                 <span class="timestamp">{{data.structure.queue[1] | queueHandler}}%</span>
+                <button mat-button (click)="claimTroop(1)" class="claim" *ngIf="(data.structure.queue[1] | queueHandler) == 100">Claim Troop</button>
             </div>
             <div class="empty" *ngIf="!data.structure.queue[1]">EMPTY</div>
         </div>
@@ -19,6 +21,7 @@
             <div class="queued" *ngIf="data.structure.queue[2]">
                 <span class="type">{{data.structure.queue[2].type}}</span>
                 <span class="timestamp">{{data.structure.queue[2] | queueHandler}}%</span>
+                <button mat-button (click)="claimTroop(2)" class="claim" *ngIf="(data.structure.queue[2] | queueHandler) == 100">Claim Troop</button>
             </div>
             <div class="empty" *ngIf="!data.structure.queue[2]">EMPTY</div>
         </div>
@@ -26,6 +29,7 @@
             <div class="queued" *ngIf="data.structure.queue[3]">
                 <span class="type">{{data.structure.queue[3].type}}</span>
                 <span class="timestamp">{{data.structure.queue[3] | queueHandler}}%</span>
+                <button mat-button (click)="claimTroop(3)" class="claim" *ngIf="(data.structure.queue[3] | queueHandler) == 100">Claim Troop</button>
             </div>
             <div class="empty" *ngIf="!data.structure.queue[3]">EMPTY</div>
         </div>
@@ -33,12 +37,13 @@
             <div class="queued" *ngIf="data.structure.queue[4]">
                 <span class="type">{{data.structure.queue[4].type}}</span>
                 <span class="timestamp">{{data.structure.queue[4] | queueHandler}}%</span>
+                <button mat-button (click)="claimTroop(4)" class="claim" *ngIf="(data.structure.queue[4] | queueHandler) == 100">Claim Troop</button>
             </div>
             <div class="empty" *ngIf="!data.structure.queue[4]">EMPTY</div>
         </div>
     </div>
     <div class="options">
-        <app-structure-dropdown [type]="data.structure.type"></app-structure-dropdown>
-        <button mat-button class="addToQueue">Add to queue</button>
+        <app-structure-dropdown (troopSelection)="updateSelectedTroop($event)" [type]="data.structure.type"></app-structure-dropdown>
+        <button mat-button class="addToQueue" [disabled]="queueFull() && selectedTroop" (click)="addToQueue()">Add to queue</button>
     </div>
 </div>

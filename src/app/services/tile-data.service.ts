@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { LandDiscovery } from './ethers.service';
+import { QueueItem } from './queue.service';
 
 export interface Tile { // data in the tile
   minerals: number,
@@ -18,6 +19,7 @@ export interface Structure {
   position: number;
   sid: string;
   level: number;
+  queue: QueueItem[];
 }
 
 @Injectable()
@@ -93,15 +95,28 @@ export class TileDataService {
                         .valueChanges();
   }
 
-  async updateTileBuild(uri: string, sid:string, id:string, level:number){
+  prepareStructureUpdate(data: any) {
+
+  }
+
+  updateStructure(uri: string, sid: string, data: any) {
+    const cleanedURI = this.cleanURI(uri);
+    return this.firestore.collection('tiles')
+                          .doc(cleanedURI)
+                          .collection('structures')
+                          .doc(sid)
+                          .update(data)
+  }
+
+  updateTileBuild(uri: string, sid:string, id:string, level:number){
     const cleanedURI = this.cleanURI(uri);
     return this.firestore.collection('tiles')
                          .doc(cleanedURI)
                          .collection('structures')
                          .doc(sid).update({"id":id, "level":level})
-
   }
-  async upgradeTileBuild(uri:string, sid:string, level:number){
+
+  upgradeTileBuild(uri:string, sid:string, level:number){
     const cleanedURI = this.cleanURI(uri);
     const newLevel = level + 1
     return this.firestore.collection('tiles')

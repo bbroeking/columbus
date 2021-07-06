@@ -42,6 +42,7 @@ export class ReportDetailsComponent implements OnInit {
   openDialog(structure: Structure) {
     const dialogRef = this.dialog.open(StructureDialogComponent, {
       data: {
+        tileId: this.report,
         structure: structure 
       }
     });

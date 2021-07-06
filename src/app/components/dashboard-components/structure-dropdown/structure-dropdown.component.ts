@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {BARRACKS, BUILDINGS} from '../../../constants/buildings';
 import * as _ from 'underscore';
 // import { FormControl } from '@angular/forms';
@@ -10,17 +10,19 @@ import * as _ from 'underscore';
 })
 export class StructureDropdownComponent implements OnInit {
   @Input() type: string
+  @Output() troopSelection = new EventEmitter<string>();
+
   options: string[];
   selectedValue: string;
-
-  // opts = new FormControl();
   constructor() { }
 
   ngOnInit(): void {
     let structure = BUILDINGS[this.type];
     if (structure)
       this.options = _.keys(structure.options);
-      console.log(this.options)
   }
 
+  emitSelection(value: string) {
+    this.troopSelection.emit(value);
+  }
 }

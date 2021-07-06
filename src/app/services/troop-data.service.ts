@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { MetamaskService } from './metamask.service';
+import { QueueItem } from './queue.service';
 
 export interface Troop {
   name: string,
@@ -18,10 +20,24 @@ export enum Troops {
 })
 export class TroopDataService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(
+    private firestore: AngularFirestore,
+    private metmaskService: MetamaskService) { }
 
   async getTroopsDocRef(troopId: string): Promise<AngularFirestoreDocument<Troop> | undefined> {
     return this.firestore.doc<Troop>(`troops/${troopId}`);
+  }
+
+  addToReserves(queueItems: QueueItem[]) {
+    const account = this.metmaskService.account.value;
+    const queueItem = queueItems[0];
+    this.firestore.collection('troops')
+                  .doc()
+                  .set({
+                    name: "somename",
+                    type: queueItem.type,
+                    uid: account
+                  })
   }
 
   getTroopsByUser(uid: string): Observable<Troop[]> {
