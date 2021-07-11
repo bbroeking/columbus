@@ -16,6 +16,13 @@ export interface Structure {
     id: string;
     buildResources: Object,
     options: Object,
+    buildTime: number
+}
+
+export enum StructureType {
+    BARRACKS,
+    GROUND_MECH_PRODUCTION,
+    AIR_MECH_PRODUCTION
 }
 
 export const BUILDINGS: {[key: string]: Structure} = {
@@ -30,7 +37,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
         'options': {
             [MARINE]: TROOPS[MARINE],
             [MARAUDER]: TROOPS[MARAUDER],
-        }
+        },
+        'buildTime': 100
     },
     [GROUND_MECH_PRODUCTION]: {
         'id': GROUND_MECH_PRODUCTION,
@@ -40,7 +48,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {}
+        'options': {},
+        'buildTime': 10000000
     },
     [AIR_MECH_PRODUCTION]: {
         'id': AIR_MECH_PRODUCTION,
@@ -50,7 +59,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {}
+        'options': {},
+        'buildTime': 10000000
     },
     [BIO_RESEARCH]: {
         'id': BIO_RESEARCH,
@@ -60,7 +70,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {}
+        'options': {},
+        'buildTime': 1000
     },
     [MECH_RESEARCH]: {
         'id': MECH_RESEARCH,
@@ -70,7 +81,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {}
+        'options': {},
+        'buildTime': 1000
     },
     [MINERALS_REFINERY]: {
         'id': MINERALS_REFINERY,
@@ -80,7 +92,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {}
+        'options': {},
+        'buildTime': 1000
     },
     [ENERGY_REFINERY]: {
         'id': ENERGY_REFINERY,
@@ -90,6 +103,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {}
+        'options': {},
+        'buildTime': 1000
     }
 };

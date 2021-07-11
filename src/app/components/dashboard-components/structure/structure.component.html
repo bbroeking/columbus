@@ -1,8 +1,25 @@
-<div class="dls-menu-item">
-    <button mat-stroked-button color="success" (click)="onPress()">Position {{structure.position}}</button>
+<div class="built" *ngIf="structure.built">
+    <div class="dls-menu-item">
+        <button mat-stroked-button color="success" (click)="onToggle()">{{structure.type}}</button>
+    </div>
+    
+    <div id="comp-render" *ngIf="display">
+        <app-structure-details [structure]="structure" [selectedTile]="selectedTile"></app-structure-details>
+    </div>    
 </div>
-
-<div id="comp-render" *ngIf="display">
-    <app-structure-details [structure]="structure" [selectedTile]="selectedTile"></app-structure-details>
+<div class="build" *ngIf="!structure.built">
+    <div class="queued" *ngIf="structure.queued">
+        <button mat-button (click)="claimStructure()" class="claim" *ngIf="(structure.queued | queueHandler) == 100">Claim Structure</button>
+        <span>queued</span>
+    </div>
+    <div class="empty-slot" *ngIf="!structure.queued">
+        <div class="dls-menu-item">
+            <button mat-stroked-button color="success" (click)="onToggle()">Build</button>
+        </div>
+        
+        <div id="comp-render" *ngIf="display">
+            <app-build-structure-dialog [structure]="structure" [selectedTile]="selectedTile"></app-build-structure-dialog>
+        </div>    
+    </div>
 </div>
 

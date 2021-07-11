@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BUILDINGS, Structure, StructureType } from '../constants/buildings';
 import { TROOPS, TROOP_MODEL } from '../constants/troops';
 
 export interface QueueItem {
@@ -14,6 +15,22 @@ export interface QueueItem {
 export class QueueService {
 
   constructor() { }
+
+  prepareStructureItem(selectedStructure: StructureType) {
+    const structure = selectedStructure.toString();
+    let build: Structure = BUILDINGS[structure];
+    let buildTime: number = build.buildTime;
+    let currentTime: number = Date.now();
+
+    const newQueueItem = {
+      type: selectedStructure.toString(),
+      startTime: currentTime,
+      endTime: currentTime + buildTime,
+      buildTime: buildTime
+    }
+
+    return newQueueItem;
+  }
 
   prepareBarracksItem(queue: QueueItem[], selectedTroop: string) {
     let build: TROOP_MODEL = TROOPS[selectedTroop];

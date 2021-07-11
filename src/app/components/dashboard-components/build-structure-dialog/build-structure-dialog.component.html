@@ -1,0 +1,12 @@
+<form>
+    <mat-form-field appearance="fill">
+      <mat-label>Options</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="opts">
+        <mat-option *ngFor="let opts of options" [value]="opts">
+          {{opts}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <button mat-button (click)="build()" class="queue-build">Build</button>

@@ -61,6 +61,7 @@ import { ConflictResolvedComponent } from './components/war-room-components/conf
 import { StructureDialogComponent } from './components/dashboard-components/structure-dialog/structure-dialog.component';
 import { QueueHandlerPipe } from './components/dashboard-components/queue-handler.pipe';
 import { StructureDropdownComponent } from './components/dashboard-components/structure-dropdown/structure-dropdown.component';
+import { BuildStructureDialogComponent } from './components/dashboard-components/build-structure-dialog/build-structure-dialog.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -105,6 +106,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     ConflictResolvedComponent,
     QueueHandlerPipe,
     StructureDropdownComponent,
+    BuildStructureDialogComponent,
   ],
   imports: [
     BrowserModule,

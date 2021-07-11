@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { QueueItem } from 'src/app/services/queue.service';
 
 import { StructureComponent } from './structure.component';
 
@@ -16,7 +17,9 @@ describe('StructureComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StructureComponent);
     component = fixture.componentInstance;
-    component.structure = { position: 1 , sid: "xxxxx", id: 'xxxxx', level: 1}
+    component.structure = { 
+      position: 1 , sid: "xxxxx", queued: [] as unknown as QueueItem,
+      id: 'xxxxx', level: 1, built: true, queue: [], type: 'barracks'}
     fixture.detectChanges();
   });
 

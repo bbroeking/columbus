@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { StructureType } from '../constants/buildings';
 import { Coordinate } from '../models/coordinate.model';
 import { LandDiscovery } from './ethers.service';
 import { QueueItem } from './queue.service';
@@ -19,10 +20,12 @@ export interface Tile { // data in the tile
 export interface Structure {
   id: string;
   position: number;
+  queued: QueueItem;
   sid: string;
   level: number;
   built: boolean;
   queue: QueueItem[];
+  type: string;
 }
 
 @Injectable()
@@ -47,11 +50,11 @@ export class TileDataService {
         minerals: 200,
         energy: 100,
       });
-      const strucutresRef = tileRef.collection('structures');
-      strucutresRef.add({position: 0})
-      strucutresRef.add({position: 1})
-      strucutresRef.add({position: 2})
-      strucutresRef.add({position: 3})
+    const strucutresRef = tileRef.collection('structures');
+    strucutresRef.add({position: 0, built: false})
+    strucutresRef.add({position: 1, built: false})
+    strucutresRef.add({position: 2, built: false})
+    strucutresRef.add({position: 3, built: false})
   }
 
   async updateTile(uri: string, resources: Partial<Tile>): Promise<void> {
@@ -95,11 +98,7 @@ export class TileDataService {
   getTileStructuresAsObservable(uri: string): Observable<Structure[]> {
     const cleanedURI = this.cleanURI(uri);
     return this.firestore.collection<Structure>(`tiles/${cleanedURI}/structures`, ref => ref.orderBy('position'))
-                        .valueChanges();
-  }
-
-  prepareStructureUpdate(data: any) {
-
+                        .valueChanges({idField: 'sid'});
   }
 
   updateStructure(uri: string, sid: string, data: any) {
@@ -111,20 +110,34 @@ export class TileDataService {
                           .update(data)
   }
 
+  queueBuildStructure(uri:string, sid:string, queueItem: QueueItem) {
+    const data = {
+      queued: queueItem
+    }
+    return this.updateStructure(uri, sid, data);
+  }
+
+  buildStructure(uri: string, sid: string, type: StructureType){
+    const data = {
+      'built': true,
+      'type': type.toString(),
+      'level': 1
+    }
+    return this.updateStructure(uri, sid, data);
+  }
+
   updateTileBuild(uri: string, sid:string, id:string, level:number){
-    const cleanedURI = this.cleanURI(uri);
-    return this.firestore.collection('tiles')
-                         .doc(cleanedURI)
-                         .collection('structures')
-                         .doc(sid).update({"id":id, "level":level})
+    const data = {
+      'id': id,
+      'level': level
+    };
+    return this.updateStructure(uri, sid, data);
   }
 
   upgradeTileBuild(uri:string, sid:string, level:number){
-    const cleanedURI = this.cleanURI(uri);
-    const newLevel = level + 1
-    return this.firestore.collection('tiles')
-                         .doc(cleanedURI)
-                         .collection('structures')
-                         .doc(sid).update({"level":newLevel})
+    const data = {
+      'level': level + 1
+    }
+    return this.updateStructure(uri, sid, data);
   }
 }
