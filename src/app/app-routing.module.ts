@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { MetamaskGuard } from './metamask.guard';
+
 import { DashboardComponent } from './components/dashboard-components/dashboard/dashboard.component';
 import { ExplorerComponent } from './components/dashboard-components/explorer/explorer.component';
 import { MapComponent } from './components/dashboard-components/map/map.component';
@@ -10,7 +12,7 @@ import { LoginComponent } from './components/login-components/login/login.compon
 import { ReportsComponent } from './components/report-components/reports/reports.component';
 import { WarRoomComponent } from './components/war-room-components/war-room/war-room.component';
 import { DeclareWarComponent } from './components/war-room-components/declare-war/declare-war.component';
-import { MetamaskGuard } from './metamask.guard';
+import { GarrisonComponent } from './components/war-room-components/garrison/garrison.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -20,6 +22,7 @@ const routes: Routes = [
   { path: 'discover', component: DiscoverComponent, canActivate: [MetamaskGuard, AuthGuard] },
   { path: 'war-room/:conflictId', component: WarRoomComponent, canActivate: [MetamaskGuard, AuthGuard] },
   { path: 'declare-war', component: DeclareWarComponent, canActivate: [MetamaskGuard, AuthGuard]},
+  { path: 'garrison', component: GarrisonComponent, canActivate: [MetamaskGuard, AuthGuard]},
   // throwaway routes
   { path: 'explorer', component: ExplorerComponent },
   { path: 'map', component: MapComponent, canActivate: [AuthGuard] },

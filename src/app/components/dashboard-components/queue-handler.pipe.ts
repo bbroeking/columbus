@@ -13,9 +13,11 @@ export class QueueHandlerPipe implements PipeTransform {
   transform(value: QueueItem, ...args: unknown[]) {
     const now = Date.now();
     const percentage = (now - value.startTime) / (value.endTime - value.startTime);
-    if (percentage > 100)
-      return 100
-    return Math.round(percentage * 100)
+    if (percentage < 0)
+      return 0;
+    if (percentage > 1)
+      return 100;
+    return Math.round(percentage * 100);
   }
 
 }

@@ -44,6 +44,6 @@
     </div>
     <div class="options">
         <app-structure-dropdown (troopSelection)="updateSelectedTroop($event)" [type]="data.structure.type"></app-structure-dropdown>
-        <button mat-button class="addToQueue" [disabled]="queueFull() && selectedTroop" (click)="addToQueue()">Add to queue</button>
+        <button mat-button class="addToQueue" [disabled]="queueFull() || selectedTroop == ''" (click)="addToQueue()">Add to queue</button>
     </div>
 </div>

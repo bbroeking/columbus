@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Coordinate } from '../models/coordinate.model';
 import { LandDiscovery } from './ethers.service';
 import { QueueItem } from './queue.service';
 
@@ -11,7 +12,8 @@ export interface Tile { // data in the tile
   conflictId: string,
   ownerId: string,
   id: string,
-  tokenId: number
+  tokenId: number,
+  coordinate: Coordinate,
 }
 
 export interface Structure {
@@ -19,6 +21,7 @@ export interface Structure {
   position: number;
   sid: string;
   level: number;
+  built: boolean;
   queue: QueueItem[];
 }
 

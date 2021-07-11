@@ -4,6 +4,8 @@ import { Conflict, ConflictDataService } from 'src/app/services/conflict-data.se
 import { Structure, Tile, TileDataService } from 'src/app/services/tile-data.service';
 import {MatDialog} from '@angular/material/dialog';
 import { StructureDialogComponent } from '../../dashboard-components/structure-dialog/structure-dialog.component';
+import { Coordinate } from 'src/app/models/coordinate.model';
+import { HexagonService } from 'src/app/services/hexagon.service';
 
 @Component({
   selector: 'app-report-details',
@@ -14,6 +16,7 @@ export class ReportDetailsComponent implements OnInit {
   @Input() report: string;
   constructor(private tileService: TileDataService,
               private conflictService: ConflictDataService,
+              private hexagonService: HexagonService,
               public dialog: MatDialog) { }
 
   tile$: Observable<Tile | undefined> | undefined;
@@ -35,8 +38,14 @@ export class ReportDetailsComponent implements OnInit {
     this.tileSubscription.unsubscribe();
   }
 
-  public generateLink(conflictId: string) {
+  generateLink(conflictId: string) {
     return `/war-room/${conflictId}`;
+  }
+
+  generateDashboardLink(x: number, y: number, z: number) {
+    const coords = new Coordinate(x, y, z);
+    const id = this.hexagonService.getIdFromCoordinates(coords);
+    return `/dashboard/${id}`;
   }
 
   openDialog(structure: Structure) {

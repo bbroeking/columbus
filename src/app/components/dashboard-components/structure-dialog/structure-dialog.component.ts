@@ -28,6 +28,7 @@ export class StructureDialogComponent implements OnInit {
     this.tileId = this.data.tileId;
     this.structureId = this.structure.sid;
     this.queue = this.structure.queue;
+    this.selectedTroop = '';
   }
 
   addToQueue(){

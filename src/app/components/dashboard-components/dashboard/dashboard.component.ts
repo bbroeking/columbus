@@ -8,10 +8,10 @@ import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.compo
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
+  @Input() hoverTileComponent: HoverTileMenuComponent;
 
   mapId: number;
   selectedTile: number;
-  @Input() hoverTileComponent: HoverTileMenuComponent;
   
   constructor(private route: ActivatedRoute) { }
 

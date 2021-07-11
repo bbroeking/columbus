@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
+import { MetamaskService } from 'src/app/services/metamask.service';
 import { Troop, TroopDataService } from 'src/app/services/troop-data.service';
 
 @Component({
@@ -15,14 +16,14 @@ export class GarrisonComponent implements OnInit {
   uid: string | undefined;
   troops$: Observable<Troop[]>;
 
-  constructor(private authService: AuthService,
+  constructor(private metamaskService: MetamaskService,
               private troopDataService: TroopDataService,
               private battlefieldDataService: BattlefieldDataService) { }
 
   async ngOnInit() {
-    this.uid = await this.authService.user?.uid
-    if (this.uid)
-      this.troops$ = this.troopDataService.getTroopsByUser(this.uid);
+    const account = this.metamaskService.account.value;
+    if (account)
+      this.troops$ = this.troopDataService.getTroopsByUser(account);
   }
 
   ngOnDestroy() {

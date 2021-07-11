@@ -1,5 +1,5 @@
 import {ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS} from "./resources";
-import {MARINE, TROOPS} from './troops';
+import {MARAUDER, MARINE, TROOPS} from './troops';
 
 // Army
 export const BARRACKS = 'barracks';
@@ -28,7 +28,8 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [RARE_ENERGY]: 0
         },
         'options': {
-            [MARINE]: TROOPS[MARINE]
+            [MARINE]: TROOPS[MARINE],
+            [MARAUDER]: TROOPS[MARAUDER],
         }
     },
     [GROUND_MECH_PRODUCTION]: {
