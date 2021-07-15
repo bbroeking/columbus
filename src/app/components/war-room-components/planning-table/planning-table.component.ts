@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Troop } from 'src/app/constants/troops';
 import { AuthService } from 'src/app/services/auth.service';
 import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
 import { ConflictDataService } from 'src/app/services/conflict-data.service';
 import { EthersService } from 'src/app/services/ethers.service';
 import { MetamaskService } from 'src/app/services/metamask.service';
-import { Troop } from 'src/app/services/troop-data.service';
 import * as _ from 'underscore';
 
 @Component({

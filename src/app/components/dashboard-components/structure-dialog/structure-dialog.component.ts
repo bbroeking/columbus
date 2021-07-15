@@ -21,7 +21,7 @@ export class StructureDialogComponent implements OnInit {
     private tileDataService: TileDataService,
     private queueService: QueueService,
     private troopDataService: TroopDataService,
-    @Inject(MAT_DIALOG_DATA) public data:any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
     this.structure = this.data.structure;

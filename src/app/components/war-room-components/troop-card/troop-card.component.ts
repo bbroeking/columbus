@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Troop } from 'src/app/services/troop-data.service';
+import { Troop } from 'src/app/constants/troops';
 
 @Component({
   selector: 'app-troop-card',

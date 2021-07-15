@@ -38,9 +38,9 @@ export enum Attributes {
     HP = 'HP',
     ATTACK = "Attack",
     DEFENSE = "Defense",
-    MINDAMAGE = "Min Hit",
-    MAXDAMAGE = "Max Hit",
-    SKEWDAMAGE = "Skew Hit"
+    MINDAMAGE = "MinHit",
+    MAXDAMAGE = "MaxHit",
+    SKEWDAMAGE = "SkewHit"
 }
 
 export const MARINE = 'marine';

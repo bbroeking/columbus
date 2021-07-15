@@ -1,19 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Troop } from '../constants/troops';
 import { MetamaskService } from './metamask.service';
 import { QueueItem } from './queue.service';
-
-export interface Troop {
-  name: string,
-  type: string,
-  uid: string,
-  docid: string,
-}
-
-export enum Troops {
-  
-}
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +31,7 @@ export class TroopDataService {
   }
 
   getTroopsByUser(uid: string): Observable<Troop[]> {
-    return this.firestore.collection<Troop>("troops", ref => ref.where('uid', '==', uid)).valueChanges({idField: 'docid'});
+    return this.firestore.collection<Troop>("troops", ref => ref.where('uid', '==', uid))
+                .valueChanges({idField: 'docid'});
   }
 }

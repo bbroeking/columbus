@@ -1,26 +1,39 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { EthersService } from 'src/app/services/ethers.service';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';
+import { BuildStructureDialogComponent } from '../build-structure-dialog/build-structure-dialog.component';
+import { StructureDialogComponent } from '../structure-dialog/structure-dialog.component';
 
 @Component({
   selector: 'app-structure',
   templateUrl: './structure.component.html',
   styleUrls: ['./structure.component.less']
 })
-export class StructureComponent implements OnInit {
+export class StructureComponent {
   @Input() structure: Structure;
   @Input() selectedTile: number;
-  display: boolean;
 
   constructor(private tileService: TileDataService,
-    private ethersService: EthersService) { }
+    private ethersService: EthersService,
+    public dialog: MatDialog) { }
   
-  ngOnInit(): void {
-    this.display = false;
+  openDialog(structure: Structure) {
+    const dialogRef = this.dialog.open(StructureDialogComponent, {
+      data: {
+        tileId: this.selectedTile,
+        structure: structure 
+      }
+    });
   }
 
-  onToggle() {
-    this.display = !this.display;
+  openBuildDialog(structure: Structure) {
+    const dialogRef = this.dialog.open(BuildStructureDialogComponent, {
+      data: {
+        structure: structure,
+        selectedTile: this.selectedTile
+      }
+    });
   }
 
   async claimStructure() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, DocumentData, DocumentReference, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Troop } from './troop-data.service';
+import { Troop } from '../constants/troops';
 
 export interface Conflict {
   tileId: string,

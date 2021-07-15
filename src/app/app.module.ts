@@ -7,6 +7,7 @@ import { InitalizeService } from './services/initalize.service';
 import { EthersService } from './services/ethers.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
+import {MatCardModule} from '@angular/material/card';
 
 import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button'
@@ -19,6 +20,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
 // import {FormControl} from '@angular/forms';
 
 // Firebase
@@ -43,7 +45,6 @@ import { DashboardComponent } from './components/dashboard-components/dashboard/
 import { ParcelTileComponent } from './components/dashboard-components/parcel-tile/parcel-tile.component';
 import { HoverTileMenuComponent } from './components/dashboard-components/hover-tile-menu/hover-tile-menu.component';
 import { StructureComponent } from './components/dashboard-components/structure/structure.component';
-import { StructureDetailsComponent } from './components/dashboard-components/structure-details/structure-details.component';
 import { LoginComponent } from './components/login-components/login/login.component';
 import { DiscoverComponent } from './components/discover-components/discover/discover.component';
 import { DiscoverParcelComponent } from './components/discover-components/discover-parcel/discover-parcel.component';
@@ -62,6 +63,7 @@ import { StructureDialogComponent } from './components/dashboard-components/stru
 import { QueueHandlerPipe } from './components/dashboard-components/queue-handler.pipe';
 import { StructureDropdownComponent } from './components/dashboard-components/structure-dropdown/structure-dropdown.component';
 import { BuildStructureDialogComponent } from './components/dashboard-components/build-structure-dialog/build-structure-dialog.component';
+import { CommandTableComponent } from './components/command-components/command-table/command-table.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -85,7 +87,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     ParcelTileComponent,
     HoverTileMenuComponent,
     StructureComponent,
-    StructureDetailsComponent,
     LoginComponent,
     DiscoverComponent,
     DiscoverParcelComponent,
@@ -107,6 +108,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     QueueHandlerPipe,
     StructureDropdownComponent,
     BuildStructureDialogComponent,
+    CommandTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,6 +130,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     MatFormFieldModule,
     FormsModule,
     MatIconModule,
+    MatGridListModule,
+    MatCardModule,
     // FormControl
   ],
   providers: [{ provide: Window,

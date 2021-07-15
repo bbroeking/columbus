@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Troop } from '../constants/troops';
 import { CloudFunctionsService } from './cloud-functions.service';
 import { ConflictDataService } from './conflict-data.service';
-import { Troop } from './troop-data.service';
 
 @Injectable({
   providedIn: 'root'
