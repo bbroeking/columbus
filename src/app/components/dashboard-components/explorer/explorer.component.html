@@ -6,3 +6,5 @@
 <button (click)="ethersService.getTotalSupply()">getTotalSupply</button>
 <button (click)="ethersService.getMetadataURI(1)">getMetadataURI</button>
 <button (click)="logData()">Log Data</button>
+
+<div class="data">{{data | json}}</div>

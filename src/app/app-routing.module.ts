@@ -20,9 +20,10 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent, canActivate: [MetamaskGuard, AuthGuard] },
   { path: 'dashboard/:mapId', component: DashboardComponent, canActivate: [MetamaskGuard, AuthGuard] },
   { path: 'discover', component: DiscoverComponent, canActivate: [MetamaskGuard, AuthGuard] },
-  { path: 'war-room/:conflictId', component: WarRoomComponent, canActivate: [MetamaskGuard, AuthGuard] },
   { path: 'declare-war', component: DeclareWarComponent, canActivate: [MetamaskGuard, AuthGuard]},
   { path: 'garrison', component: CommandTableComponent, canActivate: [MetamaskGuard, AuthGuard]},
+  { path: 'war-room/:conflictId', component: WarRoomComponent, canActivate: [MetamaskGuard, AuthGuard] },
+
   // throwaway routes
   { path: 'explorer', component: ExplorerComponent },
   { path: 'map', component: MapComponent, canActivate: [AuthGuard] },

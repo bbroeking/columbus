@@ -6,9 +6,13 @@
         <li class="nav-item" [routerLink]="['/garrison']">Garrison</li>
     </ul>
     <ul class="nav navbar-account">
+        <li class="nav-item"><div class="icon-mineral"></div></li>
+        <li class="nav-item minerals">{{ (account$ | async)?.minerals }}</li>
+        <li class="nav-item"><div class="icon-energy"></div></li>
+        <li class="nav-item energy">{{ (account$ | async)?.energy }}</li>
         <li class="nav-item" *ngIf="account">
-            Connected to
-            <span class="address">{{account}}</span></li>
+            Connected to <span class="address">{{account}}</span>
+        </li>
         <!-- <li class="nav-item" *ngIf="account" (click)="metamaskService.disconnectMetaMaskAccount()">Disconnect</li> --> 
         <li class="nav-item" *ngIf="!account" [routerLink]="['/login']">Connect</li>
     </ul>

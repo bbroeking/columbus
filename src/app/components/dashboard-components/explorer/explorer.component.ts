@@ -31,26 +31,16 @@ export class ExplorerComponent implements OnInit {
               private hexagonService: HexagonService,
               private cloudFunctions: CloudFunctionsService){
                 this.ethersService = ethers;
-                this.data = this.cloudFunctions.buildStructure({
-                  'account': 'RZLTPoHfBOZII7RLVBvEgG1FTsp2',
-                  'tile': '1923048b-b05e-4617-8498-553f9c931a96',
-                  'building': 'minerals-refinery',
-                });
+                // this.data = this.cloudFunctions.buildStructure({
+                //   'account': 'RZLTPoHfBOZII7RLVBvEgG1FTsp2',
+                //   'tile': '1923048b-b05e-4617-8498-553f9c931a96',
+                //   'building': 'minerals-refinery',
+                // });
               }
 
   async ngOnInit() {
-    this.numTokens = await this.ethersService.getBalanceOf();
-    // this.tokenMetadata = await this.ethersService.getTokenOfOwnerByIndex();
-    let supply = await this.ethersService.getTotalSupply().then(res => res);
-    let coordinates: Coordinate = await this.hexagonService.getCoordinatesFromId(supply);
-    this.neighbors = this.hexagonService.getNeighbors(coordinates);
-    this.hexagonService.getCoordinatesFromId(13);
+    this.data = await this.cloudFunctions.updateProductionTiles({'id': '0x0d641a2b926a828cabb27d8f01325ad794cf3aae'});
   }
-
-  ngOnDestroy() {
-    // this.metadataSubscription.unsubscribe();
-  }
-
 
   logData() {
     console.log(this.data);

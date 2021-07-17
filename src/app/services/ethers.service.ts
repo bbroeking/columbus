@@ -116,13 +116,18 @@ export class EthersService {
     return totalSupply.toNumber();
   }
 
-  getMetadataURI(tokenId: number): Promise<string> {
-    return this.unsignedContract.tokenURI(tokenId + 1)
+  async getMetadataURI(tokenId: number): Promise<string> {
+    const fullURI = await this.unsignedContract.tokenURI(tokenId + 1)
+    return this.cleanURI(fullURI);
   }
+
+  cleanURI(fullURI: string): string {
+    let uriComponents = fullURI.split("/");
+    return uriComponents[uriComponents.length - 1];  
+  }
+
 
   getMetadataURIWithBigNumber(tokenId: BigNumber): Promise<string> {
     return this.unsignedContract.tokenURI(tokenId);
   }
-
-
 }
