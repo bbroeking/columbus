@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Attributes, Troop, TROOP_MODEL } from 'src/app/constants/troops';
@@ -14,7 +15,7 @@ import { TROOPS } from '../../../constants/troops';
 export class CommandTableComponent implements OnInit {  
   uid: string | undefined;
   troops$: Observable<Troop[]>;
-  attributes: Attributes[];
+  promote: Troop[];
 
   constructor(private metamaskService: MetamaskService,
               private troopDataService: TroopDataService,
@@ -25,7 +26,7 @@ export class CommandTableComponent implements OnInit {
     if (account)
       this.troops$ = this.troopDataService.getTroopsByUser(account);
 
-    this.attributes = Object.values(Attributes);
+    this.promote = [];
   }
 
   ngOnDestroy() {
@@ -35,7 +36,27 @@ export class CommandTableComponent implements OnInit {
     return this.battlefieldDataService.isInBattlefield(troop);
   }
 
-  getTroopModel(type: string): TROOP_MODEL[] {
-    return [TROOPS[type]];
+  canPromote(): boolean {
+    return this.troopDataService.canPromote(this.promote);
+  }
+
+  promoteTroop(): void {
+    this.troopDataService.promoteTroop(this.promote);
+    this.promote = [];
+  }
+
+  isPromoteFull(): boolean {
+    return this.promote.length == 3;
+  }
+  
+  drop(event: CdkDragDrop<Troop[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 }

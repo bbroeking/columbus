@@ -1,31 +1,35 @@
 .command-table {
-
-    padding-top: 3rem;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    height: calc(100% - 63px);
 
-    .mat-row {
-        height: auto;
+    .command-troops {
+        padding-top: 3rem;
+        flex: auto;
+        overflow-y: scroll;
     }
 
-    .mat-header-cell {
-        padding: 8px 8px 8px 8px;
+    .promote-troop {
+        display: flex;
+        flex-direction: column;
+        background-color: brown;
+        width: 25%;
+        flex: 0 0 auto;
+    
+        .title-promote {
+            padding-top: 20px;
+            font-size: 1.2em;
+            align-self: center;
+        }
+    
+        .slots-parent {
+            height: 90%;
+            overflow-y: scroll;
+            border: 1px solid #98fc03;
+            margin: 10px;
+        }
+    
+        .promote {
+            margin-bottom: 20px;
+        }
     }
-
-    .mat-cell {
-        text-align: center;
-    }
-
-    > mat-card {
-        width: 300px;
-    }
-}
-
-td.mat-cell:first-of-type {
-    padding-left: 0;
-}
-
-td.mat-cell:last-of-type {
-    padding-right: 0;
 }

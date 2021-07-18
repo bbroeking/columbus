@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Troop } from '../constants/troops';
 import { MetamaskService } from './metamask.service';
 import { QueueItem } from './queue.service';
+import * as _ from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,42 @@ export class TroopDataService {
                   .set({
                     name: "somename",
                     type: queueItem.type,
+                    rank: 1,
                     uid: account
                   })
   }
 
   getTroopsByUser(uid: string): Observable<Troop[]> {
     return this.firestore.collection<Troop>("troops", ref => ref.where('uid', '==', uid))
-                .valueChanges({idField: 'docid'});
+                .valueChanges({idField: 'id'});
+  }
+
+  canPromote(troops: Troop[]): boolean {
+    if(troops.length == 0) return false;
+    const isMax = _.any(troops, res => res.rank > 2);
+    if (isMax) return false;
+    const rank = troops[0].rank;
+    const type = troops[0].type;
+    const isSameType = _.every(troops, res => res.type == type);
+    const isSameRank = _.every(troops, res => res.rank == rank)
+    return isSameRank && isSameType && troops.length == 3;
+  }
+
+  private getPromotion(troops: Troop[]): Partial<Troop> {
+    const account = this.metmaskService.account.value;
+    const troop: Partial<Troop> = {
+      name: "Next Rank",
+      type: troops[0].type,
+      uid: account,
+      rank: troops[0].rank + 1
+    }
+    return troop;
+  }
+
+  promoteTroop(troops: Troop[]) {
+    troops.forEach((res) => this.firestore.collection<Troop>("troops").doc(res.id).delete())
+    this.firestore.collection('troops')
+                  .doc()
+                  .set(this.getPromotion(troops))
   }
 }

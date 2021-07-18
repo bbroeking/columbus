@@ -2,15 +2,15 @@
     <div class="attacking">
         <div class="toSet" *ngIf="!isAttacking">
             <div class="attacking-row">
-                <div *ngFor="let troop of attacking$ | async" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troop]="troop"></app-troop-card>
+                <div *ngFor="let troop of attacking$ | async as attacking" class="troop" (click)="remove(troop)">
+                    <app-troop-card [troops]="attacking"></app-troop-card>
                 </div>
             </div>
         </div>    
         <div class="isSet" *ngIf="isAttacking">
             <div class="attacking-row">
                 <div *ngFor="let troop of attacking" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troop]="troop"></app-troop-card>
+                    <app-troop-card [troops]="attacking"></app-troop-card>
                 </div>
             </div>
         </div>    
@@ -18,15 +18,15 @@
     <div class="defending">
         <div class="toSet" *ngIf="!isDefending">
             <div class="attacking-row">
-                <div *ngFor="let troop of defending$ | async" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troop]="troop"></app-troop-card>
+                <div *ngFor="let troop of defending$ | async as defending" class="troop" (click)="remove(troop)">
+                    <app-troop-card [troops]="defending"></app-troop-card>
                 </div>
             </div>
         </div>    
         <div class="isSet" *ngIf="isDefending">
             <div class="defending-row">
                 <div *ngFor="let troop of defending" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troop]="troop"></app-troop-card>
+                    <app-troop-card [troops]="defending"></app-troop-card>
                 </div>
             </div>
         </div>

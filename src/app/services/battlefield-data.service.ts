@@ -66,11 +66,11 @@ export class BattlefieldDataService {
   }
 
   troopInAttacking(troop: Troop){
-    return this.attacking.findIndex(i => i.docid == troop.docid);
+    return this.attacking.findIndex(i => i.id == troop.id);
   }
 
   troopInDefending(troop: Troop) {
-    return this.defending.findIndex(i => i.docid == troop.docid)
+    return this.defending.findIndex(i => i.id == troop.id)
   }
 
   isValidBattlefield(isAttacking: boolean){

@@ -1,9 +1,10 @@
 import { ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS } from "./resources";
 export interface Troop {
     name: string,
+    rank: number,
     type: string,
     uid: string,
-    docid: string,
+    id: string,
 }
 
 export interface COMBAT_TROOP {

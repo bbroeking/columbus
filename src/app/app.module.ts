@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 // import {FormControl} from '@angular/forms';
 
 // Firebase
@@ -55,7 +56,6 @@ import { ReportsComponent } from './components/report-components/reports/reports
 import { ReportDetailsComponent } from './components/report-components/report-details/report-details.component';
 import { PlanningTableComponent } from './components/war-room-components/planning-table/planning-table.component';
 import { ConflictFeedComponent } from './components/war-room-components/conflict-feed/conflict-feed.component';
-import { TroopCardComponent } from './components/war-room-components/troop-card/troop-card.component';
 import { ConflictRoundComponent } from './components/war-room-components/conflict-round/conflict-round.component';
 import { DeclareWarComponent } from './components/war-room-components/declare-war/declare-war.component';
 import { ConflictResolvedComponent } from './components/war-room-components/conflict-resolved/conflict-resolved.component';
@@ -64,6 +64,7 @@ import { QueueHandlerPipe } from './components/dashboard-components/queue-handle
 import { StructureDropdownComponent } from './components/dashboard-components/structure-dropdown/structure-dropdown.component';
 import { BuildStructureDialogComponent } from './components/dashboard-components/build-structure-dialog/build-structure-dialog.component';
 import { CommandTableComponent } from './components/command-components/command-table/command-table.component';
+import { TroopCardComponent } from './components/command-components/troop-card/troop-card.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -101,7 +102,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     GarrisonComponent,
     PlanningTableComponent,
     ConflictFeedComponent,
-    TroopCardComponent,
     ConflictRoundComponent,
     DeclareWarComponent,
     ConflictResolvedComponent,
@@ -109,6 +109,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     StructureDropdownComponent,
     BuildStructureDialogComponent,
     CommandTableComponent,
+    TroopCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,6 +133,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    DragDropModule,
     // FormControl
   ],
   providers: [{ provide: Window,

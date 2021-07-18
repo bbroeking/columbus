@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Troop } from 'src/app/constants/troops';
+import { Attributes, Troop, TROOPS, TROOP_MODEL } from 'src/app/constants/troops';
 
 @Component({
   selector: 'app-troop-card',
@@ -7,11 +7,18 @@ import { Troop } from 'src/app/constants/troops';
   styleUrls: ['./troop-card.component.less']
 })
 export class TroopCardComponent implements OnInit {
-  @Input() troop: Troop;
-  
+  @Input() troops: Troop[];
+  attributes: Attributes[];
+
+
   constructor() { }
 
   ngOnInit(): void {
+    this.attributes = Object.values(Attributes);
   }
 
+
+  getTroopModel(type: string): TROOP_MODEL[] {
+    return [TROOPS[type]];
+  }
 }
