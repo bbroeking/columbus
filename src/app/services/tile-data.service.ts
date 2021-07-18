@@ -3,16 +3,23 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { StructureType } from '../constants/buildings';
 import { Coordinate } from '../models/coordinate.model';
+import { AccountData, AccountService } from './account.service';
 import { LandDiscovery } from './ethers.service';
 import { QueueItem } from './queue.service';
+import * as firebase from 'firebase/app';
+import { Timestamp } from '@firebase/firestore-types';
+import { MetamaskService } from './metamask.service';
 
 export interface Tile { // data in the tile
+  id: string,
+  ownerId: string,
   minerals: number,
   energy: number,
+  mineralRate: number,
+  energyRate: number,
+  lastCollected: Timestamp,
   inConflict: boolean,
   conflictId: string,
-  ownerId: string,
-  id: string,
   tokenId: number,
   coordinate: Coordinate,
 }
@@ -31,7 +38,10 @@ export interface Structure {
 @Injectable()
 export class TileDataService {
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private metamaskService: MetamaskService,
+    private accountService: AccountService) {}
 
   async getTileDocRef(uri: string): Promise<AngularFirestoreDocument<Tile> | undefined> {
     return this.firestore.doc<Tile>(`tiles/${uri}`);
@@ -108,6 +118,17 @@ export class TileDataService {
                           .collection('structures')
                           .doc(sid)
                           .update(data)
+  }
+
+  collectResources(uri: string, update: Partial<AccountData>) {
+    const account = this.metamaskService.account.getValue();
+    const cleanedURI = this.cleanURI(uri);
+    this.firestore.collection('tiles')
+                  .doc(cleanedURI)
+                  .update({
+                    lastCollected: firebase.default.firestore.FieldValue.serverTimestamp()
+                  });
+    this.accountService.updateAccountData(account, update);
   }
 
   queueBuildStructure(uri:string, sid:string, queueItem: QueueItem) {

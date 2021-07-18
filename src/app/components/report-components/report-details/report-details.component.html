@@ -14,13 +14,22 @@
                 <button mat-button [routerLink]="generateDashboardLink(tile.coordinate.x, tile.coordinate.y, tile.coordinate.z)">Go to</button>
             </div>
         </div>
-        <div class="store">
-            <div class="icon-mineral"></div>
-            <span class="mineral-value">{{tile.minerals}}</span>
-        </div>
-        <div class="store">
-            <div class="icon-energy"></div>
-            <span class="energy-value">{{tile.energy}}</span>
+        <div class="production">
+            <div class="store">
+                <span class="mineral-value">Stored: {{calculateStore(tile.mineralRate, tile.lastCollected)}}</span>
+                <div class="icon-mineral"></div>
+                <span class="collection-rate">Minerals per hour: {{tile.mineralRate}}</span>
+    
+            </div>
+            <div class="store">
+                <span class="energy-value">Stored: {{calculateStore(tile.energyRate, tile.lastCollected)}}</span>
+                <div class="icon-energy"></div>
+                <span class="collection-rate">Energy per hour: {{tile.energyRate}}</span>
+            </div>
+            <div class="last-collected">{{ tile.lastCollected?.toDate() }}</div>
+            <div class="collect-store">
+                <button mat-button (click)="collectStore(tile.mineralRate, tile.energyRate, tile.lastCollected)" class="collect">Collect</button>
+            </div>    
         </div>
     </div>
     

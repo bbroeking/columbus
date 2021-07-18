@@ -6,6 +6,8 @@ import {MatDialog} from '@angular/material/dialog';
 import { StructureDialogComponent } from '../../dashboard-components/structure-dialog/structure-dialog.component';
 import { Coordinate } from 'src/app/models/coordinate.model';
 import { HexagonService } from 'src/app/services/hexagon.service';
+import { Timestamp } from '@firebase/firestore-types';
+import { AccountData } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-report-details',
@@ -55,6 +57,23 @@ export class ReportDetailsComponent implements OnInit {
         structure: structure 
       }
     });
+  }
+
+  calculateStore(rate: number, lastCollected: Timestamp) {
+    if (!lastCollected) return 0;
+    const diff = Date.now() - lastCollected.toMillis();
+    const hours = diff / (1000 * 60 * 60);
+    return Math.floor(rate * hours);
+  }
+
+  collectStore(mRate:number, eRate: number, lastCollected: Timestamp) {
+    const mStore: number = this.calculateStore(mRate, lastCollected);
+    const eStore: number = this.calculateStore(eRate, lastCollected);
+    const acctData: Partial<AccountData> = {
+      'minerals': mStore,
+      'energy': eStore,
+    }
+    this.tileService.collectResources(this.report, acctData)
   }
 
 }

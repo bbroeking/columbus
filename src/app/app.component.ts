@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { AccountService, Player } from './services/account.service';
+import { AccountData, AccountService } from './services/account.service';
 import { EthersService } from './services/ethers.service';
 import { MetamaskService } from './services/metamask.service';
 
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   balance: string;
 
   numLands: string;
-  account$: Observable<Player | undefined>;
+  account$: Observable<AccountData | undefined>;
   accountSubscription: Subscription;
   constructor(
     public metamaskService: MetamaskService,

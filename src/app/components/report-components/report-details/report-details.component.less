@@ -26,20 +26,28 @@
                 justify-content: center;
             }
         }
-
-        .store {
+        
+        .production {
             display: flex;
-            .icon-mineral {
-                background-image: url(../../../../assets/mineral32.png);
-                height: 32px;
-                width: 32px;
+            flex-direction: column;
+            align-items: center;
+            .store {
+                display: flex;
+                .icon-mineral {
+                    background-image: url(../../../../assets/mineral32.png);
+                    height: 32px;
+                    width: 32px;
+                }
+    
+                .icon-energy {
+                    background-image: url(../../../../assets/energy32.png);
+                    height: 32px;
+                    width: 32px;
+                }
             }
-
-            .icon-energy {
-                background-image: url(../../../../assets/energy32.png);
-                height: 32px;
-                width: 32px;
-            }
+            .collect-store {
+                margin-top: 15px;
+            }   
         }
     }
 
@@ -74,7 +82,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                height: 50%;
+                height: 100%;
                 .troop {
                     display: flex;
                     flex-direction: column;
@@ -82,6 +90,10 @@
                     border: 2px solid chartreuse;
                     border-radius: 5px;
                     padding: 12px;
+                }
+                .defenders-not-set {
+                    align-self: center;
+                    justify-self: center;
                 }
             }
         }
