@@ -14,20 +14,9 @@ export class MapComponent implements OnInit {
   @Output() updateCurrentTile: EventEmitter<any> = new EventEmitter();
   @ViewChild(HoverTileMenuComponent) menu: HoverTileMenuComponent;
 
-  // neighbor Ids
-  northWestTile: string = "northWestTile";
-  northEastTile: string = "northEastTile";
-  eastTile: string = "eastTile";
-  westTile: string = "westTile";
-  southWestTile: string = "southWestTile";
-  southEastTile: string = "southEastTile";
-
-  public parcelNorthWesternTile: number | undefined;
-  public parcelNorthEasternTile: number | undefined;
-  public parcelEastTile: number | undefined;
-  public parcelWestTile: number | undefined;
-  public parcelSouthWesternTile: number | undefined;
-  public parcelSouthEasternTile: number | undefined;
+  // numSlots: boolean[] = Array(9).fill(false).map((x,i)=>x); // 2
+  // numSlots: boolean[] = Array(30).fill(false).map((x,i)=>x); // 3 -- we get 30 from 5 * num rows
+  numSlots: boolean[] = Array(49).fill(false).map((x, i) => x);
 
   mapCoordinateBase: Coordinate;
   neighbors: Map<string, Coordinate>;
@@ -36,6 +25,7 @@ export class MapComponent implements OnInit {
   constructor(private hexagonService: HexagonService) {}
 
   async ngOnInit(){
+    console.log(this.hexagonService.totalHexagonsAtRadius(4));
     this.update();
   }
 
@@ -50,16 +40,6 @@ export class MapComponent implements OnInit {
     this.neighbors.forEach((value: Coordinate, key: string) => {
       this.neighborsId.set(key, this.hexagonService.getIdFromCoordinates(value));
     })
-    this.getNeighborParcelIds();
-  }
-
-  getNeighborParcelIds() {
-    this.parcelNorthWesternTile = this.neighborsId.get(this.northWestTile);
-    this.parcelNorthEasternTile = this.neighborsId.get(this.northEastTile);
-    this.parcelEastTile = this.neighborsId.get(this.eastTile);
-    this.parcelWestTile = this.neighborsId.get(this.westTile);
-    this.parcelSouthEasternTile = this.neighborsId.get(this.southEastTile);
-    this.parcelSouthWesternTile = this.neighborsId.get(this.southWestTile);
   }
 
   openTooltip(e: MouseEvent) {

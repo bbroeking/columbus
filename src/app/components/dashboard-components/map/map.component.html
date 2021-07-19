@@ -1,62 +1,6 @@
-<div class="grid">
-    <div class="hexagon hidden"></div>
-
-    <div
-    (mouseenter)="openTooltip($event)"
-    (mouseleave)="closeTooltip($event)"
-    (click)="updateDetailsTile(parcelNorthWesternTile)"
-    class="hexagon northwest">
-        <app-parcel-tile [mapId]="parcelNorthWesternTile"></app-parcel-tile>
-    </div>
-    <div 
-    (mouseenter)="openTooltip($event)"
-    (mouseleave)="closeTooltip($event)"
-    (click)="updateDetailsTile(parcelNorthEasternTile)"
-     class="hexagon northeast">
-        <app-parcel-tile [mapId]="parcelNorthEasternTile"></app-parcel-tile>
-
-    </div>
-
-    <div class="hexagon hidden"></div>
-
-    <div
-    (mouseenter)="openTooltip($event)"
-    (mouseleave)="closeTooltip($event)" 
-    (click)="updateDetailsTile(parcelWestTile)"
-    class="hexagon west">
-        <app-parcel-tile [mapId]="parcelWestTile"></app-parcel-tile>
-    </div>
-    <div 
-    (mouseenter)="openTooltip($event)"
-    (mouseleave)="closeTooltip($event)" 
-    (click)="updateDetailsTile(mapId)"
-    class="hexagon center">
-        <app-parcel-tile [mapId]="mapId"></app-parcel-tile>
-    </div>
-    <div
-    (mouseenter)="openTooltip($event)"
-    (mouseleave)="closeTooltip($event)" 
-    (click)="updateDetailsTile(parcelEastTile)"
-    class="hexagon east">
-        <app-parcel-tile [mapId]="parcelEastTile"></app-parcel-tile>
-    </div>
-
-    <div class="hexagon hidden"></div>
-    <div class="hexagon hidden"></div>
-
-    <div 
-    (mouseenter)="openTooltip($event)"
-    (mouseleave)="closeTooltip($event)"
-    (click)="updateDetailsTile(parcelSouthWesternTile)"
-    class="hexagon southwest">
-        <app-parcel-tile [mapId]="parcelSouthWesternTile"></app-parcel-tile>
-    </div>
-    <div 
-    (mouseenter)="openTooltip($event)" 
-    (mouseleave)="closeTooltip($event)"
-    (click)="updateDetailsTile(parcelSouthEasternTile)"
-    class="hexagon southeast">
-        <app-parcel-tile [mapId]="parcelSouthEasternTile"></app-parcel-tile>
+<div class="main">
+    <div class="container">
+        <div class="hexagon hidden" [ngClass]="{hidden:slot}" *ngFor="let slot of numSlots">{{slot}}</div>
     </div>
 </div>
 <app-hover-tile-menu></app-hover-tile-menu>
