@@ -21,7 +21,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+
+// DnD
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {DragScrollModule} from 'ngx-drag-scroll';
 // import {FormControl} from '@angular/forms';
 
 // Firebase
@@ -134,6 +137,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     MatGridListModule,
     MatCardModule,
     DragDropModule,
+    DragScrollModule
     // FormControl
   ],
   providers: [{ provide: Window,

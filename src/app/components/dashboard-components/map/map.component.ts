@@ -16,7 +16,8 @@ export class MapComponent implements OnInit {
 
   // numSlots: boolean[] = Array(9).fill(false).map((x,i)=>x); // 2
   // numSlots: boolean[] = Array(30).fill(false).map((x,i)=>x); // 3 -- we get 30 from 5 * num rows
-  numSlots: boolean[] = Array(49).fill(false).map((x, i) => x);
+  // numSlots: boolean[] = Array(49).fill(false).map((x, i) => x);
+  numSlots: boolean[] = Array(81).fill(false).map((x, i) => x);
 
   mapCoordinateBase: Coordinate;
   neighbors: Map<string, Coordinate>;

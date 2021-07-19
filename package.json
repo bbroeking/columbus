@@ -29,6 +29,7 @@
     "@types/underscore": "^1.11.2",
     "ethers": "^5.1.4",
     "firebase": "^8.6.3",
+    "ngx-drag-scroll": "*",
     "rxjs": "~6.6.0",
     "solc": "^0.8.4",
     "tslib": "^2.0.0",
