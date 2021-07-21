@@ -1,14 +1,27 @@
-<div class="details-panel" *ngIf="(tile$ | async)?.ownerId === addr">
-    <div class="structure" *ngFor="let structure of structures$ | async">
-        <app-structure [structure]="structure" [selectedTile]="selectedTile"></app-structure>
-    </div>
-</div>
+<div class="details-panel" *ngIf="tile$ | async as tile">
 
-<div class="if" *ngIf="tile$ | async as tile">
-    <div class="owned-by-another" *ngIf="tile.ownerId && tile.ownerId != addr">
-        <app-declare-war [selectedTile]="selectedTile"></app-declare-war>
+    <div class="info" *ngIf="tile.ownerId">
+        <span class="tile">TileId: {{tile.id}}</span>
+        <span class="owner">Owner: {{tile.ownerId}}</span>
+        <span>In Conflict: {{tile.inConflict }}</span>
+        <button mat-button *ngIf="tile.inConflict" [routerLink]="generateWarRoomLink(tile.conflictId)">View Conflict</button>
+        <span>Mineral Production Rate: {{tile.mineralRate}}</span>
+        <span>Energy Production Rate {{tile.energyRate}}</span>
     </div>
-    <div class="unowned" *ngIf="!tile.ownerId">
-        unowned
+
+    <div class="owned-by-user" *ngIf="tile?.ownerId === addr">
+        <div class="structure" *ngFor="let structure of structures$ | async">
+            <app-structure [structure]="structure" [selectedTile]="selectedTile"></app-structure>
+        </div>    
+    </div>
+
+    <div class="owned-by-another" *ngIf="tile.ownerId && tile.ownerId != addr">
+        <div class="declare-war-wrapper">
+            <app-declare-war [selectedTile]="selectedTile"></app-declare-war>
+        </div>
+    </div>
+
+    <div class="not-owned" *ngIf="!tile.ownerId">
+        Non-Player Owned Tile
     </div>
 </div>

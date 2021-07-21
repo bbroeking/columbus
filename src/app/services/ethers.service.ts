@@ -117,8 +117,13 @@ export class EthersService {
   }
 
   async getMetadataURI(tokenId: number): Promise<string> {
-    const fullURI = await this.unsignedContract.tokenURI(tokenId + 1)
-    return this.cleanURI(fullURI);
+    try {
+      const fullURI = await this.unsignedContract.tokenURI(tokenId)
+      return this.cleanURI(fullURI);  
+    } catch(error) {
+      console.error(error);
+      return '';
+    }
   }
 
   cleanURI(fullURI: string): string {

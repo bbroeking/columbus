@@ -25,18 +25,9 @@ export class MapComponent implements OnInit {
   neighborsId: Map<string, number>
 
   constructor(private hexagonService: HexagonService) {}
-
-  async ngOnInit(){
-    this.update();
-    this.scrollIntoView();
-  }
-
-  ngOnChanges() {
-    this.update();
-  }
-
-  update() {
-    this.scrollIntoView();
+  ngOnInit(): void {
+    const mapIdAsString = this.mapId.toString();
+    this.scrollIntoView(mapIdAsString);
   }
 
   openTooltip(e: MouseEvent) {
@@ -49,10 +40,11 @@ export class MapComponent implements OnInit {
 
   updateDetailsTile(selectedTile:any){
     this.updateCurrentTile.emit(selectedTile);
+    this.scrollIntoView(selectedTile);
   }
 
-  scrollIntoView() {
-    const itemToScrollTo = document.getElementById(this.mapId.toString());
+  scrollIntoView(selectedTile: string) {
+    const itemToScrollTo = document.getElementById(selectedTile);
     // null check to ensure that the element actually exists
     if (itemToScrollTo) {
       itemToScrollTo.scrollIntoView({

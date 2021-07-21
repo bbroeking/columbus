@@ -1,16 +1,14 @@
 <div class="built" *ngIf="structure.built">
-    <div class="dls-menu-item">
-        <button mat-stroked-button color="success" (click)="openDialog(structure)">{{structure.type}}</button>
-    </div>
+    <button mat-raised-button class="structure-button" (click)="openDialog(structure)">{{structure.type}}</button>
 </div>
 <div class="build" *ngIf="!structure.built">
     <div class="queued" *ngIf="structure.queued">
-        <button mat-button (click)="claimStructure()" class="claim" *ngIf="(structure.queued | queueHandler) == 100">Claim Structure</button>
+        <button mat-raised-button (click)="claimStructure()" class="structure-button" *ngIf="(structure.queued | queueHandler) == 100">Claim Structure</button>
         <span class="building-type">{{structure.queued.type}}</span>
         <span class='percentage'>{{structure.queued | queueHandler}}% Complete</span>
     </div>
     <div class="empty-slot" *ngIf="!structure.queued">
-        <button mat-button class="open-build-structure-dialog" (click)="openBuildDialog(structure)">Build Structure</button>
+        <button mat-raised-button class="structure-button" (click)="openBuildDialog(structure)">Build Structure</button>
     </div>
 </div>
 

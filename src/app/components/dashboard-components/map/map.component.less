@@ -35,7 +35,6 @@
     height: calc(var(--s)*1.1547); 
     display: inline-block;
     font-size: initial;
-    background: red;
     margin-bottom: calc(var(--m) - var(--s)*0.2885);
     display: flex;
     align-items: center;
@@ -52,15 +51,24 @@
 .container .hexagon:nth-child(18n+16),
 .container .hexagon:nth-child(18n+17),
 .container .hexagon:nth-child(18n+18){
-    background: yellow;
     margin-left: calc(var(--s) / 2 + var(--m));
 }
 
 
 .container .hidden {
-    background: transparent !important;
+    visibility: hidden;
+    background-image: transparent !important;
 }
 
+.content {
+    width: 100%;
+    height: 100%;
+    background-position: -10px 0px;
+    background-size: 120px;
+    background-image: url(../../../../assets/rockDirt_moss2.png); // need to figure out how to tile this
+    background-repeat: no-repeat;
+    visibility: auto;
+}
 
 // Extra smaller hexagon maps
 // 2 x 2 x 2 

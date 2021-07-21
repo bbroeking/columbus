@@ -27,7 +27,8 @@ export class DeclareWarComponent {
     this.tileId = await this.ethersService.getMetadataURI(this.selectedTile);
   }
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub)
+      this.sub.unsubscribe();
   }
 
   async declareWar() {

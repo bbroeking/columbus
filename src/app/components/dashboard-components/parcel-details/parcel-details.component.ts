@@ -13,19 +13,29 @@ import { MetamaskService } from 'src/app/services/metamask.service';
 export class ParcelDetailsComponent {
 
   @Input() selectedTile: number;
+  addr: string;
   tile$: Observable<Tile | undefined>;
   structures$: Observable<Structure[]| undefined> | undefined;
-  addr: string;
 
   constructor(private tileDataService: TileDataService,
               private ethers : EthersService,
               private metamaskService: MetamaskService) { }
 
   async ngOnChanges() {
-    let uri: string = await this.ethers.getMetadataURI(this.selectedTile)
+    let uri: string = await this.ethers.getMetadataURI(this.selectedTile);
     this.addr = this.metamaskService.account.value;
-    this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
-    this.structures$ = await this.tileDataService.getTileStructuresAsObservable(uri);
+    if (uri){
+      this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
+      this.structures$ = await this.tileDataService.getTileStructuresAsObservable(uri);  
+    } else {
+      // Non-player Owned Tile
+      const tileNumberAsId = this.selectedTile.toString()
+      this.tile$ = this.tileDataService.getTileValuesAsObservable(tileNumberAsId);
+      this.structures$ = await this.tileDataService.getTileStructuresAsObservable(tileNumberAsId);  
+    }
   }
 
+  generateWarRoomLink(conflictId: string) {
+    return `/war-room/${conflictId}`;
+  }
 }
