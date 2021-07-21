@@ -1,24 +1,14 @@
-.world-browser {
-    position: absolute;
+.dashboard {
+    display: flex;
     height: calc(100% - 63px);
-    width: auto;
-    left: 0;
-    border-right: 2px solid #98fc03;
-}
-
-.world-map {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-}
-
-.world-details {
-    position: absolute;
-    height: calc(100% - 63px);
-    width: 25%;
-    right: 0;
-    border-left: 2px solid #98fc03;
-    background-color: #808080;
+    
+    .world-map {
+        flex: 1 1 50%;
+    }
+    
+    .world-details {
+        border-left: 2px solid #98fc03;
+        background-color: #808080;
+        flex: 0 1 25%;
+    }
 }

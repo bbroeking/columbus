@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Coordinate } from 'src/app/models/coordinate.model';
 import { HexagonService } from 'src/app/services/hexagon.service';
@@ -16,8 +17,8 @@ export class MapComponent implements OnInit {
 
   // numSlots: boolean[] = Array(9).fill(false).map((x,i)=>x); // 2
   // numSlots: boolean[] = Array(30).fill(false).map((x,i)=>x); // 3 -- we get 30 from 5 * num rows
-  // numSlots: boolean[] = Array(49).fill(false).map((x, i) => x);
-  numSlots: boolean[] = Array(81).fill(false).map((x, i) => x);
+  // numSlots: boolean[] = Array(49).fill(false).map((x, i) => x); // 4
+  numSlots: number[] = Array(81).fill(false).map((x, i) => i); // 5
 
   mapCoordinateBase: Coordinate;
   neighbors: Map<string, Coordinate>;
@@ -26,8 +27,8 @@ export class MapComponent implements OnInit {
   constructor(private hexagonService: HexagonService) {}
 
   async ngOnInit(){
-    console.log(this.hexagonService.totalHexagonsAtRadius(4));
     this.update();
+    this.scrollIntoView();
   }
 
   ngOnChanges() {
@@ -35,12 +36,7 @@ export class MapComponent implements OnInit {
   }
 
   update() {
-    this.mapCoordinateBase = this.hexagonService.getCoordinatesFromId(this.mapId);
-    this.neighbors = this.hexagonService.getNeighbors(this.mapCoordinateBase);
-    this.neighborsId = new Map<string, number>();
-    this.neighbors.forEach((value: Coordinate, key: string) => {
-      this.neighborsId.set(key, this.hexagonService.getIdFromCoordinates(value));
-    })
+    this.scrollIntoView();
   }
 
   openTooltip(e: MouseEvent) {
@@ -53,5 +49,20 @@ export class MapComponent implements OnInit {
 
   updateDetailsTile(selectedTile:any){
     this.updateCurrentTile.emit(selectedTile);
+  }
+
+  scrollIntoView() {
+    const itemToScrollTo = document.getElementById(this.mapId.toString());
+    // null check to ensure that the element actually exists
+    if (itemToScrollTo) {
+      itemToScrollTo.scrollIntoView({
+        block: "center",
+        inline: "center"
+      });
+    }
+  }
+
+  mapGridHidden(id: number) {
+    return this.hexagonService.mapGridHidden(5, id); // 5 is number of columns
   }
 }

@@ -1,10 +1,13 @@
 <drag-scroll class="main" [scrollbar-hidden]="true">
     <div drag-scroll-item class="drag-scroll">
         <div class="container">
-            <div class="hexagon hidden" [ngClass]="{hidden:slot}" *ngFor="let slot of numSlots">
-                <span class="content">{{ slot }}</span>
-            </div>
+            <div class="hexagon" (click)="updateDetailsTile(mapGridHidden(slot))" 
+                                [ngClass]="mapGridHidden(slot) == 0 ? 'hidden' : ''" 
+                                *ngFor="let slot of numSlots">
+                <span class="content"></span>
+            </div>    
         </div>    
     </div>
 </drag-scroll>
+
 <app-hover-tile-menu></app-hover-tile-menu>

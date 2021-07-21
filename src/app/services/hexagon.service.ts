@@ -20,6 +20,38 @@ export class HexagonService {
     return neighbors;
   }
 
+  mapGridHidden(r: number, id: number) {
+    const columns = (r * 2) - 1;
+    const row = (id / columns >> 0);
+    const posInRow = id % columns;
+    const middleRow = (columns - 1) / 2; // zero indexed middle row
+    const numberOfHiddenTiles = Math.abs(row - middleRow);
+    const front = Math.floor(numberOfHiddenTiles / 2);
+    const back = Math.ceil(numberOfHiddenTiles / 2);
+    if(posInRow < front || posInRow >= (columns - back)){
+      return 0;
+    }
+    else {
+      return this.updateId(row, middleRow, r, posInRow - front) + 1; // start index from 1
+    }
+  }
+
+  updateId(row: number, middleRow: number, topRowLength: number, posInRow: number) {
+    let currRowLength = topRowLength;
+    let id = 0;
+    for(let i = 0; i < row; i++){
+      
+      if (i > middleRow) {
+        currRowLength--;
+        id += currRowLength;
+      } else {
+        id += currRowLength;
+        currRowLength++;
+      }
+    }
+    return id + posInRow;
+  }
+
   getIdFromCoordinates(coords: Coordinate): number {
     if (coords.isEqualComponents(0, 0, 0)) return 0;
     const r = (Math.abs(coords.x) + Math.abs(coords.y) + Math.abs(coords.z)) / 2;
@@ -168,5 +200,4 @@ export class HexagonService {
 
     return new Coordinate(x, y, z);
   }
-
 }

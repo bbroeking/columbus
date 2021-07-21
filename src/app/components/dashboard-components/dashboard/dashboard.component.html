@@ -1,7 +1,4 @@
 <div class='dashboard'>
-    <div class="world-browser">
-        <app-browser></app-browser>
-    </div>
     <div class="world-map">
         <app-map (updateCurrentTile)="changeSelectedTile($event)" [mapId]="mapId"></app-map>
     </div>
