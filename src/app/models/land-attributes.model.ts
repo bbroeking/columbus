@@ -1,5 +1,5 @@
 export interface LandAttributes {
-    minerals: number,
-    energy: number,
-    defense: number
+    mineralRate: number,
+    energyRate: number,
+    fortification: number
 }
