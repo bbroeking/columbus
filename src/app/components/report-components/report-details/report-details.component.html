@@ -4,14 +4,11 @@
     <div class='tile' *ngIf="tile$ | async; let tile">
         <div class="tile-details">
             <span>{{tile.id}}</span>
-            <span style="color: #6C6; font-size: 75px;">&#x2B22;</span>
-            <!-- <div class="location">
-                <span class="loc x">X: {{tile?.coordinate?.x}}</span>
-                <span class="loc y">Y: {{tile?.coordinate?.y}}</span>
-                <span class="loc z">Z: {{tile?.coordinate?.z}}</span>
-            </div> -->
-            <div class="ifHasCoords" *ngIf="tile.coordinate">
-                <button mat-button [routerLink]="generateDashboardLink(tile.coordinate.x, tile.coordinate.y, tile.coordinate.z)">Go to</button>
+            <div class="hexagon">
+                <div class="hexagon-land"></div>
+            </div>
+            <div class="" *ngIf="tile.tokenId">
+                <button mat-raised-button [routerLink]="generateDashboardLink(tile.tokenId)">Go to</button>
             </div>
         </div>
         <div class="production">
@@ -19,23 +16,24 @@
                 <span class="mineral-value">Stored: {{calculateStore(tile.mineralRate, tile.lastCollected)}}</span>
                 <div class="icon-mineral"></div>
                 <span class="collection-rate">Minerals per hour: {{tile.mineralRate}}</span>
-    
             </div>
             <div class="store">
                 <span class="energy-value">Stored: {{calculateStore(tile.energyRate, tile.lastCollected)}}</span>
                 <div class="icon-energy"></div>
                 <span class="collection-rate">Energy per hour: {{tile.energyRate}}</span>
             </div>
-            <div class="last-collected">{{ tile.lastCollected?.toDate() }}</div>
+            <div class="last-collected">{{ tile.lastCollected?.toDate() | date:'medium' }}</div>
             <div class="collect-store">
                 <button mat-button (click)="collectStore(tile.mineralRate, tile.energyRate, tile.lastCollected)" class="collect">Collect</button>
-            </div>    
+            </div>
         </div>
     </div>
     
     <!-- Structures -->
     <div class="structures" *ngIf="structures$ | async; let structures">
-        <button mat-flat-button [disabled]="!structure?.built" (click)="openDialog(structure)" class="structure" *ngFor="let structure of structures">{{structure.position}}</button>
+        <div class="structure" *ngFor="let structure of structures">
+            <app-structure [structure]="structure" [selectedTile]="tile.tokenId" *ngIf="tile$ | async; let tile"></app-structure>
+        </div>
     </div>
 
     <!-- Conflict -->

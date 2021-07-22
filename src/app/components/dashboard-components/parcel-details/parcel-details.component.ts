@@ -13,17 +13,37 @@ import { MetamaskService } from 'src/app/services/metamask.service';
 export class ParcelDetailsComponent {
 
   @Input() selectedTile: number;
-  addr: string;
   tile$: Observable<Tile | undefined>;
   structures$: Observable<Structure[]| undefined> | undefined;
 
-  constructor(private tileDataService: TileDataService,
-              private ethers : EthersService,
-              private metamaskService: MetamaskService) { }
+  address: string;
+  selectedAddress: string;
+
+  constructor(private ethers : EthersService,
+    private tileDataService: TileDataService,
+    private metamaskService: MetamaskService) { }
+
+  async ngOnInit() {
+    let uri: string = await this.ethers.getMetadataURI(this.selectedTile);
+    this.selectedAddress = await this.ethers.getOwnerOf(this.selectedTile) || '';
+    this.address = this.metamaskService.account.value;
+
+    if (uri){
+      this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
+      this.structures$ = this.tileDataService.getTileStructuresAsObservable(uri);  
+    } else {
+      // Non-player Owned Tile
+      const tileNumberAsId = this.selectedTile.toString()
+      this.tile$ = this.tileDataService.getTileValuesAsObservable(tileNumberAsId);
+      this.structures$ = this.tileDataService.getTileStructuresAsObservable(tileNumberAsId);  
+    }
+  }
 
   async ngOnChanges() {
     let uri: string = await this.ethers.getMetadataURI(this.selectedTile);
-    this.addr = this.metamaskService.account.value;
+    this.selectedAddress = await this.ethers.getOwnerOf(this.selectedTile) || '';
+    this.address = this.metamaskService.account.value;
+
     if (uri){
       this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
       this.structures$ = this.tileDataService.getTileStructuresAsObservable(uri);  

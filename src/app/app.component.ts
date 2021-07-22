@@ -29,8 +29,6 @@ export class AppComponent implements OnInit {
                                         this.account$ = this.accountService.getAccountAsObservable(this.account);
                                     });
     this.metamaskService.setConnectedAccount();
-    // this.numLands = await this.ethersService.getBalance();
-
   }
 
   async ngOnChanges() {

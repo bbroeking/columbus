@@ -53,12 +53,6 @@ export class EthersService {
     return this.provider.getSigner()
   }
 
-  getContract() {
-    const daiAddress = environment.contract;
-    const daiAbi = JSON.parse(JSON.stringify(parcel)).default.abi;
-    return new ethers.Contract(daiAddress, daiAbi, this.provider);
-  }
-
   async discover(): Promise<LandDiscovery> {
     const account = this.requestAccount();
     const metadata = await this.metadataService.generateMetadata().toPromise();
@@ -71,6 +65,16 @@ export class EthersService {
   async getBalanceOf(){
     const balance = await this.signedContract.balanceOf(await this.requestAccount());
     return balance.toNumber();
+  }
+
+  async getOwnerOf(id: number){
+    try {
+      const addr:string = await this.signedContract.ownerOf(id);
+      return addr.toLowerCase();
+    } catch (error) {
+      console.error(error);
+      return;
+    }
   }
 
   async getTokenIdByOwner(): Promise<number[]> {

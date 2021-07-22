@@ -57,7 +57,7 @@ export class TileDataService {
     const tileRef = this.firestore.doc<Partial<Tile>>(`tiles/${landDiscovery.uuid}`)
     const landObj: Partial<Tile> = _.extend({
       tokenId: landDiscovery.tokenId,
-      lastCollected: Date.now(),
+      lastCollected: firebase.default.firestore.FieldValue.serverTimestamp(),
       inConflict: false,
     }, attributes);
     tileRef.set(landObj);

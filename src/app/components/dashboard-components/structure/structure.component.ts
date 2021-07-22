@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EthersService } from 'src/app/services/ethers.service';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';

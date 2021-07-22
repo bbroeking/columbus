@@ -10,44 +10,56 @@
     </div>
     <div class='discover-list-container'>
         <div class="discover-row">
-            <app-discover-parcel 
+            <div class="parcel-wrapper">
+                <app-discover-parcel 
                 [attributes]="attribute_one"
                 [stale]="stale_one"
                 [flipped]="flipped_one"
                 [prefix]='one'>
                 </app-discover-parcel>
-            <app-discover-parcel 
+            </div>
+            <div class="parcel-wrapper">
+                <app-discover-parcel 
                 [attributes]="attribute_two"
                 [stale]="stale_two"
                 [flipped]='flipped_two'
                 [prefix]='two'>
                 </app-discover-parcel>
-            <app-discover-parcel
+            </div>
+            <div class="parcel-wrapper">
+                <app-discover-parcel
                 [attributes]="attribute_three"
                 [stale]="stale_three"
                 [flipped]='flipped_three'
                 [prefix]='three'>
                 </app-discover-parcel>
+            </div>
         </div>
         <div class="discover-row">
-            <app-discover-parcel
-                [attributes]="attribute_four"
-                [stale]="stale_four"
-                [flipped]='flipped_four'
-                [prefix]='four'>
-                </app-discover-parcel>
-            <app-discover-parcel
-                [attributes]="attribute_five"
-                [stale]="stale_five"
-                [flipped]="flipped_five"
-                [prefix]='five'>
-                </app-discover-parcel>
+            <div class="parcel-wrapper">
                 <app-discover-parcel
                 [attributes]="attribute_four"
                 [stale]="stale_four"
                 [flipped]='flipped_four'
                 [prefix]='four'>
                 </app-discover-parcel>
+            </div>
+            <div class="parcel-wrapper">
+                <app-discover-parcel
+                [attributes]="attribute_five"
+                [stale]="stale_five"
+                [flipped]="flipped_five"
+                [prefix]='five'>
+                </app-discover-parcel>
+            </div>
+            <div class="parcel-wrapper">
+                <app-discover-parcel
+                [attributes]="attribute_four"
+                [stale]="stale_four"
+                [flipped]='flipped_four'
+                [prefix]='four'>
+                </app-discover-parcel>
+            </div>
         </div>  
     </div>
 </div>

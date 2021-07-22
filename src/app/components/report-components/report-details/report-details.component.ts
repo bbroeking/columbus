@@ -8,6 +8,8 @@ import { Coordinate } from 'src/app/models/coordinate.model';
 import { HexagonService } from 'src/app/services/hexagon.service';
 import { Timestamp } from '@firebase/firestore-types';
 import { AccountData } from 'src/app/services/account.service';
+import { BuildStructureDialogComponent } from '../../dashboard-components/build-structure-dialog/build-structure-dialog.component';
+import { last } from 'rxjs/operators';
 
 @Component({
   selector: 'app-report-details',
@@ -44,9 +46,7 @@ export class ReportDetailsComponent implements OnInit {
     return `/war-room/${conflictId}`;
   }
 
-  generateDashboardLink(x: number, y: number, z: number) {
-    const coords = new Coordinate(x, y, z);
-    const id = this.hexagonService.getIdFromCoordinates(coords);
+  generateDashboardLink(id: number) {
     return `/dashboard/${id}`;
   }
 
@@ -55,6 +55,15 @@ export class ReportDetailsComponent implements OnInit {
       data: {
         tileId: this.report,
         structure: structure 
+      }
+    });
+  }
+
+  openBuildDialog(structure: Structure) {
+    const dialogRef = this.dialog.open(BuildStructureDialogComponent, {
+      data: {
+        structure: structure,
+        selectedTile: this.report
       }
     });
   }

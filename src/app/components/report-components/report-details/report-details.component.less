@@ -1,9 +1,10 @@
 .tile-report {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr 1fr;
     grid-column-gap: 10px;
     height: 100%;
-
+    background: #909090;
+    padding: 0 10px;
     // Tile 
     .tile {
         display: flex;
@@ -11,10 +12,34 @@
         justify-content: space-around;
 
         .tile-details {
+            --s: 100px;  /* size  */
+            --m: 4px;    /* margin */        
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             min-width: 200px;
+
+            .hexagon {
+                width: var(--s);
+                margin: var(--m);
+                height: calc(var(--s)*1.1547); 
+                display: inline-block;
+                font-size: initial;
+                margin-bottom: calc(var(--m) - var(--s)*0.2885);
+                clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+                padding-bottom: 25px;
+            }
+            
+            .hexagon-land {
+                width: 100%;
+                height: 100%;
+                background-position: -10px 0px;
+                background-size: 120px;
+                background-image: url(../../../../assets/rockDirt_moss2.png); // need to figure out how to tile this
+                background-repeat: no-repeat;
+                visibility: auto;
+            }
 
             .location {
                 display: flex;

@@ -16,34 +16,16 @@ export class DiscoverParcelComponent {
   @Input() flipped: boolean | undefined;
   @Input() prefix: string | undefined;
 
-  discoverState: any;
   constructor(private ethers: EthersService,
               private tileDataService: TileDataService,
               private tileGeneratorService: TileGeneratorService) {}
 
-  ngOnChanges() {
-    if (this.flipped) this.discoverState = {'transform': 'rotateY(180deg)'};
-  }
-
-  flip() {
-    if(!this.flipped) {
-      this.flipped = true;
-      const ucl = {
-        [`flipped_${this.prefix}`]: true
-      };
-      this.tileGeneratorService.updateState(ucl as Partial<UnclaimedLand>);
-      this.discoverState = {'transform': 'rotateY(180deg)'}
-    }
-  }
-
-  conquer() {
+  mintLandAndInitalizeData() {
     this.ethers.discover()
                 .then((landDiscovery: LandDiscovery) => {
                   this.tileDataService.createTile(landDiscovery, this.attributes!);
-                  const ucl = {
-                    [`stale_${this.prefix}`]: true
-                  };
+                  const ucl = { [`stale_${this.prefix}`]: true };
                   this.tileGeneratorService.updateState(ucl as Partial<UnclaimedLand>)
-                })
+                });
   }
 }

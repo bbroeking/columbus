@@ -40,70 +40,70 @@ export const BUILDINGS: {[key: string]: Structure} = {
         },
         'buildTime': 100
     },
-    [GROUND_MECH_PRODUCTION]: {
-        'id': GROUND_MECH_PRODUCTION,
-        'buildResources': {
-            [MINERALS]: 0,
-            [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
-            [RARE_ENERGY]: 0
-        },
-        'options': {},
-        'buildTime': 10000000
-    },
-    [AIR_MECH_PRODUCTION]: {
-        'id': AIR_MECH_PRODUCTION,
-        'buildResources': {
-            [MINERALS]: 0,
-            [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
-            [RARE_ENERGY]: 0
-        },
-        'options': {},
-        'buildTime': 10000000
-    },
-    [BIO_RESEARCH]: {
-        'id': BIO_RESEARCH,
-        'buildResources': {
-            [MINERALS]: 0,
-            [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
-            [RARE_ENERGY]: 0
-        },
-        'options': {},
-        'buildTime': 1000
-    },
-    [MECH_RESEARCH]: {
-        'id': MECH_RESEARCH,
-        'buildResources': {
-            [MINERALS]: 0,
-            [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
-            [RARE_ENERGY]: 0
-        },
-        'options': {},
-        'buildTime': 1000
-    },
-    [MINERALS_REFINERY]: {
-        'id': MINERALS_REFINERY,
-        'buildResources': {
-            [MINERALS]: 0,
-            [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
-            [RARE_ENERGY]: 0
-        },
-        'options': {},
-        'buildTime': 1000
-    },
-    [ENERGY_REFINERY]: {
-        'id': ENERGY_REFINERY,
-        'buildResources': {
-            [MINERALS]: 0,
-            [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
-            [RARE_ENERGY]: 0
-        },
-        'options': {},
-        'buildTime': 1000
-    }
+    // [GROUND_MECH_PRODUCTION]: {
+    //     'id': GROUND_MECH_PRODUCTION,
+    //     'buildResources': {
+    //         [MINERALS]: 0,
+    //         [RARE_MINERALS]: 0,
+    //         [ENERGY]: 0,
+    //         [RARE_ENERGY]: 0
+    //     },
+    //     'options': {},
+    //     'buildTime': 10000000
+    // },
+    // [AIR_MECH_PRODUCTION]: {
+    //     'id': AIR_MECH_PRODUCTION,
+    //     'buildResources': {
+    //         [MINERALS]: 0,
+    //         [RARE_MINERALS]: 0,
+    //         [ENERGY]: 0,
+    //         [RARE_ENERGY]: 0
+    //     },
+    //     'options': {},
+    //     'buildTime': 10000000
+    // },
+    // [BIO_RESEARCH]: {
+    //     'id': BIO_RESEARCH,
+    //     'buildResources': {
+    //         [MINERALS]: 0,
+    //         [RARE_MINERALS]: 0,
+    //         [ENERGY]: 0,
+    //         [RARE_ENERGY]: 0
+    //     },
+    //     'options': {},
+    //     'buildTime': 1000
+    // },
+    // [MECH_RESEARCH]: {
+    //     'id': MECH_RESEARCH,
+    //     'buildResources': {
+    //         [MINERALS]: 0,
+    //         [RARE_MINERALS]: 0,
+    //         [ENERGY]: 0,
+    //         [RARE_ENERGY]: 0
+    //     },
+    //     'options': {},
+    //     'buildTime': 1000
+    // },
+    // [MINERALS_REFINERY]: {
+    //     'id': MINERALS_REFINERY,
+    //     'buildResources': {
+    //         [MINERALS]: 0,
+    //         [RARE_MINERALS]: 0,
+    //         [ENERGY]: 0,
+    //         [RARE_ENERGY]: 0
+    //     },
+    //     'options': {},
+    //     'buildTime': 1000
+    // },
+    // [ENERGY_REFINERY]: {
+    //     'id': ENERGY_REFINERY,
+    //     'buildResources': {
+    //         [MINERALS]: 0,
+    //         [RARE_MINERALS]: 0,
+    //         [ENERGY]: 0,
+    //         [RARE_ENERGY]: 0
+    //     },
+    //     'options': {},
+    //     'buildTime': 1000
+    // }
 };

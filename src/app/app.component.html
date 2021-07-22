@@ -1,13 +1,19 @@
 <div class="navbar navbar-fixed-top navbar-dark bg-inverse">
     <ul class="nav navbar-nav" routerLinkActive="active">
-        <li class="nav-item" [routerLink]="['/']" >Home</li>
         <li class="nav-item" [routerLink]="['/reports']" >Reports</li>
         <li class="nav-item" [routerLink]="['/discover']" >Annex</li>
         <li class="nav-item" [routerLink]="['/garrison']">Garrison</li>
+        <li class="nav-item" [routerLink]="['/dashboard/30']" >Map</li>
     </ul>
     <ul class="nav navbar-account">
-        <li class="nav-item minerals"> <div class="icon-mineral"></div> {{ (account$ | async)?.minerals }}</li>
-        <li class="nav-item energy"> <div class="icon-energy"></div> {{ (account$ | async)?.energy }}</li>
+        <li class="nav-item minerals"> 
+            <div class="icon-mineral"></div> 
+            <span>{{ (account$ | async)?.minerals }}</span>
+        </li>
+        <li class="nav-item energy">
+            <div class="icon-energy"></div>
+            <span>{{ (account$ | async)?.energy }}</span>
+        </li>
         <li class="nav-item" *ngIf="account">
             Connected to <span class="address">{{account}}</span>
         </li>
