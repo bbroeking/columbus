@@ -1,11 +1,17 @@
 .command-table {
     display: flex;
-    height: calc(100% - 63px);
+    height: calc(100% - 55px);
 
     .command-troops {
+        display: flex;
+        flex-direction: column;
         padding-top: 3rem;
         flex: auto;
         overflow-y: scroll;
+
+        .no-troops {
+            align-self: center;
+        }
     }
 
     .promote-troop {

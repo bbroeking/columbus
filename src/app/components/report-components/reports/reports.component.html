@@ -1,5 +1,9 @@
 <div class="reports-page">
     <div class="reports">
+        <div class="no-reports" *ngIf="metadataUris?.length == 0">
+            <span class="no-lands-found">There are no lands associated with the current connected address</span>
+            <button mat-raised-button [routerLink]="['/discover']" class="annex">Annex a Land</button>
+        </div>
         <div class="row" *ngFor="let uri of metadataUris">
             <app-report-details [report]="uri"></app-report-details>
         </div>

@@ -1,37 +1,32 @@
 .full-page {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 55px);
     background-color: #43464B;
     display: flex;
     flex-direction: column;
-}
 
-.navbar-container {
-    flex: 0 0 60px;
-}
-.refresh-time-container {
-    flex: 0 0 40px;
-}
-.discover-list-container {
-    flex: 1 1 auto;
-    height: 97%;
-}
+    .refresh-time-container {
+        flex: 0 0 40px;
 
-.refresh-time {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    height: 40px;
-    .timer {
-        padding: 5px;
+        .refresh-time {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 40px;
+            .timer {
+                padding: 5px;
+            }
+        }
     }
-}
-.discover-list {
-    display: flex;
-    justify-content: space-around;
-    height: 100%;
-}
+    .discover-list-container {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
 
-app-discover-parcel {
-    height: 100%;
+        .discover-row {
+            display: flex;
+            flex: 1 1 50%;
+            justify-content: space-around;
+        }
+    }
 }

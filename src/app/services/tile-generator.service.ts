@@ -4,24 +4,25 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { CloudFunctionsService } from './cloud-functions.service';
 import firebase from "firebase/app";
+import { Tile } from './tile-data.service';
 
 export interface UnclaimedLand {
   refresh: number,
   stale_one: boolean,
   flipped_one: boolean,
-  attributes_one: Object,
+  attributes_one: Partial<Tile>,
   stale_two: boolean,
   flipped_two: boolean,
-  attributes_two: Object,
+  attributes_two: Partial<Tile>,
   stale_three: boolean,
   flipped_three: boolean,
-  attributes_three: Object,
+  attributes_three: Partial<Tile>,
   stale_four: boolean,
   flipped_four: boolean,
-  attributes_four: Object,
+  attributes_four: Partial<Tile>,
   stale_five: boolean,
   flipped_five: boolean,
-  attributes_five: Object,
+  attributes_five: Partial<Tile>,
 }
 
 @Injectable({

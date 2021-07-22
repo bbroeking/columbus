@@ -1,27 +1,26 @@
-<div class='discover-flip'>
-    <div class='discover-content' (click)="flip()" [ngStyle]="discoverState">
-        <div class='discover-front'>
-
+<div class='annex-item'>
+    <div class="row">
+        <div class="hexagon">
+            <div class="hexagon-land"></div>
         </div>
-        <div class='discover-back'>
-            <span style="color: #6C6; font-size: 135px;">&#x2B22;</span>
-            <div class="land-stats">
-                <ul class='stats'>
-                    <li class="stat-row">
-                        <div class="stat-text">minerals</div>
-                        <div class="stat-number">{{ attributes?.minerals }}</div>
-                    </li>
-                    <li class="stat-row">
-                        <div class="stat-text">energy</div>
-                        <div class="stat-number">{{ attributes?.energy }}</div>
-                    </li>
-                    <li class="stat-row">
-                        <div class="stat-text">defense</div>
-                        <div class="stat-number">{{ attributes?.defense }}</div>
-                    </li>
-                </ul>
-            </div>
-            <button [disabled]="stale" (click)="conquer()">CONQUER</button>
-        </div>
+        <div class="land-stats">
+            <ul class='stats'>
+                <li class="stat-row">
+                    <div class="stat-text">Mineral Production Rate</div>
+                    <div class="stat-number">{{ attributes?.minerals }}</div>
+                </li>
+                <li class="stat-row">
+                    <div class="stat-text">Energy Production Rate</div>
+                    <div class="stat-number">{{ attributes?.energy }}</div>
+                </li>
+                <li class="stat-row">
+                    <div class="stat-text">Fortification</div>
+                    <div class="stat-number">{{ attributes?.defense }}</div>
+                </li>
+            </ul>
+        </div>    
+    </div>
+    <div class="row">
+        <button mat-raised-button [disabled]="stale" (click)="conquer()">CONQUER</button>
     </div>
 </div>

@@ -5,11 +5,11 @@
         <div class="tile-details">
             <span>{{tile.id}}</span>
             <span style="color: #6C6; font-size: 75px;">&#x2B22;</span>
-            <div class="location">
+            <!-- <div class="location">
                 <span class="loc x">X: {{tile?.coordinate?.x}}</span>
                 <span class="loc y">Y: {{tile?.coordinate?.y}}</span>
                 <span class="loc z">Z: {{tile?.coordinate?.z}}</span>
-            </div>
+            </div> -->
             <div class="ifHasCoords" *ngIf="tile.coordinate">
                 <button mat-button [routerLink]="generateDashboardLink(tile.coordinate.x, tile.coordinate.y, tile.coordinate.z)">Go to</button>
             </div>
@@ -41,6 +41,7 @@
     <!-- Conflict -->
     <div class="conflict" *ngIf="conflict$ | async; let conflict">
         <div class="planning" *ngIf="!conflict.isAttacking || !conflict.isDefending">
+            <div>{{conflict | json}}</div>
             <div class="attackers" *ngFor="let attacker of conflict.attacking">
                 <div class="troop">
                     <span class="name">{{attacker.name}}</span>

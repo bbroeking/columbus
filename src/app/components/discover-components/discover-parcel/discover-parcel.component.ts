@@ -39,7 +39,7 @@ export class DiscoverParcelComponent {
   conquer() {
     this.ethers.discover()
                 .then((landDiscovery: LandDiscovery) => {
-                  this.tileDataService.createTile(landDiscovery);
+                  this.tileDataService.createTile(landDiscovery, this.attributes!);
                   const ucl = {
                     [`stale_${this.prefix}`]: true
                   };

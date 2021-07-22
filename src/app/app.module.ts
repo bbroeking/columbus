@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // DnD
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -68,6 +69,7 @@ import { StructureDropdownComponent } from './components/dashboard-components/st
 import { BuildStructureDialogComponent } from './components/dashboard-components/build-structure-dialog/build-structure-dialog.component';
 import { CommandTableComponent } from './components/command-components/command-table/command-table.component';
 import { TroopCardComponent } from './components/command-components/troop-card/troop-card.component';
+import { MetamaskNotConnectedComponent } from './components/error-pages/metamask-not-connected/metamask-not-connected.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -113,6 +115,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     BuildStructureDialogComponent,
     CommandTableComponent,
     TroopCardComponent,
+    MetamaskNotConnectedComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,7 +140,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     MatGridListModule,
     MatCardModule,
     DragDropModule,
-    DragScrollModule
+    DragScrollModule,
+    MatProgressSpinnerModule
     // FormControl
   ],
   providers: [{ provide: Window,

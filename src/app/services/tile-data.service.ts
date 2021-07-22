@@ -9,18 +9,19 @@ import { QueueItem } from './queue.service';
 import * as firebase from 'firebase/app';
 import { Timestamp } from '@firebase/firestore-types';
 import { MetamaskService } from './metamask.service';
+import * as _ from 'underscore';
+import { LandAttributes } from '../models/land-attributes.model';
 
 export interface Tile { // data in the tile
-  id: string,
-  ownerId: string,
-  minerals: number,
-  energy: number,
+  id: string, // metadata addr
+  ownerId: string, // addr
+  tokenId: number, // mint number
+  conflictId: string,
   mineralRate: number,
   energyRate: number,
+  fortification: number,
   lastCollected: Timestamp,
   inConflict: boolean,
-  conflictId: string,
-  tokenId: number,
   coordinate: Coordinate,
 }
 
@@ -52,14 +53,14 @@ export class TileDataService {
     return uriComponents[uriComponents.length - 1];  
   }
 
-  async createTile(landDiscovery: LandDiscovery): Promise<void> {
+  async createTile(landDiscovery: LandDiscovery, attributes: LandAttributes): Promise<void> {
     const tileRef = this.firestore.doc<Partial<Tile>>(`tiles/${landDiscovery.uuid}`)
-    tileRef
-      .set({
-        tokenId: landDiscovery.tokenId,
-        minerals: 200,
-        energy: 100,
-      });
+    const landObj: Partial<Tile> = _.extend({
+      tokenId: landDiscovery.tokenId,
+      lastCollected: Date.now(),
+      inConflict: false,
+    }, attributes);
+    tileRef.set(landObj);
     const strucutresRef = tileRef.collection('structures');
     strucutresRef.add({position: 0, built: false})
     strucutresRef.add({position: 1, built: false})

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   network: "HTTP://127.0.0.1:7545",
-  contract: '0x2EcfcEbf9d6EEB40c2f4dE592040d7e303B7C1eE',
+  contract: '0x8B4F208e53edb9F1e04a1c57Db4ACFDD85E18386',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebase: {
     apiKey: "AIzaSyBCu8y8ME96NAcULBgSK15EK_xE6ozfV1k",

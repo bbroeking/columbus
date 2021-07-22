@@ -2,14 +2,12 @@
     <ul class="nav navbar-nav" routerLinkActive="active">
         <li class="nav-item" [routerLink]="['/']" >Home</li>
         <li class="nav-item" [routerLink]="['/reports']" >Reports</li>
-        <li class="nav-item" [routerLink]="['/discover']" >Discover</li>
+        <li class="nav-item" [routerLink]="['/discover']" >Annex</li>
         <li class="nav-item" [routerLink]="['/garrison']">Garrison</li>
     </ul>
     <ul class="nav navbar-account">
-        <li class="nav-item"><div class="icon-mineral"></div></li>
-        <li class="nav-item minerals">{{ (account$ | async)?.minerals }}</li>
-        <li class="nav-item"><div class="icon-energy"></div></li>
-        <li class="nav-item energy">{{ (account$ | async)?.energy }}</li>
+        <li class="nav-item minerals"> <div class="icon-mineral"></div> {{ (account$ | async)?.minerals }}</li>
+        <li class="nav-item energy"> <div class="icon-energy"></div> {{ (account$ | async)?.energy }}</li>
         <li class="nav-item" *ngIf="account">
             Connected to <span class="address">{{account}}</span>
         </li>

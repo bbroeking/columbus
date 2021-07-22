@@ -26,12 +26,12 @@ export class ParcelDetailsComponent {
     this.addr = this.metamaskService.account.value;
     if (uri){
       this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
-      this.structures$ = await this.tileDataService.getTileStructuresAsObservable(uri);  
+      this.structures$ = this.tileDataService.getTileStructuresAsObservable(uri);  
     } else {
       // Non-player Owned Tile
       const tileNumberAsId = this.selectedTile.toString()
       this.tile$ = this.tileDataService.getTileValuesAsObservable(tileNumberAsId);
-      this.structures$ = await this.tileDataService.getTileStructuresAsObservable(tileNumberAsId);  
+      this.structures$ = this.tileDataService.getTileStructuresAsObservable(tileNumberAsId);  
     }
   }
 

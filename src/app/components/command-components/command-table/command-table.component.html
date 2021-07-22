@@ -1,5 +1,6 @@
 <div class="command-table" cdkDropListGroup>
     <div class='command-troops' *ngIf="troops$ | async as troops">
+        <div class="no-troops" *ngIf="troops.length == 0">You have no active troops. Construct production facilities on your lands to defend them.</div>
         <div cdkDropList
             [cdkDropListData]="troops"
             [cdkDropListDisabled]="isPromoteFull()"
