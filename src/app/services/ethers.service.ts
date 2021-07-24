@@ -1,9 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { BigNumber, Contract, ethers } from "ethers";
-
-import { environment } from '../../environments/environment';
-import * as parcel from "../../../build/contracts/Parcel.json";
-
 import {MetadataService} from '../services/metadata.service'
 import { forkJoin } from 'rxjs';
 import { Provider } from './ethers-utils/web3-provider';
@@ -53,13 +49,10 @@ export class EthersService {
     return this.provider.getSigner()
   }
 
-  async discover(): Promise<LandDiscovery> {
-    const account = this.requestAccount();
-    const metadata = await this.metadataService.generateMetadata().toPromise();
-    const rawTransaction = await this.signedContract.discover(account, metadata.uuid);
+  async redeem(account: string, tokenId: number, signature: string): Promise<LandDiscovery> {
+    const rawTransaction = await this.signedContract.redeem(account, tokenId, signature);
     const confirmations = await rawTransaction.wait();
-    const tokenId = confirmations.events[0].args.tokenId.toNumber() // TODO: on-chain, this could take awhile and should be handled by and outside server resource
-    return {tokenId: tokenId, uuid: metadata.uuid} ;
+    return {tokenId: tokenId, uuid: tokenId.toString()};
   }
 
   async getBalanceOf(){
@@ -77,13 +70,12 @@ export class EthersService {
     }
   }
 
-  async getTokenIdByOwner(): Promise<number[]> {
-    const account = await this.requestAccount();
+  async getTokenIdByOwner(account: string): Promise<number[]> {
     const balance: BigNumber = await this.signedContract.balanceOf(account);
     let tokensIds = [];
     for (let i= 0; i < balance.toNumber(); i++){
       let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
-      tokensIds.push(token.toNumber()-1);
+      tokensIds.push(token.toNumber());
     }               
     return tokensIds;
   }
@@ -121,13 +113,14 @@ export class EthersService {
   }
 
   async getMetadataURI(tokenId: number): Promise<string> {
-    try {
-      const fullURI = await this.unsignedContract.tokenURI(tokenId)
-      return this.cleanURI(fullURI);  
-    } catch(error) {
-      console.error(error);
-      return '';
-    }
+    return tokenId.toString();
+    // try {
+    //   const fullURI = await this.unsignedContract.tokenURI(tokenId)
+    //   return this.cleanURI(fullURI);  
+    // } catch(error) {
+    //   console.error(error);
+    //   return '';
+    // }
   }
 
   cleanURI(fullURI: string): string {

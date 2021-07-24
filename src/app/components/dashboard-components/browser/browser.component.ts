@@ -24,7 +24,7 @@ export class BrowserComponent implements OnInit {
 
   async ngOnInit() {
     this.numTokens = await this.ethers.getBalanceOf();
-    this.ethers.getTokenIdByOwner().then((res) => {
+    this.ethers.getTokenIdByOwner("").then((res) => {
       let coordinates: Coordinate[] = [];
       res.forEach((id) => {
         coordinates.push(this.hexagonService.getCoordinatesFromId(id));

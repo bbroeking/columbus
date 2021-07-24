@@ -17,10 +17,10 @@ import { last } from 'rxjs/operators';
   styleUrls: ['./report-details.component.less']
 })
 export class ReportDetailsComponent implements OnInit {
-  @Input() report: string;
+  @Input() id: number;
+  tokenId: string;
   constructor(private tileService: TileDataService,
               private conflictService: ConflictDataService,
-              private hexagonService: HexagonService,
               public dialog: MatDialog) { }
 
   tile$: Observable<Tile | undefined> | undefined;
@@ -30,8 +30,9 @@ export class ReportDetailsComponent implements OnInit {
   
   
   ngOnInit(): void {
-    this.tile$ = this.tileService.getTileValuesAsObservable(this.report);
-    this.structures$ = this.tileService.getTileStructuresAsObservable(this.report);
+    this.tokenId = this.id.toString()
+    this.tile$ = this.tileService.getTileValuesAsObservable(this.tokenId);
+    this.structures$ = this.tileService.getTileStructuresAsObservable(this.tokenId);
     this.tileSubscription = this.tile$.subscribe((res: Tile | undefined) => {
       if (res?.conflictId)
         this.conflict$ = this.conflictService.getConflictValuesAsObservable(res.conflictId);
@@ -53,7 +54,7 @@ export class ReportDetailsComponent implements OnInit {
   openDialog(structure: Structure) {
     const dialogRef = this.dialog.open(StructureDialogComponent, {
       data: {
-        tileId: this.report,
+        tileId: this.tokenId,
         structure: structure 
       }
     });
@@ -63,7 +64,7 @@ export class ReportDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(BuildStructureDialogComponent, {
       data: {
         structure: structure,
-        selectedTile: this.report
+        selectedTile: this.tokenId
       }
     });
   }
@@ -82,7 +83,7 @@ export class ReportDetailsComponent implements OnInit {
       'minerals': mStore,
       'energy': eStore,
     }
-    this.tileService.collectResources(this.report, acctData)
+    this.tileService.collectResources(this.tokenId, acctData)
   }
 
 }

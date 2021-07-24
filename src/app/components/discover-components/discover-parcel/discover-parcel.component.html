@@ -6,21 +6,25 @@
         <div class="land-stats">
             <ul class='stats'>
                 <li class="stat-row">
-                    <div class="stat-text">Mineral Production Rate</div>
-                    <div class="stat-number">{{ attributes?.mineralRate }}</div>
+                    <div class="stat-text">Account</div>
+                    <div class="stat-number">{{ parcel?.account }}</div>
                 </li>
                 <li class="stat-row">
-                    <div class="stat-text">Energy Production Rate</div>
-                    <div class="stat-number">{{ attributes?.energyRate }}</div>
+                    <div class="stat-text">Registry</div>
+                    <div class="stat-number">{{ parcel?.registry }}</div>
                 </li>
                 <li class="stat-row">
-                    <div class="stat-text">Fortification</div>
-                    <div class="stat-number">{{ attributes?.fortification }}</div>
+                    <div class="stat-text">Signature</div>
+                    <div class="stat-number">{{ parcel?.signature }}</div>
+                </li>
+                <li class="stat-row">
+                    <div class="stat-text">Token Id</div>
+                    <div class="stat-number">{{ parcel?.tokenId }}</div>
                 </li>
             </ul>
         </div>    
     </div>
     <div class="row">
-        <button mat-raised-button [disabled]="stale" (click)="mintLandAndInitalizeData()">ANNEX</button>
+        <button mat-raised-button [disabled]="parcel?.annexed" (click)="redeemLandAndInitalizeData()">ANNEX</button>
     </div>
 </div>

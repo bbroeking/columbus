@@ -1,65 +1,10 @@
 <div class='full-page'>
-    <div class='refresh-time-container'>
-        <div class='refresh-time'>
-            <span class="timer reset">Time until reset: </span>
-            <span class="timer days">Days: {{days}}</span>
-            <span class="timer hours">Hours: {{hours}}</span>
-            <span class="timer minutes">Minutes: {{minutes}}</span>
-            <span class="timer seconds">Seconds: {{seconds}}</span>
-        </div>    
-    </div>
     <div class='discover-list-container'>
         <div class="discover-row">
-            <div class="parcel-wrapper">
-                <app-discover-parcel 
-                [attributes]="attribute_one"
-                [stale]="stale_one"
-                [flipped]="flipped_one"
-                [prefix]='one'>
-                </app-discover-parcel>
-            </div>
-            <div class="parcel-wrapper">
-                <app-discover-parcel 
-                [attributes]="attribute_two"
-                [stale]="stale_two"
-                [flipped]='flipped_two'
-                [prefix]='two'>
-                </app-discover-parcel>
-            </div>
-            <div class="parcel-wrapper">
-                <app-discover-parcel
-                [attributes]="attribute_three"
-                [stale]="stale_three"
-                [flipped]='flipped_three'
-                [prefix]='three'>
+            <div class="parcel-wrapper" *ngFor="let parcel of parcel$ | async">
+                <app-discover-parcel [parcel]="parcel">
                 </app-discover-parcel>
             </div>
         </div>
-        <div class="discover-row">
-            <div class="parcel-wrapper">
-                <app-discover-parcel
-                [attributes]="attribute_four"
-                [stale]="stale_four"
-                [flipped]='flipped_four'
-                [prefix]='four'>
-                </app-discover-parcel>
-            </div>
-            <div class="parcel-wrapper">
-                <app-discover-parcel
-                [attributes]="attribute_five"
-                [stale]="stale_five"
-                [flipped]="flipped_five"
-                [prefix]='five'>
-                </app-discover-parcel>
-            </div>
-            <div class="parcel-wrapper">
-                <app-discover-parcel
-                [attributes]="attribute_four"
-                [stale]="stale_four"
-                [flipped]='flipped_four'
-                [prefix]='four'>
-                </app-discover-parcel>
-            </div>
-        </div>  
     </div>
 </div>

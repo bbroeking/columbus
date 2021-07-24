@@ -9,15 +9,15 @@ import { MetamaskService } from 'src/app/services/metamask.service';
 })
 export class ReportsComponent implements OnInit {
   account: string;
-  metadataUris: string[];
+  tokenIds: number[];
   constructor(
     private ethers: EthersService,
     private metamaskService: MetamaskService) { 
-    this.metadataUris = [];
+    this.tokenIds = [];
   }
 
   async ngOnInit() {
     this.account = await this.metamaskService.getConnectedAccount();
-    this.metadataUris = await this.ethers.getTokenMetadataIdsByOwner(this.account);
+    this.tokenIds = await this.ethers.getTokenIdByOwner(this.account);
   }
 }

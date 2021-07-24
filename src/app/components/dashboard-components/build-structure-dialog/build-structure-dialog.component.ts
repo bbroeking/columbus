@@ -2,10 +2,10 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { StructureType } from 'src/app/constants/buildings';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';
 import {BUILDINGS} from '../../../constants/buildings';
-import * as _ from 'underscore';
 import { QueueItem, QueueService } from 'src/app/services/queue.service';
 import { EthersService } from 'src/app/services/ethers.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-build-structure-dialog',

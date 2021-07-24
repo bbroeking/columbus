@@ -70,6 +70,7 @@ import { BuildStructureDialogComponent } from './components/dashboard-components
 import { CommandTableComponent } from './components/command-components/command-table/command-table.component';
 import { TroopCardComponent } from './components/command-components/troop-card/troop-card.component';
 import { MetamaskNotConnectedComponent } from './components/error-pages/metamask-not-connected/metamask-not-connected.component';
+import { ClockComponent } from './components/discover-components/clock/clock.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -116,6 +117,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     CommandTableComponent,
     TroopCardComponent,
     MetamaskNotConnectedComponent,
+    ClockComponent,
   ],
   imports: [
     BrowserModule,

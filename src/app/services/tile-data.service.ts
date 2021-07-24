@@ -53,7 +53,7 @@ export class TileDataService {
     return uriComponents[uriComponents.length - 1];  
   }
 
-  async createTile(landDiscovery: LandDiscovery, attributes: LandAttributes): Promise<void> {
+  async createTile(landDiscovery: LandDiscovery, attributes: Partial<LandAttributes>): Promise<void> {
     const tileRef = this.firestore.doc<Partial<Tile>>(`tiles/${landDiscovery.uuid}`)
     const landObj: Partial<Tile> = _.extend({
       tokenId: landDiscovery.tokenId,
@@ -61,11 +61,11 @@ export class TileDataService {
       inConflict: false,
     }, attributes);
     tileRef.set(landObj);
-    const strucutresRef = tileRef.collection('structures');
-    strucutresRef.add({position: 0, built: false})
-    strucutresRef.add({position: 1, built: false})
-    strucutresRef.add({position: 2, built: false})
-    strucutresRef.add({position: 3, built: false})
+    const structuresRef = tileRef.collection('structures');
+    structuresRef.add({position: 0, built: false})
+    structuresRef.add({position: 1, built: false})
+    structuresRef.add({position: 2, built: false})
+    structuresRef.add({position: 3, built: false})
   }
 
   async updateTile(uri: string, resources: Partial<Tile>): Promise<void> {

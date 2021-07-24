@@ -22,7 +22,7 @@
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonic = "coyote primary six island area notice slide theme off unaware slender slow" // this is a local idiot
 
 module.exports = {
   /**

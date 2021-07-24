@@ -1,58 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { CloudFunctionsService } from './cloud-functions.service';
-import firebase from "firebase/app";
-import { Tile } from './tile-data.service';
-
-export interface UnclaimedLand {
-  refresh: number,
-  stale_one: boolean,
-  flipped_one: boolean,
-  attributes_one: Partial<Tile>,
-  stale_two: boolean,
-  flipped_two: boolean,
-  attributes_two: Partial<Tile>,
-  stale_three: boolean,
-  flipped_three: boolean,
-  attributes_three: Partial<Tile>,
-  stale_four: boolean,
-  flipped_four: boolean,
-  attributes_four: Partial<Tile>,
-  stale_five: boolean,
-  flipped_five: boolean,
-  attributes_five: Partial<Tile>,
-}
+import { Parcel } from '../interfaces/parcel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TileGeneratorService {
+  constructor(
+    private firestore: AngularFirestore) {}
 
-  user: firebase.User | null;
-  constructor(private cloudFunctionsService: CloudFunctionsService,
-    private firestore: AngularFirestore, 
-    private afAuth: AngularFireAuth) {}
-
-  ngOnInit() {
-    this.afAuth.user.subscribe((user) => {
-      this.user = user;
-    })
+  getOpenParcels(): Observable<Parcel[]> {
+    return this.firestore.collection<Parcel>('parcels', ref => ref.where('tokenId', '<', 46))
+                          .valueChanges({idField: 'id'});
   }
 
-  refreshUnclaimedLands() {
-    // return this.cloudFunctionsService.refreshUnclaimedLands({'uid': this.authService.user?.uid})
-    return this.cloudFunctionsService.refreshUnclaimedLands({'uid': 'RZLTPoHfBOZII7RLVBvEgG1FTsp2'})
-  }
-
-  updateState(data: Partial<UnclaimedLand>){ 
-    const userRef: AngularFirestoreDocument<UnclaimedLand> = this.firestore.doc(`unclaimed-land/RZLTPoHfBOZII7RLVBvEgG1FTsp2`);
-    userRef.update(data)
-  }
-
-  getUnclaimedLand(): Observable<UnclaimedLand | undefined> {
-    const userRef: AngularFirestoreDocument<UnclaimedLand> = this.firestore.doc(`unclaimed-land/RZLTPoHfBOZII7RLVBvEgG1FTsp2`);
-    return userRef.valueChanges();
+  updateParcel(tokenId: number, data: Partial<Parcel>) {
+    const id = tokenId.toString();
+    this.firestore.collection<Parcel>('parcels')
+                  .doc(id)
+                  .update(data);
   }
 }
