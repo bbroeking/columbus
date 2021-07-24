@@ -44,13 +44,8 @@ export class TileDataService {
     private metamaskService: MetamaskService,
     private accountService: AccountService) {}
 
-  async getTileDocRef(uri: string): Promise<AngularFirestoreDocument<Tile> | undefined> {
-    return this.firestore.doc<Tile>(`tiles/${uri}`);
-  }
-
-  cleanURI(fullURI: string): string {
-    let uriComponents = fullURI.split("/");
-    return uriComponents[uriComponents.length - 1];  
+  async getTileDocRef(tokenId: number): Promise<AngularFirestoreDocument<Tile> | undefined> {
+    return this.firestore.doc<Tile>(`tiles/${tokenId}`);
   }
 
   async createTile(landDiscovery: LandDiscovery, attributes: Partial<LandAttributes>): Promise<void> {
@@ -68,33 +63,29 @@ export class TileDataService {
     structuresRef.add({position: 3, built: false})
   }
 
-  async updateTile(uri: string, resources: Partial<Tile>): Promise<void> {
-    const cleanedURI = this.cleanURI(uri);
-    await this.getTileDocRef(cleanedURI)
+  async updateTile(tokenId: number, resources: Partial<Tile>): Promise<void> {
+    await this.getTileDocRef(tokenId)
               .then(function(tileDoc: AngularFirestoreDocument<Tile> | undefined) {
                 if (tileDoc === undefined) throw Error();
                 tileDoc.update(resources);
               })
   }
 
-  getTileValuesAsObservable(uri: string): Observable<Tile | undefined>{
-    const cleanedURI = this.cleanURI(uri);
-    return this.firestore.doc<Tile>(`tiles/${cleanedURI}`)
+  getTileValuesAsObservable(tokenId: number): Observable<Tile | undefined>{
+    return this.firestore.doc<Tile>(`tiles/${tokenId}`)
                         .valueChanges({idField: 'id'});
   }
 
-  async deleteTile(uri: string) {
-    const cleanedURI = this.cleanURI(uri);
-    await this.getTileDocRef(cleanedURI)
+  async deleteTile(tokenId: number) {
+    await this.getTileDocRef(tokenId)
               .then(function(tileDoc: AngularFirestoreDocument<Tile> | undefined) {
                 if (tileDoc === undefined) throw Error();
                 tileDoc.delete()
-              })
+              });
   }
 
-  async getTileStructures(uri: string): Promise<Structure[]> {
-    const cleanedURI = this.cleanURI(uri);
-    return this.firestore.collection<Structure>(`tiles/${cleanedURI}/structures`)
+  async getTileStructures(tokenId: number): Promise<Structure[]> {
+    return this.firestore.collection<Structure>(`tiles/${tokenId}/structures`)
                         .get()
                         .toPromise()
                         .then((query) => {
@@ -106,60 +97,53 @@ export class TileDataService {
     });
   }
 
-  getTileStructuresAsObservable(uri: string): Observable<Structure[]> {
-    const cleanedURI = this.cleanURI(uri);
-    return this.firestore.collection<Structure>(`tiles/${cleanedURI}/structures`, ref => ref.orderBy('position'))
+  getTileStructuresAsObservable(tokenId: number): Observable<Structure[]> {
+    return this.firestore.collection<Structure>(`tiles/${tokenId}/structures`, ref => ref.orderBy('position'))
                         .valueChanges({idField: 'sid'});
   }
 
-  updateStructure(uri: string, sid: string, data: any) {
-    const cleanedURI = this.cleanURI(uri);
+  updateStructure(tokenId: number, sid: string, data: any) {
     return this.firestore.collection('tiles')
-                          .doc(cleanedURI)
+                          .doc(`${tokenId}`)
                           .collection('structures')
                           .doc(sid)
                           .update(data)
   }
 
-  collectResources(uri: string, update: Partial<AccountData>) {
+  collectResources(tokenId: number, update: Partial<AccountData>) {
     const account = this.metamaskService.account.getValue();
-    const cleanedURI = this.cleanURI(uri);
     this.firestore.collection('tiles')
-                  .doc(cleanedURI)
+                  .doc(`${tokenId}`)
                   .update({
                     lastCollected: firebase.default.firestore.FieldValue.serverTimestamp()
                   });
     this.accountService.updateAccountData(account, update);
   }
 
-  queueBuildStructure(uri:string, sid:string, queueItem: QueueItem) {
-    const data = {
-      queued: queueItem
-    }
-    return this.updateStructure(uri, sid, data);
+  queueBuildStructure(tokenId:number, sid:string, queueItem: QueueItem) {
+    const data = { queued: queueItem };
+    return this.updateStructure(tokenId, sid, data);
   }
 
-  buildStructure(uri: string, sid: string, type: StructureType){
+  buildStructure(tokenId: number, sid: string, type: StructureType){
     const data = {
       'built': true,
       'type': type.toString(),
       'level': 1
     }
-    return this.updateStructure(uri, sid, data);
+    return this.updateStructure(tokenId, sid, data);
   }
 
-  updateTileBuild(uri: string, sid:string, id:string, level:number){
+  updateTileBuild(tokenId: number, sid:string, id:string, level:number){
     const data = {
       'id': id,
       'level': level
     };
-    return this.updateStructure(uri, sid, data);
+    return this.updateStructure(tokenId, sid, data);
   }
 
-  upgradeTileBuild(uri:string, sid:string, level:number){
-    const data = {
-      'level': level + 1
-    }
-    return this.updateStructure(uri, sid, data);
+  upgradeTileBuild(tokenId:number, sid:string, level:number){
+    const data = { 'level': level + 1 };
+    return this.updateStructure(tokenId, sid, data);
   }
 }

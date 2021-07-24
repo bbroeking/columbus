@@ -13,7 +13,7 @@ import { TROOPS } from '../../../constants/troops';
 export class StructureDialogComponent implements OnInit {
 
   structure: Structure;
-  tileId: string;
+  tileId: number;
   structureId: string;
   selectedTroop: string;
   queue: QueueItem[];

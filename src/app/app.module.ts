@@ -54,7 +54,6 @@ import { LoginComponent } from './components/login-components/login/login.compon
 import { DiscoverComponent } from './components/discover-components/discover/discover.component';
 import { DiscoverParcelComponent } from './components/discover-components/discover-parcel/discover-parcel.component';
 import { LandingPageComponent } from './components/landing-page-components/landing-page/landing-page.component';
-import { StructureUpgradeDialogComponent } from './components/dashboard-components/structure-upgrade-dialog/structure-upgrade-dialog.component';
 import { WarRoomComponent } from './components/war-room-components/war-room/war-room.component';
 import { ReportsComponent } from './components/report-components/reports/reports.component';
 import { ReportDetailsComponent } from './components/report-components/report-details/report-details.component';
@@ -98,7 +97,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     DiscoverComponent,
     DiscoverParcelComponent,
     LandingPageComponent,
-    StructureUpgradeDialogComponent,
     StructureDialogComponent,
     // Reports
     ReportsComponent,

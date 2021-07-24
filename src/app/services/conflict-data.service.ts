@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Troop } from '../constants/troops';
 
 export interface Conflict {
-  tileId: string,
+  tileId: number,
   attackerId: string,
   defenderId: string,
   attacking: Troop[], // 5 unit ids
@@ -67,7 +67,7 @@ export class ConflictDataService {
     return docRef?.collection<ConflictUpdate>('conflict-updates').ref.orderBy('round').get()
   }
 
-  async createConflict(tileId: string, uid: string): Promise<DocumentReference<Partial<Conflict>>> {
+  async createConflict(tileId: number, uid: string): Promise<DocumentReference<Partial<Conflict>>> {
     return this.firestore.collection<Partial<Conflict>>('conflicts').add({
       isAttacking: false,
       isDefending: false,

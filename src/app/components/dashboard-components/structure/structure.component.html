@@ -3,9 +3,13 @@
 </div>
 <div class="build" *ngIf="!structure.built">
     <div class="queued" *ngIf="structure.queued">
-        <button mat-raised-button (click)="claimStructure()" class="structure-button" *ngIf="(structure.queued | queueHandler) == 100">Claim Structure</button>
-        <span class="building-type">{{structure.queued.type}}</span>
-        <span class='percentage'>{{structure.queued | queueHandler}}% Complete</span>
+        <div class="queue-finished" *ngIf="(structure.queued | queueHandler)==100">
+            <button mat-raised-button (click)="claimStructure()" class="structure-button" *ngIf="(structure.queued | queueHandler) == 100">Claim Structure</button>
+        </div>
+        <div class="queue-not-finished" *ngIf="(structure.queued | queueHandler)!=100">
+            <span class="building-type">{{structure.queued.type}}</span>
+            <span class='percentage'>{{structure.queued | queueHandler}}% Complete</span>
+        </div>
     </div>
     <div class="empty-slot" *ngIf="!structure.queued">
         <button mat-raised-button class="structure-button" (click)="openBuildDialog(structure)">Build Structure</button>

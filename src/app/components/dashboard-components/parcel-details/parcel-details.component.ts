@@ -24,34 +24,24 @@ export class ParcelDetailsComponent {
     private metamaskService: MetamaskService) { }
 
   async ngOnInit() {
-    let uri: string = await this.ethers.getMetadataURI(this.selectedTile);
-    this.selectedAddress = await this.ethers.getOwnerOf(this.selectedTile) || '';
-    this.address = this.metamaskService.account.value;
-
-    if (uri){
-      this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
-      this.structures$ = this.tileDataService.getTileStructuresAsObservable(uri);  
-    } else {
-      // Non-player Owned Tile
-      const tileNumberAsId = this.selectedTile.toString()
-      this.tile$ = this.tileDataService.getTileValuesAsObservable(tileNumberAsId);
-      this.structures$ = this.tileDataService.getTileStructuresAsObservable(tileNumberAsId);  
-    }
+    this.update();
   }
 
   async ngOnChanges() {
-    let uri: string = await this.ethers.getMetadataURI(this.selectedTile);
+    this.update();
+  }
+
+  async update() {
     this.selectedAddress = await this.ethers.getOwnerOf(this.selectedTile) || '';
     this.address = this.metamaskService.account.value;
 
-    if (uri){
-      this.tile$ = this.tileDataService.getTileValuesAsObservable(uri);
-      this.structures$ = this.tileDataService.getTileStructuresAsObservable(uri);  
+    if (this.selectedTile){
+      this.tile$ = this.tileDataService.getTileValuesAsObservable(this.selectedTile);
+      this.structures$ = this.tileDataService.getTileStructuresAsObservable(this.selectedTile);  
     } else {
       // Non-player Owned Tile
-      const tileNumberAsId = this.selectedTile.toString()
-      this.tile$ = this.tileDataService.getTileValuesAsObservable(tileNumberAsId);
-      this.structures$ = this.tileDataService.getTileStructuresAsObservable(tileNumberAsId);  
+      this.tile$ = this.tileDataService.getTileValuesAsObservable(this.selectedTile);
+      this.structures$ = this.tileDataService.getTileStructuresAsObservable(this.selectedTile);  
     }
   }
 

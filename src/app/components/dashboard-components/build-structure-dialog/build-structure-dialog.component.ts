@@ -3,7 +3,6 @@ import { StructureType } from 'src/app/constants/buildings';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';
 import {BUILDINGS} from '../../../constants/buildings';
 import { QueueItem, QueueService } from 'src/app/services/queue.service';
-import { EthersService } from 'src/app/services/ethers.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as _ from 'underscore';
 
@@ -23,7 +22,6 @@ export class BuildStructureDialogComponent implements OnInit {
   constructor(
     private queueService: QueueService,
     private tileService: TileDataService,
-    private etherService: EthersService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -35,7 +33,6 @@ export class BuildStructureDialogComponent implements OnInit {
   async build() {
     const structureType: StructureType = this.selectedValue as unknown as StructureType;
     const queueItem: QueueItem = this.queueService.prepareStructureItem(structureType);
-    const uri:string = await this.etherService.getMetadataURI(this.selectedTile);
-    this.tileService.queueBuildStructure(uri, this.structure.sid, queueItem);
+    this.tileService.queueBuildStructure(this.selectedTile, this.structure.sid, queueItem);
   }
 }

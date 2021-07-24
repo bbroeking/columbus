@@ -13,32 +13,27 @@ import { TileDataService } from 'src/app/services/tile-data.service';
 })
 export class DeclareWarComponent {
   @Input() selectedTile: number;
-  tileId: string;
   sub: Subscription;
 
   constructor(
     private tileDataService: TileDataService,
     private conflictDataService: ConflictDataService,
     private router: Router,
-    private metamaskService: MetamaskService,
-    private ethersService: EthersService) { }
+    private metamaskService: MetamaskService) { }
 
-  async ngOnChanges() {
-    this.tileId = await this.ethersService.getMetadataURI(this.selectedTile);
-  }
   ngOnDestroy() {
     if (this.sub)
       this.sub.unsubscribe();
   }
 
   async declareWar() {
-    this.sub = this.tileDataService.getTileValuesAsObservable(this.tileId)
+    this.sub = this.tileDataService.getTileValuesAsObservable(this.selectedTile)
                     .subscribe( async (res) => {
                       if (res && !res?.inConflict){
                         const account = await this.metamaskService.getConnectedAccount();
                         // TODO make check for not attacking your own
-                        const conflict = await this.conflictDataService.createConflict(this.tileId, account);
-                        this.tileDataService.updateTile(this.tileId, { conflictId: conflict.id, inConflict: true})
+                        const conflict = await this.conflictDataService.createConflict(this.selectedTile, account);
+                        this.tileDataService.updateTile(this.selectedTile, { conflictId: conflict.id, inConflict: true})
                         this.router.navigate([`/war-room/${conflict.id}`])
                       }
                       else 

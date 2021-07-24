@@ -20,7 +20,7 @@ export class PlanningTableComponent implements OnInit {
   @Input() isDefending: boolean;
   @Input() attackerId: string;
   @Input() defenderId: string;
-  @Input() tileId: string;
+  @Input() tileId: number;
   @Input() conflictId: string;
 
   attacking$: Observable<Troop[]>;

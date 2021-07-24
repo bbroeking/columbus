@@ -43,7 +43,6 @@ export class StructureComponent {
       'type': this.structure.queued.type,
       'built': true,
     }
-    const uri = await this.ethersService.getMetadataURI(this.selectedTile);
-    this.tileService.updateStructure(uri, this.structure.sid, data);
+    this.tileService.updateStructure(this.selectedTile, this.structure.sid, data);
   }
 }
