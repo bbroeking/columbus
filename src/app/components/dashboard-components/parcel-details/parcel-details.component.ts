@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Structure, Tile, TileDataService } from 'src/app/services/tile-data.service';
 import { EthersService } from 'src/app/services/ethers.service';
 import { MetamaskService } from 'src/app/services/metamask.service';
+import { TileGeneratorService } from 'src/app/services/tile-generator.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ParcelDetailsComponent {
 
   constructor(private ethers : EthersService,
     private tileDataService: TileDataService,
+    private tileGeneratorService: TileGeneratorService,
     private metamaskService: MetamaskService) { }
 
   async ngOnInit() {
@@ -35,7 +37,7 @@ export class ParcelDetailsComponent {
     this.selectedAddress = await this.ethers.getOwnerOf(this.selectedTile) || '';
     this.address = this.metamaskService.account.value;
 
-    if (this.selectedTile){
+    if (this.selectedAddress){
       this.tile$ = this.tileDataService.getTileValuesAsObservable(this.selectedTile);
       this.structures$ = this.tileDataService.getTileStructuresAsObservable(this.selectedTile);  
     } else {

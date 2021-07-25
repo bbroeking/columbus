@@ -2,7 +2,7 @@ import {ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS} from "./resources";
 import {MARAUDER, MARINE, TROOPS} from './troops';
 
 // Army
-export const BARRACKS = 'barracks';
+export const BARRACKS = 'Barracks';
 export const GROUND_MECH_PRODUCTION = 'ground-mech-production';
 export const AIR_MECH_PRODUCTION = 'air-mech-production';
 // Research

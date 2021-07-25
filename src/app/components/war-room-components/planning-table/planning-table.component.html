@@ -1,32 +1,34 @@
 <div class="planning-table">
-    <div class="attacking">
-        <div class="toSet" *ngIf="!isAttacking">
-            <div class="attacking-row">
-                <div *ngFor="let troop of attacking$ | async as attacking" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troops]="attacking"></app-troop-card>
+    <div class="battlefield">
+        <div class="attacking">
+            <div class="to-set" *ngIf="!isAttacking">
+                <div class="attacking-row">
+                    <div *ngFor="let troop of attacking$ | async as attacking" class="troop" (click)="remove(troop)">
+                        <app-troop-card [troops]="attacking"></app-troop-card>
+                    </div>
                 </div>
-            </div>
-        </div>    
-        <div class="isSet" *ngIf="isAttacking">
-            <div class="attacking-row">
-                <div *ngFor="let troop of attacking" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troops]="attacking"></app-troop-card>
+            </div>    
+            <div class="is-set" *ngIf="isAttacking">
+                <div class="attacking-row">
+                    <div *ngFor="let troop of attacking" class="troop" (click)="remove(troop)">
+                        <app-troop-card [troops]="attacking"></app-troop-card>
+                    </div>
                 </div>
-            </div>
-        </div>    
-    </div>
-    <div class="defending">
-        <div class="toSet" *ngIf="!isDefending">
-            <div class="attacking-row">
-                <div *ngFor="let troop of defending$ | async as defending" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troops]="defending"></app-troop-card>
+            </div>    
+        </div>
+        <div class="defending">
+            <div class="to-set" *ngIf="!isDefending">
+                <div class="attacking-row">
+                    <div *ngFor="let troop of defending$ | async as defending" class="troop" (click)="remove(troop)">
+                        <app-troop-card [troops]="defending"></app-troop-card>
+                    </div>
                 </div>
-            </div>
-        </div>    
-        <div class="isSet" *ngIf="isDefending">
-            <div class="defending-row">
-                <div *ngFor="let troop of defending" class="troop" (click)="remove(troop)">
-                    <app-troop-card [troops]="defending"></app-troop-card>
+            </div>    
+            <div class="is-set" *ngIf="isDefending">
+                <div class="defending-row">
+                    <div *ngFor="let troop of defending" class="troop" (click)="remove(troop)">
+                        <app-troop-card [troops]="defending"></app-troop-card>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,6 +37,8 @@
         mat-button
         *ngIf="!isAttacking || !isDefending"
         class="submit" (click)="submitTable()"
-        [class.disabled]="validTable()">Lock-in</button>
+        [class.disabled]="validTable()">
+        Lock-in
+    </button>
 </div>
 

@@ -1,46 +1,20 @@
 .planning-table {
-    left: 0;
-    position: absolute;
-    width: 70%;
+    display: flex;
     height: 100%;
-    background-color: blue;
+    border-right: 2px solid #98fc03;
 
-    button {
-        position: absolute;
-        top: 50%;
-        left: 90%
-    }
-    button.disabled{
-        cursor: not-allowed !important;
-        opacity: 0.5;
-        text-decoration: none;
-    }
-
-    .isSet, .toSet  {
-        height: 100%;
-    }
-
-    .attacking, .defending {
-        height: 50%;
-    }
-
-    .attacking-row {
+    .battlefield {
         display: flex;
-        flex-wrap: nowrap;
+        flex-direction: column;
         height: 100%;
-        justify-content: space-evenly;
-    }
+        flex: 0 0 90%;
+        .attacking {
+            flex: 0 0 50%;
+            border-bottom: 1px solid #98fc03;
+        }
 
-    .defending-row {
-        display: flex;
-        flex-wrap: nowrap;
-        height: 100%;
-        justify-content: space-evenly;
-    }
-
-    .troop {
-        height: 80%;
-        width: 15%;
-        margin-top: 20px;
+        .defending {
+            flex: 0 0 50%;
+        }
     }
 }

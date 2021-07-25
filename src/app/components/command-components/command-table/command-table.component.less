@@ -1,26 +1,32 @@
+@import url("../../../../styles.less");
+
 .command-table {
     display: flex;
     height: calc(100% - 75px);
+    background: @gray-background;
 
     .command-troops {
         display: flex;
         flex-direction: column;
         padding-top: 3rem;
-        flex: auto;
+        flex: 0 0 75%;
         overflow-y: scroll;
 
         .no-troops {
             align-self: center;
+        }
+
+        .command-table-troops-list {
+            border: 1px solid #98fc03;
         }
     }
 
     .promote-troop {
         display: flex;
         flex-direction: column;
-        background-color: brown;
-        width: 25%;
-        flex: 0 0 auto;
-    
+        flex: 0 0 25%;
+        margin-left: auto;
+
         .title-promote {
             padding-top: 20px;
             font-size: 1.2em;
@@ -35,6 +41,7 @@
         }
     
         .promote {
+            align-self:center;
             margin-bottom: 20px;
         }
     }

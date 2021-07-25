@@ -1,29 +1,31 @@
-<div class="war-room">
-    <div *ngIf="conflictData$ | async as conflictData">
-        <!-- Combat is in the planning stages or is in progress -->
-        <div class="resolving" *ngIf="!conflictData.isResolved">
+<div class="war-room" *ngIf="conflictData$ | async as conflictData">
+    <!-- Combat is in the planning stages or is in progress -->
+    <div class="resolving" *ngIf="!conflictData.isResolved">
+        <div class="main-panel">
             <app-planning-table 
-                [isAttacking]="conflictData.isAttacking"
-                [isDefending]="conflictData.isDefending"
-                [attackerId]="conflictData.attackerId"
-                [defenderId]="conflictData.defenderId"
-                [tileId]="conflictData.tileId"
-                [conflictId]="conflictId">
-            </app-planning-table>
-            <app-garrison 
+            [isAttacking]="conflictData.isAttacking"
+            [isDefending]="conflictData.isDefending"
+            [attackerId]="conflictData.attackerId"
+            [defenderId]="conflictData.defenderId"
+            [tileId]="conflictData.tileId"
+            [conflictId]="conflictId">
+        </app-planning-table>
+        </div>
+        <div class="side-panel">
+                <app-garrison 
                 *ngIf="!conflictData.isAttacking || !conflictData.isDefending" 
                 [isAttacking]="conflictData.isAttacking">
             </app-garrison>
             <app-conflict-feed
                 *ngIf="conflictData.isAttacking && conflictData.isDefending"
-                [conflictId]="conflictData.id"
-            ></app-conflict-feed>  
-        </div>
-        <!-- Combat is over -->
-        <div class="resolved" *ngIf="conflictData.isResolved">
-            <app-conflict-resolved
                 [conflictId]="conflictData.id">
-            </app-conflict-resolved>
+            </app-conflict-feed>
         </div>
+    </div>
+    <!-- Combat is over -->
+    <div class="resolved" *ngIf="conflictData.isResolved">
+        <app-conflict-resolved
+            [conflictId]="conflictData.id">
+        </app-conflict-resolved>
     </div>
 </div>

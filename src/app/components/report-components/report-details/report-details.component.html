@@ -24,7 +24,7 @@
             </div>
             <div class="last-collected">{{ tile.lastCollected?.toDate() | date:'medium' }}</div>
             <div class="collect-store">
-                <button mat-button (click)="collectStore(tile.mineralRate, tile.energyRate, tile.lastCollected)" class="collect">Collect</button>
+                <button mat-raised-button (click)="collectStore(tile.mineralRate, tile.energyRate, tile.lastCollected)" class="collect">Collect</button>
             </div>
         </div>
     </div>

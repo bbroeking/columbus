@@ -1,5 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { newArray } from '@angular/compiler/src/util';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable, Subscription } from 'rxjs';
 import { QueueItem, QueueService } from 'src/app/services/queue.service';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';
 import { TroopDataService } from 'src/app/services/troop-data.service';
@@ -17,6 +19,9 @@ export class StructureDialogComponent implements OnInit {
   structureId: string;
   selectedTroop: string;
   queue: QueueItem[];
+  structure$: Observable<Structure | undefined>;
+  structureSub: Subscription;
+
   constructor(
     private tileDataService: TileDataService,
     private queueService: QueueService,
@@ -29,6 +34,11 @@ export class StructureDialogComponent implements OnInit {
     this.structureId = this.structure.sid;
     this.queue = this.structure.queue;
     this.selectedTroop = '';
+
+    this.structure$ = this.tileDataService.getTileStructureAsObservable(this.tileId, this.structureId);
+    this.structureSub = this.structure$.subscribe((struc: Structure | undefined) => {
+      this.queue = struc?.queue!;
+    })
   }
 
   addToQueue(){
@@ -36,7 +46,8 @@ export class StructureDialogComponent implements OnInit {
       const newQueue: QueueItem[] = this.queueService.prepareBarracksItem(this.queue, this.selectedTroop)
       this.tileDataService.updateStructure(this.tileId, this.structureId, {
         queue: newQueue
-      })  
+      });
+      this.queue = newQueue;
     }
   }
 
@@ -54,6 +65,16 @@ export class StructureDialogComponent implements OnInit {
 
   queueFull(): boolean {
     return this.queue.length >= 5;
+  }
+
+  unitSrc(type: string){
+    if (type == 'marine'){
+      return 'assets/units/marine.jpeg';
+    } else if (type == 'marauder') {
+      return 'assets/units/marauder.jpg'
+    } else {
+      return '';
+    }
   }
 
 }

@@ -14,9 +14,9 @@ export class StructureComponent {
   @Input() structure: Structure;
   @Input() selectedTile: number;
 
-  constructor(private tileService: TileDataService,
-    private ethersService: EthersService,
-    public dialog: MatDialog) { }
+  constructor(
+    private tileService: TileDataService,
+    public dialog: MatDialog) {}
   
   openDialog(structure: Structure) {
     const dialogRef = this.dialog.open(StructureDialogComponent, {

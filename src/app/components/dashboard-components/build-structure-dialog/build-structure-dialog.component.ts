@@ -3,7 +3,7 @@ import { StructureType } from 'src/app/constants/buildings';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';
 import {BUILDINGS} from '../../../constants/buildings';
 import { QueueItem, QueueService } from 'src/app/services/queue.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as _ from 'underscore';
 
 @Component({
@@ -22,6 +22,7 @@ export class BuildStructureDialogComponent implements OnInit {
   constructor(
     private queueService: QueueService,
     private tileService: TileDataService,
+    public dialogRef: MatDialogRef<BuildStructureDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -34,5 +35,6 @@ export class BuildStructureDialogComponent implements OnInit {
     const structureType: StructureType = this.selectedValue as unknown as StructureType;
     const queueItem: QueueItem = this.queueService.prepareStructureItem(structureType);
     this.tileService.queueBuildStructure(this.selectedTile, this.structure.sid, queueItem);
+    this.dialogRef.close();
   }
 }

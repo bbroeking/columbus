@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth.guard';
 import { MetamaskGuard } from './metamask.guard';
 
 import { DashboardComponent } from './components/dashboard-components/dashboard/dashboard.component';
 import { ExplorerComponent } from './components/dashboard-components/explorer/explorer.component';
-import { MapComponent } from './components/dashboard-components/map/map.component';
 import { DiscoverComponent } from './components/discover-components/discover/discover.component';
 import { LandingPageComponent } from './components/landing-page-components/landing-page/landing-page.component';
 import { LoginComponent } from './components/login-components/login/login.component';
@@ -19,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'reports', component: ReportsComponent, canActivate: [MetamaskGuard] },
   { path: 'dashboard/:mapId', component: DashboardComponent, canActivate: [MetamaskGuard] },
-  { path: 'discover', component: DiscoverComponent, canActivate: [MetamaskGuard] },
+  { path: 'annex', component: DiscoverComponent, canActivate: [MetamaskGuard] },
   { path: 'declare-war', component: DeclareWarComponent, canActivate: [MetamaskGuard]},
   { path: 'garrison', component: CommandTableComponent, canActivate: [MetamaskGuard]},
   { path: 'war-room/:conflictId', component: WarRoomComponent, canActivate: [MetamaskGuard] },

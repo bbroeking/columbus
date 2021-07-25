@@ -102,6 +102,10 @@ export class TileDataService {
                         .valueChanges({idField: 'sid'});
   }
 
+  getTileStructureAsObservable(tokenId: number, structureId: string): Observable<Structure | undefined> {
+    return this.firestore.doc<Structure>(`tiles/${tokenId}/structures/${structureId}`).valueChanges();
+  }
+
   updateStructure(tokenId: number, sid: string, data: any) {
     return this.firestore.collection('tiles')
                           .doc(`${tokenId}`)

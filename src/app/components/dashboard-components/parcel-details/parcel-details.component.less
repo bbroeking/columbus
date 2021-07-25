@@ -1,25 +1,38 @@
+@import url("../../../../styles.less");
+
 .details-panel {
     display: flex;
     flex-direction: column;
-
+    background: @gray-background;
+    height: 100%;
     .info {
         display: flex;
         flex-direction: column;
-        align-items: center;
         border-bottom: 1px solid #98fc03;
-        flex: 1 1 40%;
+        flex: 0 1 40%;
+
+        .entry {
+            display: flex;
+            flex: 1 1 100%;
+            align-items: center;
+            .flex-start {
+                margin-left: 20px;
+            }
+            .flex-end {
+                margin-right: 20px;
+                margin-left: auto;
+            }
+        }
     }
 
     .owned-by-user {
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: space-evenly;
         flex: 0 1 60%;
 
         .structure {
             margin: 4px;
-            width: 90%;
             flex: 1 1 20px
         }
     }
@@ -33,6 +46,13 @@
         .declare-war-wrapper {
             padding-top: 30px;
         }
+    }
+
+    .not-owned {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
     }
 
 }

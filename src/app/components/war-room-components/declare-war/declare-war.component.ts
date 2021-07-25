@@ -13,7 +13,9 @@ import { TileDataService } from 'src/app/services/tile-data.service';
 })
 export class DeclareWarComponent {
   @Input() selectedTile: number;
+  @Input() disabled:boolean;
   sub: Subscription;
+
 
   constructor(
     private tileDataService: TileDataService,

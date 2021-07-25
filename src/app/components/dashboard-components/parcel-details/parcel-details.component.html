@@ -1,15 +1,27 @@
 <div class="details-panel" *ngIf="tile$ | async as tile">
 
     <div class="info">
-        <span>TileId</span>
-        <span class="tile">{{tile.id}}</span>
-        <span>Owner</span>
-        <span class="owner">{{selectedAddress}}</span>
-        <span>Mineral Production Rate: {{tile.mineralRate}}</span>
-        <span>Energy Production Rate {{tile.energyRate}}</span>
-
-        <span>In Conflict: {{tile.inConflict }}</span>
-        <button mat-button *ngIf="tile.inConflict" [routerLink]="generateWarRoomLink(tile.conflictId)">View Conflict</button>
+        <div class="entry">
+            <span class='flex-start'>Tile Id</span>
+            <span class='flex-end'>{{tile.id}}</span>
+        </div>
+        <div class="entry">
+            <span class='flex-start'>Owner</span>
+            <span class='flex-end'>{{ (selectedAddress.length > 6) ? (selectedAddress | slice:0:6)+'..' : selectedAddress }}</span>
+        </div>
+        <div class="entry">
+            <span class="flex-start">Mineral Production Rate:</span>
+            <span class="flex-end">{{tile.mineralRate}}</span>
+        </div>
+        <div class="entry">
+            <span class="flex-start">Energy Production Rate:</span>
+            <span class="flex-end">{{tile.energyRate}}</span>
+        </div>
+        <div class="entry">
+            <span class="flex-start">In Conflict:</span>
+            <span class="flex-end">{{tile.inConflict}}</span>
+            <button mat-button *ngIf="tile.inConflict" [routerLink]="generateWarRoomLink(tile.conflictId)">View Conflict</button>
+        </div>
     </div>
 
     <div class="owned-by-user" *ngIf="selectedAddress && selectedAddress === address">
@@ -20,7 +32,7 @@
 
     <div class="owned-by-another" *ngIf="selectedAddress && selectedAddress != address">
         <div class="declare-war-wrapper">
-            <app-declare-war [selectedTile]="selectedTile"></app-declare-war>
+            <app-declare-war [disabled]="tile.inConflict" [selectedTile]="selectedTile"></app-declare-war>
         </div>
     </div>
 

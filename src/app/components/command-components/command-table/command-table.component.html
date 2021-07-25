@@ -1,7 +1,10 @@
 <div class="command-table" cdkDropListGroup>
     <div class='command-troops' *ngIf="troops$ | async as troops">
-        <div class="no-troops" *ngIf="troops.length == 0">You have no active troops. Construct production facilities on your lands to defend them.</div>
+        <div class="no-troops" *ngIf="troops.length == 0">
+            You have no active troops. Construct production facilities on your lands to defend them.
+        </div>
         <div cdkDropList
+            *ngIf="troops.length != 0"
             [cdkDropListData]="troops"
             [cdkDropListDisabled]="isPromoteFull()"
             (cdkDropListDropped)="drop($event)"
@@ -18,6 +21,11 @@
             class="slots-parent">
             <app-troop-card [troops]="promote"></app-troop-card>
         </div>
-        <button mat-button [disabled]='!canPromote()' (click)='promoteTroop()' class='promote'>Promote</button>
+        <button mat-raised-button 
+            [disabled]='!canPromote()'
+            (click)='promoteTroop()' 
+            class='promote'>
+            Promote
+        </button>
     </div>
 </div>

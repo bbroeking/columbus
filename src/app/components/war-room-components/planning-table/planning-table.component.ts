@@ -31,7 +31,6 @@ export class PlanningTableComponent implements OnInit {
 
   constructor(private battlefieldDataService: BattlefieldDataService,
               private conflictDataService: ConflictDataService,
-              private authService: AuthService,
               private router: Router,
               private ethers: EthersService,
               private metamaskService: MetamaskService) { }
