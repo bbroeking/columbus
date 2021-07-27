@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DocumentData, QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { ConflictDataService } from 'src/app/services/conflict-data.service';
+import { Observable } from 'rxjs';
+import { Conflict, ConflictDataService, ConflictUpdate } from 'src/app/services/conflict-data.service';
 
 @Component({
   selector: 'app-conflict-resolved',
@@ -8,14 +9,13 @@ import { ConflictDataService } from 'src/app/services/conflict-data.service';
   styleUrls: ['./conflict-resolved.component.less']
 })
 export class ConflictResolvedComponent implements OnInit {
-  @Input() conflictId: string;
-  conflictDocs: QueryDocumentSnapshot<DocumentData>[] | undefined;
+  @Input() conflict: Conflict;
+  conflictUpdates$: Observable<ConflictUpdate[]>;
 
   constructor(private conflictDataService: ConflictDataService) { }
 
   async ngOnInit() {
-    const query = await this.conflictDataService.getConflictUpdatesValues(this.conflictId);
-    this.conflictDocs = query?.docs;
+    this.conflictUpdates$ = await this.conflictDataService.getConflictUpdatesValues(this.conflict);
   }
 
 }

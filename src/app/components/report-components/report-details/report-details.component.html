@@ -39,7 +39,7 @@
     <!-- Conflict -->
     <div class="conflict" *ngIf="conflict$ | async; let conflict">
         <div class="planning" *ngIf="!conflict.isAttacking || !conflict.isDefending">
-            <div>{{conflict | json}}</div>
+            <!-- <div>{{conflict | json}}</div> -->
             <div class="attackers" *ngFor="let attacker of conflict.attacking">
                 <div class="troop">
                     <span class="name">{{attacker.name}}</span>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="defenders-not-set" *ngIf="!conflict.isDefending">
-                    <button mat-button class="set-defenders">Set Defense</button>
+                    <button mat-button [routerLink]="generateLink(conflict.id)" class="set-defenders">Set Defense</button>
                 </div>    
             </div>
         </div>

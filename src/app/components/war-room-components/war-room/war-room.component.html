@@ -9,7 +9,7 @@
                         cdkDropList
                         [cdkDropListData]="planAttack"
                         (cdkDropListDropped)="drop($event)">
-                        <app-battlefield-card [troops]="planAttack"></app-battlefield-card>
+                        <app-battlefield-card [troops]="planAttack" [dragDisabled]="false"></app-battlefield-card>
                     </div>    
                     <div class="attacking locked"
                         *ngIf="state != 0">
@@ -20,7 +20,7 @@
                         cdkDropList
                         [cdkDropListData]="planDefense"
                         (cdkDropListDropped)="drop($event)">
-                        <app-battlefield-card [troops]="planDefense"></app-battlefield-card>
+                        <app-battlefield-card [troops]="planDefense" [dragDisabled]="false"></app-battlefield-card>
                     </div>
                     <div class="defending locked" 
                         *ngIf="state != 1">
@@ -37,24 +37,25 @@
             </div>            
         </div>
         <div class="side-panel">
-            <div class="garrison" *ngIf="troops$ | async | filterDeployed as troops">
+            <div class="garrison" *ngIf="!conflictData.isDefending">
                 <div cdkDropList
                     [cdkDropListData]="troops"
                     (cdkDropListDropped)="drop($event)"
+                    *ngIf="troops$ | async | filterDeployed as troops"
                     class="slots-parent">
                     <app-troop-card [troops]="troops"></app-troop-card>
                 </div>
             </div>
-            <!-- <app-conflict-feed
+            <app-conflict-feed
                 *ngIf="conflictData.isAttacking && conflictData.isDefending"
-                [conflictId]="conflictData.id">
-            </app-conflict-feed> -->
+                [conflict]="conflictData">
+            </app-conflict-feed>
         </div>
     </div>
     <!-- Combat is over -->
     <div class="resolved" *ngIf="conflictData.isResolved">
         <app-conflict-resolved
-            [conflictId]="conflictData.id">
+            [conflict]="conflictData">
         </app-conflict-resolved>
     </div>
 </div>

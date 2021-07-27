@@ -12,7 +12,7 @@ export class BattlefieldCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(!this.dragDisabled)
+    if(this.dragDisabled == undefined)
       this.dragDisabled = true;
   }
 

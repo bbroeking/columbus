@@ -1,7 +1,5 @@
 <div class="conflict-feed">
-    <div class="conflict-exists" *ngIf="conflictDocs">
-        <div class="conflict-updates" *ngFor="let doc of conflictDocs">
-            <app-conflict-round [roundData]="doc"></app-conflict-round>
-        </div>
+    <div class="conflict-updates" *ngFor="let doc of conflictUpdates$ | async">
+        <app-conflict-round [roundData]="doc"></app-conflict-round>
     </div>
 </div>

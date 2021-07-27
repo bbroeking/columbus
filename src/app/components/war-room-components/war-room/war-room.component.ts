@@ -108,7 +108,7 @@ export class WarRoomComponent implements OnInit {
     const account = await this.metamaskService.getConnectedAccount();
     const metadataIds: string[] = await this.ethers.getTokenMetadataIdsByOwner(account);
     const attackerOnOffense = account == this.attackerId && !this.isAttacking;
-    const defenderOnDefense = _.contains(metadataIds, this.tileId) && this.isAttacking && !this.isDefending;
+    const defenderOnDefense = _.contains(metadataIds, this.tileId.toString()) && this.isAttacking && !this.isDefending;
     if (attackerOnOffense)
       return WarRoomState.ATTACKER_EDIT;
     else if(defenderOnDefense)

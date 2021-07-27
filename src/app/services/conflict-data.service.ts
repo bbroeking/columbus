@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, DocumentData, DocumentReference, QuerySnapshot } from '@angular/fire/firestore';
+import { Timestamp } from '@firebase/firestore-types';
 import { Observable } from 'rxjs';
 import { Troop } from '../constants/troops';
 
@@ -12,10 +13,14 @@ export interface Conflict {
   isAttacking: boolean,
   isDefending: boolean,
   isResolved: boolean,
+  resolved: Timestamp,
+  complete: Timestamp,
+  rounds: number,
   id: string, // self-ref
 }
 
 export interface ConflictUpdate {
+  id: string
   endOfRoundAtk: any,
   endOfRoundDef: any,
   logs: any,
@@ -62,9 +67,19 @@ export class ConflictDataService {
                         .valueChanges({idField: 'id'});
   }
 
-  async getConflictUpdatesValues(conflictId: string): Promise<QuerySnapshot<DocumentData>| undefined> {
-    let docRef = await this.getConflictDocRef(conflictId);
-    return docRef?.collection<ConflictUpdate>('conflict-updates').ref.orderBy('round').get()
+  getConflictUpdatesValues(conflict: Conflict): Observable<ConflictUpdate[]> {
+    const resolved: Timestamp = conflict.resolved;
+    const rounds = this.getResolvedRounds(resolved.seconds, Math.floor(Date.now() / 1000));
+    return this.firestore.collection('conflicts')
+                        .doc(`${conflict.id}`)
+                        .collection<ConflictUpdate>('conflict-updates', ref=>ref.where('round', '<=', rounds))
+                        .valueChanges({idField: 'id'});
+  }
+
+  getResolvedRounds(inital: number, now: number) {
+    const diff = now - inital;
+    const HOURS_PER_ROUND = 3600 * 2
+    return Math.floor(diff / HOURS_PER_ROUND);
   }
 
   async createConflict(tileId: number, uid: string): Promise<DocumentReference<Partial<Conflict>>> {

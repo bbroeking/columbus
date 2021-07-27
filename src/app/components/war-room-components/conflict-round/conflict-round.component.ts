@@ -9,12 +9,10 @@ import { ConflictUpdate } from 'src/app/services/conflict-data.service';
 })
 export class ConflictRoundComponent implements OnInit {
 
-  @Input() roundData: QueryDocumentSnapshot<DocumentData> | null;
-  data: DocumentData;
+  @Input() roundData: ConflictUpdate;
   constructor() { }
 
   ngOnInit(): void {
-    this.data = this.roundData?.data() as ConflictUpdate;
   }
 
 }

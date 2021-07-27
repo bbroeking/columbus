@@ -1,19 +1,19 @@
-<div class='round' *ngIf="roundData?.exists">
+<div class='round' *ngIf="roundData">
     <div class="roundNum">
-        {{data.round}}
+        <span>Round: {{roundData.round + 1}}</span>
     </div>
 
-    <div class="attackers" *ngFor="let atk of data.endOfRoundAtk">
-        {{atk.name}}
-        {{atk.HP}}
+    <div class="attackers unit" *ngFor="let atk of roundData.endOfRoundAtk">
+        <span>{{atk.name}}</span>
+        <span>{{atk.HP}}</span>
     </div>
 
-    <div class="defenders" *ngFor="let def of data.endOfRoundDef">
-        {{def.name}}
-        {{def.HP}}
+    <div class="defenders unit" *ngFor="let def of roundData.endOfRoundDef">
+        <span>{{def.name}}</span>
+        <span>{{def.HP}}</span>
     </div>
 
-    <div class="logs" *ngFor="let log of data.logs">
-        {{log}}
+    <div class="logs">
+        <span class="log" *ngFor="let log of roundData.logs">{{log}}</span>
     </div>
 </div>
