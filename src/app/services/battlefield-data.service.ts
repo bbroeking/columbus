@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Troop } from '../constants/troops';
 import { CloudFunctionsService } from './cloud-functions.service';
 import { ConflictDataService } from './conflict-data.service';
+import { TroopDataService } from './troop-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class BattlefieldDataService {
   currentDefending: Observable<Troop[]>;
 
   constructor(
+    private troopDataService: TroopDataService,
     private conflictDataService: ConflictDataService,
     private cloudFunctionsService: CloudFunctionsService) { 
     this.attacking = [];
@@ -73,29 +75,28 @@ export class BattlefieldDataService {
     return this.defending.findIndex(i => i.id == troop.id)
   }
 
-  isValidBattlefield(isAttacking: boolean){
-    if (!isAttacking)
-      return this.BATTLEFIELD_MAX == this.attacking.length;
-    else
-      return this.BATTLEFIELD_MAX == this.defending.length;
+  isValidBattlefield(troops: Troop[]): boolean{
+    return troops.length <= this.BATTLEFIELD_MAX;
   }
 
-  async submitBattlefield(isAttacking: boolean, conflictId: string){
+  async submitBattlefield(isAttacking: boolean, conflictId: string, troops: Troop[]){
     var conflict = {};
     if (!isAttacking)
       conflict = { 
-        attacking: this.attacking,
+        attacking: troops,
         isAttacking: true
       }
     else
       conflict = {
-        defending: this.defending,
+        defending: troops,
         isDefending: true
       }
+
+    this.troopDataService.deployTroops(troops);
     var res = await this.conflictDataService.updateConflict(conflictId, conflict);
     if (isAttacking)
       res = await this.cloudFunctionsService.simulateCombat({
         id: conflictId
-      })
+    })
   }
 }

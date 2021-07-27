@@ -5,6 +5,7 @@ export interface Troop {
     type: string,
     uid: string,
     id: string,
+    deployed: boolean
 }
 
 export interface COMBAT_TROOP {

@@ -41,7 +41,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CloudFunctionsService } from './services/cloud-functions.service';
 
 // Components
-import { GarrisonComponent } from './components/war-room-components/garrison/garrison.component';
 import { ExplorerComponent } from './components/dashboard-components/explorer/explorer.component';
 import { MapComponent } from './components/dashboard-components/map/map.component';
 import { BrowserComponent } from './components/dashboard-components/browser/browser.component';
@@ -57,7 +56,6 @@ import { LandingPageComponent } from './components/landing-page-components/landi
 import { WarRoomComponent } from './components/war-room-components/war-room/war-room.component';
 import { ReportsComponent } from './components/report-components/reports/reports.component';
 import { ReportDetailsComponent } from './components/report-components/report-details/report-details.component';
-import { PlanningTableComponent } from './components/war-room-components/planning-table/planning-table.component';
 import { ConflictFeedComponent } from './components/war-room-components/conflict-feed/conflict-feed.component';
 import { ConflictRoundComponent } from './components/war-room-components/conflict-round/conflict-round.component';
 import { DeclareWarComponent } from './components/war-room-components/declare-war/declare-war.component';
@@ -70,6 +68,8 @@ import { CommandTableComponent } from './components/command-components/command-t
 import { TroopCardComponent } from './components/command-components/troop-card/troop-card.component';
 import { MetamaskNotConnectedComponent } from './components/error-pages/metamask-not-connected/metamask-not-connected.component';
 import { ClockComponent } from './components/discover-components/clock/clock.component';
+import { BattlefieldCardComponent } from './components/war-room-components/battlefield-card/battlefield-card.component';
+import { FilterDeployedPipe } from './components/war-room-components/filter-deployed.pipe';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -103,8 +103,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     ReportDetailsComponent,
     // Conflicts 
     WarRoomComponent,
-    GarrisonComponent,
-    PlanningTableComponent,
     ConflictFeedComponent,
     ConflictRoundComponent,
     DeclareWarComponent,
@@ -116,6 +114,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     TroopCardComponent,
     MetamaskNotConnectedComponent,
     ClockComponent,
+    BattlefieldCardComponent,
+    FilterDeployedPipe,
   ],
   imports: [
     BrowserModule,

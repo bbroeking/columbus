@@ -1,25 +1,54 @@
-<div class="war-room" *ngIf="conflictData$ | async as conflictData">
+<div class="war-room" *ngIf="conflictData$ | async as conflictData" cdkDropListGroup>
     <!-- Combat is in the planning stages or is in progress -->
     <div class="resolving" *ngIf="!conflictData.isResolved">
         <div class="main-panel">
-            <app-planning-table 
-            [isAttacking]="conflictData.isAttacking"
-            [isDefending]="conflictData.isDefending"
-            [attackerId]="conflictData.attackerId"
-            [defenderId]="conflictData.defenderId"
-            [tileId]="conflictData.tileId"
-            [conflictId]="conflictId">
-        </app-planning-table>
+            <div class="planning-table">
+                <div class="battlefield">
+                    <div class="attacking unlocked"
+                        *ngIf="state == 0"
+                        cdkDropList
+                        [cdkDropListData]="planAttack"
+                        (cdkDropListDropped)="drop($event)">
+                        <app-battlefield-card [troops]="planAttack"></app-battlefield-card>
+                    </div>    
+                    <div class="attacking locked"
+                        *ngIf="state != 0">
+                        <app-battlefield-card [troops]="attacking"></app-battlefield-card>
+                    </div>    
+                    <div class="defending unlocked"
+                        *ngIf="state == 1"
+                        cdkDropList
+                        [cdkDropListData]="planDefense"
+                        (cdkDropListDropped)="drop($event)">
+                        <app-battlefield-card [troops]="planDefense"></app-battlefield-card>
+                    </div>
+                    <div class="defending locked" 
+                        *ngIf="state != 1">
+                        <app-battlefield-card [troops]="defending"></app-battlefield-card>
+                    </div>
+                </div>
+                <button
+                    mat-raised-button
+                    *ngIf="!isAttacking || !isDefending"
+                    class="submit" (click)="submitTable()"
+                    [class.disabled]="validBattlefield()">
+                    Lock-in
+                </button>
+            </div>            
         </div>
         <div class="side-panel">
-                <app-garrison 
-                *ngIf="!conflictData.isAttacking || !conflictData.isDefending" 
-                [isAttacking]="conflictData.isAttacking">
-            </app-garrison>
-            <app-conflict-feed
+            <div class="garrison" *ngIf="troops$ | async | filterDeployed as troops">
+                <div cdkDropList
+                    [cdkDropListData]="troops"
+                    (cdkDropListDropped)="drop($event)"
+                    class="slots-parent">
+                    <app-troop-card [troops]="troops"></app-troop-card>
+                </div>
+            </div>
+            <!-- <app-conflict-feed
                 *ngIf="conflictData.isAttacking && conflictData.isDefending"
                 [conflictId]="conflictData.id">
-            </app-conflict-feed>
+            </app-conflict-feed> -->
         </div>
     </div>
     <!-- Combat is over -->

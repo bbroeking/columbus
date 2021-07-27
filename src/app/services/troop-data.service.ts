@@ -59,6 +59,14 @@ export class TroopDataService {
     return troop;
   }
 
+  deployTroops(troops: Troop[]) {
+    troops.forEach((troop) => {
+      this.firestore.collection<Troop>("troops")
+                    .doc(troop.id)
+                    .update({ 'deployed': true })
+    });
+  }
+
   promoteTroop(troops: Troop[]) {
     troops.forEach((res) => this.firestore.collection<Troop>("troops").doc(res.id).delete())
     this.firestore.collection('troops')
