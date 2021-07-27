@@ -64,7 +64,7 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
             [Attributes.MAXDAMAGE]: 5,
             [Attributes.SKEWDAMAGE]: 1
         },
-        'buildTime': 10000000
+        'buildTime': 1000
     },
 
     [MARAUDER]: {
@@ -83,6 +83,6 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
             [Attributes.MAXDAMAGE]: 5,
             [Attributes.SKEWDAMAGE]: 1
         },
-        'buildTime': 100000000
+        'buildTime': 1000
     },
 }

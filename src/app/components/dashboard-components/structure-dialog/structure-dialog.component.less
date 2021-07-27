@@ -2,6 +2,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
+    .type {
+        padding-bottom: 10px;
+    }
+    // unit production 
     .queue {
         display: flex;
         justify-content: space-evenly;
@@ -34,5 +39,37 @@
     }
     .unit-img {
         height: 100px;
+    }
+
+
+    // Resource Production 
+
+    .resource-production {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .store {
+            display: flex;
+            align-items: center;
+            
+            .element {
+                padding: 20px;
+            }
+
+            .icon-mineral {
+                background-image: url(../../../../assets/mineral32.png);
+                height: 32px;
+                width: 32px;
+            }
+
+            .icon-energy {
+                background-image: url(../../../../assets/energy32.png);
+                height: 32px;
+                width: 32px;
+            }
+        }
+        .collect-store {
+            margin-top: 15px;
+        }   
     }
 }

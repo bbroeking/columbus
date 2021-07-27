@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { StructureType } from '../constants/buildings';
 import { Coordinate } from '../models/coordinate.model';
 import { AccountData, AccountService } from './account.service';
 import { LandDiscovery } from './ethers.service';
@@ -11,6 +10,7 @@ import { Timestamp } from '@firebase/firestore-types';
 import { MetamaskService } from './metamask.service';
 import * as _ from 'underscore';
 import { LandAttributes } from '../models/land-attributes.model';
+import { StructureType } from '../interfaces/structure-type';
 
 export interface Tile { // data in the tile
   id: string, // metadata addr
@@ -34,6 +34,20 @@ export interface Structure {
   built: boolean;
   queue: QueueItem[];
   type: string;
+}
+
+export interface UnitStructure extends Structure {
+
+}
+
+export interface ResearchStructure extends Structure {
+
+}
+
+export interface ResourceStructure extends Structure{
+  mineralRate?: number,
+  energyRate?: number,
+  lastCollected: Timestamp,
 }
 
 @Injectable()
@@ -118,6 +132,18 @@ export class TileDataService {
     const account = this.metamaskService.account.getValue();
     this.firestore.collection('tiles')
                   .doc(`${tokenId}`)
+                  .update({
+                    lastCollected: firebase.default.firestore.FieldValue.serverTimestamp()
+                  });
+    this.accountService.updateAccountData(account, update);
+  }
+
+  collectRefineryResources(tokenId: number, structureId:string, update: Partial<AccountData>) {
+    const account = this.metamaskService.account.getValue();
+    this.firestore.collection('tiles')
+                  .doc(`${tokenId}`)
+                  .collection('structures')
+                  .doc(`${structureId}`)
                   .update({
                     lastCollected: firebase.default.firestore.FieldValue.serverTimestamp()
                   });

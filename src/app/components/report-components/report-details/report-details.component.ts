@@ -4,12 +4,9 @@ import { Conflict, ConflictDataService } from 'src/app/services/conflict-data.se
 import { Structure, Tile, TileDataService } from 'src/app/services/tile-data.service';
 import {MatDialog} from '@angular/material/dialog';
 import { StructureDialogComponent } from '../../dashboard-components/structure-dialog/structure-dialog.component';
-import { Coordinate } from 'src/app/models/coordinate.model';
-import { HexagonService } from 'src/app/services/hexagon.service';
 import { Timestamp } from '@firebase/firestore-types';
 import { AccountData } from 'src/app/services/account.service';
 import { BuildStructureDialogComponent } from '../../dashboard-components/build-structure-dialog/build-structure-dialog.component';
-import { last } from 'rxjs/operators';
 
 @Component({
   selector: 'app-report-details',

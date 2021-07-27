@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BUILDINGS, Structure, StructureType } from '../constants/buildings';
+import { BUILDINGS, Structure } from '../constants/buildings';
 import { TROOPS, TROOP_MODEL } from '../constants/troops';
+import { StructureType } from '../interfaces/structure-type';
 
 export interface QueueItem {
   type: string,

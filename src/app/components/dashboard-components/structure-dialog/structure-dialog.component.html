@@ -1,54 +1,75 @@
 <div class="structure-dialog">
     <div class="type">{{structure.type}}</div>
     <div class="queue" *ngIf="structure$ | async as structure">
-        <div class="slot">
-            <div class="queued" *ngIf="structure.queue[0]">
-                <span class="type">{{structure.queue[0].type}}</span>
-                <img class='unit-img' [src]="unitSrc(structure.queue[0].type)" alt="">
-                <span class="timestamp">{{structure.queue[0] | queueHandler}}%</span>
-                <button mat-button (click)="claimTroop(0)" class="claim" *ngIf="(structure.queue[0] | queueHandler) == 100">Claim Troop</button>
+        <div class="unit-production" *ngIf="unitProduction">
+            <div class="slot">
+                <div class="queued" *ngIf="structure.queue[0]">
+                    <span class="type">{{structure.queue[0].type}}</span>
+                    <img class='unit-img' [src]="unitSrc(structure.queue[0].type)" alt="">
+                    <span class="timestamp">{{structure.queue[0] | queueHandler}}%</span>
+                    <button mat-button (click)="claimTroop(0)" class="claim" *ngIf="(structure.queue[0] | queueHandler) == 100">Claim Troop</button>
+                </div>
+                <div class="empty" *ngIf="!structure.queue[0]">EMPTY</div>
             </div>
-            <div class="empty" *ngIf="!structure.queue[0]">EMPTY</div>
-        </div>
-        <div class="slot">
-            <div class="queued" *ngIf="structure.queue[1]">
-                <span class="type">{{structure.queue[1].type}}</span>
-                <img class='unit-img' [src]="unitSrc(structure.queue[1].type)" alt="">
-                <span class="timestamp">{{structure.queue[1] | queueHandler}}%</span>
-                <button mat-button (click)="claimTroop(1)" class="claim" *ngIf="(structure.queue[1] | queueHandler) == 100">Claim Troop</button>
+            <div class="slot">
+                <div class="queued" *ngIf="structure.queue[1]">
+                    <span class="type">{{structure.queue[1].type}}</span>
+                    <img class='unit-img' [src]="unitSrc(structure.queue[1].type)" alt="">
+                    <span class="timestamp">{{structure.queue[1] | queueHandler}}%</span>
+                    <button mat-button (click)="claimTroop(1)" class="claim" *ngIf="(structure.queue[1] | queueHandler) == 100">Claim Troop</button>
+                </div>
+                <div class="empty" *ngIf="!structure.queue[1]">EMPTY</div>
             </div>
-            <div class="empty" *ngIf="!structure.queue[1]">EMPTY</div>
-        </div>
-        <div class="slot">
-            <div class="queued" *ngIf="structure.queue[2]">
-                <span class="type">{{structure.queue[2].type}}</span>
-                <img class='unit-img' [src]="unitSrc(structure.queue[2].type)" alt="">
-                <span class="timestamp">{{structure.queue[2] | queueHandler}}%</span>
-                <button mat-button (click)="claimTroop(2)" class="claim" *ngIf="(structure.queue[2] | queueHandler) == 100">Claim Troop</button>
+            <div class="slot">
+                <div class="queued" *ngIf="structure.queue[2]">
+                    <span class="type">{{structure.queue[2].type}}</span>
+                    <img class='unit-img' [src]="unitSrc(structure.queue[2].type)" alt="">
+                    <span class="timestamp">{{structure.queue[2] | queueHandler}}%</span>
+                    <button mat-button (click)="claimTroop(2)" class="claim" *ngIf="(structure.queue[2] | queueHandler) == 100">Claim Troop</button>
+                </div>
+                <div class="empty" *ngIf="!structure.queue[2]">EMPTY</div>
             </div>
-            <div class="empty" *ngIf="!structure.queue[2]">EMPTY</div>
-        </div>
-        <div class="slot">
-            <div class="queued" *ngIf="structure.queue[3]">
-                <span class="type">{{structure.queue[3].type}}</span>
-                <img class='unit-img' [src]="unitSrc(structure.queue[3].type)" alt="">
-                <span class="timestamp">{{structure.queue[3] | queueHandler}}%</span>
-                <button mat-button (click)="claimTroop(3)" class="claim" *ngIf="(structure.queue[3] | queueHandler) == 100">Claim Troop</button>
+            <div class="slot">
+                <div class="queued" *ngIf="structure.queue[3]">
+                    <span class="type">{{structure.queue[3].type}}</span>
+                    <img class='unit-img' [src]="unitSrc(structure.queue[3].type)" alt="">
+                    <span class="timestamp">{{structure.queue[3] | queueHandler}}%</span>
+                    <button mat-button (click)="claimTroop(3)" class="claim" *ngIf="(structure.queue[3] | queueHandler) == 100">Claim Troop</button>
+                </div>
+                <div class="empty" *ngIf="!structure.queue[3]">EMPTY</div>
             </div>
-            <div class="empty" *ngIf="!structure.queue[3]">EMPTY</div>
-        </div>
-        <div class="slot">
-            <div class="queued" *ngIf="structure.queue[4]">
-                <span class="type">{{structure.queue[4].type}}</span>
-                <img class='unit-img' [src]="unitSrc(structure.queue[4].type)" alt="">
-                <span class="timestamp">{{structure.queue[4] | queueHandler}}%</span>
-                <button mat-button (click)="claimTroop(4)" class="claim" *ngIf="(structure.queue[4] | queueHandler) == 100">Claim Troop</button>
+            <div class="slot">
+                <div class="queued" *ngIf="structure.queue[4]">
+                    <span class="type">{{structure.queue[4].type}}</span>
+                    <img class='unit-img' [src]="unitSrc(structure.queue[4].type)" alt="">
+                    <span class="timestamp">{{structure.queue[4] | queueHandler}}%</span>
+                    <button mat-button (click)="claimTroop(4)" class="claim" *ngIf="(structure.queue[4] | queueHandler) == 100">Claim Troop</button>
+                </div>
+                <div class="empty" *ngIf="!structure.queue[4]">EMPTY</div>
             </div>
-            <div class="empty" *ngIf="!structure.queue[4]">EMPTY</div>
+            <div class="options">
+                <app-structure-dropdown (troopSelection)="updateSelectedTroop($event)" [type]="structure.type"></app-structure-dropdown>
+                <button mat-button class="add-to-queue" [disabled]="queueFull() || selectedTroop == ''" (click)="addToQueue()">Add to queue</button>
+            </div>
         </div>
     </div>
-    <div class="options">
-        <app-structure-dropdown (troopSelection)="updateSelectedTroop($event)" [type]="structure.type"></app-structure-dropdown>
-        <button mat-button class="add-to-queue" [disabled]="queueFull() || selectedTroop == ''" (click)="addToQueue()">Add to queue</button>
+    <div class="research-production" *ngIf="researchProduction">
+        Research Production
+    </div>
+    <div class="resource-production" *ngIf="resourceProduction">
+        <div class="store" *ngIf="resourceStructure.mineralRate">
+            <div class="icon-mineral"></div>
+            <span class="element">Stored: {{calculateStore(resourceStructure.mineralRate, resourceStructure.lastCollected)}}</span>
+            <span class="element">Minerals per hour: {{resourceStructure.mineralRate}}</span>
+        </div>
+        <div class="store" *ngIf="resourceStructure.energyRate">
+            <div class="icon-energy"></div>
+            <span class="element">Stored: {{calculateStore(resourceStructure.energyRate, resourceStructure.lastCollected)}}</span>
+            <span class="element">Energy per hour: {{resourceStructure.energyRate}}</span>
+        </div>
+        <div class="last-collected">{{ resourceStructure.lastCollected?.toDate() | date:'medium' }}</div>
+        <div class="collect-store">
+            <button mat-raised-button (click)="collectStructureStore(resourceStructure.mineralRate, resourceStructure.energyRate, resourceStructure.lastCollected)" class="collect">Collect</button>
+        </div>
     </div>
 </div>
