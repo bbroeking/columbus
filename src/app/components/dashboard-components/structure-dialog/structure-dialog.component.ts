@@ -3,8 +3,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Timestamp } from '@firebase/firestore-types';
 import { Observable, Subscription } from 'rxjs';
 import { ResearchProduction, ResourceProduction, StructureType, UnitProduction } from 'src/app/interfaces/structure-type';
-import { AccountData } from 'src/app/services/account.service';
+import { AccountData, AccountService } from 'src/app/services/account.service';
+import { MetamaskService } from 'src/app/services/metamask.service';
 import { QueueItem, QueueService } from 'src/app/services/queue.service';
+import { ResearchService } from 'src/app/services/research.service';
 import { ResearchStructure, ResourceStructure, Structure, TileDataService, UnitStructure } from 'src/app/services/tile-data.service';
 import { TroopDataService } from 'src/app/services/troop-data.service';
 
@@ -18,10 +20,12 @@ export class StructureDialogComponent implements OnInit {
   structure: Structure;
   tileId: number;
   structureId: string;
-  selectedTroop: string;
+  selected: string;
   queue: QueueItem[];
   structure$: Observable<Structure | undefined>;
+  account$: Observable<AccountData | undefined> | undefined;
   structureSub: Subscription;
+  metamaskSub: Subscription;
 
   // structure dialog types 
   unitProduction: boolean;
@@ -36,6 +40,9 @@ export class StructureDialogComponent implements OnInit {
     private queueService: QueueService,
     private troopDataService: TroopDataService,
     private tileService: TileDataService,
+    private accountService: AccountService,
+    private metamaskService: MetamaskService,
+    private researchService: ResearchService,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
@@ -43,10 +50,14 @@ export class StructureDialogComponent implements OnInit {
     this.tileId = this.data.tileId;
     this.structureId = this.structure.sid;
     this.queue = this.structure.queue;
-    this.selectedTroop = '';
+    this.selected = '';
 
     this.renderStructureType(this.structure);
     this.structure$ = this.tileDataService.getTileStructureAsObservable(this.tileId, this.structureId);
+
+    this.metamaskSub = this.metamaskService.account.subscribe((account) => {
+      this.account$ = this.accountService.getAccountAsObservable(account);
+    })
     this.structureSub = this.structure$.subscribe((updatedStructure: Structure | undefined) => {
       if (updatedStructure)
         this.renderStructureType(updatedStructure);
@@ -82,8 +93,18 @@ export class StructureDialogComponent implements OnInit {
   }
   
   addToQueue(){
-    if (!this.queueFull() && this.selectedTroop){
-      const newQueue: QueueItem[] = this.queueService.prepareBarracksItem(this.queue, this.selectedTroop)
+    if (!this.queueFull() && this.selected){
+      const newQueue: QueueItem[] = this.queueService.prepareBarracksItem(this.queue, this.selected)
+      this.tileDataService.updateStructure(this.tileId, this.structureId, {
+        queue: newQueue
+      });
+      this.queue = newQueue;
+    }
+  }
+
+  addToResearchQueue() {
+    if (!this.researchQueueFull() && this.selected){
+      const newQueue: QueueItem[] = this.queueService.prepareResearchItem(this.queue, this.selected)
       this.tileDataService.updateStructure(this.tileId, this.structureId, {
         queue: newQueue
       });
@@ -96,22 +117,41 @@ export class StructureDialogComponent implements OnInit {
     this.troopDataService.addToReserves(dequeuedItem);
     this.tileDataService.updateStructure(this.tileId, this.structureId, {
       queue: this.queue
-    })  
+    });
   }
 
-  updateSelectedTroop(troop: string) {
-    this.selectedTroop = troop;
+  claimResearch(index: number) {
+    const address = this.metamaskService.account.value
+    if(address) {
+      const dequeuedItem = this.queue.splice(index, 1);
+      this.researchService.updateResearch(address, dequeuedItem[0].type);
+      this.tileDataService.updateStructure(this.tileId, this.structureId, {
+        queue: this.queue
+      });
+    }
+    else 
+      console.error('Metamask not connected');
+  }
+
+  updateSelected(troop: string) {
+    this.selected = troop;
   }
 
   queueFull(): boolean {
     return this.queue.length >= 5;
   }
 
+  researchQueueFull(): boolean {
+    return this.queue.length > 0;
+  }
+
   unitSrc(type: string){
     if (type == 'marine'){
       return 'assets/units/marine.jpeg';
     } else if (type == 'marauder') {
-      return 'assets/units/marauder.jpg'
+      return 'assets/units/marauder.jpg';
+    } else if (type == 'StimPack') {
+      return 'assets/units/stimpack.jpeg';
     } else {
       return '';
     }

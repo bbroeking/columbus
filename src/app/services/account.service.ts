@@ -13,21 +13,20 @@ export interface AccountData {
 export class AccountService {
 
   constructor(
-    private firestore: AngularFirestore, 
-  ) { }
+    private firestore: AngularFirestore) { }
 
-  getAccountAsObservable(addr: string) {
+  getAccountAsObservable(address: string) {
     return this.firestore.collection('accounts')
-                          .doc<AccountData>(addr)
+                          .doc<AccountData>(address)
                           .valueChanges({idField: 'id'});
   }
 
-  updateAccountData(addr: string, acctData: Partial<AccountData>) {
+  updateAccountData(address: string, acctData: Partial<AccountData>) {
     const incrementMinerals: number = acctData.minerals || 0;
     const incrementEnergy: number = acctData.energy || 0;
 
     return this.firestore.collection('accounts')
-                        .doc(addr)
+                        .doc(address)
                         .update({
                           'minerals': firebase.default.firestore.FieldValue.increment(incrementMinerals),
                           'energy': firebase.default.firestore.FieldValue.increment(incrementEnergy),

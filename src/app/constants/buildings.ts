@@ -1,3 +1,4 @@
+import { RESEARCH, STIMPACK } from "./research";
 import {ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS} from "./resources";
 import {MARAUDER, MARINE, TROOPS} from './troops';
 
@@ -15,7 +16,7 @@ export const ENERGY_REFINERY = 'Energy Refinery';
 export interface Structure {
     id: string;
     buildResources: Object,
-    options: Object,
+    options?: Object,
     buildTime: number
 }
 
@@ -64,7 +65,9 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
         },
-        'options': {},
+        'options': {
+            [STIMPACK]: RESEARCH[STIMPACK]
+        },
         'buildTime': 1000
     },
     // [GROUND_MECH_PRODUCTION]: {
