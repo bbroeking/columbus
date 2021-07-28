@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DocumentData, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Conflict, ConflictDataService, ConflictUpdate } from 'src/app/services/conflict-data.service';
 
@@ -17,5 +16,4 @@ export class ConflictResolvedComponent implements OnInit {
   async ngOnInit() {
     this.conflictUpdates$ = await this.conflictDataService.getConflictUpdatesValues(this.conflict);
   }
-
 }

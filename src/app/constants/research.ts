@@ -1,8 +1,9 @@
 import { ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS } from "./resources";
+import { BuildResources } from "./troops";
 
 export interface RESEARCH {
     type: string;
-    buildResources: Object,
+    buildResources: BuildResources,
     buildTime: number
 }
 

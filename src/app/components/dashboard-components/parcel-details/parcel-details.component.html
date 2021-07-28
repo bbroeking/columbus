@@ -20,7 +20,7 @@
         <div class="entry">
             <span class="flex-start">In Conflict:</span>
             <span class="flex-end">{{tile.inConflict}}</span>
-            <button mat-button *ngIf="tile.inConflict" [routerLink]="generateWarRoomLink(tile.conflictId)">View Conflict</button>
+            <button mat-raised-button *ngIf="tile.inConflict" [routerLink]="generateWarRoomLink(tile.conflictId)">View Conflict</button>
         </div>
     </div>
 

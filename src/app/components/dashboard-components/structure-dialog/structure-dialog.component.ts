@@ -2,6 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Timestamp } from '@firebase/firestore-types';
 import { Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { RESEARCH } from 'src/app/constants/research';
+import { TROOPS } from 'src/app/constants/troops';
 import { ResearchProduction, ResourceProduction, StructureType, UnitProduction } from 'src/app/interfaces/structure-type';
 import { AccountData, AccountService } from 'src/app/services/account.service';
 import { MetamaskService } from 'src/app/services/metamask.service';
@@ -26,6 +29,8 @@ export class StructureDialogComponent implements OnInit {
   account$: Observable<AccountData | undefined> | undefined;
   structureSub: Subscription;
   metamaskSub: Subscription;
+  accountSub: Subscription;
+  accountData: AccountData;
 
   // structure dialog types 
   unitProduction: boolean;
@@ -34,6 +39,9 @@ export class StructureDialogComponent implements OnInit {
   researchStructure: ResearchStructure;
   resourceProduction: boolean;
   resourceStructure: ResourceStructure;
+
+  mineralCost: number;
+  energyCost: number;
 
   constructor(
     private tileDataService: TileDataService,
@@ -57,11 +65,18 @@ export class StructureDialogComponent implements OnInit {
 
     this.metamaskSub = this.metamaskService.account.subscribe((account) => {
       this.account$ = this.accountService.getAccountAsObservable(account);
+      this.accountSub = this.account$.subscribe((accountData) => this.accountData = accountData!);
     })
     this.structureSub = this.structure$.subscribe((updatedStructure: Structure | undefined) => {
       if (updatedStructure)
         this.renderStructureType(updatedStructure);
     })
+  }
+
+  ngOnDestroy() {
+    this.structureSub.unsubscribe();
+    this.metamaskSub.unsubscribe();
+    this.accountSub.unsubscribe();
   }
 
   renderStructureType(updatedStructure: Structure) {
@@ -92,24 +107,38 @@ export class StructureDialogComponent implements OnInit {
     return Math.floor(rate * hours);
   }
   
-  addToQueue(){
-    if (!this.queueFull() && this.selected){
+  async addToQueue(){
+    const accountData: AccountData | undefined = await this.account$?.toPromise();
+    if (!this.queueFull() && this.selected && this.canPay()){
       const newQueue: QueueItem[] = this.queueService.prepareBarracksItem(this.queue, this.selected)
       this.tileDataService.updateStructure(this.tileId, this.structureId, {
         queue: newQueue
       });
       this.queue = newQueue;
+      this.deductCost();
     }
   }
 
-  addToResearchQueue() {
-    if (!this.researchQueueFull() && this.selected){
+  async addToResearchQueue() {
+    if (!this.researchQueueFull() && this.selected && this.canPay()){
       const newQueue: QueueItem[] = this.queueService.prepareResearchItem(this.queue, this.selected)
       this.tileDataService.updateStructure(this.tileId, this.structureId, {
         queue: newQueue
       });
       this.queue = newQueue;
+      this.deductCost();
     }
+  }
+
+  canPay(): boolean {
+    if(this.accountData)
+      return this.accountData.minerals >= this.mineralCost && this.accountData.energy >= this.energyCost;
+    return false;
+  }
+
+  deductCost() {
+    const address = this.metamaskService.account.value;
+    this.accountService.updateAccountData(address, {'minerals': this.mineralCost * -1, 'energy': this.energyCost * -1});
   }
 
   claimTroop(index: number) {
@@ -135,6 +164,19 @@ export class StructureDialogComponent implements OnInit {
 
   updateSelected(troop: string) {
     this.selected = troop;
+    this.calculateCost(troop)
+  }
+
+  calculateCost(troop: string) {
+    let troopModel = TROOPS[troop];
+    let researchModel = RESEARCH[troop];
+    if (troopModel) {
+      this.mineralCost = troopModel.buildResources.minerals;
+      this.energyCost = troopModel.buildResources.energy;
+    } else if (researchModel) {
+      this.mineralCost = researchModel.buildResources.minerals;
+      this.energyCost = researchModel.buildResources.energy;
+    }
   }
 
   queueFull(): boolean {

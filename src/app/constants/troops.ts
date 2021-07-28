@@ -22,9 +22,16 @@ export interface COMBAT_TROOP {
 }
 export interface TROOP_MODEL {
     type: string,
-    buildResources: Object,
+    buildResources: BuildResources,
     baseStats: Stats,
     buildTime: number
+}
+
+export interface BuildResources {
+    [MINERALS]: number,
+    [ENERGY]: number,
+    [RARE_MINERALS]: number,
+    [RARE_ENERGY]: number,
 }
 
 export interface Stats {
@@ -52,9 +59,9 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
     [MARINE]: {
         'type': MARINE,
         'buildResources': {
-            [MINERALS]: 0,
+            [MINERALS]: 200,
             [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
+            [ENERGY]: 10,
             [RARE_ENERGY]: 0
         },
         'baseStats': {
@@ -71,9 +78,9 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
     [MARAUDER]: {
         'type': MARAUDER,
         'buildResources': {
-            [MINERALS]: 0,
+            [MINERALS]: 250,
             [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
+            [ENERGY]: 50,
             [RARE_ENERGY]: 0
         },
         'baseStats': {

@@ -13,14 +13,14 @@
         </div>
         <div class="production">
             <div class="store">
-                <span class="mineral-value">Stored: {{calculateStore(tile.mineralRate, tile.lastCollected)}}</span>
                 <div class="icon-mineral"></div>
-                <span class="collection-rate">Minerals per hour: {{tile.mineralRate}}</span>
+                <span class="element mineral-value">Stored: {{calculateStore(tile.mineralRate, tile.lastCollected)}}</span>
+                <span class="element collection-rate">Minerals per hour: {{tile.mineralRate}}</span>
             </div>
             <div class="store">
-                <span class="energy-value">Stored: {{calculateStore(tile.energyRate, tile.lastCollected)}}</span>
                 <div class="icon-energy"></div>
-                <span class="collection-rate">Energy per hour: {{tile.energyRate}}</span>
+                <span class="element energy-value">Stored: {{calculateStore(tile.energyRate, tile.lastCollected)}}</span>
+                <span class="element collection-rate">Energy per hour: {{tile.energyRate}}</span>
             </div>
             <div class="last-collected">{{ tile.lastCollected?.toDate() | date:'medium' }}</div>
             <div class="collect-store">

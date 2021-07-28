@@ -1,6 +1,6 @@
 import { RESEARCH, STIMPACK } from "./research";
 import {ENERGY, MINERALS, RARE_ENERGY, RARE_MINERALS} from "./resources";
-import {MARAUDER, MARINE, TROOPS} from './troops';
+import {BuildResources, MARAUDER, MARINE, TROOPS} from './troops';
 
 // Army
 export const BARRACKS = 'Barracks';
@@ -15,7 +15,7 @@ export const ENERGY_REFINERY = 'Energy Refinery';
 
 export interface Structure {
     id: string;
-    buildResources: Object,
+    buildResources: BuildResources,
     options?: Object,
     buildTime: number
 }
@@ -24,7 +24,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
     [BARRACKS]: {
         'id': BARRACKS,
         'buildResources': {
-            [MINERALS]: 0,
+            [MINERALS]: 400,
             [RARE_MINERALS]: 0,
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
@@ -38,7 +38,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
     [MINERALS_REFINERY]: {
         'id': MINERALS_REFINERY,
         'buildResources': {
-            [MINERALS]: 0,
+            [MINERALS]: 1000,
             [RARE_MINERALS]: 0,
             [ENERGY]: 0,
             [RARE_ENERGY]: 0
@@ -51,7 +51,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
         'buildResources': {
             [MINERALS]: 0,
             [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
+            [ENERGY]: 500,
             [RARE_ENERGY]: 0
         },
         'options': {},
@@ -60,9 +60,9 @@ export const BUILDINGS: {[key: string]: Structure} = {
     [BIO_RESEARCH]: {
         'id': BIO_RESEARCH,
         'buildResources': {
-            [MINERALS]: 0,
+            [MINERALS]: 100,
             [RARE_MINERALS]: 0,
-            [ENERGY]: 0,
+            [ENERGY]: 350,
             [RARE_ENERGY]: 0
         },
         'options': {
