@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  network: "HTTP://127.0.0.1:8545",
+  network: "http://localhost:8545",
   contract: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebase: {

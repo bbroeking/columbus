@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'reports', component: ReportsComponent, canActivate: [MetamaskGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [MetamaskGuard] },
   { path: 'dashboard/:mapId', component: DashboardComponent, canActivate: [MetamaskGuard] },
   { path: 'annex', component: DiscoverComponent, canActivate: [MetamaskGuard] },
   { path: 'declare-war', component: DeclareWarComponent, canActivate: [MetamaskGuard]},
