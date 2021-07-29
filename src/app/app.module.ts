@@ -69,7 +69,8 @@ import { TroopCardComponent } from './components/command-components/troop-card/t
 import { MetamaskNotConnectedComponent } from './components/error-pages/metamask-not-connected/metamask-not-connected.component';
 import { ClockComponent } from './components/discover-components/clock/clock.component';
 import { BattlefieldCardComponent } from './components/war-room-components/battlefield-card/battlefield-card.component';
-import { FilterDeployedPipe } from './components/war-room-components/filter-deployed.pipe';
+import { FilterDeployedPipe } from './pipes/filter-deployed.pipe';
+import { FilterAnnexedPipe } from './pipes/filter-annexed.pipe';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -116,6 +117,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     ClockComponent,
     BattlefieldCardComponent,
     FilterDeployedPipe,
+    FilterAnnexedPipe,
   ],
   imports: [
     BrowserModule,

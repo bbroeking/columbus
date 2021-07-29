@@ -1,7 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { providers } from 'ethers';
 
-const WEB3PROVIDER = new InjectionToken('Web3 provider', {
+export const WEB3PROVIDER = new InjectionToken('Web3 provider', {
   providedIn: 'root',
   factory: () => (window as any).ethereum
 });

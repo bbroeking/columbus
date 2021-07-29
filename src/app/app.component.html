@@ -6,11 +6,11 @@
         <li class="nav-item" [routerLink]="['/garrison']">Garrison</li>
     </ul>
     <ul class="nav navbar-account">
-        <li class="nav-item minerals"> 
+        <li class="nav-item minerals" *ngIf="account"> 
             <div class="icon-mineral"></div> 
             <span>{{ (account$ | async)?.minerals }}</span>
         </li>
-        <li class="nav-item energy">
+        <li class="nav-item energy" *ngIf="account">
             <div class="icon-energy"></div>
             <span>{{ (account$ | async)?.energy }}</span>
         </li>

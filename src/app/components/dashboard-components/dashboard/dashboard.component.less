@@ -1,3 +1,5 @@
+@import url("../../../../styles.less");
+
 .dashboard {
     display: flex;
     height: calc(100% - 75px);
@@ -7,8 +9,8 @@
     }
     
     .world-details {
-        border-left: 2px solid #98fc03;
-        background-color: #808080;
+        border-left: 2px solid @border-accent;
+        background-color: @gray-background;
         flex: 0 1 25%;
     }
 }

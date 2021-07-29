@@ -11,7 +11,7 @@ export class TileGeneratorService {
     private firestore: AngularFirestore) {}
 
   getOpenParcels(): Observable<Parcel[]> {
-    return this.firestore.collection<Parcel>('parcels', ref => ref.where('tokenId', '<', 46))
+    return this.firestore.collection<Parcel>('parcels', ref => ref.where('tokenId', '<', 1))
                           .valueChanges({idField: 'id'});
   }
 

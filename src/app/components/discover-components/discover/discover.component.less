@@ -4,17 +4,24 @@
     background-color: @gray-background;
     display: flex;
     flex-direction: column;
+    height: calc(100% - 75px);
 
     .discover-list-container {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
+        height: auto;
 
         .discover-row {
             display: flex;
             flex: 1 1 50%;
             justify-content: space-around;
             flex-wrap: wrap;
+
+            .no-parcels {
+                align-self: center;
+                justify-content: center;
+            }
         }
     }
 }

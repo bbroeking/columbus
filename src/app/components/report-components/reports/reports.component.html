@@ -1,11 +1,11 @@
 <div class="reports-page">
+    <div class="no-reports" *ngIf="tokenIds.length == 0">
+        <span class="no-lands-found">There are no lands associated with the current connected address</span>
+        <button mat-raised-button [routerLink]="['/annex']" class="annex">Annex a Land</button>
+    </div>
     <div class="reports">
-        <div class="no-reports" *ngIf="tokenIds.length == 0">
-            <span class="no-lands-found">There are no lands associated with the current connected address</span>
-            <button mat-raised-button [routerLink]="['/annex']" class="annex">Annex a Land</button>
-        </div>
         <div class="row" *ngFor="let tokenId of tokenIds">
             <app-report-details [id]="tokenId"></app-report-details>
-        </div>
+        </div>    
     </div>
 </div>

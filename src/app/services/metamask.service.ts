@@ -30,9 +30,8 @@ export class MetamaskService {
   async getConnectedAccount() {
     try {
       const { ethereum } = window as any;
-      let accounts: string[] = await ethereum.request({ method: 'eth_accounts' });
-      this.account.next(accounts[0]);
-      return accounts[0];  
+      let account: string[] = await ethereum.request({ method: 'eth_accounts' });
+      return account[0];  
     } catch(err) {
       console.error(err);
       return '';

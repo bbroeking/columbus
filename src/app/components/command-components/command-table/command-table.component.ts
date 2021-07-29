@@ -17,16 +17,17 @@ export class CommandTableComponent implements OnInit {
   troops$: Observable<Troop[]>;
   promote: Troop[];
 
-  constructor(private metamaskService: MetamaskService,
-              private troopDataService: TroopDataService,
-              private battlefieldDataService: BattlefieldDataService) { }
+  constructor(
+    private metamaskService: MetamaskService,
+    private troopDataService: TroopDataService,
+    private battlefieldDataService: BattlefieldDataService) {
+      this.promote = [];
+    }
 
   async ngOnInit() {
-    const account = this.metamaskService.account.value;
+    const account = await this.metamaskService.getConnectedAccount();
     if (account)
       this.troops$ = this.troopDataService.getTroopsByUser(account);
-
-    this.promote = [];
   }
 
   ngOnDestroy() {
@@ -37,7 +38,7 @@ export class CommandTableComponent implements OnInit {
   }
 
   canPromote(): boolean {
-    return this.troopDataService.canPromote(this.promote);
+    return this.promote ? this.troopDataService.canPromote(this.promote) : false;
   }
 
   promoteTroop(): void {

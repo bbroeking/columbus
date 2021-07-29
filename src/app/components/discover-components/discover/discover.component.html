@@ -1,7 +1,8 @@
 <div class='full-page'>
     <div class='discover-list-container'>
-        <div class="discover-row">
-            <div class="parcel-wrapper" *ngFor="let parcel of parcel$ | async">
+        <div class="discover-row" *ngIf="parcel$ | async | filterAnnexed as parcels">
+            <span class="no-parcels" *ngIf="parcels.length == 0">No Parcels Available At This Time</span>
+            <div class="parcel-wrapper" *ngFor="let parcel of parcels">
                 <app-discover-parcel [parcel]="parcel">
                 </app-discover-parcel>
             </div>

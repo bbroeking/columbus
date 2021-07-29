@@ -4,23 +4,30 @@
     background: gray;
     overflow-y: scroll;
 
+    .no-reports {
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+
+        .no-lands-found {
+            padding-bottom: 10px;
+        }
+    }
+
     .reports {
         position: relative;
         display: flex;
         flex-direction: column;
-        .no-reports {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: auto;
+        .row {
+            box-sizing: border-box;
+            border: 1px solid chartreuse;
+            width: 100%;
+            height: 200px;
         }
     }
     
-    .row {
-        box-sizing: border-box;
-        border: 1px solid chartreuse;
-        width: 100%;
-        height: 200px;
-    }
+
 }

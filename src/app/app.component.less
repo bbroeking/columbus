@@ -1,11 +1,14 @@
+@import url("../styles.less");
+
 .navbar {
     position: relative;
     display: flex;
     width: 100%;
     top: 0px;
+    min-height: 75px;
     z-index: 3;
     background-color: black;
-    border-top: 3px solid #98fc03;
+    border-top: 3px solid @border-accent;
 }
 
 .nav {
@@ -17,7 +20,7 @@
         text-decoration: none;
         justify-self: center;
         align-self: center;
-        color: #f2f2f2;
+        color: @font-white;
         .icon-mineral {
             padding-left: 4px;
             background-image: url(../assets/mineral32.png);
@@ -40,7 +43,7 @@
     }
 
     .nav-item:hover {
-        background-color: #ddd;
+        background-color: @hover;
         color: black;
         cursor: pointer;
     }
