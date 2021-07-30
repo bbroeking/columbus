@@ -1,4 +1,4 @@
-<div class="navbar navbar-fixed-top navbar-dark bg-inverse">
+<div class="navbar navbar-fixed-top navbar-dark bg-inverse" *ngIf="!router.isActive('/', true) && !router.isActive('/login', true)">
     <ul class="nav navbar-nav" routerLinkActive="active">
         <li class="nav-item" [routerLink]="['/reports']" >Reports</li>
         <li class="nav-item" [routerLink]="['/dashboard']" >Map</li>

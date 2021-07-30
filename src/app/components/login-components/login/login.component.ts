@@ -25,9 +25,11 @@ export class LoginComponent implements OnInit {
   
   async ngOnInit() {
     this.accountSubscription = this.metamaskService.account
-                                    .subscribe((res) => {
-                                      this.account = res
-                                    });
+      .subscribe((account) => {
+        this.account = account;
+        if(this.account)
+          this.router.navigate(['/reports']);
+      });
 
     if(!MetaMaskOnboarding.isMetaMaskInstalled()) {
       // TODO: test adding the extension workflow
@@ -35,8 +37,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.accountSubscription.unsubscribe();
-    this.metamaskSubscription.unsubscribe();
+    if(this.accountSubscription)
+      this.accountSubscription.unsubscribe();
+    if(this.metamaskSubscription)
+      this.metamaskSubscription.unsubscribe();
   }
 
   async onClickInstallMetaMask() {

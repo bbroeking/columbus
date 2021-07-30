@@ -1,11 +1,10 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Attributes, Troop, TROOP_MODEL } from 'src/app/constants/troops';
+import { Troop } from 'src/app/constants/troops';
 import { BattlefieldDataService } from 'src/app/services/battlefield-data.service';
 import { MetamaskService } from 'src/app/services/metamask.service';
 import { TroopDataService } from 'src/app/services/troop-data.service';
-import { TROOPS } from '../../../constants/troops';
 
 @Component({
   selector: 'app-command-table',

@@ -9,14 +9,11 @@ import { Attributes, Troop, TROOPS, TROOP_MODEL } from 'src/app/constants/troops
 export class TroopCardComponent implements OnInit {
   @Input() troops: Troop[];
   attributes: Attributes[];
-
-
   constructor() { }
 
   ngOnInit(): void {
     this.attributes = Object.values(Attributes);
   }
-
 
   getTroopModel(type: string): TROOP_MODEL[] {
     return [TROOPS[type]];
