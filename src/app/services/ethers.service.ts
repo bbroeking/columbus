@@ -4,6 +4,7 @@ import {MetadataService} from '../services/metadata.service'
 import { forkJoin } from 'rxjs';
 import { Provider } from './ethers-utils/web3-provider';
 import { ParcelContract } from './ethers-utils/contract';
+import { BaseProvider, PROVIDER } from './ethers-utils/provider-injection-token';
 
 export interface LandDiscovery {
   tokenId: number,
@@ -16,17 +17,12 @@ export interface LandDiscovery {
 export class EthersService {
 
   private ethereum;
-  private provider: ethers.providers.Web3Provider;
   private unsignedContract: ethers.Contract;
   private signedContract: ethers.Contract;
   
-  constructor(@Inject(Provider) provider: Provider,
-              @Inject(ParcelContract) parcelContract: Contract,
-              private metadataService: MetadataService,
-              private window: Window)
-  { 
+  constructor(@Inject(ParcelContract) parcelContract: Contract,
+              private metadataService: MetadataService) { 
     this.ethereum = (window as any).ethereum;
-    this.provider = provider;
     this.unsignedContract = parcelContract;
     this.signedContract = parcelContract;
   }
@@ -38,15 +34,6 @@ export class EthersService {
   async requestAccount() {
     const accounts = await this.ethereum.request({ method: 'eth_accounts' });
     return accounts[0];
-  }
-
-  getBalance() {
-    return this.provider.getBalance("ethers.eth")
-                        .then(balance => ethers.utils.formatEther(balance));
-  }
-
-  getSigner() {
-    return this.provider.getSigner()
   }
 
   async redeem(account: string, tokenId: number, signature: string): Promise<LandDiscovery> {

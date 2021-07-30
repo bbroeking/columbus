@@ -4,6 +4,7 @@
     display: flex;
     background-color: @gray-background;
     height: 100%;
+    color: @font-white;
 
     .left-column {
         display: flex;
@@ -28,13 +29,14 @@
         .intro-text {
             font-family: "Quicksand" Arial, Helvetica, sans-serif;
             font-size: 40px;
-            color:#98fc03;
+            color:@font-white;
         }
         .intro-info {
             font-family: "Quicksand" Arial, Helvetica, sans-serif;
             font-size: 24px;
             padding-bottom: 20px;
-            color:#98fc03;
+            color:@font-white;
+            align-self: center;
         }
 
         .develop {
@@ -44,6 +46,10 @@
         .dominate {
             align-self: flex-end;
             padding-bottom: 40px;
+        }
+
+        .compete {
+            align-self: center;
         }
     }
 }

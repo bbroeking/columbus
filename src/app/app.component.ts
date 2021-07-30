@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AccountData, AccountService } from './services/account.service';
-import { EthersService } from './services/ethers.service';
 import { MetamaskService } from './services/metamask.service';
 
 @Component({
@@ -12,14 +11,12 @@ import { MetamaskService } from './services/metamask.service';
 })
 export class AppComponent implements OnInit {
   account:string;
-  numLands: string;
   account$: Observable<AccountData | undefined>;
   accountSubscription: Subscription;
 
   constructor(
     public router: Router,
     private metamaskService: MetamaskService,
-    private ethersService: EthersService,
     private accountService: AccountService) {}
 
   async ngOnInit() {
@@ -34,7 +31,6 @@ export class AppComponent implements OnInit {
 
   async ngOnChanges() {
     if (this.account) {
-      this.numLands = await this.ethersService.getBalance();
       this.account$ = this.accountService.getAccountAsObservable(this.account);
     }
   }

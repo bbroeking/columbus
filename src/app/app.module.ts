@@ -41,9 +41,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CloudFunctionsService } from './services/cloud-functions.service';
 
 // Components
-import { ExplorerComponent } from './components/dashboard-components/explorer/explorer.component';
 import { MapComponent } from './components/dashboard-components/map/map.component';
-import { BrowserComponent } from './components/dashboard-components/browser/browser.component';
 import { ParcelDetailsComponent } from './components/dashboard-components/parcel-details/parcel-details.component';
 import { DashboardComponent } from './components/dashboard-components/dashboard/dashboard.component';
 import { ParcelTileComponent } from './components/dashboard-components/parcel-tile/parcel-tile.component';
@@ -86,9 +84,7 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
 @NgModule({
   declarations: [
     AppComponent,
-    ExplorerComponent,
     MapComponent,
-    BrowserComponent,
     ParcelDetailsComponent,
     DashboardComponent,
     ParcelTileComponent,
