@@ -2,12 +2,12 @@ import { Inject, Injectable } from '@angular/core';
 import { Contract } from 'ethers';
 import { environment } from 'src/environments/environment';
 import * as parcel from "../../../../build/contracts/Parcel.json";
-import { PROVIDER } from './provider-injection-token';
+import { Provider } from './web3-provider';
 
 @Injectable({ providedIn: 'root' })
-export class ParcelContract extends Contract {
-  constructor(@Inject(PROVIDER) provider: any) {
+export class SignedParcelContract extends Contract {
+  constructor(provider: Provider) {
     const abi = JSON.parse(JSON.stringify(parcel)).default.abi;
-    super(environment.contract, abi, provider);
+    super(environment.contract, abi, provider.getSigner());
   }
 }

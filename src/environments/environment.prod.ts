@@ -3,7 +3,7 @@ export const environment = {
 
   network: "rinkeby",  // need to deploy this on a test network for now TODO
   contract: '0x450FfBFa1F45ff9017E535870c4584f9E0346de8',
-  alchemy: 'https://eth-rinkeby.alchemyapi.io/v2/iFl5CtBte3nwksEjkMlZpRMIMYkqnjP3',
+  alchemy: 'iFl5CtBte3nwksEjkMlZpRMIMYkqnjP3',
   firebase: {
     apiKey: "AIzaSyCoZUTRDH1-1curKVBjqvQyWuEC8AhtA9I",
     authDomain: "columbus-prod-dbc65.firebaseapp.com",

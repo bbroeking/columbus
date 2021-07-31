@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  network: "http://localhost:8545",
-  contract: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
-  alchemy: '',
+  // network: "http://localhost:8545",
+  // contract: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+  // alchemy: '',
+  network: "rinkeby",  // need to deploy this on a test network for now TODO
+  contract: '0x450FfBFa1F45ff9017E535870c4584f9E0346de8',
+  alchemy: 'iFl5CtBte3nwksEjkMlZpRMIMYkqnjP3',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebase: {
     apiKey: "AIzaSyBCu8y8ME96NAcULBgSK15EK_xE6ozfV1k",

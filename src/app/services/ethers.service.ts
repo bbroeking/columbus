@@ -4,7 +4,8 @@ import {MetadataService} from '../services/metadata.service'
 import { forkJoin } from 'rxjs';
 import { Provider } from './ethers-utils/web3-provider';
 import { ParcelContract } from './ethers-utils/contract';
-import { BaseProvider, PROVIDER } from './ethers-utils/provider-injection-token';
+import { PROVIDER } from './ethers-utils/provider-injection-token';
+import { SignedParcelContract } from './ethers-utils/signed-contract';
 
 export interface LandDiscovery {
   tokenId: number,
@@ -21,10 +22,11 @@ export class EthersService {
   private signedContract: ethers.Contract;
   
   constructor(@Inject(ParcelContract) parcelContract: Contract,
+              @Inject(SignedParcelContract) signedParcelContract: Contract,
               private metadataService: MetadataService) { 
     this.ethereum = (window as any).ethereum;
     this.unsignedContract = parcelContract;
-    this.signedContract = parcelContract;
+    this.signedContract = signedParcelContract;
   }
 
   public ngOnDestory(){
@@ -43,13 +45,13 @@ export class EthersService {
   }
 
   async getBalanceOf(){
-    const balance = await this.signedContract.balanceOf(await this.requestAccount());
+    const balance = await this.unsignedContract.balanceOf(await this.requestAccount());
     return balance.toNumber();
   }
 
   async getOwnerOf(id: number){
     try {
-      const addr:string = await this.signedContract.ownerOf(id);
+      const addr:string = await this.unsignedContract.ownerOf(id);
       return addr.toLowerCase();
     } catch (error) {
       console.error(error);
@@ -58,20 +60,20 @@ export class EthersService {
   }
 
   async getTokenIdByOwner(account: string): Promise<number[]> {
-    const balance: BigNumber = await this.signedContract.balanceOf(account);
+    const balance: BigNumber = await this.unsignedContract.balanceOf(account);
     let tokensIds = [];
     for (let i= 0; i < balance.toNumber(); i++){
-      let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
+      let token = await this.unsignedContract.tokenOfOwnerByIndex(account, i);
       tokensIds.push(token.toNumber());
     }               
     return tokensIds;
   }
 
   async getTokenMetadataIdsByOwner(account: string) {
-    const balance: BigNumber = await this.signedContract.balanceOf(account);
+    const balance: BigNumber = await this.unsignedContract.balanceOf(account);
     let tokens = [];
     for (let i= 0; i < balance.toNumber(); i++){
-      let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
+      let token = await this.unsignedContract.tokenOfOwnerByIndex(account, i);
       const uri: string = await this.getMetadataURIWithBigNumber(token);
       let uriComponents = uri.split("/");
       const blob_id: string = uriComponents[uriComponents.length - 1];
@@ -82,10 +84,10 @@ export class EthersService {
 
   async getTokenMetadataByOwner(){
     const account = await this.requestAccount();
-    const balance: BigNumber = await this.signedContract.balanceOf(account);
+    const balance: BigNumber = await this.unsignedContract.balanceOf(account);
     let tokens = [];
     for (let i= 0; i < balance.toNumber(); i++){
-      let token = await this.signedContract.tokenOfOwnerByIndex(account, i);
+      let token = await this.unsignedContract.tokenOfOwnerByIndex(account, i);
       const uri: string = await this.getMetadataURIWithBigNumber(token);
       let uriComponents = uri.split("/");
       const blob_id: string = uriComponents[uriComponents.length - 1];
