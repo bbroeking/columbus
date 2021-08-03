@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Troop } from '../constants/troops';
+import { Troop, TROOP_MODEL } from '../constants/troops';
 import { MetamaskService } from './metamask.service';
 import { QueueItem } from './queue.service';
 import * as _ from 'underscore';
+import { TROOPS } from '../constants/troops';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,11 @@ export class TroopDataService {
 
   async getTroopsDocRef(troopId: string): Promise<AngularFirestoreDocument<Troop> | undefined> {
     return this.firestore.doc<Troop>(`troops/${troopId}`);
+  }
+ 
+  getTroopData(type: string): TROOP_MODEL {
+    let troop: TROOP_MODEL = TROOPS[type];
+    return troop;
   }
 
   addToReserves(queueItems: QueueItem[]) {

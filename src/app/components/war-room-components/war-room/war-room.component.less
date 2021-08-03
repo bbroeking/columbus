@@ -37,15 +37,27 @@
         height: 100%;
         flex: 0 0 90%;
         .attacking {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             flex: 0 0 50%;
             border-bottom: 1px solid @border-accent;
         }
         .defending {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             flex: 0 0 50%;
         }
         .unlocked {
             border-right: 1px solid @border-accent;
         }
+    }
+
+    .await {
+        padding-left: 7px;
+        align-self: center;
+        justify-content: center;
     }
 }
 

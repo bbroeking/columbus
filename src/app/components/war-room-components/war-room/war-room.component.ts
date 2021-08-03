@@ -26,6 +26,7 @@ export enum WarRoomState {
 export class WarRoomComponent implements OnInit {
   conflictId: string;
   conflictData$: Observable<Conflict | undefined>;
+  conflictData: Conflict | undefined;
   troops$: Observable<Troop[]>;
   conflictSub: Subscription;
 
@@ -44,9 +45,10 @@ export class WarRoomComponent implements OnInit {
   defenderId: string;
   tileId: number;
   state: WarRoomState;
+  resolvedConflict: boolean;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
+  constructor(
+    private route: ActivatedRoute,
     private metamaskService: MetamaskService,
     private ethers: EthersService,
     private conflictDataService: ConflictDataService,
@@ -79,14 +81,28 @@ export class WarRoomComponent implements OnInit {
 
     this.conflictSubscription = this.conflictDataService.getConflictValuesAsObservable(this.conflictId)
                                                         .subscribe((conflict) => {
-                                                          this.attacking = conflict?.attacking || []
-                                                          this.defending = conflict?.defending || []
+                                                          this.conflictData = conflict;
+                                                          this.attacking = conflict?.attacking || [];
+                                                          this.defending = conflict?.defending || [];
+                                                          this.checkConflictComplete();
                                                         });
+  }
+
+  ngOnChanges() {
+    this.checkConflictComplete();
   }
 
   ngOnDestroy() {
     if (this.conflictSubscription)
       this.conflictSubscription.unsubscribe();
+  }
+
+  checkConflictComplete() {
+    if(this.conflictData) {
+      const complete = this.conflictData.complete;
+      if (complete)
+        this.resolvedConflict = complete.seconds < (Date.now() / 1000);
+    }
   }
 
   async submitTable() {
@@ -115,6 +131,13 @@ export class WarRoomComponent implements OnInit {
       return WarRoomState.DEFENDER_EDIT;
     else
       return WarRoomState.VIEW
+  }
+
+  submitEnabled() {
+    if(this.state === WarRoomState.ATTACKER_EDIT || this.state === WarRoomState.DEFENDER_EDIT)
+      return true;
+    else 
+      return false;
   }
 
   isAvailable(troop: Troop) {

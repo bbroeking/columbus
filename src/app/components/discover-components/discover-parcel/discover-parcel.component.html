@@ -25,6 +25,6 @@
         </div>    
     </div>
     <div class="row">
-        <button mat-raised-button [disabled]="parcel?.annexed" (click)="redeemLandAndInitalizeData()">ANNEX</button>
+        <button mat-raised-button [disabled]="parcel?.annexed || domination < 1" (click)="redeemLandAndInitalizeData()">ANNEX</button>
     </div>
 </div>

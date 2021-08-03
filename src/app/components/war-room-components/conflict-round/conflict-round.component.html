@@ -1,16 +1,20 @@
 <div class='round' *ngIf="roundData">
-    <div class="roundNum">
+    <div class="round-num">
         <span>Round: {{roundData.round + 1}}</span>
     </div>
 
-    <div class="attackers unit" *ngFor="let atk of roundData.endOfRoundAtk">
-        <span>{{atk.name}}</span>
-        <span>{{atk.HP}}</span>
+    <div class="attackers-row">
+        <div class="attackers unit" *ngFor="let atk of roundData.endOfRoundAtk">
+            <img class="icon" [src]="getTypeIcon(atk.type)" alt="attacker-atk.type">
+            <span>{{atk.HP}}/{{getTroopData(atk.type).baseStats.HP}}</span>
+        </div>    
     </div>
 
-    <div class="defenders unit" *ngFor="let def of roundData.endOfRoundDef">
-        <span>{{def.name}}</span>
-        <span>{{def.HP}}</span>
+    <div class="defenders-row">
+        <div class="defenders unit" *ngFor="let def of roundData.endOfRoundDef">
+            <img class="icon" [src]="getTypeIcon(def.type)" alt="defender-def.type">
+            <span>{{def.HP}}/{{getTroopData(def.type).baseStats.HP}}</span>
+        </div>    
     </div>
 
     <div class="logs">

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DocumentData, DocumentReference, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { ConflictUpdate } from 'src/app/services/conflict-data.service';
+import { IconService } from 'src/app/services/icon.service';
+import { TroopDataService } from 'src/app/services/troop-data.service';
 
 @Component({
   selector: 'app-conflict-round',
@@ -10,9 +11,20 @@ import { ConflictUpdate } from 'src/app/services/conflict-data.service';
 export class ConflictRoundComponent implements OnInit {
 
   @Input() roundData: ConflictUpdate;
-  constructor() { }
+  constructor(
+    private troopService: TroopDataService,
+    private iconService: IconService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  getTypeIcon(type: string) {
+    return this.iconService.getIconSrc(type);
+  }
+
+  getTroopData(type: string) {
+    return this.troopService.getTroopData(type);
   }
 
 }

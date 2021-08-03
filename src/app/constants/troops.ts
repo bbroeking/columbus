@@ -74,7 +74,6 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
         },
         'buildTime': 1000
     },
-
     [MARAUDER]: {
         'type': MARAUDER,
         'buildResources': {

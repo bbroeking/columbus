@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 import { Conflict, ConflictDataService, ConflictUpdate } from 'src/app/services/conflict-data.service';
+import { MetamaskService } from 'src/app/services/metamask.service';
 
 @Component({
   selector: 'app-conflict-resolved',
@@ -10,10 +12,32 @@ import { Conflict, ConflictDataService, ConflictUpdate } from 'src/app/services/
 export class ConflictResolvedComponent implements OnInit {
   @Input() conflict: Conflict;
   conflictUpdates$: Observable<ConflictUpdate[]>;
-
-  constructor(private conflictDataService: ConflictDataService) { }
+  
+  mineralReward: number;
+  energyReward: number;
+  dominationReward: number;
+  constructor(
+    private metamaskService: MetamaskService,
+    private conflictDataService: ConflictDataService,
+    private accountService: AccountService) { }
 
   async ngOnInit() {
+    this.mineralReward = 100;
+    this.energyReward = 50;
+    this.dominationReward = 0.25;
     this.conflictUpdates$ = await this.conflictDataService.getConflictUpdatesValues(this.conflict);
+  }
+
+  collectReward() {
+    this.metamaskService.setConnectedAccount();
+    const address = this.metamaskService.account.value;
+    this.accountService.updateAccountData(address, {
+      'domination': this.dominationReward,
+      'minerals': this.mineralReward,
+      'energy': this.energyReward
+    });
+    this.conflictDataService.updateConflict(this.conflict.id, {
+      'isResolved': true
+    });
   }
 }

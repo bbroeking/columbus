@@ -2,11 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Timestamp } from '@firebase/firestore-types';
 import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { RESEARCH } from 'src/app/constants/research';
 import { TROOPS } from 'src/app/constants/troops';
 import { ResearchProduction, ResourceProduction, StructureType, UnitProduction } from 'src/app/interfaces/structure-type';
 import { AccountData, AccountService } from 'src/app/services/account.service';
+import { IconService } from 'src/app/services/icon.service';
 import { MetamaskService } from 'src/app/services/metamask.service';
 import { QueueItem, QueueService } from 'src/app/services/queue.service';
 import { ResearchService } from 'src/app/services/research.service';
@@ -44,6 +44,7 @@ export class StructureDialogComponent implements OnInit {
   energyCost: number;
 
   constructor(
+    private iconService: IconService,
     private tileDataService: TileDataService,
     private queueService: QueueService,
     private troopDataService: TroopDataService,
@@ -188,15 +189,7 @@ export class StructureDialogComponent implements OnInit {
   }
 
   unitSrc(type: string){
-    if (type == 'marine'){
-      return 'assets/units/marine.jpeg';
-    } else if (type == 'marauder') {
-      return 'assets/units/marauder.jpg';
-    } else if (type == 'StimPack') {
-      return 'assets/units/stimpack.jpeg';
-    } else {
-      return '';
-    }
+    return this.iconService.getIconSrc(type);
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Troop } from 'src/app/constants/troops';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-battlefield-card',
@@ -9,11 +10,17 @@ import { Troop } from 'src/app/constants/troops';
 export class BattlefieldCardComponent implements OnInit {
   @Input() troops: Troop[];
   @Input() dragDisabled: boolean;
-  constructor() { }
+  constructor(
+    private iconService: IconService
+  ) { }
 
   ngOnInit(): void {
     if(this.dragDisabled == undefined)
       this.dragDisabled = true;
+  }
+
+  getIcon(type: string) {
+    return this.iconService.getIconSrc(type);
   }
 
 }

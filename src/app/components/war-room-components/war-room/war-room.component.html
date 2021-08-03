@@ -1,6 +1,6 @@
 <div class="war-room" *ngIf="conflictData$ | async as conflictData" cdkDropListGroup>
     <!-- Combat is in the planning stages or is in progress -->
-    <div class="resolving" *ngIf="!conflictData.isResolved">
+    <div class="resolving" *ngIf="!resolvedConflict">
         <div class="main-panel">
             <div class="planning-table">
                 <div class="battlefield">
@@ -29,11 +29,15 @@
                 </div>
                 <button
                     mat-raised-button
-                    *ngIf="!isAttacking || !isDefending"
+                    *ngIf="submitEnabled()"
                     class="submit" (click)="submitTable()"
                     [class.disabled]="validBattlefield()">
                     Lock-in
                 </button>
+                <div class="await"
+                    *ngIf="!submitEnabled()">
+                    Resolving...
+                </div>
             </div>            
         </div>
         <div class="side-panel">
@@ -53,7 +57,7 @@
         </div>
     </div>
     <!-- Combat is over -->
-    <div class="resolved" *ngIf="conflictData.isResolved">
+    <div class="resolved" *ngIf="resolvedConflict">
         <app-conflict-resolved
             [conflict]="conflictData">
         </app-conflict-resolved>

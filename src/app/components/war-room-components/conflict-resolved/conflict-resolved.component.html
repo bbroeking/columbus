@@ -1,4 +1,21 @@
 <div class="conflict-feed">
+    <div class="collect-reward">
+        <div class="resource-reward">
+            <div class="row">
+                <div class="icon icon-mineral"></div>
+                <span class="minerals">{{mineralReward}}</span>    
+            </div>
+            <div class="row">
+                <div class="icon icon-energy"></div>
+                <span class="energy">{{energyReward}}</span>    
+            </div>
+            <div class="row">
+                <div class="icon icon-domination"></div>
+                <span class="domination">{{dominationReward}}</span>    
+            </div>
+          </div>
+        <button class="claim" mat-raised-button (click)="collectReward()">Claim Reward</button>
+    </div>
     <div class="conflict-updates" *ngFor="let doc of conflictUpdates$ | async">
         <app-conflict-round [roundData]="doc"></app-conflict-round>
     </div>

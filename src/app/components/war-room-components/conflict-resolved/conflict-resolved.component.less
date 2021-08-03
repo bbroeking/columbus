@@ -10,4 +10,47 @@
         border: lightblue;
         border-style: solid;
     }
+
+    .collect-reward {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .claim {
+            width: 160px;
+        }
+        .resource-reward {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .row {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .icon {
+                padding-left: 10px; 
+            }
+            .icon-mineral {
+                background-image: url(../../../../assets/mineral32.png);
+                background-repeat: no-repeat;
+                height: 32px;
+                width: 32px;
+            }
+            .icon-energy {
+                background-image: url(../../../../assets/energy32.png);
+                background-repeat: no-repeat;
+                height: 32px;
+                width: 32px;
+            }
+    
+            .icon-domination {
+                background-image: url(../../../../assets/domination.png);
+                background-repeat: no-repeat;
+                height: 32px;
+                width: 32px;
+            }
+        }
+    }
+
 }
