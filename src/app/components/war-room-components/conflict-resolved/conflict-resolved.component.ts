@@ -16,6 +16,7 @@ export class ConflictResolvedComponent implements OnInit {
   mineralReward: number;
   energyReward: number;
   dominationReward: number;
+  rewardCollected: boolean;
   constructor(
     private metamaskService: MetamaskService,
     private conflictDataService: ConflictDataService,
@@ -25,6 +26,7 @@ export class ConflictResolvedComponent implements OnInit {
     this.mineralReward = 100;
     this.energyReward = 50;
     this.dominationReward = 0.25;
+    this.rewardCollected = this.conflict.isResolved;
     this.conflictUpdates$ = await this.conflictDataService.getConflictUpdatesValues(this.conflict);
   }
 
@@ -39,5 +41,6 @@ export class ConflictResolvedComponent implements OnInit {
     this.conflictDataService.updateConflict(this.conflict.id, {
       'isResolved': true
     });
+    this.rewardCollected = true;
   }
 }

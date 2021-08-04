@@ -49,7 +49,8 @@ export class MapComponent implements OnInit {
     if (itemToScrollTo) {
       itemToScrollTo.scrollIntoView({
         block: "center",
-        inline: "center"
+        inline: "center",
+        behavior: "smooth"
       });
     }
   }

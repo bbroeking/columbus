@@ -24,14 +24,13 @@ export class ReportDetailsComponent implements OnInit {
   conflict$: Observable<Conflict | undefined>;
   tileSubscription: Subscription;
   
-  
   ngOnInit(): void {
     this.tile$ = this.tileService.getTileValuesAsObservable(this.id);
     this.structures$ = this.tileService.getTileStructuresAsObservable(this.id);
-    this.tileSubscription = this.tile$.subscribe((res: Tile | undefined) => {
-      if (res?.conflictId)
-        this.conflict$ = this.conflictService.getConflictValuesAsObservable(res.conflictId);
-    })
+    this.tileSubscription = this.tile$.subscribe((tile: Tile | undefined) => {
+      if (tile?.conflictId)
+        this.conflict$ = this.conflictService.getConflictValuesAsObservable(tile.conflictId);
+    });
   }
 
   ngOnDestroy() {
