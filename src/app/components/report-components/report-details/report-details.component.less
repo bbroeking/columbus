@@ -84,9 +84,14 @@
 
     // Structures
     .structures {
+        display:grid;
+        grid-template-columns: 200px 200px;
+        grid-row: auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        margin: 10px;
         .structure {
-            width: 100%;
-            height: 25%;
+            flex: 0 0 50%;
         }
     }
 

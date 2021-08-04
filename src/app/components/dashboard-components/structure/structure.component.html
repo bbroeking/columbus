@@ -1,5 +1,7 @@
 <div class="built" *ngIf="structure.built">
-    <button mat-raised-button class="structure-button" (click)="openDialog(structure)">{{structure.type}}</button>
+    <button mat-raised-button class="structure-button" (click)="openDialog(structure)">
+        <img class="unit-img" [src]="getUnitSrc(structure.type)">
+    </button>
 </div>
 <div class="build" *ngIf="!structure.built">
     <div class="queued" *ngIf="structure.queued">

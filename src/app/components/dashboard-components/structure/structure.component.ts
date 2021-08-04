@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EthersService } from 'src/app/services/ethers.service';
+import { IconService } from 'src/app/services/icon.service';
 import { Structure, TileDataService } from 'src/app/services/tile-data.service';
 import { BuildStructureDialogComponent } from '../build-structure-dialog/build-structure-dialog.component';
 import { StructureDialogComponent } from '../structure-dialog/structure-dialog.component';
@@ -15,6 +16,7 @@ export class StructureComponent {
   @Input() selectedTile: number;
 
   constructor(
+    private iconService: IconService,
     private tileService: TileDataService,
     public dialog: MatDialog) {}
   
@@ -44,5 +46,9 @@ export class StructureComponent {
       'built': true,
     }
     this.tileService.updateStructure(this.selectedTile, this.structure.sid, data);
+  }
+
+  getUnitSrc(type: string) {
+    return this.iconService.getIconSrc(type);
   }
 }
