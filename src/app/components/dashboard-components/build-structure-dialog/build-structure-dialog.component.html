@@ -3,23 +3,27 @@
     <mat-form-field appearance="fill">
       <mat-label>Structures</mat-label>
       <mat-select [(ngModel)]="selectedValue" name="opts">
-        <mat-option (click)="calculateCost(opts)" *ngFor="let opts of options" [value]="opts">
+        <mat-option (click)="updateSelection(opts)" *ngFor="let opts of options" [value]="opts">
           {{opts}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </form>
 
-  <div class="resource-cost" *ngIf="selectedValue">
-    <div class="row">
-        <div class="icon-mineral"></div>
-        <span class="minerals">{{mineralCost}}</span>    
-    </div>
-    <div class="row">
-        <div class="icon-energy"></div>
-        <span class="energy">{{energyCost}}</span>    
+  <div class="to-build">
+    <img [src]="getUnitSrc()">
+    <div class="resource-cost" *ngIf="selectedValue">
+      <div class="row">
+          <div class="icon-mineral"></div>
+          <span class="minerals">{{mineralCost}}</span>    
+      </div>
+      <div class="row">
+          <div class="icon-energy"></div>
+          <span class="energy">{{energyCost}}</span>    
+      </div>
     </div>
   </div>
+
 
   <button mat-raised-button
     (click)="build()"

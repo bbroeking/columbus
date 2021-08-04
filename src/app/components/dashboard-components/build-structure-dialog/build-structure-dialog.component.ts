@@ -8,6 +8,7 @@ import { StructureType } from 'src/app/interfaces/structure-type';
 import { AccountData, AccountService } from 'src/app/services/account.service';
 import { Observable, Subscription } from 'rxjs';
 import { MetamaskService } from 'src/app/services/metamask.service';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-build-structure-dialog',
@@ -28,10 +29,12 @@ export class BuildStructureDialogComponent implements OnInit {
 
   mineralCost: number;
   energyCost: number;
+  unitType: string;
 
   address: string;
 
   constructor(
+    private iconService: IconService,
     private queueService: QueueService,
     private tileService: TileDataService,
     private accountService: AccountService,
@@ -75,11 +78,18 @@ export class BuildStructureDialogComponent implements OnInit {
     this.accountService.updateAccountData(this.address, {'minerals': this.mineralCost * -1, 'energy': this.energyCost * -1});
   }
 
-  calculateCost(structure: string) {
+  updateSelection(structure: string) {
     let structureModel = BUILDINGS[structure];
     if (structureModel) {
       this.mineralCost = structureModel.buildResources.minerals;
       this.energyCost = structureModel.buildResources.energy;
     }
+    this.unitType = structureModel.id;
+  }
+
+  getUnitSrc() {
+    if(this.unitType)
+      return this.iconService.getIconSrc(this.unitType);
+    return '';
   }
 }
