@@ -44,7 +44,6 @@ import { CloudFunctionsService } from './services/cloud-functions.service';
 import { MapComponent } from './components/dashboard-components/map/map.component';
 import { ParcelDetailsComponent } from './components/dashboard-components/parcel-details/parcel-details.component';
 import { DashboardComponent } from './components/dashboard-components/dashboard/dashboard.component';
-import { ParcelTileComponent } from './components/dashboard-components/parcel-tile/parcel-tile.component';
 import { HoverTileMenuComponent } from './components/dashboard-components/hover-tile-menu/hover-tile-menu.component';
 import { StructureComponent } from './components/dashboard-components/structure/structure.component';
 import { LoginComponent } from './components/login-components/login/login.component';
@@ -87,7 +86,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     MapComponent,
     ParcelDetailsComponent,
     DashboardComponent,
-    ParcelTileComponent,
     HoverTileMenuComponent,
     StructureComponent,
     LoginComponent,
@@ -140,7 +138,6 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     DragDropModule,
     DragScrollModule,
     MatProgressSpinnerModule
-    // FormControl
   ],
   providers: [{ provide: Window,
                 useValue: window 

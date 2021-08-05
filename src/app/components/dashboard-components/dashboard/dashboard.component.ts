@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.mapId = +(params.get('mapId') || 30);
+      this.mapId = +(params.get('mapId') || 31);
     });
     this.selectedTile = this.mapId;
   }

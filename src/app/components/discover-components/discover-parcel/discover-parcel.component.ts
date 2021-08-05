@@ -30,11 +30,11 @@ export class DiscoverParcelComponent implements OnInit {
 
   async redeemLandAndInitalizeData() {
     this.accountService.updateAccountData(this.address, {'domination': -1});
-    const ld = await this.ethers.redeem(this.parcel.account, this.parcel.tokenId, this.parcel.signature);
-    this.tileDataService.createTile(ld, { // this should happen as part of a server function call so we dont get into a state where this isnt run
-      mineralRate: 100,
-      energyRate: 25,
-      fortification: 2
+    const redemption = await this.ethers.redeem(this.parcel.account, this.parcel.tokenId, this.parcel.signature);
+    this.tileDataService.createTile(redemption, {
+      mineralRate: this.parcel.mineralRate,
+      energyRate: this.parcel.energyRate,
+      fortification: this.parcel.fortification
     });
     this.tileGeneratorService.updateParcel(
       this.parcel.tokenId, { annexed: true }

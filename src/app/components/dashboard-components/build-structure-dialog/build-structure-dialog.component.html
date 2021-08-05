@@ -24,8 +24,8 @@
     </div>
   </div>
 
-
   <button mat-raised-button
+    [disabled]="canPay()"
     (click)="build()"
     class="queue-build">Build</button>
 </div>

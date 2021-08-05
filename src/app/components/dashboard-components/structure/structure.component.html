@@ -9,8 +9,10 @@
             <button mat-raised-button (click)="claimStructure()" class="structure-button" *ngIf="(structure.queued | queueHandler) == 100">Claim Structure</button>
         </div>
         <div class="queue-not-finished" *ngIf="(structure.queued | queueHandler)!=100">
-            <span class="building-type">{{structure.queued.type}}</span>
-            <span class='percentage'>{{structure.queued | queueHandler}}% Complete</span>
+            <div class="progress-bar" [style.width.%]="1"></div>
+            <button mat-raised-button [disabled]="true" class="structure-button" (click)="openDialog(structure)">
+                <img class="unit-img" [src]="getUnitSrc(structure.queued.type)">
+            </button>   
         </div>
     </div>
     <div class="empty-slot" *ngIf="!structure.queued">

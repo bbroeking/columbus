@@ -4,5 +4,8 @@ export interface Parcel {
     registry: string,
     signature: string,
     tokenId: number,
+    mineralRate: number,
+    energyRate: number,
+    fortification: number,
     annexed: boolean,
 }

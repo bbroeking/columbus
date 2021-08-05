@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   network: "http://localhost:8545",
-  contract: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+  contract: '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
   alchemy: '',
   // network: "rinkeby",  // need to deploy this on a test network for now TODO
   // contract: '0x450FfBFa1F45ff9017E535870c4584f9E0346de8',

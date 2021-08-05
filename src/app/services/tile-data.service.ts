@@ -26,14 +26,14 @@ export interface Tile { // data in the tile
 }
 
 export interface Structure {
-  id: string;
-  position: number;
-  queued: QueueItem;
-  sid: string;
-  level: number;
-  built: boolean;
-  queue: QueueItem[];
-  type: string;
+  id: string,
+  position: number,
+  queued: QueueItem,
+  sid: string,
+  level: number,
+  built: boolean,
+  queue: QueueItem[],
+  type: string,
 }
 
 export interface UnitStructure extends Structure {
@@ -117,7 +117,7 @@ export class TileDataService {
   }
 
   getTileStructureAsObservable(tokenId: number, structureId: string): Observable<Structure | undefined> {
-    return this.firestore.doc<Structure>(`tiles/${tokenId}/structures/${structureId}`).valueChanges();
+    return this.firestore.doc<Structure>(`tiles/${tokenId}/structures/${structureId}`).valueChanges({idField: 'sid'});
   }
 
   updateStructure(tokenId: number, sid: string, data: any) {

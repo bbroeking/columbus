@@ -59,7 +59,7 @@ export class BuildStructureDialogComponent implements OnInit {
   }
 
   async build() {
-    if(this.address && this.accountData){
+    if(this.address && this.accountData && this.canPay()){
       const structureType: StructureType = this.selectedValue as unknown as StructureType;
       const queueItem: QueueItem = this.queueService.prepareStructureItem(structureType);
       this.tileService.queueBuildStructure(this.selectedTile, this.structure.sid, queueItem);
