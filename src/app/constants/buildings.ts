@@ -33,7 +33,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [MARINE]: TROOPS[MARINE],
             [MARAUDER]: TROOPS[MARAUDER],
         },
-        'buildTime': 100000000
+        'buildTime': 1800000
     },
     [MINERALS_REFINERY]: {
         'id': MINERALS_REFINERY,
@@ -44,7 +44,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [RARE_ENERGY]: 0
         },
         'options': {},
-        'buildTime': 10000000000
+        'buildTime': 1800000
     },
     [ENERGY_REFINERY]: {
         'id': ENERGY_REFINERY,
@@ -55,7 +55,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
             [RARE_ENERGY]: 0
         },
         'options': {},
-        'buildTime': 10000000000
+        'buildTime': 1800000
     },
     [BIO_RESEARCH]: {
         'id': BIO_RESEARCH,
@@ -68,7 +68,7 @@ export const BUILDINGS: {[key: string]: Structure} = {
         'options': {
             [STIMPACK]: RESEARCH[STIMPACK]
         },
-        'buildTime': 100000000000
+        'buildTime': 1800000
     },
     // [GROUND_MECH_PRODUCTION]: {
     //     'id': GROUND_MECH_PRODUCTION,

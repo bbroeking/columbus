@@ -1,3 +1,5 @@
+@import url("../../../../styles.less");
+
 .annex-item {
     --s: 100px;  /* size  */
     --m: 4px;    /* margin */
@@ -26,7 +28,7 @@
         height: 100%;
         background-position: -10px 0px;
         background-size: 120px;
-        background-image: url(../../../../assets/rockDirt_moss2.png); // need to figure out how to tile this
+        background-image: @rock-snow; // need to figure out how to tile this
         background-repeat: no-repeat;
         visibility: auto;
     }
@@ -46,7 +48,7 @@
 }
 
 .icon-domination {
-    background-image: url(../../../../assets/domination.png);
+    background-image: @domination-icon;
     background-repeat: no-repeat;
     height: 32px;
     width: 32px;
