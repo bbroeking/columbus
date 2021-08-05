@@ -23,7 +23,7 @@ export interface COMBAT_TROOP {
 export interface TROOP_MODEL {
     type: string,
     buildResources: BuildResources,
-    baseStats: Stats,
+    baseStats: Stats[],
     buildTime: number
 }
 
@@ -64,14 +64,32 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
             [ENERGY]: 10,
             [RARE_ENERGY]: 0
         },
-        'baseStats': {
-            [Attributes.HP]: 20,
-            [Attributes.ATTACK]: 5,
-            [Attributes.DEFENSE]: 5,
-            [Attributes.MINDAMAGE]: 0,
-            [Attributes.MAXDAMAGE]: 5,
-            [Attributes.SKEWDAMAGE]: 1
-        },
+        'baseStats': [
+            {
+                [Attributes.HP]: 20,
+                [Attributes.ATTACK]: 5,
+                [Attributes.DEFENSE]: 5,
+                [Attributes.MINDAMAGE]: 0,
+                [Attributes.MAXDAMAGE]: 5,
+                [Attributes.SKEWDAMAGE]: 1
+            },
+            {
+                [Attributes.HP]: 42,
+                [Attributes.ATTACK]: 7,
+                [Attributes.DEFENSE]: 7,
+                [Attributes.MINDAMAGE]: 7,
+                [Attributes.MAXDAMAGE]: 14,
+                [Attributes.SKEWDAMAGE]: 1
+            },
+            {
+                [Attributes.HP]: 65,
+                [Attributes.ATTACK]: 9,
+                [Attributes.DEFENSE]: 9,
+                [Attributes.MINDAMAGE]: 10,
+                [Attributes.MAXDAMAGE]: 17,
+                [Attributes.SKEWDAMAGE]: 1
+            }
+        ],
         'buildTime': 1000
     },
     [MARAUDER]: {
@@ -82,14 +100,32 @@ export const TROOPS: {[key: string]: TROOP_MODEL} = {
             [ENERGY]: 50,
             [RARE_ENERGY]: 0
         },
-        'baseStats': {
-            [Attributes.HP]: 30,
-            [Attributes.ATTACK]: 3,
-            [Attributes.DEFENSE]: 7,
-            [Attributes.MINDAMAGE]: 0,
-            [Attributes.MAXDAMAGE]: 5,
-            [Attributes.SKEWDAMAGE]: 1
-        },
+        'baseStats': [
+            {
+                [Attributes.HP]: 30,
+                [Attributes.ATTACK]: 3,
+                [Attributes.DEFENSE]: 7,
+                [Attributes.MINDAMAGE]: 0,
+                [Attributes.MAXDAMAGE]: 5,
+                [Attributes.SKEWDAMAGE]: 1
+            },
+            {
+                [Attributes.HP]: 65,
+                [Attributes.ATTACK]: 5,
+                [Attributes.DEFENSE]: 9,
+                [Attributes.MINDAMAGE]: 7,
+                [Attributes.MAXDAMAGE]: 15,
+                [Attributes.SKEWDAMAGE]: 1
+            },
+            {
+                [Attributes.HP]: 95,
+                [Attributes.ATTACK]: 7,
+                [Attributes.DEFENSE]: 11,
+                [Attributes.MINDAMAGE]: 11,
+                [Attributes.MAXDAMAGE]: 19,
+                [Attributes.SKEWDAMAGE]: 1
+            }
+        ],
         'buildTime': 1000
     },
 }
