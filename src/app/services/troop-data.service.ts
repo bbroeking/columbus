@@ -74,9 +74,11 @@ export class TroopDataService {
   }
 
   promoteTroop(troops: Troop[]) {
-    troops.forEach((res) => this.firestore.collection<Troop>("troops").doc(res.id).delete())
+    troops.forEach((res) => this.firestore.collection<Troop>("troops").doc(res.id).delete());
+    const promoteTroop: Partial<Troop> = this.getPromotion(troops);
     this.firestore.collection('troops')
                   .doc()
-                  .set(this.getPromotion(troops))
+                  .set(promoteTroop);
+    return promoteTroop;
   }
 }

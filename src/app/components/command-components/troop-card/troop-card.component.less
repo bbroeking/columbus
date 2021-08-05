@@ -1,27 +1,60 @@
+@import url("../../../../styles.less");
+
 .troop-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-    .mat-elevation-z4 {
-        margin: 10px;
-        height: 150px;
-        .mat-row {
-            height: auto;
+
+    mat-card-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mat-row {
+        height: auto;
+    }
+    
+    .mat-header-cell {
+        padding: 8px;
+    }
+    
+    .mat-cell {
+        text-align: center;
+    }
+
+    mat-card {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 0;
+        height: 80%;
+        max-width: 400px;
+        margin: 20px;
+        .row {
+            display: flex;
+            .name {
+                font-size: 30px;
+                margin: 0;
+            }
+            .pull-right {
+                font-size: 20px;
+                margin-left: auto;
+                padding-left: 10px;
+                padding-right: 7px;
+                border-bottom: 1px solid @border-accent;
+                border-left: 1px solid @border-accent;;
+            }
         }
-        
-        .mat-header-cell {
-            padding: 8px;
+        .type {
+            border-top: 1px solid @border-accent;;
+            font-size: 12px;
+            margin-left: 7px;
         }
-        
-        .mat-cell {
-            text-align: center;
+        .icon {
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        > mat-card {
-            width: 300px;
-        }
-    }    
+    }
 
     td.mat-cell:first-of-type {
         padding-left: 0;

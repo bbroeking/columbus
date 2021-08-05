@@ -68,6 +68,8 @@ import { ClockComponent } from './components/discover-components/clock/clock.com
 import { BattlefieldCardComponent } from './components/war-room-components/battlefield-card/battlefield-card.component';
 import { FilterDeployedPipe } from './pipes/filter-deployed.pipe';
 import { FilterAnnexedPipe } from './pipes/filter-annexed.pipe';
+import { PromoteCardComponent } from './components/command-components/promote-card/promote-card.component';
+import { PromoteSuccessDialogComponent } from './components/command-components/promote-success-dialog/promote-success-dialog.component';
 
 
 export function init_app(initalizeService: InitalizeService) {
@@ -112,6 +114,8 @@ export function enableWeb3Provider(provider: providers.Web3Provider) {
     BattlefieldCardComponent,
     FilterDeployedPipe,
     FilterAnnexedPipe,
+    PromoteCardComponent,
+    PromoteSuccessDialogComponent,
   ],
   imports: [
     BrowserModule,

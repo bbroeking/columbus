@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Attributes, Troop, TROOPS, TROOP_MODEL } from 'src/app/constants/troops';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-troop-card',
@@ -9,7 +10,9 @@ import { Attributes, Troop, TROOPS, TROOP_MODEL } from 'src/app/constants/troops
 export class TroopCardComponent implements OnInit {
   @Input() troops: Troop[];
   attributes: Attributes[];
-  constructor() { }
+  constructor(
+    private iconService: IconService
+  ) {}
 
   ngOnInit(): void {
     this.attributes = Object.values(Attributes);
@@ -17,5 +20,9 @@ export class TroopCardComponent implements OnInit {
 
   getTroopModel(type: string): TROOP_MODEL[] {
     return [TROOPS[type]];
+  }
+
+  getIcon(type: string) {
+    return this.iconService.getIconSrc(type);
   }
 }

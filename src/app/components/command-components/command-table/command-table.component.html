@@ -17,7 +17,7 @@
             [cdkDropListData]="promote"
             (cdkDropListDropped)="drop($event)"
             class="slots-parent">
-            <app-troop-card [troops]="promote"></app-troop-card>
+            <app-promote-card [troops]="promote"></app-promote-card>
         </div>
         <button mat-raised-button 
             [disabled]='!canPromote()'

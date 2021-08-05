@@ -1,13 +1,15 @@
 <div class="troop-list">
     <mat-card class="mat-elevation-z4" *ngFor="let troop of troops" cdkDrag>
         <mat-card-header>
-            <mat-card-title>{{troop.name}}</mat-card-title>
-            <mat-card-title>{{troop.rank}}</mat-card-title>
+            <div class="row">
+                <mat-card-title class='name'>{{troop.name}}</mat-card-title>
+                <mat-card-title class="pull-right">{{troop.rank}}</mat-card-title>
+            </div>
+            <div class="row">
+                <mat-card-title class='type'>{{troop.type}}</mat-card-title>    
+            </div>
         </mat-card-header>
-        <div class="data" *ngIf="getTroopModel(troop.type) as troopModel">
-            Type: {{troopModel[0].type}}
-        </div>
-    
+        <img class='icon' [src]="getIcon(troop.type)" alt="troop">
         <mat-card-content>
             <table mat-table [dataSource]="getTroopModel(troop.type)">
                 <!-- Position Column -->
