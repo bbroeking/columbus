@@ -6,14 +6,14 @@
     <div class="attackers-row">
         <div class="attackers unit" *ngFor="let atk of roundData.endOfRoundAtk">
             <img class="icon" [src]="getTypeIcon(atk.type)" alt="attacker-atk.type">
-            <span>{{atk.HP}}/{{getTroopData(atk.type).baseStats.HP}}</span>
+            <span>{{atk.HP}}/{{getTroopData(atk.type).baseStats[atk.type - 1].HP}}</span>
         </div>    
     </div>
 
     <div class="defenders-row">
         <div class="defenders unit" *ngFor="let def of roundData.endOfRoundDef">
             <img class="icon" [src]="getTypeIcon(def.type)" alt="defender-def.type">
-            <span>{{def.HP}}/{{getTroopData(def.type).baseStats.HP}}</span>
+            <span>{{def.HP}}/{{getTroopData(def.type).baseStats[def.type -1].HP}}</span>
         </div>    
     </div>
 

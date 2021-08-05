@@ -35,7 +35,7 @@ export class AccountService {
                         .set({
                           'minerals': 0,
                           'energy': 0,
-                          'dominion': 1,
+                          'domination': 1,
                         });
         }
       });
