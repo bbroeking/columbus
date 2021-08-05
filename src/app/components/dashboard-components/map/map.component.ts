@@ -1,8 +1,8 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Coordinate } from 'src/app/models/coordinate.model';
 import { HexagonService } from 'src/app/services/hexagon.service';
 import { HoverTileMenuComponent } from '../hover-tile-menu/hover-tile-menu.component';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-map',
@@ -23,10 +23,12 @@ export class MapComponent implements OnInit {
   mapCoordinateBase: Coordinate;
   neighbors: Map<string, Coordinate>;
   neighborsId: Map<string, number>
+  mapTiles: Array<string>;
 
   constructor(private hexagonService: HexagonService) {}
   ngOnInit(): void {
     const mapIdAsString = this.mapId.toString();
+    this.mapTiles = Array(65).fill('0').map(() => this.getTile());
     this.scrollIntoView(mapIdAsString);
   }
 
@@ -55,7 +57,25 @@ export class MapComponent implements OnInit {
     }
   }
 
+  getStyles(id: number) {
+    const isHidden = this.mapGridHidden(id) == 0 ? 'hidden' : '';
+    const tile = this.getTile()
+    return isHidden + " " + tile;
+  }
+
   mapGridHidden(id: number) {
     return this.hexagonService.mapGridHidden(5, id); // 5 is number of columns
+  }
+
+  getTile(){
+    const tiles = ['stone', 'stone-moss', 'stone-moss-2', 'stone-moss-3', 
+      'dirt-moss', 'dirt-moss-2', 'dirt-moss-3', 
+      'rock-snow', 'rock-snow-2', 'rock-snow-3'];
+    return _.sample(tiles) || '';
+  }
+
+  setTileClass(slot: number) {
+    const id = this.mapGridHidden(slot);
+    return this.mapTiles[id];
   }
 }

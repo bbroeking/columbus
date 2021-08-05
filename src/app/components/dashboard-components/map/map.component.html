@@ -6,7 +6,8 @@
                 [ngClass]="mapGridHidden(slot) == 0 ? 'hidden' : ''" 
                 *ngFor="let slot of numSlots"
                 id="{{mapGridHidden(slot)}}">
-                <div class="content"></div>
+                <div class="content"
+                    [ngClass]="setTileClass(slot)"></div>
             </div>    
         </div>    
     </div>
