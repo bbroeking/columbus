@@ -109,7 +109,6 @@ export class StructureDialogComponent implements OnInit {
   }
   
   async addToQueue(){
-    const accountData: AccountData | undefined = await this.account$?.toPromise();
     if (!this.queueFull() && this.selected && this.canPay()){
       const newQueue: QueueItem[] = this.queueService.prepareBarracksItem(this.queue, this.selected)
       this.tileDataService.updateStructure(this.tileId, this.structureId, {

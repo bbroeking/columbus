@@ -3,7 +3,6 @@ import MetaMaskOnboarding from '@metamask/onboarding'
 import { MetamaskService } from 'src/app/services/metamask.service';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
